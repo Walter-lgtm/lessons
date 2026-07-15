@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Лабораторный протокол: Физика 7</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <!-- Экран 1: Ввод ID -->
+    <div id="start-screen" class="screen active">
+      <h1>Система тестирования</h1>
+      <p>Добро пожаловать в лабораторию. Для начала работы введите ваш идентификационный номер (ID).</p>
+      <div class="id-input-group">
+        <input type="text" id="studentId" placeholder="Введите ID ученика">
+        <button class="nav-btn" onclick="startTest()">Начать тест</button>
+      </div>
+    </div>
+
+    <!-- Экран 2: Прохождение теста -->
+    <div id="question-screen" class="screen">
+      <h2 id="test-title">Тест</h2>
+      
+      <div class="question-card">
+        <p id="q-text"></p>
+        <div id="q-image-container"></div>
+        
+        <div class="options" id="options">
+          <!-- Кнопки генерируются JS -->
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="btn-prev" class="nav-btn" onclick="goBack()" style="display:none;">← Назад</button>
+        <!-- Кнопка "Далее" не нужна, переход автоматический после ответа -->
+      </div>
+    </div>
+
+    <!-- Экран 3: Результаты -->
+    <div id="result-screen" class="screen">
+      <h2>Протокол завершён</h2>
+      <p>Ваш результат: <span id="final-score" style="color:var(--accent); font-size: 1.5em;">0</span> из <span id="total-questions">0</span></p>
+      <p>Статус: Обработка данных...</p>
+      <br>
+      <button class="nav-btn" onclick="sendResults()">Сохранить в журнал</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
