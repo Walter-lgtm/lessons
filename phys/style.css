@@ -1,0 +1,135 @@
+:root {
+  --hl-bg: #1a1b1d;       /* Тёмный лабораторный фон */
+  --panel-bg: #2b2d30;   /* Цвет панелей */
+  --text-main: #e0e0e0;  /* Светло-серый текст */
+  --accent: #ff8c00;     /* Оранжево-жёлтый акцент (как костюм Фримена) */
+  --border: #4a4d55;     /* Цвет рамок */
+  --font-ui: 'Courier New', Courier, monospace; /* Шрифт интерфейса */
+  --font-text: Georgia, serif; /* Читаемый шрифт для вопросов */
+}
+
+body {
+  background-color: var(--hl-bg);
+  color: var(--text-main);
+  font-family: var(--font-text);
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  background-color: var(--panel-bg);
+  border: 2px solid var(--border);
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  padding: 30px;
+}
+
+h1, h2 {
+  text-align: center;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 15px;
+}
+
+p {
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* Карточка вопроса */
+.question-card {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px dashed var(--border);
+  background: rgba(43, 45, 48, 0.5);
+}
+
+img.question-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 15px 0;
+  border: 1px solid var(--accent);
+}
+
+/* Варианты ответов */
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+button.option-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 12px;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  transition: all 0.3s;
+  text-align: left;
+}
+
+button.option-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(255, 140, 0, 0.1);
+}
+
+/* Состояние ответа */
+button.option-btn.correct {
+  border-color: #4caf50;
+  color: #4caf50;
+}
+button.option-btn.wrong {
+  border-color: #f44336;
+  color: #f44336;
+}
+
+/* Кнопки навигации */
+.controls {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button.nav-btn {
+  background: var(--border);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-weight: bold;
+}
+
+button.nav-btn:hover {
+  background: var(--accent);
+  color: black;
+}
+
+/* Экран ввода ID */
+.id-input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+input#studentId {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--border);
+  background: #1a1b1d;
+  color: white;
+}
+
+/* Скрытие/показ блоков */
+.screen {
+  display: none; /* Скрыто по умолчанию */
+}
+.screen.active {
+  display: block; /* Активно */
+}
