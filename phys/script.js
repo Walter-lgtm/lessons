@@ -134,7 +134,7 @@ async function sendResults() {
 
   try {
     // ЗАМЕНИ ЭТОТ URL НА URL ТВОЕГО GOOGLE APPS SCRIPT
-    const scriptUrl = 'ВАШ_URL_GOOGLE_APPS_SCRIPT_HERE'; 
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbwBfBa2ghGs_Ts2RuZf06t0MC-xVO-n-to8MVzDost6rWNdEJjNNMFl_6B57iEH1uJsZA/exec'; 
     
     const response = await fetch(scriptUrl, {
       method: 'POST',
