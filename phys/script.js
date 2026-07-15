@@ -116,41 +116,50 @@ function finishTest() {
 }
 
 async function sendResults() {
-  // Сбор данных
   const resultsPayload = {
     id: studentData.id,
-    name: studentData.name || "Неизвестно", // Будет заполнено скриптом позже
-    grade: studentData.grade || 7,          // Будет заполнено скриптом позже
+    name: studentData.name || "Неизвестно",
+    grade: studentData.grade || 7,
     score: score,
     total: questions.length,
     answers: questions.map((q, i) => ({
       questionId: q.id,
-      selected: null, // Тут сложно отследить без сложной логики, можно сохранить только балл
       correct: q.correct_answer
     }))
   };
 
-  console.log('Отправка данных:', resultsPayload);
+  // ВСТАВЬ СЮДА НОВУЮ ССЫЛКУ ИЗ ШАГА 2 (ту, что с /exec)
+  const scriptUrl = 'https://script.google.com/macros/s/AKfycbwBfBa2ghGs_Ts2RuZf06t0MC-xVO-n-to8MVzDost6rWNdEJjNNMFl_6B57iEH1uJsZA/exec'; 
 
   try {
-    // ЗАМЕНИ ЭТОТ URL НА URL ТВОЕГО GOOGLE APPS SCRIPT
-    const scriptUrl = 'https://script.google.com/macros/s/AKfycbwBfBa2ghGs_Ts2RuZf06t0MC-xVO-n-to8MVzDost6rWNdEJjNNMFl_6B57iEH1uJsZA/exec'; 
+    console.log('Готовим данные к отправке:', resultsPayload);
     
-    const response = await fetch(scriptUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(resultsPayload)
-    });
+    // Превращаем весь объект в одну длинную строку
+    const dataString = encodeURIComponent(JSON.stringify(resultsPayload));
+    
+    // Формируем URL: ссылка?p=наша_длинная_строка
+    const finalUrl = scriptUrl + '?p=' + dataString;
+    
+    console.log('Отправляем GET запрос на:', finalUrl);
 
+    // Делаем обычный GET запрос (он не вызывает проблем с CORS у Google)
+    const response = await fetch(finalUrl);
+    const text = await response.text();
+    
     if (response.ok) {
-      alert('Результаты успешно сохранены!');
-      window.location.reload(); // Перезагрузка страницы
+      try {
+        const json = JSON.parse(text);
+        alert('Результаты успешно сохранены! Статус: ' + (json.status || 'OK'));
+        window.location.reload();
+      } catch (e) {
+        alert('Данные отправлены, проверьте таблицу.');
+      }
     } else {
-      throw new Error('Ошибка сохранения');
+      alert('Ошибка сервера. Код: ' + response.status);
     }
   } catch (e) {
-    console.error(e);
-    alert('Ошибка при отправке результатов. Проверьте консоль или соединение.');
+    console.error('Ошибка JS:', e);
+    alert('Ошибка сети. Проверьте консоль (F12).');
   }
 }
 
