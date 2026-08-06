@@ -29,8 +29,12 @@ const authCard = document.getElementById('step-auth');
 const finalCard = document.getElementById('step-final');
 const quizContainer = document.getElementById('quiz-container');
 
-if (startBtn) startBtn.addEventListener('click', startQuiz);
-if (printBtn) printBtn.addEventListener('click', () => window.print());
+if (startBtn) {
+    startBtn.addEventListener('click', startQuiz);
+}
+if (printBtn) {
+    printBtn.addEventListener('click', () => window.print());
+}
 
 function startQuiz() {
     const nameInput = document.getElementById('student-name').value.trim();
@@ -44,24 +48,24 @@ function startQuiz() {
     studentData.name = nameInput;
     studentData.letter = letterInput.toUpperCase();
 
-    authCard.classList.remove('active');
+    if (authCard) {
+        authCard.classList.remove('active');
+    }
     renderQuiz();
     showStep(0);
 }
 
 function renderQuiz() {
+    if (!quizContainer) return;
     quizContainer.innerHTML = "";
+    
     questions.forEach((q, index) => {
         const card = document.createElement('div');
-        card.className = `card q-card`;
+        card.className = "card q-card";
         card.id = `step-q-${index}`;
 
         let content = `<div class="question-text">Задание №${index + 1}. ${q.text}</div>`;
         
-        if (q.img) {
-            content += `<img src="${q.img}" class="question-img" alt="Иллюстрация">`;
-        }
-
         if (q.type === 'inline-dropdown') {
             let renderedText = q.textTemplate;
             
@@ -83,30 +87,13 @@ function renderQuiz() {
             content += `<button class="btn next-btn-trigger" style="margin-top: 15px;">Далее</button>`;
         }
         
-        if (q.type === 'single') {
-            content += `<ul class="options-list">`;
-            q.options.forEach((opt, oIdx) => {
-                content += `<li class="option-item" data-opt="${oIdx}">${opt}</li>`;
-            });
-            content += `</ul>`;
-        }
-        
         card.innerHTML = content;
 
-        // Безопасная навеска обработчиков событий внутри созданной карточки
         if (q.type === 'inline-dropdown') {
             const nextBtn = card.querySelector('.next-btn-trigger');
             if (nextBtn) {
                 nextBtn.addEventListener('click', () => nextStep());
             }
-        } else if (q.type === 'single') {
-            const items = card.querySelectorAll('.option-item');
-            items.forEach(item => {
-                item.addEventListener('click', (e) => {
-                    const optIdx = parseInt(e.currentTarget.getAttribute('data-opt'));
-                    selectSingle(index, optIdx);
-                });
-            });
         }
 
         quizContainer.appendChild(card);
@@ -123,19 +110,6 @@ function showStep(stepIndex) {
     } else {
         finishQuiz();
     }
-}
-
-function selectSingle(qIdx, optIdx) {
-    userAnswers[qIdx] = optIdx;
-    
-    const items = document.querySelectorAll(`#step-q-${qIdx} .option-item`);
-    items.forEach((item, i) => {
-        if(i === optIdx) item.classList.add('selected');
-    });
-
-    setTimeout(() => {
-        nextStep();
-    }, 500);
 }
 
 function nextStep() {
@@ -169,10 +143,7 @@ function finishQuiz() {
         maxPoints += q.points;
         const ans = userAnswers[index];
 
-        if (q.type === 'single' && ans === q.correct) {
-            score += q.points;
-        } 
-        else if (q.type === 'inline-dropdown' && Array.isArray(ans)) {
+        if (q.type === 'inline-dropdown' && Array.isArray(ans)) {
             q.correctAnswers.forEach((correctAnsIdx, dropIdx) => {
                 if (ans[dropIdx] === correctAnsIdx) {
                     score += 1; 
@@ -185,15 +156,22 @@ function finishQuiz() {
     studentData.maxPoints = maxPoints;
     studentData.grade = calculateGrade(score, maxPoints);
 
-    document.getElementById('res-name').innerText = studentData.name;
-    document.getElementById('res-class').innerText = `5-${studentData.letter}`;
-    document.getElementById('res-points').innerText = score;
-    document.getElementById('res-max-points').innerText = maxPoints;
-    document.getElementById('res-grade').innerText = studentData.grade;
+    const resName = document.getElementById('res-name');
+    const resClass = document.getElementById('res-class');
+    const resPoints = document.getElementById('res-points');
+    const resMaxPoints = document.getElementById('res-max-points');
+    const resGrade = document.getElementById('res-grade');
+
+    if (resName) resName.innerText = studentData.name;
+    if (resClass) resClass.innerText = `5-${studentData.letter}`;
+    if (resPoints) resPoints.innerText = score;
+    if (resMaxPoints) resMaxPoints.innerText = maxPoints;
+    if (resGrade) resGrade.innerText = studentData.grade;
 
     generatePrintForm();
-    sendToGoogleSheets(studentData);
-    finalCard.classList.add('active');
+    if (finalCard) {
+        finalCard.classList.add('active');
+    }
 }
 
 function generatePrintForm() {
@@ -227,10 +205,7 @@ function generatePrintForm() {
         let isCorrect = false;
         let details = "";
 
-        if (q.type === 'single') {
-            isCorrect = ans === q.correct;
-            details = isCorrect ? "Верно" : "Ошибка";
-        } else if (q.type === 'inline-dropdown') {
+        if (q.type === 'inline-dropdown') {
             let correctCount = 0;
             q.correctAnswers.forEach((correctAnsIdx, dropIdx) => {
                 if (ans && ans[dropIdx] === correctAnsIdx) correctCount++;
@@ -250,8 +225,4 @@ function generatePrintForm() {
 
     html += `</tbody></table>`;
     printZone.innerHTML = html;
-}
-
-function sendToGoogleSheets(data) {
-    console.log("Данные готовы к отправке в таблицы:", data);
 }
