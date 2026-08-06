@@ -1,4 +1,3 @@
-// Наш массив вопросов, куда мы будем добавлять новые задания по цепочке
 const questions = [
     {
         type: "inline-dropdown",
@@ -15,7 +14,7 @@ const questions = [
             </div>
         `,
         dropdownOptions: ["Размножение", "Развитие", "Рост", "Обмен веществ", "Дыхание", "Питание"],
-        correctAnswers:, // Вот теперь массив на месте!
+        correctAnswers:,
         points: 3
     }
 ];
@@ -30,8 +29,8 @@ const authCard = document.getElementById('step-auth');
 const finalCard = document.getElementById('step-final');
 const quizContainer = document.getElementById('quiz-container');
 
-startBtn.addEventListener('click', startQuiz);
-printBtn.addEventListener('click', () => window.print());
+if (startBtn) startBtn.addEventListener('click', startQuiz);
+if (printBtn) printBtn.addEventListener('click', () => window.print());
 
 function startQuiz() {
     const nameInput = document.getElementById('student-name').value.trim();
@@ -63,11 +62,9 @@ function renderQuiz() {
             content += `<img src="${q.img}" class="question-img" alt="Иллюстрация">`;
         }
 
-        // Рендеринг типа задания с выпадающими списками в тексте
         if (q.type === 'inline-dropdown') {
             let renderedText = q.textTemplate;
             
-            // Создаем HTML выпадающего списка
             let selectHtmlTemplate = (dropdownIdx) => {
                 let html = `<select class="inline-select" data-q="${index}" data-drop="${dropdownIdx}">`;
                 html += `<option value="">Выберите...</option>`;
@@ -78,13 +75,11 @@ function renderQuiz() {
                 return html;
             };
 
-            // Подставляем селекты вместо маркеров {0}, {1}, {2}
             q.correctAnswers.forEach((_, dropIdx) => {
                 renderedText = renderedText.replace(`{${dropIdx}}`, selectHtmlTemplate(dropIdx));
             });
 
             content += `<div class="inline-question-block">${renderedText}</div>`;
-            // Для комплексных заданий нужна кнопка "Далее"
             content += `<button class="btn" style="margin-top: 15px;" onclick="nextStep()">Далее</button>`;
         }
         
@@ -106,7 +101,8 @@ function showStep(stepIndex) {
     allCards.forEach(c => c.classList.remove('active'));
 
     if (stepIndex < questions.length) {
-        document.getElementById(`step-q-${stepIndex}`).classList.add('active');
+        const targetCard = document.getElementById(`step-q-${stepIndex}`);
+        if (targetCard) targetCard.classList.add('active');
     } else {
         finishQuiz();
     }
@@ -126,7 +122,6 @@ function selectSingle(qIdx, optIdx) {
 }
 
 function nextStep() {
-    // Сохраняем ответы из выпадающих списков текущего шага, если они там есть
     const currentQ = questions[currentStep];
     if (currentQ && currentQ.type === 'inline-dropdown') {
         const selects = document.querySelectorAll(`#step-q-${currentStep} .inline-select`);
@@ -161,7 +156,6 @@ function finishQuiz() {
             score += q.points;
         } 
         else if (q.type === 'inline-dropdown' && Array.isArray(ans)) {
-            // За каждый правильный выпадающий список даем по 1 баллу
             q.correctAnswers.forEach((correctAnsIdx, dropIdx) => {
                 if (ans[dropIdx] === correctAnsIdx) {
                     score += 1; 
@@ -187,6 +181,8 @@ function finishQuiz() {
 
 function generatePrintForm() {
     const printZone = document.getElementById('print-zone');
+    if (!printZone) return;
+
     let html = `
         <div class="print-header">
             <h1>РЕЗУЛЬТАТЫ ВЫПОЛНЕНИЯ ЗАДАНИЯ</h1>
@@ -197,7 +193,7 @@ function generatePrintForm() {
         <p><strong>Класс:</strong> 5-${studentData.letter}</p>
         <p><strong>Набрано баллов:</strong> ${studentData.points} из ${studentData.maxPoints}</p>
         <p><strong>Оценка:</strong> ${studentData.grade}</p>
-        <p style="font-size: 12px; margin-top:5px; color:#555;">Разбалловка: 90%+ — «5密, 70%+ — «4», 50%+ — «3»</p>
+        <p style="font-size: 12px; margin-top:5px; color:#555;">Разбалловка: 90%+ — «5», 70%+ — «4密, 50%+ — «3»</p>
         
         <table class="print-table">
             <thead>
@@ -207,7 +203,7 @@ function generatePrintForm() {
                     <th>Результат</th>
                 </tr>
             </thead>
-            <tbody>;`
+            <tbody>`;
 
     questions.forEach((q, index) => {
         const ans = userAnswers[index];
