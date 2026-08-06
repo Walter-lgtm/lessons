@@ -188,7 +188,7 @@ function generatePrintForm() {
         <p><strong>Класс:</strong> 5-${studentData.letter}</p>
         <p><strong>Набрано баллов:</strong> ${studentData.points} из ${studentData.maxPoints}</p>
         <p><strong>Оценка:</strong> ${studentData.grade}</p>
-        <p style="font-size: 12px; margin-top:5px; color:#555;">Разбалловка: 90%+ — «5», 70%+ — «4», 50%+ — «3»</p>
+        <p style="font-size: 12px; margin-top:5px; color:#555;">Разбалловка: 90%+ — «5», 70%+ — «4密, 50%+ — «3»</p>
         
         <table class="print-table">
             <thead>
