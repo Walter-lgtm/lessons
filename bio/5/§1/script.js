@@ -14,20 +14,13 @@ const questions = [
       </div>
     `,
     dropdownOptions: ["Размножение", "Развитие", "Рост", "Обмен веществ", "Дыхание", "Питание"],
-    // индексы правильных ответов: 0→Рост, 1→Развитие, 2→Размножение
-    correctAnswers: [2, 1, 0],
+    correctAnswers:, // 2→Рост, 1→Развитие, 0→Размножение
     points: 3
   }
 ];
 
 let currentStep = 0;
-let studentData = {
-  name: "",
-  letter: "",
-  points: 0,
-  maxPoints: 0,
-  grade: ""
-};
+let studentData = { name: "", letter: "", points: 0, maxPoints: 0, grade: "" };
 let userAnswers = [];
 
 const startBtn = document.getElementById('start-btn');
@@ -58,7 +51,7 @@ function startQuiz() {
   if (authCard) {
     authCard.classList.remove('active');
   }
-  userAnswers = []; // сброс ответов
+  userAnswers = [];
   currentStep = 0;
   renderQuiz();
   showStep(0);
@@ -124,19 +117,29 @@ function showStep(stepIndex) {
 }
 
 function nextStep() {
-  // собираем ответы для текущего шага
   const q = questions[currentStep];
-  if (q.type === 'inline-dropdown') {
-    const selects = quizContainer.querySelectorAll(`#step-q-${currentStep} .inline-select`);
+  const targetCard = document.getElementById(`step-q-${currentStep}`);
+  
+  if (q.type === 'inline-dropdown' && targetCard) {
+    const selects = targetCard.querySelectorAll('.inline-select');
     const answers = [];
     selects.forEach(sel => {
-      answers.push(sel.value);
+      // Сохраняем как число, если выбрано, или null
+      answers.push(sel.value === "" ? null : parseInt(sel.value));
     });
     userAnswers.push(answers);
   }
 
   currentStep++;
   showStep(currentStep);
+}
+
+function calculateGrade(points, max) {
+  const percent = (points / max) * 100;
+  if (percent >= 90) return "5";
+  if (percent >= 70) return "4";
+  if (percent >= 50) return "3";
+  return "2";
 }
 
 function finishQuiz() {
@@ -146,20 +149,81 @@ function finishQuiz() {
   questions.forEach((q, idx) => {
     maxPoints += q.points || 1;
     if (q.type === 'inline-dropdown' && userAnswers[idx]) {
-      // сравниваем массивы ответов
-      const isCorrect = userAnswers[idx].every((val, i) => val === String(q.correctAnswers[i]));
-      if (isCorrect) {
-        totalPoints += q.points || 1;
-      }
+      q.correctAnswers.forEach((correctVal, i) => {
+        if (userAnswers[idx][i] === correctVal) {
+          totalPoints += 1; // 1 балл за каждый верный пропуск
+        }
+      });
     }
   });
 
   studentData.points = totalPoints;
   studentData.maxPoints = maxPoints;
+  studentData.grade = calculateGrade(totalPoints, maxPoints);
 
-  // здесь можно вывести результат в finalCard и т.п.
+  const resName = document.getElementById('res-name');
+  const resClass = document.getElementById('res-class');
+  const resPoints = document.getElementById('res-points');
+  const resMaxPoints = document.getElementById('res-max-points');
+  const resGrade = document.getElementById('res-grade');
+
+  if (resName) resName.innerText = studentData.name;
+  if (resClass) resClass.innerText = `5-${studentData.letter}`;
+  if (resPoints) resPoints.innerText = totalPoints;
+  if (resMaxPoints) resMaxPoints.innerText = maxPoints;
+  if (resGrade) resGrade.innerText = studentData.grade;
+
+  generatePrintForm();
+
   if (finalCard) {
     finalCard.classList.add('active');
-    // например: finalCard.innerHTML = `Результат: ${totalPoints} из ${maxPoints}`;
   }
+}
+
+function generatePrintForm() {
+  const printZone = document.getElementById('print-zone');
+  if (!printZone) return;
+
+  let html = `
+    <div class="print-header">
+        <h1>РЕЗУЛЬТАТЫ ВЫПОЛНЕНИЯ ЗАДАНИЯ</h1>
+        <p><strong>Предмет:</strong> Биология (5 класс)</p>
+        <p><strong>Тема:</strong> §1. Живая и неживая природа — единое целое?</p>
+    </div>
+    <p><strong>Ученик(ца):</strong> ${studentData.name}</p>
+    <p><strong>Класс:</strong> 5-${studentData.letter}</p>
+    <p><strong>Набрано баллов:</strong> ${studentData.points} из ${studentData.maxPoints}</p>
+    <p><strong>Оценка:</strong> ${studentData.grade}</p>
+    <p style="font-size: 12px; margin-top:5px; color:#555;">Разбалловка: 90%+ — «5», 70%+ — «4», 50%+ — «3»</p>
+    
+    <table class="print-table" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid #000; padding: 8px;">№</th>
+                <th style="border: 1px solid #000; padding: 8px;">Задание</th>
+                <th style="border: 1px solid #000; padding: 8px;">Результат</th>
+            </tr>
+        </thead>
+        <tbody>`;
+
+  questions.forEach((q, index) => {
+    let correctCount = 0;
+    if (userAnswers[index]) {
+      q.correctAnswers.forEach((correctVal, i) => {
+        if (userAnswers[index][i] === correctVal) correctCount++;
+      });
+    }
+    const isCorrect = correctCount === q.correctAnswers.length;
+    const rowClass = isCorrect ? "" : "print-row-wrong";
+
+    html += `
+        <tr class="${rowClass}">
+            <td style="border: 1px solid #000; padding: 8px;">${index + 1}</td>
+            <td style="border: 1px solid #000; padding: 8px;">${q.text}</td>
+            <td style="border: 1px solid #000; padding: 8px;"><strong>Правильно ${correctCount} из ${q.correctAnswers.length}</strong></td>
+        </tr>`;
+  });
+
+  html += `</tbody></table>`;
+  printZone.innerHTML = html;
 }
