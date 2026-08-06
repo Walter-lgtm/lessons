@@ -30,7 +30,7 @@
             <button class="btn" id="start-btn">Начать задание</button>
         </div>
 
-        <!-- Здесь будут динамически появляться задания из script.js -->
+        <!-- Здесь динамически появляются карточки с заданиями -->
         <div id="quiz-container"></div>
 
         <!-- Экран Финал: Результаты -->
@@ -38,17 +38,21 @@
             <h2>Тест завершен!</h2>
             <div class="results-box">
                 <p>Ученик: <strong id="res-name"></strong>, класс: <strong id="res-class"></strong></p>
-                <div class="score-display">
-                    <span id="res-points">0</span> из <span id="res-max-points">0</span> баллов
+                <div class="score-display" style="font-size: 24px; margin: 15px 0; font-weight: bold;">
+                    Баллы: <span id="res-points">0</span> из <span id="res-max-points">0</span>
                 </div>
-                <div class="grade-display">Оценка: <span id="res-grade">-</span></div>
+                <div class="grade-display" style="font-size: 26px; font-weight: bold; color: #2e7d32;">
+                    Оценка: <span id="res-grade">-</span>
+                </div>
             </div>
             <button class="btn" id="print-btn">Сохранить бланк / Печать</button>
-            <p class="hint-text">Результаты автоматически отправлены учителю.</p>
+            <p class="hint-text" style="font-size: 12px; color: #888; text-align: center; margin-top: 15px;">
+                Результаты зафиксированы.
+            </p>
         </div>
     </div>
 
-    <!-- Скрытый бланк для печати (виден только принтеру/при сохранении в PDF) -->
+    <!-- Скрытая зона для генерации PDF-ведомости -->
     <div id="print-zone" class="print-only"></div>
 
     <script src="script.js"></script>
