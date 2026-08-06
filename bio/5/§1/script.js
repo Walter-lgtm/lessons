@@ -65,8 +65,8 @@ function renderQuiz() {
         if (q.type === 'inline-dropdown') {
             let renderedText = q.textTemplate;
             
-            let selectHtmlTemplate = (dropdownIdx) => {
-                let html = `<select class="inline-select" data-q="${index}" data-drop="${dropdownIdx}">`;
+            const selectHtmlTemplate = (dropdownIdx) => {
+                let html = `<select class="inline-select" data-drop="${dropdownIdx}">`;
                 html += `<option value="">Выберите...</option>`;
                 q.dropdownOptions.forEach((opt, optIdx) => {
                     html += `<option value="${optIdx}">${opt}</option>`;
@@ -80,18 +80,35 @@ function renderQuiz() {
             });
 
             content += `<div class="inline-question-block">${renderedText}</div>`;
-            content += `<button class="btn" style="margin-top: 15px;" onclick="nextStep()">Далее</button>`;
+            content += `<button class="btn next-btn-trigger" style="margin-top: 15px;">Далее</button>`;
         }
         
         if (q.type === 'single') {
             content += `<ul class="options-list">`;
             q.options.forEach((opt, oIdx) => {
-                content += `<li class="option-item" onclick="selectSingle(${index}, ${oIdx})">${opt}</li>`;
+                content += `<li class="option-item" data-opt="${oIdx}">${opt}</li>`;
             });
             content += `</ul>`;
         }
         
         card.innerHTML = content;
+
+        // Безопасная навеска обработчиков событий внутри созданной карточки
+        if (q.type === 'inline-dropdown') {
+            const nextBtn = card.querySelector('.next-btn-trigger');
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => nextStep());
+            }
+        } else if (q.type === 'single') {
+            const items = card.querySelectorAll('.option-item');
+            items.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    const optIdx = parseInt(e.currentTarget.getAttribute('data-opt'));
+                    selectSingle(index, optIdx);
+                });
+            });
+        }
+
         quizContainer.appendChild(card);
     });
 }
@@ -193,7 +210,7 @@ function generatePrintForm() {
         <p><strong>Класс:</strong> 5-${studentData.letter}</p>
         <p><strong>Набрано баллов:</strong> ${studentData.points} из ${studentData.maxPoints}</p>
         <p><strong>Оценка:</strong> ${studentData.grade}</p>
-        <p style="font-size: 12px; margin-top:5px; color:#555;">Разбалловка: 90%+ — «5», 70%+ — «4密, 50%+ — «3»</p>
+        <p style="font-size: 12px; margin-top:5px; color:#555;">Разбалловка: 90%+ — «5», 70%+ — «4», 50%+ — «3»</p>
         
         <table class="print-table">
             <thead>
