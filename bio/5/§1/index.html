@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Биология 5 класс — §1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container" id="app">
+        <!-- Экран 1: Регистрация -->
+        <div class="card active" id="step-auth">
+            <h2>Цифровой рабочий лист</h2>
+            <h3>§1. Живая и неживая природа — единое целое?</h3>
+            <div class="input-group">
+                <label for="student-name">Фамилия и Имя ученика:</label>
+                <input type="text" id="student-name" placeholder="Введите имя и фамилию" autocomplete="off">
+            </div>
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Класс:</label>
+                    <input type="text" value="5" disabled class="disabled-input">
+                </div>
+                <div class="input-group">
+                    <label for="student-letter">Буква класса:</label>
+                    <input type="text" id="student-letter" placeholder="например, А" maxlength="2" autocomplete="off">
+                </div>
+            </div>
+            <button class="btn" id="start-btn">Начать задание</button>
+        </div>
+
+        <!-- Здесь будут динамически появляться задания из script.js -->
+        <div id="quiz-container"></div>
+
+        <!-- Экран Финал: Результаты -->
+        <div class="card" id="step-final">
+            <h2>Тест завершен!</h2>
+            <div class="results-box">
+                <p>Ученик: <strong id="res-name"></strong>, класс: <strong id="res-class"></strong></p>
+                <div class="score-display">
+                    <span id="res-points">0</span> из <span id="res-max-points">0</span> баллов
+                </div>
+                <div class="grade-display">Оценка: <span id="res-grade">-</span></div>
+            </div>
+            <button class="btn" id="print-btn">Сохранить бланк / Печать</button>
+            <p class="hint-text">Результаты автоматически отправлены учителю.</p>
+        </div>
+    </div>
+
+    <!-- Скрытый бланк для печати (виден только принтеру/при сохранении в PDF) -->
+    <div id="print-zone" class="print-only"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
