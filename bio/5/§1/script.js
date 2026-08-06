@@ -1,11 +1,26 @@
-// Пока что здесь пустая база вопросов. Как только вы скинете фото, я наполню этот массив реальными данными!
+// Наш массив вопросов, куда мы будем добавлять новые задания по цепочке
 const questions = [
     {
-        type: "single", // Один вариант
-        text: "Пример вопроса: Что изучает биология?",
-        options: ["Машины", "Живую природу", "Звезды", "Минералы"],
-        correct: 1, // Индекс правильного ответа (с нуля)
-        points: 1
+        type: "inline-dropdown",
+        text: "Вставь вместо пропусков верные биологические термины:",
+        // Шаблон текста, где вместо {0}, {1}, {2} будут выпадающие списки
+        textTemplate: `
+            <div style="line-height: 1.8; margin-bottom: 15px;">
+                {0} — это количественные изменения в структуре любого природного тела, то есть в процессе жизни организмы увеличивают свои размеры и массу.
+            </div>
+            <div style="line-height: 1.8; margin-bottom: 15px;">
+                {1} — это качественные изменения в структуре любого природного тела.
+            </div>
+            <div style="line-height: 1.8; margin-bottom: 15px;">
+                {2} — это способность воспроизводить себе подобных, передавать свои признаки, свойства и особенности развития из поколения в поколение.
+            </div>
+        `,
+        // Варианты ответов для списков (общие для всех пропусков, как на скриншоте)
+        dropdownOptions: ["Размножение", "Развитие", "Рост", "Обмен веществ", "Дыхание", "Питание"],
+        // Правильные ответы (индексы элементов из массива dropdownOptions выше)
+        // {0} - Рост (индекс 2), {1} - Развитие (индекс 1), {2} - Размножение (индекс 0)
+        correctAnswers:, 
+        points: 3 // 3 балла за полностью верное задание
     }
 ];
 
@@ -13,7 +28,6 @@ let currentStep = 0;
 let studentData = { name: "", letter: "", points: 0, maxPoints: 0, grade: "" };
 let userAnswers = [];
 
-// Элементы интерфейса
 const startBtn = document.getElementById('start-btn');
 const printBtn = document.getElementById('print-btn');
 const authCard = document.getElementById('step-auth');
@@ -53,6 +67,31 @@ function renderQuiz() {
             content += `<img src="${q.img}" class="question-img" alt="Иллюстрация">`;
         }
 
+        // Рендеринг типа задания с выпадающими списками в тексте
+        if (q.type === 'inline-dropdown') {
+            let renderedText = q.textTemplate;
+            
+            // Создаем HTML выпадающего списка
+            let selectHtmlTemplate = (dropdownIdx) => {
+                let html = `<select class="inline-select" data-q="${index}" data-drop="${dropdownIdx}">`;
+                html += `<option value="">Выберите...</option>`;
+                q.dropdownOptions.forEach((opt, optIdx) => {
+                    html += `<option value="${optIdx}">${opt}</option>`;
+                });
+                html += `</select>`;
+                return html;
+            };
+
+            // Подставляем селекты вместо маркеров {0}, {1}, {2}
+            q.correctAnswers.forEach((_, dropIdx) => {
+                renderedText = renderedText.replace(`{${dropIdx}}`, selectHtmlTemplate(dropIdx));
+            });
+
+            content += `<div class="inline-question-block">${renderedText}</div>`;
+            // Для комплексных заданий нужна кнопка "Далее"
+            content += `<button class="btn" style="margin-top: 15px;" onclick="nextStep()">Далее</button>`;
+        }
+        
         if (q.type === 'single') {
             content += `<ul class="options-list">`;
             q.options.forEach((opt, oIdx) => {
@@ -80,17 +119,30 @@ function showStep(stepIndex) {
 function selectSingle(qIdx, optIdx) {
     userAnswers[qIdx] = optIdx;
     
-    // Эффект выделения перед автопереходом
     const items = document.querySelectorAll(`#step-q-${qIdx} .option-item`);
     items.forEach((item, i) => {
         if(i === optIdx) item.classList.add('selected');
     });
 
-    // Автопереход через полсекунды
     setTimeout(() => {
-        currentStep++;
-        showStep(currentStep);
+        nextStep();
     }, 500);
+}
+
+function nextStep() {
+    // Сохраняем ответы из выпадающих списков текущего шага, если они там есть
+    const currentQ = questions[currentStep];
+    if (currentQ && currentQ.type === 'inline-dropdown') {
+        const selects = document.querySelectorAll(`#step-q-${currentStep} .inline-select`);
+        let answersArr = [];
+        selects.forEach(sel => {
+            answersArr.push(sel.value === "" ? null : parseInt(sel.value));
+        });
+        userAnswers[currentStep] = answersArr;
+    }
+
+    currentStep++;
+    showStep(currentStep);
 }
 
 function calculateGrade(points, max) {
@@ -107,8 +159,18 @@ function finishQuiz() {
 
     questions.forEach((q, index) => {
         maxPoints += q.points;
-        if (q.type === 'single' && userAnswers[index] === q.correct) {
+        const ans = userAnswers[index];
+
+        if (q.type === 'single' && ans === q.correct) {
             score += q.points;
+        } 
+        else if (q.type === 'inline-dropdown' && Array.isArray(ans)) {
+            // За каждый правильный выпадающий список даем по 1 баллу
+            q.correctAnswers.forEach((correctAnsIdx, dropIdx) => {
+                if (ans[dropIdx] === correctAnsIdx) {
+                    score += 1; 
+                }
+            });
         }
     });
 
@@ -116,19 +178,14 @@ function finishQuiz() {
     studentData.maxPoints = maxPoints;
     studentData.grade = calculateGrade(score, maxPoints);
 
-    // Заполнение финального экрана
     document.getElementById('res-name').innerText = studentData.name;
     document.getElementById('res-class').innerText = `5-${studentData.letter}`;
     document.getElementById('res-points').innerText = score;
     document.getElementById('res-max-points').innerText = maxPoints;
     document.getElementById('res-grade').innerText = studentData.grade;
 
-    // Сборка печатной ведомости (PDF)
     generatePrintForm();
-
-    // Сюда мы позже прикрутим отправку в Google Таблицу
     sendToGoogleSheets(studentData);
-
     finalCard.classList.add('active');
 }
 
@@ -144,7 +201,7 @@ function generatePrintForm() {
         <p><strong>Класс:</strong> 5-${studentData.letter}</p>
         <p><strong>Набрано баллов:</strong> ${studentData.points} из ${studentData.maxPoints}</p>
         <p><strong>Оценка:</strong> ${studentData.grade}</p>
-        <p style="font-size: 12px; margin-top:5px; color:#555;">Разбалловка: 90%+ — «5», 70%+ — «4», 50%+ — «3»</p>
+        <p style="font-size: 12px; margin-top:5px; color:#555;">Разбалловка: 90%+ — «5密, 70%+ — «4», 50%+ — «3»</p>
         
         <table class="print-table">
             <thead>
@@ -157,14 +214,28 @@ function generatePrintForm() {
             <tbody>;`
 
     questions.forEach((q, index) => {
-        const isCorrect = userAnswers[index] === q.correct;
-        const statusText = isCorrect ? "Верно" : "Ошибка";
+        const ans = userAnswers[index];
+        let isCorrect = false;
+        let details = "";
+
+        if (q.type === 'single') {
+            isCorrect = ans === q.correct;
+            details = isCorrect ? "Верно" : "Ошибка";
+        } else if (q.type === 'inline-dropdown') {
+            let correctCount = 0;
+            q.correctAnswers.forEach((correctAnsIdx, dropIdx) => {
+                if (ans && ans[dropIdx] === correctAnsIdx) correctCount++;
+            });
+            isCorrect = correctCount === q.correctAnswers.length;
+            details = `Правильно ${correctCount} из ${q.correctAnswers.length}`;
+        }
+
         const rowClass = isCorrect ? "" : "print-row-wrong";
         html += `
             <tr class="${rowClass}">
                 <td>${index + 1}</td>
                 <td>${q.text}</td>
-                <td><strong>${statusText}</strong></td>
+                <td><strong>${details}</strong></td>
             </tr>`;
     });
 
@@ -174,5 +245,4 @@ function generatePrintForm() {
 
 function sendToGoogleSheets(data) {
     console.log("Данные готовы к отправке в таблицы:", data);
-    // Логику отправки подключим сразу после настройки скрипта таблиц
 }
