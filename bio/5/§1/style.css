@@ -207,3 +207,71 @@ input[type="text"]:focus, select:focus {
   .grade-display { font-size: 36px; }
   .input-row { grid-template-columns: 1fr; gap: 10px; } /* на очень узких экранах поля друг под другом */
 }
+/* Сопоставление: два столбца */
+.matching-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: center;
+}
+.col-terms, .col-defs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.term-item {
+  font-size: 16px;
+  padding: 10px 12px;
+  background: #f5f5f5;
+  border-radius: 6px;
+}
+
+/* Верно/неверно: список с селектами */
+.tf-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.tf-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+.tf-statement {
+  flex: 1;
+  margin-right: 12px;
+}
+@media (max-width: 420px) {
+  .tf-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .tf-statement { margin-right: 0; }
+}
+
+/* Картинка с подписями */
+.image-label-wrapper {
+  text-align: center;
+}
+.label-options {
+  margin-top: 18px;
+  text-align: left;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.label-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.label-name {
+  font-weight: 600;
+  min-width: 130px;
+}
+
+/* Адаптив для новых блоков */
+@media (max-width: 420px) {
+  .matching-grid { grid-template-columns: 1fr; }
+  .col-terms, .col-defs { width: 100%; }
+}
