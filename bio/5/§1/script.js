@@ -98,44 +98,98 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderQuiz() {
-    if (!quizContainer) return;
-    quizContainer.innerHTML = "";
+  if (!quizContainer) return;
+  quizContainer.innerHTML = "";
 
-    questions.forEach((q, index) => {
-      const card = document.createElement('div');
-      card.className = "card q-card";
-      card.id = `step-q-${index}`;
+  questions.forEach((q, index) => {
+    const card = document.createElement('div');
+    card.className = "card q-card";
+    card.id = `step-q-${index}`;
 
-      let content = `<div class="question-text">Задание №${index + 1}. ${q.text}</div>`;
+    let content = `<div class="question-text">Задание №${index + 1}. ${q.text}</div>`;
 
-      if (q.type === 'inline-dropdown') {
-        let renderedText = q.textTemplate;
-        const selectHtmlTemplate = (dropdownIdx) => {
-          return `<select class="inline-select" data-drop="${dropdownIdx}">
-                    <option value="">Выберите...</option>
-                    ${q.dropdownOptions.map((opt, optIdx) => `<option value="${optIdx}">${opt}</option>`).join('')}
-                  </select>`;
-        };
+    if (q.type === 'inline-dropdown') {
+      let renderedText = q.textTemplate;
+      const selectHtmlTemplate = (dropIdx) => {
+        return `<select class="inline-select" data-drop="${dropIdx}">
+                  <option value="">Выберите...</option>
+                  ${q.dropdownOptions.map((opt, optIdx) => `<option value="${optIdx}">${opt}</option>`).join('')}
+                </select>`;
+      };
+      q.correctAnswers.forEach((_, dropIdx) => {
+        renderedText = renderedText.replace(`{${dropIdx}}`, selectHtmlTemplate(dropIdx));
+      });
+      content += `<div class="inline-question-block">${renderedText}</div>`;
+    }
 
-        q.correctAnswers.forEach((_, dropIdx) => {
-          renderedText = renderedText.replace(`{${dropIdx}}`, selectHtmlTemplate(dropIdx));
-        });
+    else if (q.type === 'matching') {
+      // простой вариант: два столбца — слева термины, справа выпадающие списки с определениями
+      const terms = q.pairs.map(p => p.term);
+      const definitions = q.pairs.map(p => p.definition);
+      content += `
+        <div class="matching-grid">
+          <div class="col-terms">
+            ${terms.map((t, i) => `<div class="term-item">${t}</div>`).join('')}
+          </div>
+          <div class="col-defs">
+            ${definitions.map((d, i) => `
+              <select class="inline-select match-select" data-pair="${i}">
+                <option value="">Выберите определение</option>
+                ${definitions.map((def, idx) => `<option value="${idx}">${def}</option>`).join('')}
+              </select>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
 
-        content += `<div class="inline-question-block">${renderedText}</div>`;
-        content += `<button class="btn next-btn-trigger" style="margin-top: 15px;">Далее</button>`;
-      }
+    else if (q.type === 'true-false') {
+      content += `
+        <div class="tf-list">
+          ${q.statements.map((s, i) => `
+            <label class="tf-item">
+              <span class="tf-statement">${s}</span>
+              <select class="inline-select tf-select" data-stmt="${i}">
+                <option value="true">Верно</option>
+                <option value="false">Неверно</option>
+              </select>
+            </label>
+          `).join('')}
+        </div>
+      `;
+    }
 
-      card.innerHTML = content;
+    else if (q.type === 'image-label') {
+      // картинка + подписи (пока без перетаскивания: подписи — выпадающие списки рядом с местами)
+      content += `
+        <div class="image-label-wrapper">
+          <img src="${q.imageUrl}" alt="Схема клетки" class="question-img">
+          <div class="label-options">
+            ${q.labels.map((lbl, i) => `
+              <div class="label-row">
+                <span class="label-name">${lbl}</span>:
+                <select class="inline-select label-select" data-label="${i}">
+                  <option value="">Выберите место</option>
+                  ${q.labelPositions.map((_, idx) => `<option value="${idx}">Место ${idx + 1}</option>`).join('')}
+                </select>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
 
-      if (q.type === 'inline-dropdown') {
-        const nextBtn = card.querySelector('.next-btn-trigger');
-        if (nextBtn) {
-          nextBtn.addEventListener('click', () => nextStep());
-        }
-      }
-      quizContainer.appendChild(card);
-    });
-  }
+    content += `<button class="btn next-btn-trigger" style="margin-top: 20px;">Далее</button>`;
+    card.innerHTML = content;
+
+    // вешаем обработчик на кнопку «Далее»
+    const nextBtn = card.querySelector('.next-btn-trigger');
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => nextStep());
+    }
+    quizContainer.appendChild(card);
+  });
+}
 
   function showStep(stepIndex) {
     const allCards = document.querySelectorAll('.card');
@@ -152,21 +206,45 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function nextStep() {
-    const q = questions[currentStep];
-    const targetCard = document.getElementById(`step-q-${currentStep}`);
+  const q = questions[currentStep];
+  const targetCard = document.getElementById(`step-q-${currentStep}`);
+  const answers = [];
 
-    if (q.type === 'inline-dropdown' && targetCard) {
-      const selects = targetCard.querySelectorAll('.inline-select');
-      const answers = [];
-      selects.forEach(sel => {
-        answers.push(sel.value === "" ? null : parseInt(sel.value, 10));
-      });
-      userAnswers.push(answers);
-    }
-
-    currentStep++;
-    showStep(currentStep);
+  if (q.type === 'inline-dropdown' && targetCard) {
+    const selects = targetCard.querySelectorAll('.inline-select');
+    selects.forEach(sel => {
+      answers.push(sel.value === "" ? null : parseInt(sel.value, 10));
+    });
   }
+
+  else if (q.type === 'matching' && targetCard) {
+    const selects = targetCard.querySelectorAll('.match-select');
+    selects.forEach(sel => {
+      const idx = parseInt(sel.dataset.pair, 10);
+      answers[idx] = sel.value === "" ? null : parseInt(sel.value, 10);
+    });
+  }
+
+  else if (q.type === 'true-false' && targetCard) {
+    const selects = targetCard.querySelectorAll('.tf-select');
+    selects.forEach(sel => {
+      const idx = parseInt(sel.dataset.stmt, 10);
+      answers[idx] = sel.value === "true"; // true/false
+    });
+  }
+
+  else if (q.type === 'image-label' && targetCard) {
+    const selects = targetCard.querySelectorAll('.label-select');
+    selects.forEach(sel => {
+      const idx = parseInt(sel.dataset.label, 10);
+      answers[idx] = sel.value === "" ? null : parseInt(sel.value, 10);
+    });
+  }
+
+  userAnswers.push(answers);
+  currentStep++;
+  showStep(currentStep);
+}
 
   function calculateGrade(points, max) {
     if (max === 0) return "2";
