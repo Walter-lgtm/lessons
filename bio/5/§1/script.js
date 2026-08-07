@@ -1,10 +1,11 @@
+// Массив вопросов с жестко прописанными данными без пустых знаков препинания
 const questions = [
   {
     type: "inline-dropdown",
     text: "Вставь вместо пропусков верные биологические термины:",
     textTemplate: `
       <div style="line-height: 1.8; margin-bottom: 15px; text-align: left;">
-        {0} — это количественные изменения в структуре любого природного тела, то есть в процессе жизни организмы увеличивают свои размеры и массу.
+        {0} — это количественные изменения в структуру любого природного тела, то есть в процессе жизни организмы увеличивают свои размеры и массу.
       </div>
       <div style="line-height: 1.8; margin-bottom: 15px; text-align: left;">
         {1} — это качественные изменения в структуре любого природного тела.
@@ -14,7 +15,7 @@ const questions = [
       </div>
     `,
     dropdownOptions: ["Размножение", "Развитие", "Рост", "Обмен веществ", "Дыхание", "Питание"],
-    correctAnswers:, // 2 - Рост, 1 - Развитие, 0 - Размножение
+    correctAnswers:, // На месте: 2 (Рост), 1 (Развитие), 0 (Размножение)
     points: 3
   }
 ];
@@ -171,7 +172,7 @@ function generatePrintForm() {
   if (!printZone) return;
 
   let html = `
-    <div class="print-header">
+    <div class="print-header" style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px;">
         <h1>РЕЗУЛЬТАТЫ ВЫПОЛНЕНИЯ ЗАДАНИЯ</h1>
         <p><strong>Предмет:</strong> Биология (5 класс)</p>
         <p><strong>Тема:</strong> §1. Живая и неживая природа — единое целое?</p>
@@ -199,7 +200,6 @@ function generatePrintForm() {
         if (userAnswers[index][i] === correctVal) correctCount++;
       });
     }
-    const isCorrect = correctCount === q.correctAnswers.length;
 
     html += `
         <tr>
