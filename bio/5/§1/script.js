@@ -14,7 +14,7 @@ const questions = [
       </div>
     `,
     dropdownOptions: ["Размножение", "Развитие", "Рост", "Обмен веществ", "Дыхание", "Питание"],
-    correctAnswers:, // 2→Рост, 1→Развитие, 0→Размножение
+    correctAnswers:, // 2 - Рост, 1 - Развитие, 0 - Размножение
     points: 3
   }
 ];
@@ -29,12 +29,8 @@ const authCard = document.getElementById('step-auth');
 const finalCard = document.getElementById('step-final');
 const quizContainer = document.getElementById('quiz-container');
 
-if (startBtn) {
-  startBtn.addEventListener('click', startQuiz);
-}
-if (printBtn) {
-  printBtn.addEventListener('click', () => window.print());
-}
+if (startBtn) startBtn.addEventListener('click', startQuiz);
+if (printBtn) printBtn.addEventListener('click', () => window.print());
 
 function startQuiz() {
   const nameInput = document.getElementById('student-name').value.trim();
@@ -48,9 +44,7 @@ function startQuiz() {
   studentData.name = nameInput;
   studentData.letter = letterInput.toUpperCase();
 
-  if (authCard) {
-    authCard.classList.remove('active');
-  }
+  if (authCard) authCard.classList.remove('active');
   userAnswers = [];
   currentStep = 0;
   renderQuiz();
@@ -70,15 +64,11 @@ function renderQuiz() {
 
     if (q.type === 'inline-dropdown') {
       let renderedText = q.textTemplate;
-
       const selectHtmlTemplate = (dropdownIdx) => {
-        let html = `<select class="inline-select" data-drop="${dropdownIdx}">`;
-        html += `<option value="">Выберите...</option>`;
-        q.dropdownOptions.forEach((opt, optIdx) => {
-          html += `<option value="${optIdx}">${opt}</option>`;
-        });
-        html += `</select>`;
-        return html;
+        return `<select class="inline-select" data-drop="${dropdownIdx}">
+                  <option value="">Выберите...</option>
+                  ${q.dropdownOptions.map((opt, optIdx) => `<option value="${optIdx}">${opt}</option>`).join('')}
+                </select>`;
       };
 
       q.correctAnswers.forEach((_, dropIdx) => {
@@ -97,7 +87,6 @@ function renderQuiz() {
         nextBtn.addEventListener('click', () => nextStep());
       }
     }
-
     quizContainer.appendChild(card);
   });
 }
@@ -108,9 +97,7 @@ function showStep(stepIndex) {
 
   if (stepIndex < questions.length) {
     const targetCard = document.getElementById(`step-q-${stepIndex}`);
-    if (targetCard) {
-      targetCard.classList.add('active');
-    }
+    if (targetCard) targetCard.classList.add('active');
   } else {
     finishQuiz();
   }
@@ -124,7 +111,6 @@ function nextStep() {
     const selects = targetCard.querySelectorAll('.inline-select');
     const answers = [];
     selects.forEach(sel => {
-      // Сохраняем как число, если выбрано, или null
       answers.push(sel.value === "" ? null : parseInt(sel.value));
     });
     userAnswers.push(answers);
@@ -151,7 +137,7 @@ function finishQuiz() {
     if (q.type === 'inline-dropdown' && userAnswers[idx]) {
       q.correctAnswers.forEach((correctVal, i) => {
         if (userAnswers[idx][i] === correctVal) {
-          totalPoints += 1; // 1 балл за каждый верный пропуск
+          totalPoints += 1; 
         }
       });
     }
@@ -190,18 +176,18 @@ function generatePrintForm() {
         <p><strong>Предмет:</strong> Биология (5 класс)</p>
         <p><strong>Тема:</strong> §1. Живая и неживая природа — единое целое?</p>
     </div>
-    <p><strong>Ученик(ца):</strong> ${studentData.name}</p>
+    <p style="margin-top: 15px;"><strong>Ученик(ца):</strong> ${studentData.name}</p>
     <p><strong>Класс:</strong> 5-${studentData.letter}</p>
     <p><strong>Набрано баллов:</strong> ${studentData.points} из ${studentData.maxPoints}</p>
     <p><strong>Оценка:</strong> ${studentData.grade}</p>
     <p style="font-size: 12px; margin-top:5px; color:#555;">Разбалловка: 90%+ — «5», 70%+ — «4», 50%+ — «3»</p>
     
-    <table class="print-table" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
         <thead>
             <tr>
-                <th style="border: 1px solid #000; padding: 8px;">№</th>
-                <th style="border: 1px solid #000; padding: 8px;">Задание</th>
-                <th style="border: 1px solid #000; padding: 8px;">Результат</th>
+                <th style="border: 1px solid #000; padding: 8px; text-align: left;">№</th>
+                <th style="border: 1px solid #000; padding: 8px; text-align: left;">Задание</th>
+                <th style="border: 1px solid #000; padding: 8px; text-align: left;">Результат</th>
             </tr>
         </thead>
         <tbody>`;
@@ -214,10 +200,9 @@ function generatePrintForm() {
       });
     }
     const isCorrect = correctCount === q.correctAnswers.length;
-    const rowClass = isCorrect ? "" : "print-row-wrong";
 
     html += `
-        <tr class="${rowClass}">
+        <tr>
             <td style="border: 1px solid #000; padding: 8px;">${index + 1}</td>
             <td style="border: 1px solid #000; padding: 8px;">${q.text}</td>
             <td style="border: 1px solid #000; padding: 8px;"><strong>Правильно ${correctCount} из ${q.correctAnswers.length}</strong></td>
