@@ -283,3 +283,33 @@ input[type="text"]:focus, select:focus {
   .matching-grid { grid-template-columns: 1fr; }
   .col-terms, .col-defs { width: 100%; }
 }
+.matching-row {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* расстояние между кнопкой/текстом и селектом */
+  margin-bottom: 12px;
+}
+
+.matching-term {
+  flex: 0 0 110px; /* фиксированная ширина для левой колонки */
+  text-align: right;
+  font-weight: 500;
+  color: #4a4a4a;
+}
+
+.matching-select {
+  flex: 1;
+  width: 100%; /* растягивается на всё оставшееся место */
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.matching-select select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #c4c4c4;
+  background-color: #fff;
+  color: #333;
+}
