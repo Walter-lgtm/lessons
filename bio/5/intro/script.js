@@ -253,24 +253,23 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("res-class").textContent = studentClass;
         document.getElementById("res-score").textContent = totalScore;
 
-        // Расчет оценки по пятибалльной шкале
-        let grade = "2";
+        // Расчет оценки по пятибалльной шкале (изменили имя переменной)
+        let finalGrade = "2";
         if (totalScore >= 9) {
-            grade = "5 (Отлично)";
+            finalGrade = "5 (Отлично)";
         } else if (totalScore >= 7) {
-            grade = "4 (Хорошо)";
+            finalGrade = "4 (Хорошо)";
         } else if (totalScore >= 5) {
-            grade = "3 (Удовл.)";
+            finalGrade = "3 (Удовл.)";
         } else {
-            grade = "2 (Неудовл.)";
+            finalGrade = "2 (Неудовл.)";
         }
-        document.getElementById("res-grade").textContent = grade;
+        document.getElementById("res-grade").textContent = finalGrade;
 
         document.getElementById("result-screen").classList.remove("hidden");
 
-        // --- Скрытая отправка данных в Google Форму ---
-        // (Оценку тоже можно будет отправлять в таблицу, если захотите)
-        sendToGoogleForm(studentName, studentClass, totalScore);
+        // Передаем в функцию отправки новую переменную finalGrade
+        sendToGoogleForm(studentName, studentClass, totalScore, finalGrade);
     });
 
     function sendToGoogleForm(name, className, score, grade) {
