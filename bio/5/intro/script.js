@@ -278,9 +278,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const formURL = "https://docs.google.com/forms/d/18zGvLRe86BDICDiVhkexcoehYU7DbmhKckw1LY-viaE/formResponse";
         const formData = new FormData();
         
-        formData.append("entry.111111111", name);      // ID поля ФИО
-        formData.append("entry.222222222", className); // ID поля Класс
-        formData.append("entry.333333333", score);     // ID поля Оценка
+        formData.append("entry.426483672", name);      // ID поля ФИО
+        formData.append("entry.538540870", className); // ID поля Класс
+        formData.append("entry.815205528", score);     // ID поля Оценка
 
         fetch(formURL, {
             method: "POST",
