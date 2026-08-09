@@ -280,7 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
         formData.append("entry.426483672", name);      // ID поля ФИО
         formData.append("entry.538540870", className); // ID поля Класс
         formData.append("entry.815205528", score);     // ID поля Баллы
-        formData.append("entry.696485465", grade); // ID поля Оценка
+        formData.append("entry.696485465", finalGrade); // ID поля Оценка
 
         fetch(formURL, {
             method: "POST",
