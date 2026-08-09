@@ -272,7 +272,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sendToGoogleForm(studentName, studentClass, totalScore, finalGrade);
     });
 
-    function sendToGoogleForm(name, className, score, grade) {
+    function sendToGoogleForm(name, className, score, finalGrade) {
         // Замените URL на вашу реальную форму и пропишите entry ID полей
         const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSen1gHjUSsa_1ZlfRZl2ExHapI5KFAeu2Ip5T1ap6TLDyoYbw/formResponse";
         const formData = new FormData();
