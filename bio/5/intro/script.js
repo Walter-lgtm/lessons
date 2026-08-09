@@ -273,14 +273,15 @@ document.addEventListener("DOMContentLoaded", () => {
         sendToGoogleForm(studentName, studentClass, totalScore);
     });
 
-    function sendToGoogleForm(name, className, score) {
+    function sendToGoogleForm(name, className, score, grade) {
         // Замените URL на вашу реальную форму и пропишите entry ID полей
         const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSen1gHjUSsa_1ZlfRZl2ExHapI5KFAeu2Ip5T1ap6TLDyoYbw/formResponse";
         const formData = new FormData();
         
         formData.append("entry.426483672", name);      // ID поля ФИО
         formData.append("entry.538540870", className); // ID поля Класс
-        formData.append("entry.815205528", score);     // ID поля Оценка
+        formData.append("entry.815205528", score);     // ID поля Баллы
+        formData.append("entry.696485465", grade); // ID поля Оценка
 
         fetch(formURL, {
             method: "POST",
