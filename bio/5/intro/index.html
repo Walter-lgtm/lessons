@@ -1,1 +1,233 @@
-L
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§1. Живая и неживая природа — единое целое</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Введите ваши данные для доступа к терминалу:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: ВВЕДЕНИЕ (INTRO)</p>
+            </div>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Вставь вместо пропусков верные биологические термины</h3>
+            <div class="drag-words-container" id="words-t1">
+                <span class="drag-word" draggable="true" data-word="Размножение">Размножение</span>
+                <span class="drag-word" draggable="true" data-word="Развитие">Развитие</span>
+                <span class="drag-word" draggable="true" data-word="Питание">Питание</span>
+                <span class="drag-word" draggable="true" data-word="Рост">Рост</span>
+                <span class="drag-word" draggable="true" data-word="Обмен веществ">Обмен веществ</span>
+                <span class="drag-word" draggable="true" data-word="Дыхание">Дыхание</span>
+            </div>
+            <div class="text-gaps">
+                <p><span class="drop-gap" data-answer="Рост"></span> — это количественные изменения в структуре любого природного тела, то есть в процессе жизни организмы увеличивают свои размеры и массу.</p>
+                <p><span class="drop-gap" data-answer="Развитие"></span> — это качественные изменения в структуре любого природного тела.</p>
+                <p><span class="drop-gap" data-answer="Размножение"></span> — это способность воспроизводить себе подобных, передавать свои признаки, свойства и особенности развития из поколения в поколение.</p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Выбери три верных ответа</h3>
+            <p class="question-text">Какие взаимосвязанные процессы являются составляющими обмена веществ в организме и обеспечивают непрерывный поток веществ и энергии для жизнедеятельности?</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Дыхание"><span></span> Дыхание</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Размножение"><span></span> Размножение</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Движение"><span></span> Движение</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Питание"><span></span> Питание</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Выделение"><span></span> Выделение</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Раздражимость"><span></span> Раздражимость</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Выбери верный ответ</h3>
+            <p class="question-text">Как называется оболочка Земли, которая включает в себя все живые организмы, среду их обитания, а также продукты их жизнедеятельности?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q3" value="Гидросфера"><span></span> Гидросфера</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="Атмосфера"><span></span> Атмосфера</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="Почва"><span></span> Почва</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="Биосфера"><span></span> Биосфера</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="Литосфера"><span></span> Литосфера</label>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 4 -->
+        <section class="task-card" id="task4">
+            <h3>[λ] Задание 4. Выбери верный ответ</h3>
+            <p class="question-text">На какой высоте расположен озоновый экран?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q4" value="50-100"><span></span> 50–100 км</label>
+                <label class="hl-radio"><input type="radio" name="q4" value="5-10"><span></span> 5–10 км</label>
+                <label class="hl-radio"><input type="radio" name="q4" value="15-20"><span></span> 15–20 км</label>
+                <label class="hl-radio"><input type="radio" name="q4" value="1-5"><span></span> 1–5 км</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 5 -->
+        <section class="task-card" id="task5">
+            <h3>[λ] Задание 5. Распредели объекты</h3>
+            <p class="question-text">Распредели объекты живой и неживой природы по группам</p>
+            <div class="drag-words-container" id="words-t5">
+                <span class="drag-word" draggable="true" data-word="уж">уж</span>
+                <span class="drag-word" draggable="true" data-word="пион">пион</span>
+                <span class="drag-word" draggable="true" data-word="пшеница">пшеница</span>
+                <span class="drag-word" draggable="true" data-word="туча">туча</span>
+                <span class="drag-word" draggable="true" data-word="ёж">ёж</span>
+                <span class="drag-word" draggable="true" data-word="горы">горы</span>
+                <span class="drag-word" draggable="true" data-word="лёд">лёд</span>
+                <span class="drag-word" draggable="true" data-word="галька">галька</span>
+                <span class="drag-word" draggable="true" data-word="кислород">кислород</span>
+                <span class="drag-word" draggable="true" data-word="заяц">заяц</span>
+            </div>
+            <div class="two-columns">
+                <div class="group-zone" id="t5-group1" data-group="live">
+                    <h4>Живой объект</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t5-group2" data-group="dead">
+                    <h4>Неживой объект</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 6 -->
+        <section class="task-card" id="task6">
+            <h3>[λ] Задание 6. Распредели объекты</h3>
+            <p class="question-text">Распредели объекты живой и неживой природы по группам</p>
+            <div class="drag-words-container" id="words-t6">
+                <span class="drag-word" draggable="true" data-word="удав">удав</span>
+                <span class="drag-word" draggable="true" data-word="подсолнечник">подсолнечник</span>
+                <span class="drag-word" draggable="true" data-word="крот">крот</span>
+                <span class="drag-word" draggable="true" data-word="облака">облака</span>
+                <span class="drag-word" draggable="true" data-word="куница">куница</span>
+                <span class="drag-word" draggable="true" data-word="холмы">холмы</span>
+                <span class="drag-word" draggable="true" data-word="снежинка">снежинка</span>
+                <span class="drag-word" draggable="true" data-word="песок">песок</span>
+                <span class="drag-word" draggable="true" data-word="воздух">воздух</span>
+                <span class="drag-word" draggable="true" data-word="лиса">лиса</span>
+            </div>
+            <div class="two-columns">
+                <div class="group-zone" id="t6-group1" data-group="live">
+                    <h4>Живой объект</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t6-group2" data-group="dead">
+                    <h4>Неживой объект</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 7 -->
+        <section class="task-card" id="task7">
+            <h3>[λ] Задание 7. Вычеркни лишние слова</h3>
+            <p class="question-text">Зачеркни слова, которые НЕ относятся к объектам живой природы</p>
+            <p class="sub-text">К объектам живой природы относятся:</p>
+            <div class="strike-container" id="strike-t7">
+                <button class="strike-btn" data-word="морской ёж">морской ёж</button>
+                <button class="strike-btn" data-word="акула">акула</button>
+                <button class="strike-btn" data-word="ландыш майский">ландыш майский</button>
+                <button class="strike-btn" data-word="медуза">медуза</button>
+                <button class="strike-btn" data-word="град" data-wrong="true">град</button>
+                <button class="strike-btn" data-word="песок" data-wrong="true">песок</button>
+                <button class="strike-btn" data-word="варан">варан</button>
+                <button class="strike-btn" data-word="верблюжья колючка">верблюжья колючка</button>
+                <button class="strike-btn" data-word="камень" data-wrong="true">камень</button>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 8 -->
+        <section class="task-card" id="task8">
+            <h3>[λ] Задание 8. Выбери верный ответ</h3>
+            <p class="question-text">Учёным основоположником учения о биосфере является:</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q8" value="Ломоносов"><span></span> Ломоносов</label>
+                <label class="hl-radio"><input type="radio" name="q8" value="Вернадский"><span></span> Вернадский</label>
+                <label class="hl-radio"><input type="radio" name="q8" value="Чижевский"><span></span> Чижевский</label>
+                <label class="hl-radio"><input type="radio" name="q8" value="Левенгук"><span></span> Левенгук</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 9 -->
+        <section class="task-card" id="task9">
+            <h3>[λ] Задание 9. Вычеркни лишние слова</h3>
+            <p class="question-text">Зачеркни слова, которые НЕ относятся к объектам неживой природы</p>
+            <p class="sub-text">К объектам неживой природы относятся:</p>
+            <div class="strike-container" id="strike-t9">
+                <button class="strike-btn" data-word="горы">горы</button>
+                <button class="strike-btn" data-word="вода">вода</button>
+                <button class="strike-btn" data-word="полынь" data-wrong="true">полынь</button>
+                <button class="strike-btn" data-word="сосна" data-wrong="true">сосна</button>
+                <button class="strike-btn" data-word="шакал" data-wrong="true">шакал</button>
+                <button class="strike-btn" data-word="лиса" data-wrong="true">лиса</button>
+                <button class="strike-btn" data-word="холмы">холмы</button>
+                <button class="strike-btn" data-word="льдины">льдины</button>
+                <button class="strike-btn" data-word="тушканчик" data-wrong="true">тушканчик</button>
+                <button class="strike-btn" data-word="известняк">известняк</button>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 10 -->
+        <section class="task-card" id="task10">
+            <h3>[λ] Задание 10. Соедини элементы</h3>
+            <p class="question-text">Укажи роль каждого организма в пищевой цепи</p>
+            <div class="match-container">
+                <div class="match-col" id="left-col">
+                    <div class="match-item" data-id="predator">хищник</div>
+                    <div class="match-item" data-id="plant">растение</div>
+                    <div class="match-item" data-id="herbivore">растительноядное животное</div>
+                </div>
+                <div class="match-col" id="right-col">
+                    <div class="match-target" data-id="plant">клевер</div>
+                    <div class="match-target" data-id="predator">волк</div>
+                    <div class="match-target" data-id="herbivore">мышь</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Кнопка отправки -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>ТЕСТИРОВАНИЕ ЗАВЕРШЕНО</h2>
+        <p class="system-msg">> Данные успешно переданы в архив Чёрной Мезы.</p>
+        <div class="score-board">
+            <p>Сотрудник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 10</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
