@@ -275,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function sendToGoogleForm(name, className, score) {
         // Замените URL на вашу реальную форму и пропишите entry ID полей
-        const formURL = "https://google.com";
+        const formURL = "https://docs.google.com/forms/d/18zGvLRe86BDICDiVhkexcoehYU7DbmhKckw1LY-viaE/formResponse";
         const formData = new FormData();
         
         formData.append("entry.111111111", name);      // ID поля ФИО
