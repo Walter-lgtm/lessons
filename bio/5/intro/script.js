@@ -252,9 +252,24 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("res-name").textContent = studentName;
         document.getElementById("res-class").textContent = studentClass;
         document.getElementById("res-score").textContent = totalScore;
+
+        // Расчет оценки по пятибалльной шкале
+        let grade = "2";
+        if (totalScore >= 9) {
+            grade = "5 (Отлично)";
+        } else if (totalScore >= 7) {
+            grade = "4 (Хорошо)";
+        } else if (totalScore >= 5) {
+            grade = "3 (Удовл.)";
+        } else {
+            grade = "2 (Неудовл.)";
+        }
+        document.getElementById("res-grade").textContent = grade;
+
         document.getElementById("result-screen").classList.remove("hidden");
 
         // --- Скрытая отправка данных в Google Форму ---
+        // (Оценку тоже можно будет отправлять в таблицу, если захотите)
         sendToGoogleForm(studentName, studentClass, totalScore);
     });
 
