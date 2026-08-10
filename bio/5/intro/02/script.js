@@ -219,14 +219,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     function sendToGoogleForm(name, className, score, finalGrade) {
         // Укажите здесь URL вашей ВТОРОЙ (новой) опубликованной Google Формы
-        const formURL = "https://google.com";
+        const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSfcJRxHJRNI6kHYeHasVX4kQN7PMKJAmmXiFRLyt9tLZ0DbHg/formResponse";
         const formData = new FormData();
         
         // Укажите здесь реальные entry.ID полей вашей ВТОРОЙ формы
-        formData.append("entry.111111111", name);       // ID поля ФИО формы 02
-        formData.append("entry.222222222", className);  // ID поля Класс формы 02
-        formData.append("entry.333333333", score);      // ID поля Баллы формы 02
-        formData.append("entry.444444444", finalGrade); // ID поля Оценка формы 02
+        formData.append("entry.1875858208", name);       // ID поля ФИО формы 02
+        formData.append("entry.362770474", className);  // ID поля Класс формы 02
+        formData.append("entry.1542758248", score);      // ID поля Баллы формы 02
+        formData.append("entry.1917083737", finalGrade); // ID поля Оценка формы 02
 
         fetch(formURL, {
             method: "POST",
