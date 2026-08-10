@@ -522,17 +522,24 @@ document.addEventListener("DOMContentLoaded", () => {
               wrap.appendChild(groupsDiv);
               section.appendChild(wrap);
             } else if (q.type === "lab_dropdowns") {
-              const div = document.createElement("div");
-              div.className = "select-gaps";
-              q.answers.forEach((ans, aIdx) => {
-                let selectHtml = <select class="hl-select" id="lab-sel-${q.id}-${aIdx}"><option
-                  value="" disabled selected>...</option>;
-                    q.options.sort(() => Math.random() - 0.5).forEach(opt => { selectHtml += <option
-                      value="${opt}">${opt}</option>; });
-                      selectHtml += </select>;
-                      div.innerHTML += <p>Знак вопроса (?) №${aIdx + 1}: ${selectHtml}</p>;
-              });
-              section.appendChild(div);
+                const div = document.createElement("div");
+                div.className = "select-gaps";
+                
+                q.answers.forEach((ans, aIdx) => {
+                    // Создаем БЕЗОПАСНУЮ копию массива, чтобы .sort() не ломал исходные данные
+                    let shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+                    
+                    let selectHtml = `<select class="hl-select" id="lab-sel-${q.id}-${aIdx}">`;
+                    selectHtml += `<option value="" disabled selected>...</option>`;
+                    
+                    shuffledOptions.forEach(opt => { 
+                        selectHtml += `<option value="${opt}">${opt}</option>`; 
+                    });
+                    selectHtml += `</select>`;
+                    
+                    div.innerHTML += `<p>Знак вопроса (?) №${aIdx + 1}: ${selectHtml}</p>`;
+                });
+                section.appendChild(div);
             }
           tasksArea.appendChild(section);
         });
