@@ -1,1 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§3. Роль биологии в жизни современного человека</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Модуль 03. Введите данные для доступа к панели:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: Роль биологии в жизни современного человека</p>
+            </div>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Выбери верный ответ</h3>
+            <div class="select-gaps">
+                <p>
+                    <select class="hl-select" id="t3-select1">
+                        <option value="" disabled selected>...</option>
+                        <option value="гипотеза">гипотеза</option>
+                        <option value="понятие">понятие</option>
+                        <option value="теория">теория</option>
+                        <option value="рассказ">рассказ</option>
+                    </select>
+                    — система мыслей человека, выделяющая и обобщающая различные предметы или явления по общим и специфическим для них признакам.
+                </p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Выбери верный ответ</h3>
+            <div class="select-gaps">
+                <p>
+                    <select class="hl-select" id="t3-select2">
+                        <option value="" disabled selected>...</option>
+                        <option value="вывод">вывод</option>
+                        <option value="термин">термин</option>
+                        <option value="буква">буква</option>
+                        <option value="цифра">цифра</option>
+                    </select>
+                    — слово или словосочетание, являющееся названием некоторого понятия определённой области науки.
+                </p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Выбери верный ответ</h3>
+            <div class="select-gaps">
+                <p>
+                    <select class="hl-select" id="t3-select3">
+                        <option value="" disabled selected>...</option>
+                        <option value="теория">теория</option>
+                        <option value="гипотеза">гипотеза</option>
+                        <option value="вывод">вывод</option>
+                        <option value="символ">символ</option>
+                    </select>
+                    — специальный графический знак, позволяющий заменить тот или иной термин, обозначающий соответствующее понятие.
+                </p>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 4 -->
+        <section class="task-card" id="task4">
+            <h3>[λ] Задание 4. Выбери верный ответ</h3>
+            <p class="question-text">Какая отрасль биологии связана с созданием новых сортов растений и выведения новых пород животных?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q4" value="Фармакология"><span></span> Фармакология</label>
+                <label class="hl-radio"><input type="radio" name="q4" value="Селекция"><span></span> Селекция</label>
+                <label class="hl-radio"><input type="radio" name="q4" value="Экология"><span></span> Экология</label>
+                <label class="hl-radio"><input type="radio" name="q4" value="Биохимия"><span></span> Биохимия</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 5 -->
+        <section class="task-card" id="task5">
+            <h3>[λ] Задание 5. Выбери верный ответ</h3>
+            <p class="question-text">Какая отрасль biology связана с производством новых лекарств, витаминов, вакцин и сывороток?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q5" value="Фармакология"><span></span> Фармакология</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Селекция"><span></span> Селекция</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Экология"><span></span> Экология</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Биохимия"><span></span> Биохимия</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 6 -->
+        <section class="task-card" id="task6">
+            <h3>[λ] Задание 6. Выбери верный ответ</h3>
+            <p class="question-text">Какая отрасль биологии связана с производством химических средств защиты растений от вредителей и болезней?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q6" value="Фармакология"><span></span> Фармакология</label>
+                <label class="hl-radio"><input type="radio" name="q6" value="Селекция"><span></span> Селекция</label>
+                <label class="hl-radio"><input type="radio" name="q6" value="Экология"><span></span> Экология</label>
+                <label class="hl-radio"><input type="radio" name="q6" value="Биохимия"><span></span> Биохимия</label>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 7 -->
+        <section class="task-card" id="task7">
+            <h3>[λ] Задание 7. Выбери верный ответ</h3>
+            <div class="select-gaps">
+                <p>
+                    Научное или научно-популярное справочное издание, содержащее систематизированную информацию по различным областям знаний, называется 
+                    <select class="hl-select" id="t3-select7">
+                        <option value="" disabled selected>...</option>
+                        <option value="словарь">словарь</option>
+                        <option value="справочник">справочник</option>
+                        <option value="карта">карта</option>
+                        <option value="энциклопедия">энциклопедия</option>
+                    </select>.
+                </p>
+            </div>
+        </section>
+
+        <!-- Кнопка отправки -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>ТЕСТИРОВАНИЕ ЗАВЕРШЕНО</h2>
+        <p class="system-msg">> Данные успешно переданы в архив Чёрной Мезы.</p>
+        <div class="score-board">
+            <p>Сотрудник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 7</p>
+            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
