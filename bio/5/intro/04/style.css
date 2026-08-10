@@ -271,3 +271,33 @@ body {
         margin-bottom: 10px;
     }
 }
+
+/* Адаптивность изображений для экранов смартфонов */
+.image-wrapper img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #444; /* Аккуратная рамка в стиле терминала */
+}
+
+/* Настройка инлайновых текстовых полей */
+.hl-input-inline {
+    background-color: #000;
+    border: none;
+    border-bottom: 2px solid #ffb000;
+    color: #ffb000;
+    font-size: 1rem;
+    padding: 0 5px;
+    width: 100px;
+    outline: none;
+    text-align: center;
+}
+
+/* Настройка кнопок для вычеркивания и распределения */
+.drag-words-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
