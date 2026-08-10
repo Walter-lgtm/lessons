@@ -319,38 +319,38 @@ document.addEventListener("DOMContentLoaded", () => {
         quizContainer.classList.remove("hidden");
         window.scrollTo(0, 0);
 
-        // Перемешиваем весь банк вопросов (алгоритм Фишера-Йетса)
+        // Безопасное перемешивание банка вопросов
         let shuffled = [...questionBank];
         for (let i = shuffled.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
         }
 
-        // Берём ровно 15 случайных вопросов для варианта ученика
+        // Выбираем строго 15 случайных вопросов для варианта
         activeQuestions = shuffled.slice(0, 15);
         renderQuiz();
     });
 
     function renderQuiz() {
-        tasksArea.innerHTML = ""; // Очищаем контейнер
+        tasksArea.innerHTML = ""; // Полная очистка рабочей зоны
 
         activeQuestions.forEach((q, index) => {
             const section = document.createElement("section");
             section.className = "task-card";
             section.id = `dynamic-task-${q.id}`;
 
-            // Заголовок вопроса
+            // Порядковый номер задания на экране
             const h3 = document.createElement("h3");
             h3.textContent = `[λ] Задание ${index + 1}.`;
             section.appendChild(h3);
 
-            // Текст вопроса
+            // Текст самого вопроса
             const pText = document.createElement("p");
             pText.className = "question-text";
             pText.textContent = q.question;
             section.appendChild(pText);
 
-            // Если есть картинка
+            // Подключение иллюстрации, если она заложена в вопросе
             if (q.img) {
                 const imgWrap = document.createElement("div");
                 imgWrap.className = "image-wrapper";
@@ -362,8 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 imgWrap.appendChild(img);
                 section.appendChild(imgWrap);
             }
-
-            // Рендеринг в зависимости от типа интерактивности
+            // РЕНДЕРИНГ: Одиночный выбор (Радиокнопки)
             if (q.type === "radio" || q.type === "radio_img") {
                 const group = document.createElement("div");
                 group.className = "radio-group";
@@ -375,6 +374,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
                 section.appendChild(group);
 
+            // РЕНДЕРИНГ: Множественный выбор (Чекбоксы)
             } else if (q.type === "checkbox") {
                 const group = document.createElement("div");
                 group.className = "checkbox-group";
@@ -385,8 +385,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     group.appendChild(lbl);
                 });
                 section.appendChild(group);
-
-            } else if (q.type === "select") {
+            }
+// РЕНДЕРИНГ: Выпадающие списки (Задания 6 и 18)
+            else if (q.type === "select") {
                 const div = document.createElement("div");
                 div.className = "select-gaps";
                 
@@ -397,22 +398,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 div.innerHTML = `<p>${q.textBefore}${selectHtml}${q.textAfter}</p>`;
                 section.appendChild(div);
 
+            // РЕНДЕРИНГ: Ручной ввод текста (Задания 8 и 19)
             } else if (q.type === "text") {
                 const div = document.createElement("div");
                 div.className = "text-inputs-block";
                 div.innerHTML = `<p>${q.textBefore}<input type="text" class="hl-input-inline" id="input-${q.id}" placeholder="..." autocomplete="off">${q.textAfter}</p>`;
                 section.appendChild(div);
-
-            } else if (q.type === "strikeout") {
+            }
+            // РЕНДЕРИНГ: Интерактивное вычеркивание слов (Задание 16)
+            else if (q.type === "strikeout") {
                 const div = document.createElement("div");
-                div.className = "drag-words-container"; // Используем схожий контейнер для кнопок
+                div.className = "drag-words-container"; 
                 q.words.forEach(word => {
                     const btn = document.createElement("span");
-                    btn.className = "drag-word"; // Стили кнопок Half-Life
+                    btn.className = "drag-word"; 
                     btn.textContent = word;
                     btn.style.cursor = "pointer";
                     btn.addEventListener("click", () => {
-                        btn.classList.toggle("matched"); // Переключаем визуальное вычеркивание
+                        btn.classList.toggle("matched"); 
                         if (btn.classList.contains("matched")) {
                             btn.style.textDecoration = "line-through";
                             btn.style.opacity = "0.5";
@@ -424,8 +427,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     div.appendChild(btn);
                 });
                 section.appendChild(div);
-
-            } else if (q.type === "match") {
+            }
+            // РЕНДЕРИНГ: Сопоставление пар кликами (Задания 20, 29, 31)
+            else if (q.type === "match") {
                 const container = document.createElement("div");
                 container.className = "match-container";
                 
@@ -470,16 +474,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 container.appendChild(leftCol);
                 container.appendChild(rightCol);
                 section.appendChild(container);
-
-            } else if (q.type === "sort_groups") {
+            }
+            // РЕНДЕРИНГ: Распределение по двум группам корзин (Задания 24 и 26)
+            else if (q.type === "sort_groups") {
                 const wrap = document.createElement("div");
                 
-                // Кнопки слов
                 const wordsDiv = document.createElement("div");
                 wordsDiv.className = "drag-words-container";
                 wordsDiv.style.marginBottom = "15px";
                 
-                // Контейнеры корзин
                 const groupsDiv = document.createElement("div");
                 groupsDiv.className = "match-container";
 
@@ -490,7 +493,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     btn.className = "drag-word";
                     btn.textContent = word;
                     btn.addEventListener("click", () => {
-                        if (btn.classList.contains("hidden")) return;
                         wordsDiv.querySelectorAll(".drag-word").forEach(w => w.classList.remove("selected"));
                         selectedWordBtn = btn;
                         btn.classList.add("selected");
@@ -519,14 +521,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 wrap.appendChild(wordsDiv);
-              wrap.appendChild(groupsDiv);
-              section.appendChild(wrap);
-            } else if (q.type === "lab_dropdowns") {
+                wrap.appendChild(groupsDiv);
+                section.appendChild(wrap);
+            }
+            // РЕНДЕРИНГ: Лабораторная посуда со списками (Задание 32)
+            else if (q.type === "lab_dropdowns") {
                 const div = document.createElement("div");
                 div.className = "select-gaps";
                 
                 q.answers.forEach((ans, aIdx) => {
-                    // Создаем БЕЗОПАСНУЮ копию массива, чтобы .sort() не ломал исходные данные
+                    // Делаем БЕЗОПАСНУЮ копию массива вариантов, чтобы .sort() не ломал исходные данные
                     let shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
                     
                     let selectHtml = `<select class="hl-select" id="lab-sel-${q.id}-${aIdx}">`;
@@ -541,7 +545,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
                 section.appendChild(div);
             }
-          tasksArea.appendChild(section);
+
+            // Добавляем готовую карточку со всеми элементами на страницу
+            tasksArea.appendChild(section);
         });
     }
 // ==========================================
@@ -570,7 +576,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (val === q.answer) totalScore += 1;
 
             } else if (q.type === "strikeout") {
-                // Проверяем, вычеркнуты ли строго все лишние слова
                 const cards = document.querySelectorAll(`#dynamic-task-${q.id} .drag-word`);
                 let correctStrikeout = true;
                 cards.forEach(card => {
@@ -578,7 +583,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     const isStruck = card.classList.contains("matched");
                     const isWrongWord = q.wrongAnswers.includes(txt);
                     
-                    // Если лишнее слово не вычеркнуто ИЛИ правильное слово вычеркнуто — задание провалено
                     if ((isWrongWord && !isStruck) || (!isWrongWord && isStruck)) {
                         correctStrikeout = false;
                     }
@@ -607,8 +611,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     const gName = box.querySelector("strong").textContent;
                     const rawAnswers = box.dataset.answers || "";
                     const userItems = rawAnswers.split("|").filter(x => x !== "");
-                    
-                    // Считаем сколько предметов РЕАЛЬНО должно быть в этой группе
                     const expectedItems = Object.keys(q.items).filter(k => q.items[k] === gName);
                     
                     if (userItems.length !== expectedItems.length || !userItems.every(item => q.items[item] === gName)) {
@@ -627,7 +629,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // --- Расчет оценки по пятибалльной шкале (из 15 баллов) ---
+        // Расчет оценки по пятибалльной шкале (из 15 баллов)
         let finalGrade = "2";
         if (totalScore >= 14) {
             finalGrade = "5 (Отлично)";
@@ -647,7 +649,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("res-grade").textContent = finalGrade;
         document.getElementById("result-screen").classList.remove("hidden");
 
-        // Отправка в скрытую функцию передачи данных в Google Таблицу
+        // Передача данных в Google Таблицу
         sendToGoogleForm(studentName, studentClass, totalScore, finalGrade);
     });
 
@@ -655,11 +657,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // СКРЫТАЯ ПЕРЕДАЧА ДАННЫХ В GOOGLE ТАБЛИЦУ
     // ==========================================
     function sendToGoogleForm(name, className, score, finalGrade) {
-        // Укажите здесь URL вашей ЧЕТВЕРТОЙ (новой) опубликованной Google Формы
+        // Укажите URL вашей ЧЕТВЕРТОЙ опубликованной Google Формы
         const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSeQYfLz5xdvx5gYuFMm1yQVzwXXZnaXez20M0Rn25SAo9HhSg/formResponse";
         const formData = new FormData();
         
-        // Укажите здесь реальные entry.ID полей вашей ЧЕТВЕРТОЙ формы
+        // Укажите реальные entry.ID полей вашей ЧЕТВЕРТОЙ формы
         formData.append("entry.1912567859", name);       // ID поля ФИО формы 04
         formData.append("entry.564776308", className);  // ID поля Класс формы 04
         formData.append("entry.797116085", score);      // ID поля Баллы формы 04
@@ -671,4 +673,4 @@ document.addEventListener("DOMContentLoaded", () => {
             body: formData
         }).catch(err => console.log("Ошибка отправки данных: ", err));
     }
-}); // Конец скрипта
+}); // Конец скрипта DOMContentLoaded
