@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Black Mesa - Контрольный Терминал 04</title>
+    <title>Проверка знаний по теме введение в биологию</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <!-- Экран авторизации ученика -->
     <div id="auth-screen" class="terminal-block">
-        <h2>КОНТРОЛЬНЫЙ ДОСТУП: ТЕМА "ВВЕДЕНИЕ"</h2>
+        <h2>КОНТРОЛЬНЫЙ ДОСТУП: ТЕМА "ВВЕДЕНИЕ В БИОЛОГИЮ"</h2>
         <p class="system-msg">> Модуль 04. Система сформирует случайный вариант из 15 заданий:</p>
         <div class="input-group">
             <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
@@ -20,7 +20,7 @@
             <label for="student-class">КЛАСС:</label>
             <input type="text" id="student-class" placeholder="5А" autocomplete="off">
         </div>
-        <button id="start-btn" class="hl-btn">НАЧАТЬ КОНТРОЛЬНУЮ РАБОТУ</button>
+        <button id="start-btn" class="hl-btn">НАЧАТЬ ПРОВЕРОЧНУЮ РАБОТУ</button>
     </div>
 
     <!-- Основной контейнер контрольной работы -->
@@ -29,7 +29,7 @@
             <div class="logo">λ</div>
             <div class="title-block">
                 <h1>BLACK MESA RESEARCH FACILITY</h1>
-                <p>ИТОГОВАЯ КОНТРОЛЬНАЯ РАБОТА: ВВЕДЕНИЕ В БИОЛОГИЮ</p>
+                <p>ПРОВЕРОЧНАЯ РАБОТА: ВВЕДЕНИЕ В БИОЛОГИЮ</p>
             </div>
         </header>
 
@@ -44,10 +44,10 @@
 
     <!-- Финальный экран результатов -->
     <div id="result-screen" class="terminal-block hidden">
-        <h2>КОНТРОЛЬ ЗАВЕРШЕН</h2>
+        <h2>ПРОВЕРКА ЗАВЕРШЕНА</h2>
         <p class="system-msg">> Протокол тестирования передан в архив Первого Сектора.</p>
         <div class="score-board">
-            <p>Сотрудник: <span id="res-name"></span></p>
+            <p>Участник: <span id="res-name"></span></p>
             <p>Класс: <span id="res-class"></span></p>
             <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 15</p>
             <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
