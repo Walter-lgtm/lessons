@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
             img: "pit.png",
             options: ["Развитие", "Обмен веществ и дыхание", "Выделение", "Питание"],
             answer: "Питание"
-        }
+        },
       {
             id: 15,
             type: "radio",
