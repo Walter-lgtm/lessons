@@ -429,7 +429,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 section.appendChild(div);
             }
             // РЕНДЕРИНГ: Сопоставление пар кликами (Задания 20, 29, 31)
-            else if (q.type === "match") {
+           else if (q.type === "match") {
                 const container = document.createElement("div");
                 container.className = "match-container";
                 
@@ -439,6 +439,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 rightCol.className = "match-col";
 
                 const leftKeys = Object.keys(q.pairs);
+                // Делаем безопасную копию для перемешивания правой колонки
                 const rightVals = Object.values(q.pairs).sort(() => Math.random() - 0.5);
 
                 let selectedLeft = null;
@@ -447,8 +448,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     const item = document.createElement("div");
                     item.className = "match-item";
                     item.textContent = k;
+                    item.style.cursor = "pointer";
+                    
                     item.addEventListener("click", () => {
                         if (item.classList.contains("matched")) return;
+                        // Снимаем выделение с других элементов левой колонки
                         leftCol.querySelectorAll(".match-item").forEach(i => i.classList.remove("selected"));
                         selectedLeft = item;
                         item.classList.add("selected");
@@ -460,12 +464,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     const target = document.createElement("div");
                     target.className = "match-target";
                     target.textContent = v;
+                    target.style.cursor = "pointer";
+                    
                     target.addEventListener("click", () => {
+                        // Если уже соединено или слева ничего не выбрано — игнорируем
                         if (target.classList.contains("matched") || !selectedLeft) return;
-                        target.dataset.userAnswer = selectedLeft.textContent;
+                        
+                        // Сохраняем связь, очищая текст от случайных пробелов по краям
+                        target.dataset.userAnswer = selectedLeft.textContent.trim();
+                        
+                        // Визуально фиксируем соединение пары элементов
                         target.classList.add("matched");
                         selectedLeft.classList.add("matched");
                         selectedLeft.classList.remove("selected");
+                        
+                        // Сбрасываем буфер выбора
                         selectedLeft = null;
                     });
                     rightCol.appendChild(target);
@@ -593,10 +606,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 let correctMatch = true;
                 const targets = document.querySelectorAll(`#dynamic-task-${q.id} .match-target`);
                 let count = 0;
+                
                 targets.forEach(t => {
                     if (t.classList.contains("matched")) {
                         count++;
-                        if (q.pairs[t.dataset.userAnswer] !== t.textContent) correctMatch = false;
+                        const uAns = (t.dataset.userAnswer || "").trim();
+                        const tText = t.textContent.trim();
+                        if (q.pairs[uAns] !== tText) correctMatch = false;
                     } else {
                         correctMatch = false;
                     }
