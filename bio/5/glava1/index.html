@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§4.Методы исследования в биологии</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Введите ваши данные для доступа к терминалу:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: МЕТОДЫ ИССЛЕДОВАНИЯ В БИОЛОГИИ</p>
+            </div>
+        </header>
+
+        <!-- ЗАЗАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Вставь вместо пропусков верные биологические термины</h3>
+            <p class="question-text">Выберите подходящие по смыслу слова из выпадающих списков:</p>
+            <div class="select-text-gaps">
+                <p>Одним из самых первых методов, которыми стал пользоваться ещё первобытный человек, 
+                    <select class="hl-select" data-answer="было наблюдение">
+                        <option value="" selected disabled>-- выбрать --</option>
+                        <option value="было наблюдение">было наблюдение</option>
+                        <option value="был эксперимент">был эксперимент</option>
+                        <option value="наблюдение">наблюдение</option>
+                    </select>. 
+                    Более сложный практический метод — это 
+                    <select class="hl-select" data-answer="эксперимент">
+                        <option value="" selected disabled>-- выбрать --</option>
+                        <option value="эксперимент">эксперимент</option>
+                        <option value="Наблюдение">Наблюдение</option>
+                        <option value="опыта">опыта</option>
+                    </select>. 
+                    <select class="hl-select" data-answer="Эксперимент">
+                        <option value="" selected disabled>-- выбрать --</option>
+                        <option value="Эксперимент">Эксперимент</option>
+                        <option value="Наблюдение">Наблюдение</option>
+                        <option value="наблюдения">наблюдения</option>
+                    </select> отличается от 
+                    <select class="hl-select" data-answer="наблюдения">
+                        <option value="" selected disabled>-- выбрать --</option>
+                        <option value="наблюдения">наблюдения</option>
+                        <option value="эксперимент">эксперимент</option>
+                        <option value="опыта">опыта</option>
+                    </select> более активным воздействием на изучаемый объект.
+                </p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Распредели подписи к лабораторному оборудованию</h3>
+            <p class="question-text">Перетащите плашки с описанием функций в соответствующие ячейки под изображениями:</p>
+            
+            <div class="image-host-container">
+                <img src="lab_obr.png" alt="Лабораторное оборудование" class="task-img">
+            </div>
+
+            <div class="drag-words-container" id="words-t2">
+                <span class="drag-word" draggable="true" data-word="для набирания твёрдых веществ">для набирания твёрдых веществ</span>
+                <span class="drag-word" draggable="true" data-word="для измельчения веществ">для измельчения веществ</span>
+                <span class="drag-word" draggable="true" data-word="для перемешивания растворов">для перемешивания растворов</span>
+                <span class="drag-word" draggable="true" data-word="для отбора определённого объема жидкости">для отбора определённого объема жидкости</span>
+                <span class="drag-word" draggable="true" data-word="для переливания жидкостей по каплям">для переливания жидкостей по каплям</span>
+            </div>
+
+            <div class="equipment-grid">
+                <div class="group-zone mini-zone" id="t2-zone1" data-answer="для отбора определённого объема жидкости">
+                    <h4>Рис. 1</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone mini-zone" id="t2-zone2" data-answer="для измельчения веществ">
+                    <h4>Рис. 2</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone mini-zone" id="t2-zone3" data-answer="для перемешивания растворов">
+                    <h4>Рис. 3</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone mini-zone" id="t2-zone4" data-answer="для переливания жидкостей по каплям">
+                    <h4>Рис. 4</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone mini-zone" id="t2-zone5" data-answer="для набирания твёрдых веществ">
+                    <h4>Рис. 5</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Выбери верный ответ</h3>
+            <p class="question-text">Для измерения массы тела используют:</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q3" value="термометр"><span></span> термометр</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="часы"><span></span> часы</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="весы"><span></span> весы</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="линейку"><span></span> линейку</label>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 4 -->
+        <section class="task-card" id="task4">
+            <h3>[λ] Задание 4. Вставь верный биологический термин</h3>
+            <p class="question-text">Выберите подходящие по смыслу понятия из списков:</p>
+            <div class="select-text-gaps">
+                <p>
+                    <select class="hl-select" data-answer="Наука">
+                        <option value="" selected disabled>-- выбрать --</option>
+                        <option value="Методы">Методы</option>
+                        <option value="Наблюдение">Наблюдение</option>
+                        <option value="Наука">Наука</option>
+                    </select>
+                    — особый вид человеческой деятельности, направленный на получение новых знаний об окружающем мире.
+                </p>
+                <p style="margin-top: 15px;">
+                    <select class="hl-select" data-answer="Научный метод">
+                        <option value="" selected disabled>-- выбрать --</option>
+                        <option value="Научный метод">Научный метод</option>
+                        <option value="Наука">Наука</option>
+                        <option value="Процесс">Процесс</option>
+                    </select>
+                    — это совокупность приёмов и операций, используемых при построении системы научных знаний.
+                </p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 5 -->
+        <section class="task-card" id="task5">
+            <h3>[λ] Задание 5. Выбери верный ответ</h3>
+            <p class="question-text">С помощью какого метода биологии можно изучать сезонные явления в природе, например листопад?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q5" value="Измерения"><span></span> Измерения</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Наблюдения"><span></span> Наблюдения</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Моделирования"><span></span> Моделирования</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Проведения опытов"><span></span> Проведения опытов</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Эксперимента"><span></span> Эксперимента</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Палеонтологического"><span></span> Палеонтологического</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 6 -->
+        <section class="task-card" id="task6">
+            <h3>[λ] Задание 6. Выбери верные ответы</h3>
+            <p class="question-text">Что из перечисленного биологи относят к фиксированным объектам?</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q6" value="Чучела животных"><span></span> Чучела животных</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q6" value="Белый медведь в зоопарке"><span></span> Белый медведь в зоопарке</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q6" value="Гербарий"><span></span> Гербарий</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q6" value="Цветы на клумбе"><span></span> Цветы на клумбе</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q6" value="Постоянные препараты"><span></span> Постоянные препараты</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q6" value="Куст жасмина в саду"><span></span> Куст жасмина в саду</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 7 -->
+        <section class="task-card" id="task7">
+            <h3>[λ] Задание 7. Соотнеси объекты и методы</h3>
+            <p class="question-text">Соотнеси объекты с их методом приготовления:</p>
+            <div class="match-container">
+                <div class="match-col" id="left-col">
+                    <div class="match-item" data-id="luc">кожица лука</div>
+                    <div class="match-item" data-id="elodea">срез листа элодеи</div>
+                    <div class="match-item" data-id="drozo">мушка дрозофила</div>
+                    <div class="match-item" data-id="blood">клетка крови человека</div>
+                </div>
+                <div class="match-col" id="right-col">
+                    <div class="match-target" data-id="blood">постоянный препарат</div>
+                    <div class="match-target" data-id="drozo">фиксированный препарат</div>
+                    <div class="match-target" data-id="luc">временный препарат</div>
+                    <div class="match-target" data-id="elodea">приготовленный препарат</div>
+                </div>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 8 -->
+        <section class="task-card" id="task8">
+            <h3>[λ] Задание 8. Вычеркни лишние слова</h3>
+            <p class="question-text">Вычеркни те объекты, которые НЕ относятся к живым:</p>
+            <div class="strike-container" id="strike-t8">
+                <button class="strike-btn" data-word="ветка сосны в гербарии" data-wrong="true">ветка сосны в гербарии</button>
+                <button class="strike-btn" data-word="бабочка в коллекции" data-wrong="true">бабочка в коллекции</button>
+                <button class="strike-btn" data-word="иволга в саду">иволга в саду</button>
+                <button class="strike-btn" data-word="жираф в зоопарке">жираф в зоопарке</button>
+                <button class="strike-btn" data-word="чучело гиены в музее природы" data-wrong="true">чучело гиены в музее природы</button>
+                <button class="strike-btn" data-word="слон в цирке">слон в цирке</button>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 9 -->
+        <section class="task-card" id="task9">
+            <h3>[λ] Задание 9. Распредели по группам</h3>
+            <p class="question-text">Распредели по группам объекты природы:</p>
+            <div class="drag-words-container" id="words-t9">
+                <span class="drag-word" draggable="true" data-word="цветок нарцисса в гербарии">цветок нарцисса в гербарии</span>
+                <span class="drag-word" draggable="true" data-word="рыбки в аквариуме">рыбки в аквариуме</span>
+                <span class="drag-word" draggable="true" data-word="морковь на пришкольном участке">морковь на пришкольном участке</span>
+                <span class="drag-word" draggable="true" data-word="бабочка белянка в школьной коллекции">бабочка белянка в школьной коллекции</span>
+                <span class="drag-word" draggable="true" data-word="скелет рыбы в пластиковом футляре">скелет рыбы в пластиковом футляре</span>
+                <span class="drag-word" draggable="true" data-word="сыроежки">сыроежки</span>
+                <span class="drag-word" draggable="true" data-word="заяц в лесу">заяц в лесу</span>
+                <span class="drag-word" draggable="true" data-word="чучело волка в краеведческом музее">чучело волка в краеведческом музее</span>
+            </div>
+            <div class="two-columns">
+                <div class="group-zone" id="t9-group1" data-group="live">
+                    <h4>Живые объекты природы</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t9-group2" data-group="fixed">
+                    <h4>Фиксированные объекты природы</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 10 -->
+        <section class="task-card" id="task10">
+            <h3>[λ] Задание 10. Выбери верный ответ</h3>
+            <p class="question-text">Полученные в ходе наблюдения ответы на поставленные вопросы отмечают:</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q10" value="в дневнике погоды"><span></span> в дневнике погоды</label>
+                <label class="hl-radio"><input type="radio" name="q10" value="в дневнике наблюдений"><span></span> в дневнике наблюдений</label>
+                <label class="hl-radio"><input type="radio" name="q10" value="в тетради измерений"><span></span> в тетради измерений</label>
+            </div>
+        </section>
+
+        <!-- Кнопка отправки -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>ТЕСТИРОВАНИЕ ЗАВЕРШЕНО</h2>
+        <p class="system-msg">> Данные успешно переданы в архив Чёрной Мезы.</p>
+        <div class="score-board">
+            <p>Сотрудник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 10</p>
+            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
