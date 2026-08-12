@@ -1,1 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§6. Эксперимент в биологических исследованиях</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Введите ваши данные для доступа к терминалу:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: ЭКСПЕРИМЕНТ В ИССЛЕДОВАНИЯХ</p>
+            </div>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Выбери верный биологический термин</h3>
+            <div class="select-text-gaps">
+                <p>Исследование, проводимое в специально созданных и контролируемых условиях, которые позволяют установить, как эти условия влияют на объект или явление, называют 
+                    <select class="hl-select" data-answer="экспериментом">
+                        <option value="" selected disabled>-- выбрать --</option>
+                        <option value="экспериментом">экспериментом</option>
+                        <option value="наблюдением">наблюдением</option>
+                        <option value="описанием">описанием</option>
+                        <option value="измерением">измерением</option>
+                    </select>.
+                </p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Выбери верный ответ</h3>
+            <p class="question-text">Исследование, проводимое в специально созданных и контролируемых условиях, которые позволяют установить, как эти условия влияют на объект или явление:</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q2" value="Наблюдение"><span></span> Наблюдение</label>
+                <label class="hl-radio"><input type="radio" name="q2" value="Описание"><span></span> Описание</label>
+                <label class="hl-radio"><input type="radio" name="q2" value="Эксперимент"><span></span> Эксперимент</label>
+                <label class="hl-radio"><input type="radio" name="q2" value="Измерение"><span></span> Измерение</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Выбери верные биологические термины</h3>
+            <div class="select-text-gaps">
+                <p>Научные предположения — 
+                    <select class="hl-select" data-answer="гипотезы">
+                        <option value="" selected disabled>-- выбрать --</option>
+                        <option value="гипотезы">гипотезы</option>
+                        <option value="теоремы">теоремы</option>
+                        <option value="законы">законы</option>
+                    </select>.
+                </p>
+                <p style="margin-top: 10px;">Гипотезы могут быть 
+                    <select class="hl-select" data-answer="подтверждены">
+                        <option value="" selected disabled>-- выбрать --</option>
+                        <option value="подтверждены">подтверждены</option>
+                        <option value="нарисованы">нарисованы</option>
+                        <option value="прорешены">прорешены</option>
+                    </select>.
+                </p>
+                <p style="margin-top: 10px;">Гипотезы могут быть 
+                    <select class="hl-select" data-answer="опровергнуты">
+                        <option value="" selected disabled>-- выбрать --</option>
+                        <option value="нарисованы">нарисованы</option>
+                        <option value="прорешены">прорешены</option>
+                        <option value="опровергнуты">опровергнуты</option>
+                    </select>.
+                </p>
+                <p style="margin-top: 10px;">Гипотезы могут быть основанием для проведения 
+                    <select class="hl-select" data-answer="эксперимента">
+                        <option value="" selected disabled>-- выбрать --</option>
+                        <option value="наблюдения">наблюдения</option>
+                        <option value="эксперимента">эксперимента</option>
+                        <option value="измерения">измерения</option>
+                    </select>.
+                </p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 4 -->
+        <section class="task-card" id="task4">
+            <h3>[λ] Задание 4. Выбери верный ответ</h3>
+            <p class="question-text">С каким учёным связано понятие «эксперимент»?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q4" value="Дарвин"><span></span> Дарвин</label>
+                <label class="hl-radio"><input type="radio" name="q4" value="Аристотель"><span></span> Аристотель</label>
+                <label class="hl-radio"><input type="radio" name="q4" value="Гарвей"><span></span> Гарвей</label>
+                <label class="hl-radio"><input type="radio" name="q4" value="Гиппократ"><span></span> Гиппократ</label>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 5 -->
+        <section class="task-card" id="task5">
+            <h3>[λ] Задание 5. Выбери верный ответ</h3>
+            <p class="question-text">С какого этапа начинается научное исследование?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q5" value="Обобщение полученных результатов"><span></span> Обобщение полученных результатов</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Выдвижение гипотезы"><span></span> Выдвижение гипотезы</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Разработка и проведение эксперимента"><span></span> Разработка и проведение эксперимента</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Наблюдение за объектом или явлением"><span></span> Наблюдение за объектом или явлением</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Постановка проблемы"><span></span> Постановка проблемы</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 6 -->
+        <section class="task-card" id="task6">
+            <h3>[λ] Задание 6. Вставь вместо пропусков верный биологический термин</h3>
+            <div class="select-text-gaps">
+                <p>Научный эксперимент должен непременно сопровождаться 
+                    <input type="text" class="hl-inline-input" id="t6-i1" placeholder="к..." autocomplete="off"> 
+                    <input type="text" class="hl-inline-input" id="t6-i2" placeholder="о..." autocomplete="off">, 
+                    условия которого отличаются от условий эксперимента одним фактором.
+                </p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 7 -->
+        <section class="task-card" id="task7">
+            <h3>[λ] Задание 7. Выбери верные ответы</h3>
+            <p class="question-text">Гипотеза, которая была проверена и оказалась соответствующей фактам, может стать:</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q7" value="Теорией"><span></span> Теорией</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q7" value="Предположением"><span></span> Предположением</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q7" value="Законом"><span></span> Законом</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q7" value="Выводом"><span></span> Выводом</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 8 -->
+        <section class="task-card" id="task8">
+            <h3>[λ] Задание 8. Выбери верный ответ</h3>
+            <p class="question-text">Какой метод биологии позволяет показать наглядно климатические изменения на Земле в будущем?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q8" value="Описание"><span></span> Описание</label>
+                <label class="hl-radio"><input type="radio" name="q8" value="Эксперимент"><span></span> Эксперимент</label>
+                <label class="hl-radio"><input type="radio" name="q8" value="Измерение"><span></span> Измерение</label>
+                <label class="hl-radio"><input type="radio" name="q8" value="Моделирование"><span></span> Моделирование</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 9 -->
+        <section class="task-card" id="task9">
+            <h3>[λ] Задание 9. Выбери верный ответ</h3>
+            <p class="question-text">Для познания окружающего мира и проведения научного эксперимента учёный может использовать в практической части:</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q9" value="Научный факт"><span></span> Научный факт</label>
+                <label class="hl-radio"><input type="radio" name="q9" value="Научный метод"><span></span> Научный метод</label>
+                <label class="hl-radio"><input type="radio" name="q9" value="Научную гипотезу"><span></span> Научную гипотезу</label>
+                <label class="hl-radio"><input type="radio" name="q9" value="Научную проблему"><span></span> Научную проблему</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 10 -->
+        <section class="task-card" id="task10">
+            <h3>[λ] Задание 10. Выбери верный ответ</h3>
+            <p class="question-text">Что из перечисленных приборов НЕ относится к лабораторному оборудованию?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q10" value="Весы"><span></span> Весы</label>
+                <label class="hl-radio"><input type="radio" name="q10" value="Штативная лупа"><span></span> Штативная лупа</label>
+                <label class="hl-radio"><input type="radio" name="q10" value="Микроскоп"><span></span> Микроскоп</label>
+                <label class="hl-radio"><input type="radio" name="q10" value="Бинокль"><span></span> Бинокль</label>
+            </div>
+        </section>
+
+        <!-- Кнопка отправки результатов -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>ТЕСТИРОВАНИЕ ЗАВЕРШЕНО</h2>
+        <p class="system-msg">> Данные успешно переданы в архив Чёрной Мезы.</p>
+        <div class="score-board">
+            <p>Участник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 10</p>
+            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
