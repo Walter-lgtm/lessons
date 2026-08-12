@@ -1,0 +1,352 @@
+/* Базовые научно-фантастические настройки */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+    background-color: #121212;
+    color: #ffb000; /* Фирменный оранжевый Half-Life / Black Mesa */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Утилиты видимости элементов */
+.hidden {
+    display: none !important;
+}
+
+/* Стили терминальных блоков (Авторизация и Финал) */
+.terminal-block {
+    background-color: #1a1a1a;
+    border: 2px solid #ffb000;
+    box-shadow: 0 0 15px rgba(255, 176, 0, 0.2);
+    padding: 30px;
+    max-width: 500px;
+    width: 100%;
+    margin-top: 10vh;
+    text-align: center;
+}
+
+.terminal-block h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.system-msg {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+/* Поля ввода информации */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    background-color: #000;
+    border: 1px solid #ffb000;
+    color: #ffb000;
+    padding: 10px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.input-group input:focus {
+    box-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
+}
+
+/* Фирменные кнопки Black Mesa */
+.hl-btn {
+    background-color: #ffb000;
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    letter-spacing: 1px;
+}
+
+.hl-btn:hover {
+    background-color: #ffc84d;
+    box-shadow: 0 0 12px rgba(255, 176, 0, 0.6);
+}
+
+/* Общий контейнер тестов и Шапка страницы */
+#quiz-container {
+    max-width: 800px;
+    width: 100%;
+}
+
+.hl-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #ffb000;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+.hl-header .logo {
+    font-size: 3.5rem;
+    font-family: sans-serif;
+    margin-right: 20px;
+    line-height: 1;
+}
+
+.title-block h1 {
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+}
+
+.title-block p {
+    color: #888;
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+/* Карточки с заданиями */
+.task-card {
+    background-color: #161616;
+    border-left: 4px solid #ffb000;
+    border-top: 1px solid #2a2a2a;
+    border-right: 1px solid #2a2a2a;
+    border-bottom: 1px solid #2a2a2a;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.task-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #ffb000;
+    text-transform: uppercase;
+}
+
+.question-text {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: #e0e0e0;
+    line-height: 1.4;
+}
+
+.sub-text {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+/* Кастомные выпадающие списки (Задания 1, 2, 3) */
+.select-text-gaps p {
+    line-height: 2;
+    color: #e0e0e0;
+    font-size: 1rem;
+}
+
+.hl-select {
+    background-color: #000;
+    border: 1px solid #ffb000;
+    color: #ffb000;
+    padding: 6px 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95rem;
+    outline: none;
+    cursor: pointer;
+    margin: 4px 0;
+}
+
+.hl-select:focus {
+    box-shadow: 0 0 6px rgba(255, 176, 0, 0.6);
+}
+
+/* Кастомные радиокнопки и чекбоксы (HUD-стиль) */
+.checkbox-group, .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.hl-checkbox, .hl-radio {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #ccc;
+    user-select: none;
+}
+
+.hl-checkbox input, .hl-radio input {
+    display: none;
+}
+
+.hl-checkbox span {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ffb000;
+    margin-right: 12px;
+    display: inline-block;
+    position: relative;
+    background: #000;
+}
+
+.hl-checkbox input:checked + span::after {
+    content: "■";
+    color: #ffb000;
+    font-size: 14px;
+    position: absolute;
+    top: -2px;
+    left: 2px;
+}
+
+.hl-radio span {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ffb000;
+    border-radius: 50%;
+    margin-right: 12px;
+    display: inline-block;
+    position: relative;
+    background: #000;
+}
+
+.hl-radio input:checked + span::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background-color: #ffb000;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+}
+
+.hl-checkbox:hover, .hl-radio:hover {
+    color: #ffb000;
+}
+
+/* Контейнеры графических иллюстраций приборов */
+.image-host-container {
+    width: 100%;
+    background-color: #050505;
+    border: 1px solid #2a2a2a;
+    padding: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.task-img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #333;
+}
+
+/* Кнопки-слова для интерактивного вычёркивания (Задание 5) */
+.strike-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.strike-btn {
+    background-color: #1f1f1f;
+    border: 1px solid #ffb000;
+    color: #ffb000;
+    padding: 8px 14px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.strike-btn:hover {
+    background-color: #2a2a2a;
+}
+
+.strike-btn.strikethrough {
+    text-decoration: line-through;
+    color: #555;
+    border-color: #333;
+    background-color: #0b0b0b;
+}
+
+/* Обёртка финальной кнопки */
+.submit-wrapper {
+    margin: 40px 0;
+}
+
+.final-btn {
+    font-size: 1.1rem;
+    padding: 16px;
+    border: 2px solid #ffb000;
+    background-color: #000;
+    color: #ffb000;
+}
+
+.final-btn:hover {
+    color: #000;
+    background-color: #ffb000;
+}
+
+/* Финальное табло результатов */
+.score-board {
+    text-align: left;
+    background-color: #0a0a0a;
+    padding: 20px;
+    border: 1px solid #ffb000;
+    margin-top: 20px;
+}
+
+.score-board p {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.total-score {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffb000;
+    border-top: 1px dashed #ffb000;
+    padding-top: 10px;
+    margin-top: 15px;
+}
+
+/* Адаптивность под мобильные телефоны */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    .hl-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hl-header .logo {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .hl-select {
+        width: 100%;
+        margin: 6px 0;
+    }
+}
