@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§7. Описание результатов исследований</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Введите ваши данные для доступа к терминалу:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: ОПИСАНИЕ РЕЗУЛЬТАТОВ ИССЛЕДОВАНИЙ</p>
+            </div>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Выбери верный ответ</h3>
+            <p class="question-text">В виде чего представляют данные, которые позволяют оценить соотношение сразу нескольких величин?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q1" value="Схема"><span></span> Схема</label>
+                <label class="hl-radio"><input type="radio" name="q1" value="Таблица"><span></span> Таблица</label>
+                <label class="hl-radio"><input type="radio" name="q1" value="График"><span></span> График</label>
+                <label class="hl-radio"><input type="radio" name="q1" value="Диаграмма"><span></span> Диаграмма</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Выбери верный ответ</h3>
+            <p class="question-text">Для изучения сезонных явлений у птиц используют метод:</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q2" value="Измерение"><span></span> Измерение</label>
+                <label class="hl-radio"><input type="radio" name="q2" value="Описание"><span></span> Описание</label>
+                <label class="hl-radio"><input type="radio" name="q2" value="Наблюдение"><span></span> Наблюдение</label>
+                <label class="hl-radio"><input type="radio" name="q2" value="Эксперимент"><span></span> Эксперимент</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Выбери верный ответ</h3>
+            <p class="question-text">Кому из учёных принадлежит труд «История животных»?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q3" value="Гиппократ"><span></span> Гиппократ</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="Гарвей"><span></span> Гарвей</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="Аристотель"><span></span> Аристотель</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="Дарвин"><span></span> Darwin</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 4 -->
+        <section class="task-card" id="task4">
+            <h3>[λ] Задание 4. Распредели по группам</h3>
+            <p class="question-text">Распредели на две группы описания живых организмов:</p>
+            
+            <div class="drag-words-container" id="words-t4">
+                <span class="drag-word" draggable="true" data-word="длина меха лисицы не менее 5 см">длина меха лисицы не менее 5 см</span>
+                <span class="drag-word" draggable="true" data-word="высокое дерево">высокое дерево</span>
+                <span class="drag-word" draggable="true" data-word="высота дерева 3 м">высота дерева 3 м</span>
+                <span class="drag-word" draggable="true" data-word="красный цветок">красный цветок</span>
+                <span class="drag-word" draggable="true" data-word="красных цветков на кусте розы 4">красных цветков на кусте розы 4</span>
+                <span class="drag-word" draggable="true" data-word="густой еловый лес">густой еловый лес</span>
+                <span class="drag-word" draggable="true" data-word="на небольшой площади почвы растёт очень много елей">на небольшой площади почвы растёт очень много елей</span>
+                <span class="drag-word" draggable="true" data-word="пушистая лисица">пушистая лисица</span>
+            </div>
+
+            <div class="two-columns">
+                <div class="group-zone" id="t4-group1" data-group="qualitative">
+                    <h4>Качественные описания</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t4-group2" data-group="quantitative">
+                    <h4>Количественные описания</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 5 -->
+        <section class="task-card" id="task5">
+            <h3>[λ] Задание 5. Выбери верный ответ</h3>
+            <p class="question-text">Какое описание не относится к качественным описаниям?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q5" value="Крупный бурый медведь"><span></span> Крупный бурый медведь</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Быстрая лань"><span></span> Быстрая лань</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Масса бурундука 70 кг"><span></span> Масса бурундука 70 кг</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Мелкие цветки сирени"><span></span> Мелкие цветки сирени</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 6 -->
+        <section class="task-card" id="task6">
+            <h3>[λ] Задание 6. Распредели по группам</h3>
+            <p class="question-text">Распредели на две группы описания живых организмов:</p>
+            
+            <div class="drag-words-container" id="words-t6">
+                <span class="drag-word" draggable="true" data-word="слон массой 2 т">слон массой 2 т</span>
+                <span class="drag-word" draggable="true" data-word="мелкие яблоки">мелкие яблоки</span>
+                <span class="drag-word" draggable="true" data-word="яблоки с маленьким диаметром 3 см">яблоки с маленьким диаметром 3 см</span>
+                <span class="drag-word" draggable="true" data-word="высокий стебель ромашки">высокий стебель ромашки</span>
+                <span class="drag-word" draggable="true" data-word="стебель ромашки 1 м">стебель ромашки 1 м</span>
+                <span class="drag-word" draggable="true" data-word="большая группа опят">большая группа опят</span>
+                <span class="drag-word" draggable="true" data-word="на одном пне растут опята в количестве 23">на одном пне растут опята в количестве 23</span>
+                <span class="drag-word" draggable="true" data-word="тяжёлый слон">тяжёлый слон</span>
+            </div>
+
+            <div class="two-columns">
+                <div class="group-zone" id="t6-group1" data-group="qualitative">
+                    <h4>Качественные описания</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t6-group2" data-group="quantitative">
+                    <h4>Количественные описания</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 7 -->
+        <section class="task-card" id="task7">
+            <h3>[λ] Задание 7. Выбери верный биологический термин</h3>
+            <div class="select-text-gaps">
+                <p>
+                    <select class="hl-select" data-answer="Таблица">
+                        <option value="" selected disabled>-- выбрать --</option>
+                        <option value="Таблица">Таблица</option>
+                        <option value="График">График</option>
+                        <option value="Схема">Схема</option>
+                        <option value="Кластер">Кластер</option>
+                    </select>
+                    — это представление количественных или других данных в форме строк и столбцов.
+                </p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 8 -->
+        <section class="task-card" id="task8">
+            <h3>[λ] Задание 8. Выбери верный биологический термин</h3>
+            <div class="select-text-gaps">
+                <p>
+                    <select class="hl-select" data-answer="Анализ">
+                        <option value="" selected disabled>-- выбрать --</option>
+                        <option value="Анализ">Анализ</option>
+                        <option value="Гипотеза">Гипотеза</option>
+                        <option value="Теория">Теория</option>
+                    </select>
+                    — это расчленение, разделение целого на составные части, выделение отдельных сторон и свойств объекта или явления.
+                </p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 9 -->
+        <section class="task-card" id="task9">
+            <h3>[λ] Задание 9. Заполни пропуски</h3>
+            <p class="question-text">Вставьте вместо пропусков верные биологические термины:</p>
+            <div class="select-text-gaps">
+                <p style="margin-bottom: 15px;">
+                    <input type="text" class="hl-inline-input" id="t9-i1" placeholder="д..." autocomplete="off">
+                    — графическое представление данных, позволяющее оценить соотношение нескольких величин.
+                </p>
+                <p>Способы оформления результатов наблюдений называются 
+                    <input type="text" class="hl-inline-input" id="t9-i2" placeholder="б..." autocomplete="off">
+                    <input type="text" class="hl-inline-input" id="t9-i3" placeholder="р..." autocomplete="off">.
+                </p>
+            </div>
+            <div class="image-host-container" style="margin-top: 20px;">
+                <img src="bio_04.jpeg" alt="Оформление результатов исследований" class="task-img">
+            </div>
+        </section>
+
+        <!-- Кнопка отправки результатов -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>ТЕСТИРОВАНИЕ ЗАВЕРШЕНО</h2>
+        <p class="system-msg">> Данные успешно переданы в архив Чёрной Мезы.</p>
+        <div class="score-board">
+            <p>Участник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 9</p>
+            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
