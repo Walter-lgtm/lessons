@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function sendToGoogleForm(name, className, score, finalGrade) {
         // Укажите URL опубликованной Google Формы в кавычках ниже
-        const formURL = "https://docs.google.com/forms/d/e/1FAIpQLScyAaUqTgrX6QQ_KHjGMZbI7dOkWduUuqdTbmItuN2Zo5UmvA/";
+        const formURL = "https://docs.google.com/forms/d/e/1FAIpQLScyAaUqTgrX6QQ_KHjGMZbI7dOkWduUuqdTbmItuN2Zo5UmvA/formResponse";
         const formData = new FormData();
         
         // Замените "entry.XXXXX" на реальные ID полей из вашей формы
