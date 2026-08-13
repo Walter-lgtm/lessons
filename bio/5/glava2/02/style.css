@@ -425,13 +425,13 @@ body {
     opacity: 0.85;
 }
 
-/* Сами зоны сброса в виде неоновых полупрозрачных терминальных рамок */
+/* Модернизированные зоны сброса: полностью прозрачный фон, видна только рамка */
 .drop-zone-overlay {
     position: absolute;
     width: 150px;
     height: 32px;
     border: 1px dashed #ffb000;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: transparent; /* Полная прозрачность */
     color: #ffb000;
     text-align: center;
     line-height: 30px;
@@ -442,17 +442,17 @@ body {
     z-index: 10;
 }
 
-/* Визуальный отклик, когда плашка находится над зоной сброса */
+/* Визуальный отклик при наведении перетаскиваемой плашки — легкое неоновое заполнение */
 .drop-zone-overlay.drag-over {
-    background-color: rgba(255, 176, 0, 0.2);
+    background-color: rgba(255, 176, 0, 0.15); /* Едва заметный оранжевый отсвет */
     border-style: solid;
-    box-shadow: 0 0 10px rgba(255, 176, 0, 0.6);
+    box-shadow: 0 0 12px rgba(255, 176, 0, 0.7);
 }
 
-/* Стиль заполненной зоны, когда плашка успешно сброшена */
+/* Стиль зоны, когда плашка успешно сброшена (внутри появляется текст) */
 .drop-zone-overlay.filled {
     border-style: solid;
-    background-color: #1a1a1a;
+    background-color: rgba(26, 26, 26, 0.8); /* Легкая подложка только под текст, чтобы он читался поверх картинки */
     box-shadow: inset 0 0 5px rgba(255, 176, 0, 0.3);
 }
 
