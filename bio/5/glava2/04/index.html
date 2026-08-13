@@ -1,1 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§11. Жизнедеятельность организмов</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Введите ваши данные для доступа к терминалу:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: ГЛАВА 2 (§11. ЖИЗНЕДЕЯТЕЛЬНОСТЬ ОРГАНИЗМОВ)</p>
+            </div>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Комбинированное задание</h3>
+            <p class="question-text">
+                Ф<input type="text" id="t1-text" class="hl-inline-input" placeholder="отосинтез" autocomplete="off"> 
+                — процесс образования органических веществ из углекислого газа и воды, протекающий в хлоропластах с использованием солнечной энергии. Фотосинтез характерен для 
+                <select class="hl-select" id="t1-select">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="грибов">грибов</option>
+                    <option value="животных">животных</option>
+                    <option value="растений">растений</option>
+                </select>.
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Комбинированное задание</h3>
+            <p class="question-text">
+                А<input type="text" id="t2-text" class="hl-inline-input" placeholder="втотрофы" autocomplete="off"> 
+                растения и некоторые бактерии, способные самостоятельно образовывать органические вещества из неорганических. Процесс образования органических веществ по действием солнечного света называется 
+                <select class="hl-select" id="t2-select">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="дыханием">дыханием</option>
+                    <option value="брожением">брожением</option>
+                    <option value="фотосинтезом">фотосинтезом</option>
+                </select>.
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Выбери верный ответ</h3>
+            <p class="question-text">Как называется процесс газообмена между организмом и окружающей средой?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q3" value="Питание"><span></span> Питание</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="Дыхание"><span></span> Дыхание</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="Выделение"><span></span> Выделение</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="Раздражимость"><span></span> Развитие / Раздражимость</label>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 4 -->
+        <section class="task-card" id="task4">
+            <h3>[λ] Задание 4. Заполните пропуски в тексте</h3>
+            <p class="question-text">
+                <select class="hl-select" id="t4-select1">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="Питание">Питание</option>
+                    <option value="Обмен веществ">Обмен веществ</option>
+                    <option value="Дыхание">Дыхание</option>
+                </select>
+                — взаимосвязанные процессы образования и разрушения веществ, протекающие в организме и обеспечивающие его связь с окружающей средой.
+            </p>
+            <p class="question-text">
+                Последовательное изменение строения и процессов жизнедеятельности организма называется 
+                <select class="hl-select" id="t4-select2">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="развитием">развитием</option>
+                    <option value="ростом">ростом</option>
+                    <option value="раздражимостью">раздражимостью</option>
+                </select>.
+            </p>
+            <p class="question-text">
+                Ответная реакция живых организмов на воздействие различных раздражителей и реагирование на них соответствующими изменениями на уровне клетки, ткани или всего организма называется 
+                <select class="hl-select" id="t4-select3">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="ростом">ростом</option>
+                    <option value="обменом веществ">обменом веществ</option>
+                    <option value="раздражимостью">раздражимостью</option>
+                </select>.
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 5 -->
+        <section class="task-card" id="task5">
+            <h3>[λ] Задание 5. Заполните пропуски в тексте</h3>
+            <p class="question-text">
+                <select class="hl-select" id="t5-select1">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="Размножение">Размножение</option>
+                    <option value="Рост">Рост</option>
+                    <option value="Развитие">Развитие</option>
+                </select>
+                — способность давать подобное себе потомство.
+            </p>
+            <p class="question-text">
+                <select class="hl-select" id="t5-select2">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="Фотосинтез">Фотосинтез</option>
+                    <option value="Хемосинтез">Хемосинтез</option>
+                </select>
+                — процесс создания органических веществ из неорганических с использованием энергии света. Процесс протекает в 
+                <select class="hl-select" id="t5-select3">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="хлоропластах">хлоропластах</option>
+                    <option value="хромопластах">хромопластах</option>
+                    <option value="лейкопластах">лейкопластах</option>
+                </select>.
+            </p>
+            <p class="question-text">
+                Фотосинтезировать могут только растения, так как содержат зелёный пигмент — 
+                <select class="hl-select" id="t5-select4">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="каротин">каротин</option>
+                    <option value="хлорофилл">хлорофилл</option>
+                </select>.
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 6 -->
+        <section class="task-card" id="task6">
+            <h3>[λ] Задание 6. Выбери два верных ответа (Множественный выбор)</h3>
+            <p class="question-text">Растения, которые могут питаться как животные (гетеротрофы):</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q6" value="Ландыш майский"><span></span> Ландыш майский</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q6" value="Ромашка лекарственная"><span></span> Ромашка лекарственная</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q6" value="Росянка"><span></span> Росянка</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q6" value="Капуста цветная"><span></span> Капуста цветная</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q6" value="Венерина мухоловка"><span></span> Венерина мухоловка</label>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 7 -->
+        <section class="task-card" id="task7">
+            <h3>[λ] Задание 7. Выбери верные ответы (Множественный выбор)</h3>
+            <p class="question-text">Какие из перечисленных организмов могут фотосинтезировать?</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q7" value="Дуб"><span></span> Дуб</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q7" value="Лягушка"><span></span> Лягушка</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q7" value="Жираф"><span></span> Жираф</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q7" value="Крокодил"><span></span> Крокодил</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q7" value="Сыроежки"><span></span> Сыроежки</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q7" value="Герань"><span></span> Герань</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 8 -->
+        <section class="task-card" id="task8">
+            <h3>[λ] Задание 8. Выбери верный ответ</h3>
+            <p class="question-text">Какие организмы могут проявлять себя как гетеротрофы и как автотрофы, в зависимости от внешних факторов?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q8" value="Инфузория-туфелька"><span></span> Инфузория-туфелька</label>
+                <label class="hl-radio"><input type="radio" name="q8" value="Амёба"><span></span> Амёба</label>
+                <label class="hl-radio"><input type="radio" name="q8" value="Эвглена зелёная"><span></span> Эвглена зелёная</label>
+                <label class="hl-radio"><input type="radio" name="q8" value="Вольвокс"><span></span> Вольвокс</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 9 -->
+        <section class="task-card" id="task9">
+            <h3>[λ] Задание 9. Запиши ответы самостоятельно</h3>
+            <p class="question-text">
+                <input type="text" id="t9-ans1" class="hl-inline-input" style="width: 140px;" placeholder="Введи термин" autocomplete="off"> 
+                объединяет все клеточные структуры и обеспечивает их взаимодействие.
+            </p>
+            <p class="question-text">
+                В клетках растений, животных и грибов генетический аппарат окружён мембраной и называется 
+                <input type="text" id="t9-ans2" class="hl-inline-input" style="width: 100px;" placeholder="Введи термин" autocomplete="off">.
+            </p>
+            <p class="question-text">
+                <input type="text" id="t9-ans3" class="hl-inline-input" style="width: 140px;" placeholder="Введи термин" autocomplete="off">, 
+                окрашенные в жёлтый и красный цвета, определяют окраску лепестков цветков и т. д.
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 10 -->
+        <section class="task-card" id="task10">
+            <h3>[λ] Задание 10. Выбери верные ответы из выпадающих списков</h3>
+            <p class="question-text">
+                При распаде 
+                <select class="hl-select" id="t10-select1">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="органических веществ">органических веществ</option>
+                    <option value="неорганических веществ">неорганических веществ</option>
+                </select>
+                выделяется энергия, необходимая для жизнедеятельности клетки.
+            </p>
+            <p class="question-text">
+                Чем активнее жизнедеятельность клетки, тем больше скорость движения 
+                <select class="hl-select" id="t10-select2">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="цитоплазмы">цитоплазмы</option>
+                    <option value="клеточной стенки">клеточной стенки</option>
+                </select>.
+            </p>
+            <p class="question-text">
+                Перед началом деления клетки 
+                <select class="hl-select" id="t10-select3">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="ядро">ядро</option>
+                    <option value="хлоропласты">хлоропласты</option>
+                </select>
+                увеличивается, и в нём становятся хорошо заметны 
+                <select class="hl-select" id="t10-select4">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="хромосомы">хромосомы</option>
+                    <option value="вакуоли">вакуоли</option>
+                </select>.
+            </p>
+        </section>
+
+        <!-- Кнопка отправки результатов -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>МОНИТОРИНГ ЖИЗНЕДЕЯТЕЛЬНОСТИ ЗАВЕРШЕН</h2>
+        <p class="system-msg">> Физиологические показатели успешно заархивированы.</p>
+        <div class="score-board">
+            <p>Сотрудник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 10</p>
+            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
