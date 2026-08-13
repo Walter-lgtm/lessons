@@ -1,1 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§10. Клетка — основная единица живого организма</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Введите ваши данные для доступа к терминалу:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: ГЛАВА 2 (§10. СТРОЕНИЕ КЛЕТКИ)</p>
+            </div>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Выбери верный термин из выпадающего списка</h3>
+            <p class="question-text">
+                <select class="hl-select" data-task="1">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="Клеточная мембрана">Клеточная мембрана</option>
+                    <option value="Цитоплазма">Цитоплазма</option>
+                    <option value="Генетический аппарат">Генетический аппарат</option>
+                </select>
+                отграничивает внутреннее содержимое клетки, защищает её от неблагоприятных влияний окружающей среды. Через неё происходит регулируемый обмен веществ между содержимым клетки и внешней средой.
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Выбери верные ответы (Множественный выбор)</h3>
+            <p class="question-text">В клетках каких организмов содержатся пластиды?</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Крот"><span></span> Крот</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Арбуз"><span></span> Арбуз</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Белый медведь"><span></span> Белый медведь</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Берёза"><span></span> Берёза</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Белый гриб"><span></span> Белый гриб</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Инфузория-туфелька"><span></span> Инфузория-туфелька</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Выбери верный ответ</h3>
+            <p class="question-text">Какой процесс позволяет клеткам увеличиваться количественно?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q3" value="Рост"><span></span> Рост</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="Развитие"><span></span> Развитие</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="Деление"><span></span> Деление</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="Питание"><span></span> Питание</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 4 -->
+        <section class="task-card" id="task4">
+            <h3>[λ] Задание 4. Впиши пропущенные биологические термины</h3>
+            <p class="question-text">
+                Ц<input type="text" id="t4-ans1" class="hl-inline-input" placeholder="иология" autocomplete="off"> — раздел биологии, который изучает живые клетки, их строение и функционирование. Основоположниками клеточной теории являются 
+                Шл<input type="text" id="t4-ans2" class="hl-inline-input" placeholder="ейден" autocomplete="off"> и 
+                Шв<input type="text" id="t4-ans3" class="hl-inline-input" placeholder="анн" autocomplete="off">.
+            </p>
+        </section>
+        <!-- ЗАДАНИЕ 5 -->
+        <section class="task-card" id="task5">
+            <h3>[λ] Задание 5. Распредели органеллы клетки по группам</h3>
+            <p class="question-text">Выбери органоиды клетки в соответствии с их принадлежностью к растительной клетке и общему строению клетки:</p>
+            <div class="drag-words-container" id="words-t5">
+                <span class="drag-word" draggable="true" data-word="ядро">ядро</span>
+                <span class="drag-word" draggable="true" data-word="хромопласты">хромопласты</span>
+                <span class="drag-word" draggable="true" data-word="хромосомы">хромосомы</span>
+                <span class="drag-word" draggable="true" data-word="лизосомы">лизосомы</span>
+                <span class="drag-word" draggable="true" data-word="лейкопласты">лейкопласты</span>
+                <span class="drag-word" draggable="true" data-word="клеточная оболочка">клеточная оболочка</span>
+                <span class="drag-word" draggable="true" data-word="цитоплазма">цитоплазма</span>
+                <span class="drag-word" draggable="true" data-word="хлоропласты">хлоропласты</span>
+            </div>
+            <div class="two-columns">
+                <div class="group-zone" id="t5-group1" data-group="plant-only">
+                    <h4>Растительная клетка</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t5-group2" data-group="general">
+                    <h4>Общее строение клетки</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 6 -->
+        <section class="task-card" id="task6">
+            <h3>[λ] Задание 6. Содержание химических элементов (кликни слева, затем справа)</h3>
+            <p class="question-text">Укажи содержание химических элементов в клетке:</p>
+            <div class="match-container">
+                <div class="match-col" id="left-col">
+                    <div class="match-item" data-id="h">водород</div>
+                    <div class="match-item" data-id="c">углерод</div>
+                    <div class="match-item" data-id="n">азот</div>
+                    <div class="match-item" data-id="o">кислород</div>
+                </div>
+                <div class="match-col" id="right-col">
+                    <div class="match-target" data-id="o">68 %</div>
+                    <div class="match-target" data-id="n">3 %</div>
+                    <div class="match-target" data-id="h">10 %</div>
+                    <div class="match-target" data-id="c">17 %</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 7 -->
+        <section class="task-card" id="task7">
+            <h3>[λ] Задание 7. Заполни пропуски</h3>
+            <p class="question-text">Запиши названия химических элементов, которых больше всего содержится в клетках живых организмов (до 98 % от массы клетки):</p>
+            <p class="question-text">
+                к<input type="text" id="t7-ans1" class="hl-inline-input" placeholder="ислород" autocomplete="off">, 
+                в<input type="text" id="t7-ans2" class="hl-inline-input" placeholder="одород" autocomplete="off">, 
+                a<input type="text" id="t7-ans3" class="hl-inline-input" placeholder="зот" autocomplete="off">, 
+                у<input type="text" id="t7-ans4" class="hl-inline-input" placeholder="глерод" autocomplete="off">.
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 8 -->
+        <section class="task-card" id="task8">
+            <h3>[λ] Задание 8. Выбери верные ответы из выпадающих списков</h3>
+            <p class="question-text">
+                <select class="hl-select" data-task="8-1">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="Неорганические вещества">Неорганические вещества</option>
+                    <option value="Органические вещества">Органические вещества</option>
+                </select>
+                клетки — это вода и минеральные соли. 
+                <select class="hl-select" data-task="8-2">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="Неорганические вещества">Неорганические вещества</option>
+                    <option value="Органические вещества">Органические вещества</option>
+                </select>
+                — это сложные углеродсодержащие соединения, которые входят в состав всех живых организмов.
+            </p>
+        </section>
+
+        <!-- Кнопка отправки результатов -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>АНАЛИЗ СТРУКТУРЫ КЛЕТКИ ЗАВЕРШЕН</h2>
+        <p class="system-msg">> Биологические данные успешно переданы в архив Чёрной Мезы.</p>
+        <div class="score-board">
+            <p>Участник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 8</p>
+            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
