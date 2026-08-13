@@ -1,1 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§9. Увеличительные приборы для исследований</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Введите ваши данные для доступа к терминалу:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: ГЛАВА 2 (§9. УВЕЛИЧИТЕЛЬНЫЕ ПРИБОРЫ)</p>
+            </div>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Анатомия приборов (Drag-and-Drop)</h3>
+            <p class="question-text">Перетащи названия составных частей к соответствующим меткам на рисунках лупы и микроскопа:</p>
+            
+            <div class="drag-words-container" id="words-t1">
+                <span class="drag-word" draggable="true" data-word="микроскоп">микроскоп</span>
+                <span class="drag-word" draggable="true" data-word="ручка">ручка</span>
+                <span class="drag-word" draggable="true" data-word="предметный столик">предметный столик</span>
+                <span class="drag-word" draggable="true" data-word="окуляр">окуляр</span>
+                <span class="drag-word" draggable="true" data-word="увеличительное стекло">увеличительное стекло</span>
+                <span class="drag-word" draggable="true" data-word="лупа">лупа</span>
+                <span class="drag-word" draggable="true" data-word="зеркало">зеркало</span>
+                <span class="drag-word" draggable="true" data-word="штатив">штатив</span>
+                <span class="drag-word" draggable="true" data-word="регулировочные винты">регулировочные винты</span>
+            </div>
+
+            <div class="interactive-image-container">
+                <img src="bio_09_1.png" alt="Строение лупы и микроскопа" class="task-image-main">
+                <!-- Интерактивные зоны сброса (координаты будут настроены в CSS) -->
+                <div class="drop-zone-overlay t1-gap" data-answer="увеличительное стекло" style="top: 12%; left: 15%;"></div>
+                <div class="drop-zone-overlay t1-gap" data-answer="ручка" style="top: 35%; left: 15%;"></div>
+                <div class="drop-zone-overlay t1-gap" data-answer="лупа" style="top: 55%; left: 15%;"></div>
+                
+                <div class="drop-zone-overlay t1-gap" data-answer="окуляр" style="top: 8%; left: 65%;"></div>
+                <div class="drop-zone-overlay t1-gap" data-answer="регулировочные винты" style="top: 20%; left: 82%;"></div>
+                <div class="drop-zone-overlay t1-gap" data-answer="предметный столик" style="top: 38%; left: 60%;"></div>
+                <div class="drop-zone-overlay t1-gap" data-answer="зеркало" style="top: 62%; left: 60%;"></div>
+                <div class="drop-zone-overlay t1-gap" data-answer="штатив" style="top: 70%; left: 82%;"></div>
+                <div class="drop-zone-overlay t1-gap" data-answer="микроскоп" style="top: 88%; left: 72%;"></div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Детали микроскопа (Drag-and-Drop)</h3>
+            <p class="question-text">Распредели подписи к основным узлам светового микроскопа:</p>
+            
+            <div class="drag-words-container" id="words-t2">
+                <span class="drag-word" draggable="true" data-word="винты">винты</span>
+                <span class="drag-word" draggable="true" data-word="зеркало">зеркало</span>
+                <span class="drag-word" draggable="true" data-word="предметный столик">предметный столик</span>
+                <span class="drag-word" draggable="true" data-word="объектив">объектив</span>
+                <span class="drag-word" draggable="true" data-word="окуляр">окуляр</span>
+                <span class="drag-word" draggable="true" data-word="штатив">штатив</span>
+            </div>
+
+            <div class="interactive-image-container">
+                <img src="bio_09_2.png" alt="Узлы микроскопа" class="task-image-main">
+                <div class="drop-zone-overlay t2-gap" data-answer="окуляр" style="top: 5%; left: 70%;"></div>
+                <div class="drop-zone-overlay t2-gap" data-answer="объектив" style="top: 25%; left: 30%;"></div>
+                <div class="drop-zone-overlay t2-gap" data-answer="предметный столик" style="top: 45%; left: 32%;"></div>
+                <div class="drop-zone-overlay t2-gap" data-answer="зеркало" style="top: 75%; left: 35%;"></div>
+                <div class="drop-zone-overlay t2-gap" data-answer="винты" style="top: 35%; left: 72%;"></div>
+                <div class="drop-zone-overlay t2-gap" data-answer="штатив" style="top: 65%; left: 72%;"></div>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Выбери два верных ответа</h3>
+            <p class="question-text">Какое лабораторное оборудование изображено на рисунке?</p>
+            <div class="image-wrapper">
+                <img src="bio_09_3.png" alt="Виды луп" class="task-image">
+            </div>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q3" value="Световой микроскоп"><span></span> Световой микроскоп</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q3" value="Ручная лупа"><span></span> Ручная лупа</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q3" value="Цифровой микроскоп"><span></span> Цифровой микроскоп</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q3" value="Штативная лупа"><span></span> Штативная лупа</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 4 -->
+        <section class="task-card" id="task4">
+            <h3>[λ] Задание 4. Выбери верный ответ</h3>
+            <p class="question-text">Какой увеличительный прибор увеличивает объект в 200 раз?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q4" value="Ручная лупа"><span></span> Ручная лупа</label>
+                <label class="hl-radio"><input type="radio" name="q4" value="Штативная лупа"><span></span> Штативная лупа</label>
+                <label class="hl-radio"><input type="radio" name="q4" value="Световой микроскоп"><span></span> Световой микроскоп</label>
+                <label class="hl-radio"><input type="radio" name="q4" value="Цифровой микроскоп"><span></span> Цифровой микроскоп</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 5 -->
+        <section class="task-card" id="task5">
+            <h3>[λ] Задание 5. Выбери верный ответ</h3>
+            <p class="question-text">Какой увеличительный прибор увеличивает объект в 2–20 раз?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q5" value="Ручная лупа"><span></span> Ручная лупа</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Штативная лупа"><span></span> Штативная лупа</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Световой микроскоп"><span></span> Световой микроскоп</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Цифровой микроскоп"><span></span> Цифровой микроскоп</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 6 -->
+        <section class="task-card" id="task6">
+            <h3>[λ] Задание 6. Выбери верный ответ</h3>
+            <p class="question-text">Как называется часть микроскопа, куда крепят предметное стекло с микропрепаратом?</p>
+            <div class="image-wrapper">
+                <img src="bio_09_6.png" alt="Деталь микроскопа" class="task-image">
+            </div>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q6" value="Окуляр"><span></span> Окуляр</label>
+                <label class="hl-radio"><input type="radio" name="q6" value="Объектив"><span></span> Объектив</label>
+                <label class="hl-radio"><input type="radio" name="q6" value="Предметный столик"><span></span> Предметный столик</label>
+                <label class="hl-radio"><input type="radio" name="q6" value="Зеркало"><span></span> Зеркало</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 7 -->
+        <section class="task-card" id="task7">
+            <h3>[λ] Задание 7. Выбери верный ответ</h3>
+            <p class="question-text">С помощью какой части микроскопа корректируют изображение объекта под своё зрение?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q7" value="Тубус"><span></span> Тубус</label>
+                <label class="hl-radio"><input type="radio" name="q7" value="Винты"><span></span> Винты</label>
+                <label class="hl-radio"><input type="radio" name="q7" value="Окуляр"><span></span> Окуляр</label>
+                <label class="hl-radio"><input type="radio" name="q7" value="Зеркало"><span></span> Зеркало</label>
+            </div>
+        </section>
+<!-- ЗАДАНИЕ 8 -->
+        <section class="task-card" id="task8">
+            <h3>[λ] Задание 8. Выбери верный ответ</h3>
+            <p class="question-text">С помощью какой части микроскопа устанавливают свет для работы с микропрепаратом?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q8" value="Тубус"><span></span> Тубус</label>
+                <label class="hl-radio"><input type="radio" name="q8" value="Зеркало"><span></span> Зеркало</label>
+                <label class="hl-radio"><input type="radio" name="q8" value="Объектив"><span></span> Объектив</label>
+                <label class="hl-radio"><input type="radio" name="q8" value="Окуляр"><span></span> Окуляр</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 9 -->
+        <section class="task-card" id="task9">
+            <h3>[λ] Задание 9. Выбери верный ответ</h3>
+            <p class="question-text">На каком расстоянии должен располагаться микроскоп от края стола при работе с ним?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q9" value="20-30 см"><span></span> 20–30 см</label>
+                <label class="hl-radio"><input type="radio" name="q9" value="10-25 см"><span></span> 10–25 см</label>
+                <label class="hl-radio"><input type="radio" name="q9" value="5-10 см"><span></span> 5–10 см</label>
+                <label class="hl-radio"><input type="radio" name="q9" value="50 см"><span></span> 50 см</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 10 -->
+        <section class="task-card" id="task10">
+            <h3>[λ] Задание 10. Выбери и вставь верный ответ</h3>
+            <p class="question-text">
+                Поместить предметное стекло с приготовленным препаратом на 
+                <select class="hl-select" data-task="10">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="зеркало">зеркало</option>
+                    <option value="тубус">тубус</option>
+                    <option value="предметный столик">предметный столик</option>
+                </select>. 
+                Устанавливают свет для работы с помощью зеркала.
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 11 -->
+        <section class="task-card" id="task11">
+            <h3>[λ] Задание 11. Выбери верный ответ</h3>
+            <p class="question-text">Какие части микроскопа дают разные увеличения объектам?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q11" value="Окуляр"><span></span> Окуляр</label>
+                <label class="hl-radio"><input type="radio" name="q11" value="Объективы"><span></span> Объективы</label>
+                <label class="hl-radio"><input type="radio" name="q11" value="Зеркало"><span></span> Зеркало</label>
+                <label class="hl-radio"><input type="radio" name="q11" value="Тубус"><span></span> Тубус</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 12 -->
+        <section class="task-card" id="task12">
+            <h3>[λ] Задание 12. Выбери верный ответ</h3>
+            <p class="question-text">Какое оборудование НЕ используется при изучении мелких объектов и клеток? Под какими цифрами изображено это оборудование?</p>
+            <div class="image-wrapper">
+                <img src="bio_09_12.png" alt="Оптические приборы" class="task-image">
+            </div>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q12" value="2, 3"><span></span> 2, 3</label>
+                <label class="hl-radio"><input type="radio" name="q12" value="1, 5"><span></span> 1, 5</label>
+                <label class="hl-radio"><input type="radio" name="q12" value="4, 3"><span></span> 4, 3</label>
+                <label class="hl-radio"><input type="radio" name="q12" value="1, 5_dup"><span></span> 1, 5</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 13 -->
+        <section class="task-card" id="task13">
+            <h3>[λ] Задание 13. Выбери два верных ответа</h3>
+            <p class="question-text">Что из приборов является лабораторным оборудованием для изучения органоидов клеток в лабораторных опытах?</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q13" value="Световой микроскоп"><span></span> Световой микроскоп</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q13" value="Бинокль"><span></span> Бинокль</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q13" value="Ручная лупа"><span></span> Ручная лупа</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q13" value="Электронный микроскоп"><span></span> Электронный микроскоп</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q13" value="Подзорная труба"><span></span> Подзорная труба</label>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 14 -->
+        <section class="task-card" id="task14">
+            <h3>[λ] Задание 14. Выбери верный ответ</h3>
+            <p class="question-text">Какое оборудование используется при изучении объектов (орнитологи наблюдают птиц)?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q14" value="Световой микроскоп, подзорная труба"><span></span> Световой микроскоп, подзорная труба</label>
+                <label class="hl-radio"><input type="radio" name="q14" value="Электронный микроскоп, лупа"><span></span> Электронный микроскоп, лупа</label>
+                <label class="hl-radio"><input type="radio" name="q14" value="Подзорная труба, бинокль"><span></span> Подзорная труба, бинокль</label>
+                <label class="hl-radio"><input type="radio" name="q14" value="Лупа, бинокль"><span></span> Лупа, бинокль</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 15 -->
+        <section class="task-card" id="task15">
+            <h3>[λ] Задание 15. Выбери верный ответ</h3>
+            <p class="question-text">Какой увеличительный прибор используют при необходимом увеличении изображения объекта в 25 раз?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q15" value="Световой микроскоп"><span></span> Световой микроскоп</label>
+                <label class="hl-radio"><input type="radio" name="q15" value="Цифровой микроскоп"><span></span> Цифровой микроскоп</label>
+                <label class="hl-radio"><input type="radio" name="q15" value="Штативная лупа"><span></span> Штативная лупа</label>
+                <label class="hl-radio"><input type="radio" name="q15" value="Ручная лупа"><span></span> Ручная лупа</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 16 -->
+        <section class="task-card" id="task16">
+            <h3>[λ] Задание 16. Сопоставление кратности (кликни слева, затем справа)</h3>
+            <p class="question-text">Соотнеси цифры увеличения объектов с приборами, которые их дают:</p>
+            <div class="match-container">
+                <div class="match-col" id="left-col">
+                    <div class="match-item" data-id="stat-lupa">В 25 раз</div>
+                    <div class="match-item" data-id="light-micro">В 200 раз</div>
+                    <div class="match-item" data-id="electron-micro">В сотни раз</div>
+                    <div class="match-item" data-id="hand-lupa">В 10 раз</div>
+                </div>
+                <div class="match-col" id="right-col">
+                    <div class="match-target" data-id="hand-lupa">Ручная лупа</div>
+                    <div class="match-target" data-id="electron-micro">Электронный микроскоп</div>
+                    <div class="match-target" data-id="stat-lupa">Штативная лупа</div>
+                    <div class="match-target" data-id="light-micro">Световой микроскоп</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 17 -->
+        <section class="task-card" id="task17">
+            <h3>[λ] Задание 17. Расчёт оптики микроскопа</h3>
+            <p class="question-text">Какое общее увеличение объекта даст световой микроскоп, если на окуляре выставлено увеличение Х10, а на объективе Х40?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q17" value="В 4 раза"><span></span> В 4 раза</label>
+                <label class="hl-radio"><input type="radio" name="q17" value="В 40 раз"><span></span> В 40 раз</label>
+                <label class="hl-radio"><input type="radio" name="q17" value="В 400 раз"><span></span> В 400 раз</label>
+                <label class="hl-radio"><input type="radio" name="q17" value="В 4000 раз"><span></span> В 4000 раз</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 18 -->
+        <section class="task-card" id="task18">
+            <h3>[λ] Задание 18. Укажи верные утверждения (Множественный выбор)</h3>
+            <p class="question-text">Укажи все истинные биологические утверждения из списка:</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q18" value="1"><span></span> С помощью лупы можно изучить детальное строение клеток</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q18" value="2"><span></span> Лупа состоит из увеличительного стекла</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q18" value="3"><span></span> Современные световые микроскопы способны увеличивать изображение только до 10 раз</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q18" value="4"><span></span> Лупы бывают ручные и штативные</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q18" value="5"><span></span> Первый микроскоп был изобретён в V веке</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q18" value="6"><span></span> Робер Гук ввёл понятие «клетка»</label>
+            </div>
+        </section>
+
+        <!-- Кнопка отправки результатов -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>ЛАБОРАТОРНЫЙ ПРАКТИКУМ ЗАВЕРШЕН</h2>
+        <p class="system-msg">> Данные успешно переданы в архив научно-исследовательского комплекса Чёрная Меза.</p>
+        <div class="score-board">
+            <p>Участник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 18</p>
+            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
