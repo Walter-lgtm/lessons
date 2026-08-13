@@ -1,1 +1,259 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§8. Организм — единое целое</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Введите ваши данные для доступа к терминалу:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: ГЛАВА 2 (ОРГАНИЗМЫ — ТЕЛА ЖИВОЙ ПРИРОДЫ)</p>
+            </div>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Выбери верный термин из выпадающего списка</h3>
+            <p class="question-text">
+                <select class="hl-select" data-task="1">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="Орган">Орган</option>
+                    <option value="Клетка">Клетка</option>
+                    <option value="Система органов">Система органов</option>
+                </select>
+                является основной структурной и функциональной единицей всех живых организмов.
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Выбери верный термин из выпадающего списка</h3>
+            <p class="question-text">
+                <select class="hl-select" data-task="2">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="Орган">Орган</option>
+                    <option value="Клетка">Клетка</option>
+                    <option value="Система органов">Система органов</option>
+                </select>
+                — это часть многоклеточного организма, имеющая особое строение и выполняющая определённую функцию.
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Выбери верный термин из выпадающего списка</h3>
+            <p class="question-text">
+                Клетки, сходные по строению, объединённые выполнением общей работы (функции), и межклеточное вещество, связывающее клетки, образуют 
+                <select class="hl-select" data-task="3">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="систему органов">систему органов</option>
+                    <option value="ткани">ткани</option>
+                    <option value="организм">организм</option>
+                </select>.
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 4 -->
+        <section class="task-card" id="task4">
+            <h3>[λ] Задание 4. Соедини элементы (кликни слева, затем справа)</h3>
+            <p class="question-text">Установи соответствие между организмами и их типами организации:</p>
+            <div class="match-container">
+                <div class="match-col" id="left-col">
+                    <div class="match-item" data-id="single">Эвглена зелёная</div>
+                    <div class="match-item" data-id="non-cell">Вирус</div>
+                    <div class="match-item" data-id="multi">Медуза</div>
+                </div>
+                <div class="match-col" id="right-col">
+                    <div class="match-target" data-id="non-cell">Неклеточные организмы</div>
+                    <div class="match-target" data-id="single">Одноклеточные организмы</div>
+                    <div class="match-target" data-id="multi">Многоклеточные организмы</div>
+                </div>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 5 -->
+        <section class="task-card" id="task5">
+            <h3>[λ] Задание 5. Выбери три верных ответа</h3>
+            <p class="question-text">К многоклеточным организмам относятся:</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q5" value="Ёж"><span></span> Ёж</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q5" value="Эвглена зелёная"><span></span> Эвглена зелёная</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q5" value="Удав"><span></span> Удав</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q5" value="Амёба"><span></span> Амёба</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q5" value="Человек"><span></span> Человек</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q5" value="Инфузория-туфелька"><span></span> Инфузория-туфелька</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 6 -->
+        <section class="task-card" id="task6">
+            <h3>[λ] Задание 6. Распредели объекты</h3>
+            <p class="question-text">Распредели одноклеточные и многоклеточные организмы по группам:</p>
+            <div class="drag-words-container" id="words-t6">
+                <span class="drag-word" draggable="true" data-word="дождевой червь">дождевой червь</span>
+                <span class="drag-word" draggable="true" data-word="эвглена зелёная">эвглена зелёная</span>
+                <span class="drag-word" draggable="true" data-word="акула">акула</span>
+                <span class="drag-word" draggable="true" data-word="амёба">амёба</span>
+                <span class="drag-word" draggable="true" data-word="инфузория-туфелька">инфузория-туфелька</span>
+                <span class="drag-word" draggable="true" data-word="кошка">кошка</span>
+                <span class="drag-word" draggable="true" data-word="томаты">томаты</span>
+            </div>
+            <div class="two-columns">
+                <div class="group-zone" id="t6-group1" data-group="single-cell">
+                    <h4>Одноклеточные организмы</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t6-group2" data-group="multi-cell">
+                    <h4>Многоклеточные организмы</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 7 -->
+        <section class="task-card" id="task7">
+            <h3>[λ] Задание 7. Распредели по группам биологические объекты</h3>
+            <p class="question-text">Распредели объекты согласно их уровню организации:</p>
+            <div class="drag-words-container" id="words-t7">
+                <span class="drag-word" draggable="true" data-word="нервная ткань">нервная ткань</span>
+                <span class="drag-word" draggable="true" data-word="арбуз">арбуз</span>
+                <span class="drag-word" draggable="true" data-word="кровеносная система">кровеносная система</span>
+                <span class="drag-word" draggable="true" data-word="хвост">хвост</span>
+                <span class="drag-word" draggable="true" data-word="амёба">амёба</span>
+                <span class="drag-word" draggable="true" data-word="печень">печень</span>
+                <span class="drag-word" draggable="true" data-word="дыхательная система">дыхательная система</span>
+                <span class="drag-word" draggable="true" data-word="мышечная ткань">мышечная ткань</span>
+                <span class="drag-word" draggable="true" data-word="эвглена зелёная">эвглена зелёная</span>
+                <span class="drag-word" draggable="true" data-word="синий кит">синий кит</span>
+            </div>
+            <div class="five-columns">
+                <div class="group-zone" id="t7-group1" data-group="cellular">
+                    <h4>Клеточный</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t7-group2" data-group="tissue">
+                    <h4>Тканевый</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t7-group3" data-group="organ">
+                    <h4>Органный</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t7-group4" data-group="system">
+                    <h4>Система органов</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t7-group5" data-group="organismal">
+                    <h4>Организменный</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 8 -->
+        <section class="task-card" id="task8">
+            <h3>[λ] Задание 8. Анализ схемы</h3>
+            <p class="question-text">Какой уровень организации организма в представленной схеме должен располагаться на второй строчке снизу вверх?</p>
+            <div class="image-wrapper">
+                <img src="bio_05.jpeg" alt="Схема уровней организации" class="task-image">
+            </div>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q8" value="Система органов"><span></span> Система органов</label>
+                <label class="hl-radio"><input type="radio" name="q8" value="Клеточный"><span></span> Клеточный</label>
+                <label class="hl-radio"><input type="radio" name="q8" value="Тканевый"><span></span> Тканевый</label>
+                <label class="hl-radio"><input type="radio" name="q8" value="Органный"><span></span> Органный</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 9 -->
+        <section class="task-card" id="task9">
+            <h3>[λ] Задание 9. Анализ схемы</h3>
+            <p class="question-text">Какой уровень организации организма в представленной схеме должен располагаться на третьей строчке снизу вверх?</p>
+            <div class="image-wrapper">
+                <img src="bio_05.jpeg" alt="Схема уровней организации" class="task-image">
+            </div>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q9" value="Система органов"><span></span> Система органов</label>
+                <label class="hl-radio"><input type="radio" name="q9" value="Клеточный"><span></span> Клеточный</label>
+                <label class="hl-radio"><input type="radio" name="q9" value="Тканевый"><span></span> Тканевый</label>
+                <label class="hl-radio"><input type="radio" name="q9" value="Органный"><span></span> Органный</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 10 -->
+        <section class="task-card" id="task10">
+            <h3>[λ] Задание 10. Выбери верный ответ</h3>
+            <p class="question-text">Какая ткань НЕ относится к тканям организма человека?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q10" value="Образовательная"><span></span> Образовательная</label>
+                <label class="hl-radio"><input type="radio" name="q10" value="Эпителиальная"><span></span> Эпителиальная</label>
+                <label class="hl-radio"><input type="radio" name="q10" value="Нервная"><span></span> Нервная</label>
+                <label class="hl-radio"><input type="radio" name="q10" value="Соединительная"><span></span> Соединительная</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 11 -->
+        <section class="task-card" id="task11">
+            <h3>[λ] Задание 11. Выбери верный ответ</h3>
+            <p class="question-text">Какая ткань относится к тканям животного организма?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q11" value="Образовательная"><span></span> Образовательная</label>
+                <label class="hl-radio"><input type="radio" name="q11" value="Всасывающая"><span></span> Всасывающая</label>
+                <label class="hl-radio"><input type="radio" name="q11" value="Соединительная"><span></span> Соединительная</label>
+                <label class="hl-radio"><input type="radio" name="q11" value="Проводящая"><span></span> Проводящая</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 12 -->
+        <section class="task-card" id="task12">
+            <h3>[λ] Задание 12. Выбери верный ответ</h3>
+            <p class="question-text">К какой системе органов относится желудок в организме человека?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q12" value="Кровеносная"><span></span> Кровеносная</label>
+                <label class="hl-radio"><input type="radio" name="q12" value="Дыхательная"><span></span> Дыхательная</label>
+                <label class="hl-radio"><input type="radio" name="q12" value="Пищеварительная"><span></span> Пищеварительная</label>
+                <label class="hl-radio"><input type="radio" name="q12" value="Нервная"><span></span> Нервная</label>
+            </div>
+        </section>
+
+        <!-- Кнопка отправки -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>ТЕСТИРОВАНИЕ ЗАВЕРШЕНО</h2>
+        <p class="system-msg">> Данные успешно переданы в архив Чёрной Мезы.</p>
+        <div class="score-board">
+            <p>Сотрудник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 12</p>
+            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
