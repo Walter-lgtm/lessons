@@ -25,6 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
         authScreen.classList.add("hidden");
         quizContainer.classList.remove("hidden");
         window.scrollTo(0, 0);
+
+        // КРИТИЧЕСКИЙ ФИКС: Инициализируем Drag-and-Drop ТОЛЬКО после открытия тестов,
+        // когда элементы появились в DOM-дереве и готовы к обработке!
+        initDragAndDrop(); 
     });
 
     // ==========================================
@@ -59,8 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-
-    initDragAndDrop();
 
     // ==========================================
     // 3. МЕХАНИКА СОПОСТАВЛЕНИЯ ПАР (Задание 6)
