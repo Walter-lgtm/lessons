@@ -1,1 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§12. Разнообразие организмов и их классификация</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Введите ваши данные для доступа к терминалу:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: ГЛАВА 2 (§12. РАЗНООБРАЗИЕ ОРГАНИЗМОВ)</p>
+            </div>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Отметь верные утверждения (Множественный выбор)</h3>
+            <p class="question-text">Выберите все истинные биологические утверждения из списка:</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q1" value="1"><span></span> Живые клетки дышат, питаются, растут и размножаются.</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q1" value="2"><span></span> Вещества, необходимые для жизнедеятельности клеток, поступают в них через хромосомы.</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q1" value="3"><span></span> Клеточная мембрана хорошо пропускает одни вещества (например, воду) и задерживает другие.</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q1" value="4"><span></span> Когда происходит нарушение реакций в клетке, никакие изменения не происходят.</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q1" value="5"><span></span> Клетки не реагируют на внешние и внутренние воздействия.</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q1" value="6"><span></span> Движение цитоплазмы, как правило, бывает наиболее интенсивным при температуре 37 °C.</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Вставь верный термин (Без подсказок)</h3>
+            <p class="question-text">
+                Результат приспособления к условиям жизни в процессе продолжительного исторического развития — э<input type="text" id="t2-ans1" class="hl-inline-input" style="width: 110px;" autocomplete="off">.
+            </p>
+            <p class="question-text">
+                К<input type="text" id="t2-ans2" class="hl-inline-input" style="width: 130px;" autocomplete="off"> — распределение объектов по группам в зависимости от их общих признаков.
+            </p>
+            <p class="question-text">
+                Науку, изучающую многообразие видов живых организмов, называют с<input type="text" id="t2-ans3" class="hl-inline-input" style="width: 120px;" autocomplete="off">.
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Выбери и вставь верный ответ</h3>
+            <p class="question-text">
+                <select class="hl-select" id="t3-select">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="Вид">Вид</option>
+                    <option value="Род">Род</option>
+                    <option value="Царство">Царство</option>
+                </select>
+                — группа особей, сходных по особенностям строения, процессов жизнедеятельности и образу жизни, дающих при скрещивании плодовитое потомство и населяющих определённую территорию.
+            </p>
+        </section>
+        <!-- ЗАДАНИЕ 4 -->
+        <section class="task-card" id="task4">
+            <h3>[λ] Задание 4. Распредели живые организмы по группам (Drag-and-Drop)</h3>
+            <p class="question-text">Перетащи названия организмов в соответствующие колонки строения:</p>
+            <div class="drag-words-container" id="words-t4">
+                <span class="drag-word" draggable="true" data-word="архебактерии">архебактерии</span>
+                <span class="drag-word" draggable="true" data-word="цианобактерии">цианобактерии</span>
+                <span class="drag-word" draggable="true" data-word="вирусы">вирусы</span>
+                <span class="drag-word" draggable="true" data-word="амёба">амёба</span>
+                <span class="drag-word" draggable="true" data-word="бактерии">бактерии</span>
+                <span class="drag-word" draggable="true" data-word="инфузория-туфелька">инфузория-туфелька</span>
+                <span class="drag-word" draggable="true" data-word="креветки">креветки</span>
+            </div>
+            <div class="three-columns">
+                <div class="group-zone" id="t4-group1" data-group="non-cellular">
+                    <h4>Неклеточные</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t4-group2" data-group="prokaryotes">
+                    <h4>Прокариоты</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t4-group3" data-group="eukaryotes">
+                    <h4>Эукариоты</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 5 -->
+        <section class="task-card" id="task5">
+            <h3>[λ] Задание 5. Выбери верный ответ</h3>
+            <p class="question-text">К какому надцарству относится амёба?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q5" value="Вирусы"><span></span> Вирусы</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Эукариоты"><span></span> Эукариоты</label>
+                <label class="hl-radio"><input type="radio" name="q5" value="Прокариоты"><span></span> Прокариоты</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 6 -->
+        <section class="task-card" id="task6">
+            <h3>[λ] Задание 6. Соотнеси организмы с группами царств (Клик слева, затем справа)</h3>
+            <p class="question-text">Распредели организмы согласно современной систематике:</p>
+            <div class="match-container">
+                <div class="match-col" id="left-col">
+                    <div class="match-item" data-id="plants">Подсолнечник</div>
+                    <div class="match-item" data-id="animals">Белка</div>
+                    <div class="match-item" data-id="fungi">Опята</div>
+                    <div class="match-item" data-id="bacteria">Архебактерии</div>
+                </div>
+                <div class="match-col" id="right-col">
+                    <div class="match-target" data-id="bacteria">Царство бактерий</div>
+                    <div class="match-target" data-id="fungi">Царство грибов</div>
+                    <div class="match-target" data-id="plants">Царство растений</div>
+                    <div class="match-target" data-id="animals">Царство животных</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 7 -->
+        <section class="task-card" id="task7">
+            <h3>[λ] Задание 7. Выбери верный ответ</h3>
+            <p class="question-text">К какому царству согласно современной систематике относится бурый медведь?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q7" value="Царство растений"><span></span> Царство растений</label>
+                <label class="hl-radio"><input type="radio" name="q7" value="Царство грибов"><span></span> Царство грибов</label>
+                <label class="hl-radio"><input type="radio" name="q7" value="Царство животных"><span></span> Царство животных</label>
+                <label class="hl-radio"><input type="radio" name="q7" value="Царство бактерий"><span></span> Царство бактерий</label>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 8 -->
+        <section class="task-card" id="task8">
+            <h3>[λ] Задание 8. Распредели организмы по царствам (Drag-and-Drop)</h3>
+            <p class="question-text">Распредели перечисленные живые организмы по царствам, к которым они принадлежат:</p>
+            <div class="drag-words-container" id="words-t8">
+                <span class="drag-word" draggable="true" data-word="бактерии">бактерии</span>
+                <span class="drag-word" draggable="true" data-word="пшеница">пшеница</span>
+                <span class="drag-word" draggable="true" data-word="архебактерии">архебактерии</span>
+                <span class="drag-word" draggable="true" data-word="маслята">маслята</span>
+                <span class="drag-word" draggable="true" data-word="лён">лён</span>
+                <span class="drag-word" draggable="true" data-word="дельфин">дельфин</span>
+                <span class="drag-word" draggable="true" data-word="цианобактерии">цианобактерии</span>
+                <span class="drag-word" draggable="true" data-word="антилопа">антилопа</span>
+                <span class="drag-word" draggable="true" data-word="дрожжи">дрожжи</span>
+                <span class="drag-word" draggable="true" data-word="бегемот">бегемот</span>
+                <span class="drag-word" draggable="true" data-word="подосиновики">подосиновики</span>
+                <span class="drag-word" draggable="true" data-word="картофель">картофель</span>
+            </div>
+            <div class="four-columns-grid">
+                <div class="group-zone" id="t8-group1" data-group="c-bacteria">
+                    <h4>Царство бактерий</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t8-group2" data-group="c-plants">
+                    <h4>Царство растений</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t8-group3" data-group="c-animals">
+                    <h4>Царство животных</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t8-group4" data-group="c-fungi">
+                    <h4>Царство грибов</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 9 -->
+        <section class="task-card" id="task9">
+            <h3>[λ] Задание 9. Выбери верный ответ</h3>
+            <p class="question-text">К какому надцарству относится вид Ива плакучая (вавилонская)?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q9" value="Надцатьарство эукариот"><span></span> Надцатьарство эукариот</label>
+                <label class="hl-radio"><input type="radio" name="q9" value="Надцатьарство прокариот"><span></span> Надцатьарство прокариот</label>
+                <label class="hl-radio"><input type="radio" name="q9" value="Надцатьарство неклеточные"><span></span> Надцатьарство неклеточные</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 10 -->
+        <section class="task-card" id="task10">
+            <h3>[λ] Задание 10. Укажи верные утверждения (Множественный выбор)</h3>
+            <p class="question-text">Выберите все истинные биологические утверждения из списка:</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q10" value="1"><span></span> Живые организмы состоят из тех же химических элементов, что и объекты неживой природы.</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q10" value="2"><span></span> Некоторые бактерии состоят из одной клетки.</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q10" value="3"><span></span> Цветковые растения образованы одной клеткой.</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q10" value="4"><span></span> Все живые организмы сходны по химическому составу.</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q10" value="5"><span></span> Для живых организмов не характерен рост и развитие.</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q10" value="6"><span></span> Питание и дыхание не являются характерными особенностями живых организмов.</label>
+            </div>
+        </section>
+
+        <!-- Кнопка отправки результатов -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>СИСТЕМАТИЗАЦИЯ И КЛАССИФИКАЦИЯ ЗАВЕРШЕНА</h2>
+        <p class="system-msg">> Научные данные о многообразии видов заархивированы в Секторе С.</p>
+        <div class="score-board">
+            <p>Участник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 10</p>
+            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
