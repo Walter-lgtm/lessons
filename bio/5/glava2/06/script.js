@@ -21,6 +21,29 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("ВНИМАНИЕ! Доступ заблокирован. Введите ФИО и Класс для идентификации.");
             return;
         }
+        // === НАЧАЛО БЛОКА ПОДВОХА (ВЕРСИЯ 2.0 - ЖЕСТКИЙ ПРОТОКОЛ) ===
+        // Создаем уникальный ID ученика на основе Имени и Класса (чтобы не путать детей на одном телефоне)
+        const studentUid = (studentName + "_" + studentClass).toLowerCase().replace(/\s+/g, '');
+        const storageKey = "attempts_" + window.location.pathname.split("/").pop() + "_" + studentUid;
+        
+        // Считываем, сколько раз этот конкретный ребенок нажимал кнопку старта
+        let currentAttempt = parseInt(localStorage.getItem(storageKey)) || 0;
+        currentAttempt++; // Плюсуем текущую попытку
+        localStorage.setItem(storageKey, currentAttempt); // Записываем обратно в память смартфона
+
+        // Если это НЕ первая попытка, активируем скрытый штрафной коэффициент
+        let penaltyBlock = "";
+        if (currentAttempt > 1) {
+            let penalty = currentAttempt - 1;
+            // Передаем значение штрафа в глобальный объект окна, чтобы прочитать его при отправке результатов
+            window.currentPenalty = penalty;
+            window.currentAttemptNumber = currentAttempt;
+            penaltyBlock = ` (Попытка №${currentAttempt}, Штраф: -${penalty}б.)`;
+        } else {
+            window.currentPenalty = 0;
+            window.currentAttemptNumber = 1;
+        }
+        // === КОНЕЦ БЛОКА ПОДВОХА ===
 
         authScreen.classList.add("hidden");
         quizContainer.classList.remove("hidden");
@@ -232,7 +255,13 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("res-name").textContent = studentName;
         document.getElementById("res-class").textContent = studentClass;
         document.getElementById("res-score").textContent = totalScore;
-
+        // --- ПРИМЕНЕНИЕ ШТРАФА (ЖЕСТКИЙ ПРОТОКОЛ) ---
+        if (window.currentPenalty && window.currentPenalty > 0) {
+            totalScore = totalScore - window.currentPenalty;
+            if (totalScore < 0) totalScore = 0;
+            // Дописываем информацию в класс для Google Таблицы учителя
+            studentClass = studentClass + ` (Попытка №${window.currentAttemptNumber}, Штраф: -${window.currentPenalty}б.)`;
+        }
         // Расчет оценки по пятибалльной шкале (из 10 возможных баллов)
         let finalGrade = "2";
         if (totalScore >= 9) {
