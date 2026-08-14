@@ -491,3 +491,11 @@ body {
     gap: 15px;
     margin-top: 20px;
 }
+/* Эффект вычеркивания для плашек грибов (Задание 6) */
+.strike-item.crossed-out {
+    text-decoration: line-through;
+    background-color: rgba(255, 0, 0, 0.25) !important;
+    border-color: #ff3333 !important;
+    color: #ff9999 !important;
+    box-shadow: 0 0 8px rgba(255, 51, 51, 0.4);
+}
