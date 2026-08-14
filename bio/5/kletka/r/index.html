@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Терминал: Строение клетки</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Атмосферная сетка/шум на фоне терминала -->
+    <div class="scanlines"></div>
+
+    <div class="terminal-container">
+        <!-- Верхняя панель терминала -->
+        <header class="terminal-header">
+            <div class="logo">λ</div>
+            <div class="title">СИСТЕМА АНАЛИЗА БИОЛОГИЧЕСКИХ ОБРАЗЦОВ v1.05</div>
+            <div class="score-board">БАЛЛЫ: <span id="score">0</span></div>
+        </header>
+
+        <div class="main-workspace">
+            <!-- Левое меню с плашками органелл -->
+            <aside class="sidebar">
+                <div class="sidebar-title">ОРГАНЕЛЛЫ</div>
+                <div id="draggables-container" class="draggables-list">
+                    <!-- Плашки будут добавляться динамически через JS -->
+                    <div class="loading-text">Ожидание загрузки данных...</div>
+                </div>
+            </aside>
+
+            <!-- Центральный экран с цитологической картой -->
+            <main class="viewport">
+                <div class="viewport-tabs">
+                    <button class="tab-btn active">Растительная</button>
+                    <button class="tab-btn">Животная</button>
+                    <button class="tab-btn">Грибная</button>
+                </div>
+                <div class="screen-border">
+                    <div class="image-container" id="image-container">
+                        <!-- Сюда встанет картинка клетки -->
+                        <img id="cell-image" src="kletka_rast.png" alt="Карта клетки">
+                        <!-- Сюда скрипт будет накладывать зоны-сокеты -->
+                        <div id="sockets-container"></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script href="script.js"></script>
+</body>
+</html>
