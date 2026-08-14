@@ -2,44 +2,43 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Терминал: Строение клетки</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Атмосферная сетка/шум на фоне терминала -->
     <div class="scanlines"></div>
 
     <div class="terminal-container">
-        <!-- Верхняя панель терминала -->
+        <!-- Верхняя панель -->
         <header class="terminal-header">
             <div class="logo">λ</div>
             <div class="title">СИСТЕМА АНАЛИЗА БИОЛОГИЧЕСКИХ ОБРАЗЦОВ v1.05</div>
+            <!-- Новая кнопка возврата/выбора -->
+            <button id="menu-btn" class="menu-toggle-btn">ВЫБОР КЛЕТКИ</button>
             <div class="score-board">БАЛЛЫ: <span id="score">0</span></div>
         </header>
 
         <div class="main-workspace">
-            <!-- Левое меню с плашками органелл -->
+            <!-- Левое меню -->
             <aside class="sidebar">
                 <div class="sidebar-title">ОРГАНЕЛЛЫ</div>
                 <div id="draggables-container" class="draggables-list">
-                    <!-- Плашки будут добавляться динамически через JS -->
                     <div class="loading-text">Ожидание загрузки данных...</div>
                 </div>
             </aside>
 
-            <!-- Центральный экран с цитологической картой -->
+            <!-- Центральный экран -->
             <main class="viewport">
+                <!-- Кнопки выбора клеток теперь работают интерактивно -->
                 <div class="viewport-tabs">
-                    <button class="tab-btn active">Растительная</button>
-                    <button class="tab-btn">Животная</button>
-                    <button class="tab-btn">Грибная</button>
+                    <button class="tab-btn active" onclick="switchCell('rast')">Растительная</button>
+                    <button class="tab-btn" onclick="switchCell('jiv')">Животная</button>
+                    <button class="tab-btn" onclick="switchCell('grib')">Грибная</button>
                 </div>
                 <div class="screen-border">
                     <div class="image-container" id="image-container">
-                        <!-- Сюда встанет картинка клетки -->
                         <img id="cell-image" src="kletka_rast.png" alt="Карта клетки">
-                        <!-- Сюда скрипт будет накладывать зоны-сокеты -->
                         <div id="sockets-container"></div>
                     </div>
                 </div>
@@ -47,40 +46,40 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
-    <!-- Модальное окно терминала для сбора данных -->
-<div id="result-modal" class="modal-overlay hidden">
-    <div class="modal-content">
-        <div class="modal-header">СТАТУС: ТЕСТИРОВАНИЕ ЗАВЕРШЕНО</div>
-        <div class="modal-body">
-            <p class="blink-text">> ДОСТУП К СИНХРОНИЗАЦИИ ДАННЫХ ОТКРЫТ...</p>
-            <div class="stats-summary">
-                <p>НАБРАНО БАЛЛОВ: <span id="modal-score">0</span> из 15</p>
-                <p>ИТОГОВАЯ ОЦЕНКА: <span id="modal-grade">-</span></p>
+    <!-- Модальное окно результатов -->
+    <div id="result-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">СТАТУС: ТЕСТИРОВАНИЕ ЗАВЕРШЕНО</div>
+            <div class="modal-body">
+                <p class="blink-text">> ДОСТУП К СИНХРОНИЗАЦИИ ДАННЫХ ОТКРЫТ...</p>
+                <div class="stats-summary">
+                    <p>НАБРАНО БАЛЛОВ: <span id="modal-score">0</span> из <span id="modal-total">15</span></p>
+                    <p>ИТОГОВАЯ ОЦЕНКА: <span id="modal-grade">-</span></p>
+                </div>
+                
+                <form id="google-form" action="" method="POST" target="hidden-iframe">
+                    <div class="input-group">
+                        <label for="student-name">> ВВЕДИТЕ ФИО:</label>
+                        <input type="text" id="student-name" required placeholder="Иванов Иван Иванович" autocomplete="off">
+                    </div>
+                    <div class="input-group">
+                        <label for="student-class">> ВВЕДИТЕ КЛАСС:</label>
+                        <input type="text" id="student-class" required placeholder="5 А" autocomplete="off">
+                    </div>
+                    
+                    <input type="hidden" id="entry-score" name="entry.ХХХХХХХ">
+                    <input type="hidden" id="entry-grade" name="entry.YYYYYYY">
+                    
+                    <button type="submit" class="submit-btn">ОТПРАВИТЬ В БАЗУ ДАННЫХ</button>
+                </form>
+                <!-- Новая кнопка закрытия окна, чтобы просто вернуться тренироваться дальше -->
+                <button type="button" class="back-btn" onclick="closeModal()">ВЕРНУТЬСЯ К ВЫБОРУ КЛЕТОК</button>
             </div>
-            
-            <!-- Форма отправки -->
-            <form id="google-form" action="" method="POST" target="hidden-iframe">
-                <div class="input-group">
-                    <label for="student-name">> ВВЕДИТЕ ФИО:</label>
-                    <input type="text" id="student-name" required placeholder="Иванов Иван Иванович" autocomplete="off">
-                </div>
-                <div class="input-group">
-                    <label for="student-class">> ВВЕДИТЕ КЛАСС:</label>
-                    <input type="text" id="student-class" required placeholder="5 А" autocomplete="off">
-                </div>
-                
-                <!-- Скрытые поля для передачи баллов и оценок в Гугл-форму -->
-                <input type="hidden" id="entry-score" name="entry.ХХХХХХХ">
-                <input type="hidden" id="entry-grade" name="entry.YYYYYYY">
-                
-                <button type="submit" class="submit-btn">ОТПРАВИТЬ В БАЗУ ДАННЫХ</button>
-            </form>
         </div>
     </div>
-</div>
 
-<!-- Невидимый фрейм, чтобы страница не перезагружалась при отправке формы -->
-<iframe name="hidden-iframe" id="hidden-iframe" class="hidden"></iframe>
+    <iframe name="hidden-iframe" id="hidden-iframe" class="hidden"></iframe>
+
+    <script src="script.js"></script>
 </body>
 </html>
