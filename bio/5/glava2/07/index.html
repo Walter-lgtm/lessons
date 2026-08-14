@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§14. Многообразие и значение бактерий и вирусов</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Введите ваши данные для доступа к терминалу:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: ГЛАВА 2 (§14. БАКТЕРИИ И ВИРУСЫ)</p>
+            </div>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Выбери верный ответ</h3>
+            <p class="question-text">Бактерии как клетки содержат:</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q1" value="Ядро"><span></span> Ядро</label>
+                <label class="hl-radio"><input type="radio" name="q1" value="Ядрышко"><span></span> Ядрышко</label>
+                <label class="hl-radio"><input type="radio" name="q1" value="Кольцевую хромосому"><span></span> Кольцевую хромосому</label>
+                <label class="hl-radio"><input type="radio" name="q1" value="Два ядра"><span></span> Два ядра</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Выбери верный ответ</h3>
+            <p class="question-text">Организмы, которые не имеют клеточного строения, активны только в клетках других организмов:</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q2" value="Простейшие"><span></span> Простейшие</label>
+                <label class="hl-radio"><input type="radio" name="q2" value="Архебактерии"><span></span> Архебактерии</label>
+                <label class="hl-radio"><input type="radio" name="q2" value="Вирусы"><span></span> Вирусы</label>
+                <label class="hl-radio"><input type="radio" name="q2" value="Водоросли"><span></span> Водоросли</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Распредели бактерии по их значению по группам</h3>
+            <p class="question-text">Перетащи плашки в соответствующие зоны значения:</p>
+            <div class="drag-words-container" id="words-t3">
+                <span class="drag-word" draggable="true" data-word="кисломолочные продукты">кисломолочные продукты</span>
+                <span class="drag-word" draggable="true" data-word="сквашенные продукты питания">сквашенные продукты питания</span>
+                <span class="drag-word" draggable="true" data-word="очистка сточных вод">очистка сточных вод</span>
+                <span class="drag-word" draggable="true" data-word="круговорот веществ">круговорот веществ</span>
+                <span class="drag-word" draggable="true" data-word="болезни растений и животных">болезни растений и животных</span>
+                <span class="drag-word" draggable="true" data-word="разложение остатков растений и животных">разложение остатков растений и животных</span>
+            </div>
+            <div class="two-columns">
+                <div class="group-zone" id="t3-group1" data-group="nature">
+                    <h4>Значение в природе</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t3-group2" data-group="human">
+                    <h4>Значение в жизни человека</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАРАНИЕ 4 -->
+        <section class="task-card" id="task4">
+            <h3>[λ] Задание 4. Отметь верные ответы (Множественный выбор)</h3>
+            <p class="question-text">Какие меры профилактики предотвращают бактериальные заболевания человека?</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q4" value="Закаливание"><span></span> Закаливание</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q4" value="Усиленное питание"><span></span> Усиленное питание</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q4" value="Вакцинация"><span></span> Вакцинация</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q4" value="Приём витаминов"><span></span> Приём витаминов</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q4" value="Питьевая вода из крана"><span></span> Питьевая вода из крана</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q4" value="Личная гигиена"><span></span> Личная гигиена</label>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 5 -->
+        <section class="task-card" id="task5">
+            <h3>[λ] Задание 5. Выбери и вставь верный ответ</h3>
+            <p class="question-text">
+                В<select class="hl-select" id="t5-select" style="display: inline-block; width: auto; margin: 0 5px;">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="Вирус">ирус</option>
+                    <option value="Бактерии">актерии</option>
+                    <option value="Простейшие">простейшие</option>
+                </select>
+                — микроскопическая частица, представляющая собой молекулы с генетической информацией, заключённые в белковую оболочку.
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 6 -->
+        <section class="task-card" id="task6">
+            <h3>[λ] Задание 6. Отметь верные ответы (Множественный выбор)</h3>
+            <p class="question-text">Бактерии живут одновременно с высокоорганизованными организмами так как они:</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q6" value="Одноклеточные"><span></span> Одноклеточные</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q6" value="Микроскопические"><span></span> Микроскопические</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q6" value="Питаются органическими веществами"><span></span> Питаются органическими веществами</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q6" value="Быстро размножаются"><span></span> Быстро размножаются</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q6" value="При неблагоприятных условиях образуют споры"><span></span> При неблагоприятных условиях образуют споры</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 7 -->
+        <section class="task-card" id="task7">
+            <h3>[λ] Задание 7. Отметь верные ответы (Множественный выбор)</h3>
+            <p class="question-text">Туберкулёзную палочку относят к:</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q7" value="Эукариотам"><span></span> Эукариотам</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q7" value="Прокариотам"><span></span> Прокариотам</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q7" value="Простейшим"><span></span> Простейшим</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q7" value="Одноклеточным"><span></span> Одноклеточным</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 8 -->
+        <section class="task-card" id="task8">
+            <h3>[λ] Задание 8. Отметь верные ответы (Множественный выбор)</h3>
+            <p class="question-text">Выбери болезни человека, которые НЕ вызывают бактерии (вирусные заболевания):</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q8" value="Тиф"><span></span> Тиф</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q8" value="Корь"><span></span> Корь</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q8" value="Чума"><span></span> Чума</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q8" value="Гепатит"><span></span> Гепатит</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q8" value="Ангина"><span></span> Ангина</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q8" value="Туберкулёз"><span></span> Туберкулёз</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q8" value="Краснуха"><span></span> Краснуха</label>
+            </div>
+        </section>
+
+        <!-- Кнопка отправки результатов -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>ИЗУЧЕНИЕ МИКРОМИРА ЗАВЕРШЕНО</h2>
+        <p class="system-msg">> Данные о бактериальных и вирусных структурах успешно заархивированы.</p>
+        <div class="score-board">
+            <p>Участник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 8</p>
+            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
