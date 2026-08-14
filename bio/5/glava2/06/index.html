@@ -1,1 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§13. Многообразие и значение растений, животных и грибов</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Введите ваши данные для доступа к терминалу:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИ СТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: ГЛАВА 2 (§13. МНОГООБРАЗИЕ И ЗНАЧЕНИЕ ОРГАНИЗМОВ)</p>
+            </div>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Выбери верные ответы из выпадающих списков</h3>
+            <p class="question-text">
+                В клетках растений над мембраной располагается 
+                <select class="hl-select" id="t1-select1">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="цитоплазма">цитоплазма</option>
+                    <option value="клеточная оболочка">клеточная оболочка</option>
+                    <option value="ядро">ядро</option>
+                </select>. 
+                В клетках растений располагаются особые органеллы разного цвета, которые называются 
+                <select class="hl-select" id="t1-select2">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="хлоропласты">хлоропласты</option>
+                    <option value="пластиды">пластиды</option>
+                    <option value="лейкопласты">лейкопласты</option>
+                </select>. 
+                Растения по способу питания являются 
+                <select class="hl-select" id="t1-select3">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="автотрофами">автотрофами</option>
+                    <option value="гетеротрофами">гетеротрофами</option>
+                    <option value="миксотрофами">миксотрофами</option>
+                </select>.
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Значение растений в жизни человека (Клик слева, затем справа)</h3>
+            <p class="question-text">Соотнеси растения с их хозяйственным или промышленным значением:</p>
+            <div class="match-container">
+                <div class="match-col" id="left-col-t2">
+                    <div class="match-item t2-left" data-id="maslo">Подсолнечник</div>
+                    <div class="match-item t2-left" data-id="wood">Дуб</div>
+                    <div class="match-item t2-left" data-id="zerno">Пшеница</div>
+                    <div class="match-item t2-left" data-id="berry">Клубника</div>
+                    <div class="match-item t2-left" data-id="vegetable">Капуста белокочанная</div>
+                </div>
+                <div class="match-col" id="right-col-t2">
+                    <div class="match-target t2-right" data-id="vegetable">Овощная культура (сельское хозяйство)</div>
+                    <div class="match-target t2-right" data-id="zerno">Зерновая культура (сельское хозяйство)</div>
+                    <div class="match-target t2-right" data-id="wood">(бумажная и деревообрабатывающая промышленность)</div>
+                    <div class="match-target t2-right" data-id="maslo">Масличная культура (сельское хозяйство)</div>
+                    <div class="match-target t2-right" data-id="berry">Ягодная культура (сельское хозяйство)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Отметь верные ответы (Множественный выбор)</h3>
+            <p class="question-text">Выбери обязательные условия для процесса фотосинтеза:</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q3" value="Вода"><span></span> Вода</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q3" value="Почва"><span></span> Почва</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q3" value="Свет"><span></span> Свет</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q3" value="Хлорофилл"><span></span> Хлорофилл</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q3" value="Удобрения"><span></span> Удобрения</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q3" value="Углекислый газ"><span></span> Углекислый газ</label>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 4 -->
+        <section class="task-card" id="task4">
+            <h3>[λ] Задание 4. Отметь верные ответы (Множественный выбор)</h3>
+            <p class="question-text">На какие две большие группы делятся многоклеточные животные?</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q4" value="Простейшие"><span></span> Простейшие</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q4" value="Беспозвоночные"><span></span> Беспозвоночные</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q4" value="Позвоночные"><span></span> Позвоночные</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q4" value="Хищники"><span></span> Хищники</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 5 -->
+        <section class="task-card" id="task5">
+            <h3>[λ] Задание 5. Распредели животных по группам</h3>
+            <p class="question-text">Перетащи плашки животных согласно их значению в жизни человека:</p>
+            <div class="drag-words-container" id="words-t5">
+                <span class="drag-word" draggable="true" data-word="креветки">креветки</span>
+                <span class="drag-word" draggable="true" data-word="рыба">рыба</span>
+                <span class="drag-word" draggable="true" data-word="тарантул (паук)">тарантул (паук)</span>
+                <span class="drag-word" draggable="true" data-word="лошади">лошади</span>
+                <span class="drag-word" draggable="true" data-word="львы">львы</span>
+                <span class="drag-word" draggable="true" data-word="овцы">овцы</span>
+                <span class="drag-word" draggable="true" data-word="зайцы">зайцы</span>
+                <span class="drag-word" draggable="true" data-word="коровы">коровы</span>
+                <span class="drag-word" draggable="true" data-word="дикие утки">дикие утки</span>
+                <span class="drag-word" draggable="true" data-word="скорпионы">скорпионы</span>
+                <span class="drag-word" draggable="true" data-word="свиньи">свиньи</span>
+                <span class="drag-word" draggable="true" data-word="змеи">змеи</span>
+            </div>
+            <div class="three-columns">
+                <div class="group-zone" id="t5-group1" data-group="domestic">
+                    <h4>Домашние (сельскохозяйственные) животные</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t5-group2" data-group="commercial">
+                    <h4>Промысловые животные</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t5-group3" data-group="dangerous">
+                    <h4>Опасные животные</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 6 -->
+        <section class="task-card" id="task6">
+            <h3>[λ] Задание 6. Вычеркни лишние слова (Кликни, чтобы вычеркнуть)</h3>
+            <p class="question-text">Вычеркни те названия грибов, которые НЕ являются условно-съедобными для человека (съедобные грибы):</p>
+            <div class="drag-words-container" id="strike-container-t6">
+                <span class="drag-word strike-item" data-word="грузди">грузди</span>
+                <span class="drag-word strike-item" data-word="рыжики">рыжики</span>
+                <span class="drag-word strike-item" data-word="маслята">маслята</span>
+                <span class="drag-word strike-item" data-word="белые грибы">белые грибы</span>
+                <span class="drag-word strike-item" data-word="сморчки">сморчки</span>
+                <span class="drag-word strike-item" data-word="маховики">маховики</span>
+                <span class="drag-word strike-item" data-word="подосиновики">подосиновики</span>
+                <span class="drag-word strike-item" data-word="волнушки">волнушки</span>
+                <span class="drag-word strike-item" data-word="подберёзовики">подберёзовики</span>
+                <span class="drag-word strike-item" data-word="строчки">строчки</span>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 7 -->
+        <section class="task-card" id="task7">
+            <h3>[λ] Задание 7. Выбери верный ответ</h3>
+            <p class="question-text">Что общего между грибами и животными?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q7" value="1"><span></span> Всасывание минеральных веществ с помощью гиф</label>
+                <label class="hl-radio"><input type="radio" name="q7" value="2"><span></span> По способу питания (гетеротрофы)</label>
+                <label class="hl-radio"><input type="radio" name="q7" value="3"><span></span> Ведут неподвижный образ жизни</label>
+                <label class="hl-radio"><input type="radio" name="q7" value="4"><span></span> Растут всю жизнь</label>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 8 -->
+        <section class="task-card" id="task8">
+            <h3>[λ] Задание 8. Категории животных (Клик слева, затем справа)</h3>
+            <p class="question-text">Соотнеси животных с их значением для человека или природоохранным статусом:</p>
+            <div class="match-container">
+                <div class="match-col" id="left-col-t8">
+                    <div class="match-item t8-left" data-id="danger">Гадюка</div>
+                    <div class="match-item t8-left" data-id="domestic">Собаки</div>
+                    <div class="match-item t8-left" data-id="redbook">Манулы</div>
+                    <div class="match-item t8-left" data-id="farm">Лошади</div>
+                </div>
+                <div class="match-col" id="right-col-t8">
+                    <div class="match-target t8-right" data-id="farm">Сельскохозяйственные животные</div>
+                    <div class="match-target t8-right" data-id="redbook">Краснокнижные животные</div>
+                    <div class="match-target t8-right" data-id="danger">Опасные животные</div>
+                    <div class="match-target t8-right" data-id="domestic">Домашние животные</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 9 -->
+        <section class="task-card" id="task9">
+            <h3>[λ] Задание 9. Выбери верный ответ</h3>
+            <p class="question-text">Выбери растение, которое растёт только в южных регионах:</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q9" value="Картофель"><span></span> Картофель</label>
+                <label class="hl-radio"><input type="radio" name="q9" value="Хлопчатник"><span></span> Хлопчатник</label>
+                <label class="hl-radio"><input type="radio" name="q9" value="Пшеница"><span></span> Пшеница</label>
+                <label class="hl-radio"><input type="radio" name="q9" value="Морковь"><span></span> Морковь</label>
+                <label class="hl-radio"><input type="radio" name="q9" value="Подсолнечник"><span></span> Подсолнечник</label>
+                <label class="hl-radio"><input type="radio" name="q9" value="Ячмень"><span></span> Ячмень</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 10 -->
+        <section class="task-card" id="task10">
+            <h3>[λ] Задание 10. Распредели растения по группам</h3>
+            <p class="question-text">Перетащи плашки растений в соответствующие зоны классификации:</p>
+            <div class="drag-words-container" id="words-t10">
+                <span class="drag-word" draggable="true" data-word="венерин башмачок">венерин башмачок</span>
+                <span class="drag-word" draggable="true" data-word="дурман">дурман</span>
+                <span class="drag-word" draggable="true" data-word="крапива">крапива</span>
+                <span class="drag-word" draggable="true" data-word="чистотел">чистотел</span>
+                <span class="drag-word" draggable="true" data-word="конопля">конопля</span>
+                <span class="drag-word" draggable="true" data-word="лотос">лотос</span>
+                <span class="drag-word" draggable="true" data-word="подорожник">подорожник</span>
+                <span class="drag-word" draggable="true" data-word="подснежник">подснежник</span>
+                <span class="drag-word" draggable="true" data-word="свёкла">свёкла</span>
+                <span class="drag-word" draggable="true" data-word="белладонна">белладонна</span>
+                <span class="drag-word" draggable="true" data-word="морковь">морковь</span>
+                <span class="drag-word" draggable="true" data-word="картофель">картофель</span>
+            </div>
+            <div class="four-columns-grid">
+                <div class="group-zone" id="t10-group1" data-group="agri">
+                    <h4>Сельскохозяйственные растения</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t10-group2" data-group="toxic">
+                    <h4>Растения, опасные для человека</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t10-group3" data-group="red">
+                    <h4>Растения Красной книги</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t10-group4" data-group="medical">
+                    <h4>Лекарственные растения</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Кнопка отправки результатов -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>АНАЛИЗ БИОРАЗНООБРАЗИЯ ЗАВЕРШЕН</h2>
+        <p class="system-msg">> Физиологические и экологические данные заархивированы в Секторе С.</p>
+        <div class="score-board">
+            <p>Участник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 10</p>
+            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
