@@ -37,8 +37,8 @@ body {
 }
 
 .terminal-container {
-    width: 95vw;
-    height: 90vh;
+    width: 98vw;
+    height: 96vh; /* Максимально расширяем терминал по высоте */
     background: var(--hl-panel);
     border: 2px solid var(--hl-orange-dim);
     box-shadow: 0 0 20px rgba(247, 148, 29, 0.15);
@@ -102,11 +102,13 @@ body {
 }
 
 .draggables-list {
-    padding: 15px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    overflow-y: auto;
+    gap: 8px;
+    overflow-y: auto; /* Разрешаем вертикальную прокрутку */
+    -webkit-overflow-scrolling: touch; /* Плавный скролл на iPhone */
+    flex: 1;
 }
 
 /* Плашки для перетаскивания */
@@ -175,8 +177,9 @@ body {
 
 #cell-image {
     display: block;
+    width: auto;
+    height: 82vh; /* Увеличиваем картинку почти на весь экран терминала */
     max-width: 100%;
-    max-height: 70vh;
     object-fit: contain;
 }
 
@@ -304,4 +307,27 @@ body {
 .submit-btn:hover {
     background: var(--hl-orange);
     color: #000;
+}
+/* Автоматический принудительный альбомный режим для смартфонов */
+@media screen and (orientation: portrait) and (max-width: 1024px) {
+    body::before {
+        content: "ПОЖАЛУЙСТА, ПЕРЕВЕРНИТЕ СМАРТФОН В АЛЬБОМНЫЙ РЕЖИМ RE_ORIENT_DISPLAY...";
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: #111;
+        color: var(--hl-orange);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 40px;
+        font-size: 18px;
+        font-weight: bold;
+        border: 4px solid var(--hl-orange);
+        box-shadow: inset 0 0 20px rgba(247, 148, 29, 0.5);
+    }
+    .terminal-container {
+        display: none; /* Прячем игру, пока экран не перевернут */
+    }
 }
