@@ -116,8 +116,13 @@ function handleTouchStart(e) {
 }
 
 function handleTouchMove(e) {
-    e.preventDefault(); // Запрещаем скролл экрана при перетаскивании
     if (!draggedElement) return;
+    
+    // Запрещаем скролл экрана ТОЛЬКО если плашка зафиксирована и перетаскивается
+    if (draggedElement.style.position === 'fixed') {
+        e.preventDefault();
+    }
+    
     moveAt(e.touches[0].pageX, e.touches[0].pageY);
 }
 
