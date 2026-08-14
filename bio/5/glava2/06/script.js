@@ -21,24 +21,20 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("ВНИМАНИЕ! Доступ заблокирован. Введите ФИО и Класс для идентификации.");
             return;
         }
+
         // === НАЧАЛО БЛОКА ПОДВОХА (ВЕРСИЯ 2.0 - ЖЕСТКИЙ ПРОТОКОЛ) ===
-        // Создаем уникальный ID ученика на основе Имени и Класса (чтобы не путать детей на одном телефоне)
         const studentUid = (studentName + "_" + studentClass).toLowerCase().replace(/\s+/g, '');
         const storageKey = "attempts_" + window.location.pathname.split("/").pop() + "_" + studentUid;
         
-        // Считываем, сколько раз этот конкретный ребенок нажимал кнопку старта
         let currentAttempt = parseInt(localStorage.getItem(storageKey)) || 0;
-        currentAttempt++; // Плюсуем текущую попытку
-        localStorage.setItem(storageKey, currentAttempt); // Записываем обратно в память смартфона
+        currentAttempt++; 
+        localStorage.setItem(storageKey, currentAttempt); 
 
-        // Если это НЕ первая попытка, активируем скрытый штрафной коэффициент
         let penaltyBlock = "";
         if (currentAttempt > 1) {
             let penalty = currentAttempt - 1;
-            // Передаем значение штрафа в глобальный объект окна, чтобы прочитать его при отправке результатов
             window.currentPenalty = penalty;
             window.currentAttemptNumber = currentAttempt;
-            penaltyBlock = ` (Попытка №${currentAttempt}, Штраф: -${penalty}б.)`;
         } else {
             window.currentPenalty = 0;
             window.currentAttemptNumber = 1;
@@ -49,10 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
         quizContainer.classList.remove("hidden");
         window.scrollTo(0, 0);
 
-        // Инициализация интерактивных механик только после входа
-        initGlobalDragAndDrop();
-        initStrikeMechanic();
-        initMatchMechanic();
+        // Инициализация ВСЕХ интерактивных механик §13 (ничего не забываем!)
+        if (typeof initGlobalDragAndDrop === "function") initGlobalDragAndDrop();
+        if (typeof initStrikeMechanic === "function") initStrikeMechanic();
+        if (typeof initMatchMechanic === "function") initMatchMechanic();
     });
 
     // ==========================================
