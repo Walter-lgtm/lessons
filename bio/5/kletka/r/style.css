@@ -1,0 +1,202 @@
+/* Фирменная палитра Half-Life (Оранжевый Lambda, темный металлик) */
+:root {
+    --hl-orange: #f7941d;
+    --hl-orange-dim: #b36300;
+    --hl-bg-dark: #111111;
+    --hl-panel: #1c1c1c;
+    --hl-border: #383838;
+    --hl-text: #e1e1e1;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace; /* Программистский стиль */
+    user-select: none;
+}
+
+body {
+    background-color: var(--hl-bg-dark);
+    color: var(--hl-text);
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Эффект старого ЭЛТ-монитора */
+.scanlines {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 4px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.terminal-container {
+    width: 95vw;
+    height: 90vh;
+    background: var(--hl-panel);
+    border: 2px solid var(--hl-orange-dim);
+    box-shadow: 0 0 20px rgba(247, 148, 29, 0.15);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Шапка */
+.terminal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 2px solid var(--hl-orange-dim);
+    background: #151515;
+}
+
+.logo {
+    color: var(--hl-orange);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.title {
+    color: var(--hl-orange);
+    letter-spacing: 2px;
+    font-size: 14px;
+}
+
+.score-board {
+    border: 1px solid var(--hl-orange);
+    padding: 5px 15px;
+    color: var(--hl-orange);
+    font-weight: bold;
+    box-shadow: inset 0 0 5px rgba(247, 148, 29, 0.3);
+}
+
+/* Главная рабочая область */
+.main-workspace {
+    display: flex;
+    flex: 1;
+    height: calc(100% - 50px);
+}
+
+/* Боковое меню */
+.sidebar {
+    width: 250px;
+    border-right: 2px solid var(--hl-border);
+    background: #181818;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-title {
+    background: var(--hl-border);
+    color: var(--hl-orange);
+    padding: 10px;
+    font-size: 14px;
+    text-align: center;
+    border-bottom: 1px solid var(--hl-orange-dim);
+}
+
+.draggables-list {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+}
+
+/* Плашки для перетаскивания */
+.draggable-item {
+    background: #252525;
+    border: 1px solid var(--hl-border);
+    color: var(--hl-text);
+    padding: 12px;
+    text-align: center;
+    cursor: grab;
+    transition: all 0.2s;
+    font-size: 13px;
+}
+
+.draggable-item:hover {
+    border-color: var(--hl-orange);
+    color: var(--hl-orange);
+    background: #2a2a2a;
+}
+
+/* Центральный экран */
+.viewport {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    background: #131313;
+}
+
+.viewport-tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.tab-btn {
+    background: #222;
+    border: 1px solid var(--hl-border);
+    color: #888;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    border-color: var(--hl-orange);
+    color: var(--hl-orange);
+    background: var(--hl-panel);
+}
+
+.screen-border {
+    flex: 1;
+    border: 1px solid var(--hl-border);
+    background: #0a0a0a;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.image-container {
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#cell-image {
+    display: block;
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+}
+
+/* Гнезда (сокеты) на картинке */
+.cell-socket {
+    position: absolute;
+    width: 120px; /* Примерный размер, адаптируем позже */
+    height: 35px;
+    border: 1px dashed var(--hl-orange-dim);
+    background: rgba(247, 148, 29, 0.05);
+    transform: translate(-50%, -50%); /* Центрирование по координатам */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 11px;
+    color: rgba(247, 148, 29, 0.4);
+}
+
+.cell-socket.highlight {
+    border-style: solid;
+    border-color: var(--hl-orange);
+    background: rgba(247, 148, 29, 0.15);
+}
