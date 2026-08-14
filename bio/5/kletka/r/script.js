@@ -1,12 +1,12 @@
 // ==================== НАСТРОЙКА ИНТЕГРАЦИИ С GOOGLE ====================
-const GOOGLE_FORM_URL = "https://google.com"; 
+const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScwmK7HaknWp9kMUiT58fKskwpbFHM9K3bBsIyjqifNi5plPQ/formResponse"; 
 
 // Замените эти entry.XXXXXX на реальные ID полей из вашей Google-формы
 const ENTRY_IDS = {
-    name: "entry.111111111",   // Поле для ФИО
-    class: "entry.222222222",  // Поле для Класса
-    score: "entry.333333333",  // Поле для Баллов
-    grade: "entry.444444444"   // Поле для Оценки
+    name: "entry.1807934981",   // Поле для ФИО
+    class: "entry.1514005416",  // Поле для Класса
+    score: "entry.2094081297",  // Поле для Баллов
+    grade: "entry.263224971"   // Поле для Оценки
 };
 // =======================================================================
 
