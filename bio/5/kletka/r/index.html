@@ -48,5 +48,39 @@
     </div>
 
     <script href="script.js"></script>
+    <!-- Модальное окно терминала для сбора данных -->
+<div id="result-modal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <div class="modal-header">СТАТУС: ТЕСТИРОВАНИЕ ЗАВЕРШЕНО</div>
+        <div class="modal-body">
+            <p class="blink-text">> ДОСТУП К СИНХРОНИЗАЦИИ ДАННЫХ ОТКРЫТ...</p>
+            <div class="stats-summary">
+                <p>НАБРАНО БАЛЛОВ: <span id="modal-score">0</span> из 15</p>
+                <p>ИТОГОВАЯ ОЦЕНКА: <span id="modal-grade">-</span></p>
+            </div>
+            
+            <!-- Форма отправки -->
+            <form id="google-form" action="" method="POST" target="hidden-iframe">
+                <div class="input-group">
+                    <label for="student-name">> ВВЕДИТЕ ФИО:</label>
+                    <input type="text" id="student-name" required placeholder="Иванов Иван Иванович" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label for="student-class">> ВВЕДИТЕ КЛАСС:</label>
+                    <input type="text" id="student-class" required placeholder="5 А" autocomplete="off">
+                </div>
+                
+                <!-- Скрытые поля для передачи баллов и оценок в Гугл-форму -->
+                <input type="hidden" id="entry-score" name="entry.ХХХХХХХ">
+                <input type="hidden" id="entry-grade" name="entry.YYYYYYY">
+                
+                <button type="submit" class="submit-btn">ОТПРАВИТЬ В БАЗУ ДАННЫХ</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Невидимый фрейм, чтобы страница не перезагружалась при отправке формы -->
+<iframe name="hidden-iframe" id="hidden-iframe" class="hidden"></iframe>
 </body>
 </html>
