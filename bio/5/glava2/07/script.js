@@ -1,4 +1,25 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // ==========================================
+    // СИСТЕМА КОНТРОЛЯ ПОПЫТОК (АНТИ-БРУТФОРС)
+    // ==========================================
+    // Генерируем уникальный ключ для локального хранилища на основе названия страницы
+    const storageKey = "attempts_" + window.location.pathname.split("/").pop();
+    
+    // Считываем текущую попытку. Если её нет — это первый заход (1)
+    let currentAttempt = parseInt(localStorage.getItem(storageKey)) || 1;
+    
+    // Если ученик вошел на страницу повторно, увеличиваем счетчик и сохраняем
+    if (window.performance && window.performance.navigation.type === window.performance.navigation.TYPE_RELOAD || currentAttempt > 1) {
+        // Проверяем, если это именно перезапуск страницы (ученик обновил её или зашел второй раз)
+        if (sessionStorage.getItem("page_loaded_in_this_session")) {
+            // Защита от накрутки счетчика при обычном клике внутри одной сессии (не увеличиваем бесконечно)
+        } else {
+            currentAttempt++;
+            localStorage.setItem(storageKey, currentAttempt);
+        }
+    }
+    // Ставим маркер текущей сессии
+    sessionStorage.setItem("page_loaded_in_this_session", "true");
     // Глобальные переменные данных ученика
     let studentName = "";
     let studentClass = "";
@@ -119,6 +140,15 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("res-class").textContent = studentClass;
         document.getElementById("res-score").textContent = totalScore;
 
+       // --- ПРИМЕНЕНИЕ ШТРАФА ЗА ПОВТОРНЫЙ ВХОД ---
+        if (currentAttempt > 1) {
+            let penalty = currentAttempt - 1;
+            totalScore = totalScore - penalty;
+            if (totalScore < 0) totalScore = 0; // Балл не может упасть ниже нуля
+            
+            // Добавим уведомление для учителя в лог бэкенда (изменяем переменную класса)
+            studentClass = studentClass + ` (Попытка №${currentAttempt}, Штраф: -${penalty}б.)`;
+        }
         // Расчет оценки по пятибалльной шкале (из 8 возможных баллов)
         let finalGrade = "2";
         if (totalScore === 8) {
