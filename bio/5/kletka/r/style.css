@@ -1,4 +1,3 @@
-/* Фирменная палитра Half-Life (Оранжевый Lambda, темный металлик) */
 :root {
     --hl-orange: #f7941d;
     --hl-orange-dim: #b36300;
@@ -12,21 +11,23 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Courier New', Courier, monospace; /* Программистский стиль */
+    font-family: 'Courier New', Courier, monospace;
     user-select: none;
+    -webkit-user-select: none;
+    touch-action: none; /* Запрещаем дефолтные жесты браузера (зум, скролл всей страницы) */
 }
 
 body {
     background-color: var(--hl-bg-dark);
     color: var(--hl-text);
-    overflow: hidden;
-    height: 100vh;
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 
-/* Эффект старого ЭЛТ-монитора */
 .scanlines {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -37,126 +38,108 @@ body {
 }
 
 .terminal-container {
-    width: 98vw;
-    height: 96vh; /* Максимально расширяем терминал по высоте */
+    width: 100vw;
+    height: 100vh;
     background: var(--hl-panel);
-    border: 2px solid var(--hl-orange-dim);
-    box-shadow: 0 0 20px rgba(247, 148, 29, 0.15);
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
-/* Шапка */
 .terminal-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 5px 15px;
     border-bottom: 2px solid var(--hl-orange-dim);
     background: #151515;
+    height: 45px;
 }
 
-.logo {
-    color: var(--hl-orange);
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.title {
-    color: var(--hl-orange);
-    letter-spacing: 2px;
-    font-size: 14px;
-}
+.logo { color: var(--hl-orange); font-size: 20px; font-weight: bold; }
+.title { color: var(--hl-orange); letter-spacing: 1px; font-size: 11px; }
 
 .score-board {
     border: 1px solid var(--hl-orange);
-    padding: 5px 15px;
+    padding: 3px 10px;
     color: var(--hl-orange);
     font-weight: bold;
-    box-shadow: inset 0 0 5px rgba(247, 148, 29, 0.3);
+    font-size: 12px;
 }
 
-/* Главная рабочая область */
+/* Кнопка возврата в шапке */
+.menu-toggle-btn {
+    background: #252525;
+    border: 1px solid var(--hl-orange-dim);
+    color: var(--hl-orange);
+    padding: 4px 12px;
+    cursor: pointer;
+    font-size: 11px;
+}
+.menu-toggle-btn:hover { border-color: var(--hl-orange); background: #333; }
+
 .main-workspace {
     display: flex;
     flex: 1;
-    height: calc(100% - 50px);
+    height: calc(100vh - 45px);
+    overflow: hidden;
 }
 
-/* Боковое меню */
 .sidebar {
-    width: 250px;
+    width: 220px;
     border-right: 2px solid var(--hl-border);
     background: #181818;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .sidebar-title {
     background: var(--hl-border);
     color: var(--hl-orange);
-    padding: 10px;
-    font-size: 14px;
+    padding: 8px;
+    font-size: 12px;
     text-align: center;
-    border-bottom: 1px solid var(--hl-orange-dim);
 }
 
+/* Изолированный скролл для плашек */
 .draggables-list {
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 8px;
-    overflow-y: auto; /* Разрешаем вертикальную прокрутку */
-    -webkit-overflow-scrolling: touch; /* Плавный скролл на iPhone */
+    overflow-y: auto;
     flex: 1;
+    touch-action: pan-y; /* РАЗРЕШАЕМ пальцу скроллить этот блок по вертикали */
+    -webkit-overflow-scrolling: touch;
 }
 
-/* Плашки для перетаскивания */
 .draggable-item {
     background: #252525;
     border: 1px solid var(--hl-border);
     color: var(--hl-text);
-    padding: 12px;
+    padding: 10px;
     text-align: center;
     cursor: grab;
-    transition: all 0.2s;
-    font-size: 13px;
+    font-size: 12px;
 }
+.draggable-item:hover { border-color: var(--hl-orange); color: var(--hl-orange); }
 
-.draggable-item:hover {
-    border-color: var(--hl-orange);
-    color: var(--hl-orange);
-    background: #2a2a2a;
-}
-
-/* Центральный экран */
 .viewport {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 15px;
+    padding: 10px;
     background: #131313;
+    height: 100%;
 }
 
-.viewport-tabs {
-    display: flex;
-    gap: 5px;
-    margin-bottom: 10px;
-}
-
+.viewport-tabs { display: flex; gap: 5px; margin-bottom: 5px; height: 30px; }
 .tab-btn {
-    background: #222;
-    border: 1px solid var(--hl-border);
-    color: #888;
-    padding: 8px 16px;
-    cursor: pointer;
+    background: #222; border: 1px solid var(--hl-border);
+    color: #888; padding: 4px 12px; cursor: pointer; font-size: 11px;
 }
-
-.tab-btn.active {
-    border-color: var(--hl-orange);
-    color: var(--hl-orange);
-    background: var(--hl-panel);
-}
+.tab-btn.active { border-color: var(--hl-orange); color: var(--hl-orange); background: var(--hl-panel); }
 
 .screen-border {
     flex: 1;
@@ -169,165 +152,66 @@ body {
     overflow: hidden;
 }
 
-.image-container {
-    position: relative;
-    max-width: 100%;
-    max-height: 100%;
-}
+.image-container { position: relative; display: inline-block; }
 
 #cell-image {
     display: block;
-    width: auto;
-    height: 82vh; /* Увеличиваем картинку почти на весь экран терминала */
+    max-height: calc(100vh - 110px); /* Картинка строго вписывается в экран смартфона */
     max-width: 100%;
     object-fit: contain;
 }
 
-/* Гнезда (сокеты) на картинке */
 .cell-socket {
     position: absolute;
-    width: 120px; /* Примерный размер, адаптируем позже */
-    height: 35px;
+    width: 110px;
+    height: 30px;
     border: 1px dashed var(--hl-orange-dim);
     background: rgba(247, 148, 29, 0.05);
-    transform: translate(-50%, -50%); /* Центрирование по координатам */
+    transform: translate(-50%, -50%);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 11px;
+    font-size: 10px;
     color: rgba(247, 148, 29, 0.4);
+    pointer-events: auto;
 }
+.cell-socket.highlight { border-style: solid; border-color: var(--hl-orange); background: rgba(247, 148, 29, 0.15); }
 
-.cell-socket.highlight {
-    border-style: solid;
-    border-color: var(--hl-orange);
-    background: rgba(247, 148, 29, 0.15);
-}
-/* Стили для модального окна в стиле Half-Life */
+/* Модальное окно */
 .modal-overlay {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.3s ease;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.85); z-index: 100;
+    display: flex; justify-content: center; align-items: center;
 }
+.modal-overlay.hidden, .hidden { display: none !important; }
+.modal-content { background: #1a1a1a; border: 2px solid var(--hl-orange); width: 420px; max-width: 95%; }
+.modal-header { background: var(--hl-orange); color: #000; font-weight: bold; padding: 8px; font-size: 12px; }
+.modal-body { padding: 15px; display: flex; flex-direction: column; gap: 12px; }
+.blink-text { color: var(--hl-orange); font-size: 12px; }
+.stats-summary { background: #111; border: 1px solid var(--hl-border); padding: 10px; font-size: 13px; }
+.stats-summary span { color: var(--hl-orange); font-weight: bold; }
+.input-group { display: flex; flex-direction: column; gap: 4px; }
+.input-group label { font-size: 11px; color: #aaa; }
+.input-group input { background: #0f0f0f; border: 1px solid var(--hl-border); padding: 8px; color: var(--hl-text); font-size: 13px; outline: none; touch-action: text; }
+.submit-btn { background: #252525; border: 1px solid var(--hl-orange); color: var(--hl-orange); padding: 10px; width: 100%; cursor: pointer; font-size: 12px; font-weight: bold; }
+.submit-btn:hover { background: var(--hl-orange); color: #000; }
 
-.modal-overlay.hidden, .hidden {
-    display: none !important;
+.back-btn {
+    background: transparent; border: 1px solid var(--hl-border);
+    color: #888; padding: 8px; width: 100%; cursor: pointer; font-size: 11px; margin-top: 5px;
 }
+.back-btn:hover { color: #fff; border-color: #fff; }
 
-.modal-content {
-    background: #1a1a1a;
-    border: 2px solid var(--hl-orange);
-    width: 450px;
-    max-width: 90%;
-    box-shadow: 0 0 30px rgba(247, 148, 29, 0.3);
-}
-
-.modal-header {
-    background: var(--hl-orange);
-    color: #000;
-    font-weight: bold;
-    padding: 10px;
-    font-size: 14px;
-    letter-spacing: 1px;
-}
-
-.modal-body {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.blink-text {
-    color: var(--hl-orange);
-    animation: hlblink 1.5s infinite;
-}
-
-@keyframes hlblink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-}
-
-.stats-summary {
-    background: #111;
-    border: 1px solid var(--hl-border);
-    padding: 15px;
-    line-height: 1.6;
-    font-size: 15px;
-}
-
-.stats-summary span {
-    color: var(--hl-orange);
-    font-weight: bold;
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 15px;
-}
-
-.input-group label {
-    font-size: 12px;
-    color: #aaa;
-}
-
-.input-group input {
-    background: #0f0f0f;
-    border: 1px solid var(--hl-border);
-    padding: 10px;
-    color: var(--hl-text);
-    font-size: 14px;
-    outline: none;
-}
-
-.input-group input:focus {
-    border-color: var(--hl-orange);
-    box-shadow: 0 0 5px rgba(247, 148, 29, 0.2);
-}
-
-.submit-btn {
-    background: #252525;
-    border: 1px solid var(--hl-orange);
-    color: var(--hl-orange);
-    padding: 12px;
-    width: 100%;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 13px;
-    transition: all 0.2s;
-}
-
-.submit-btn:hover {
-    background: var(--hl-orange);
-    color: #000;
-}
-/* Автоматический принудительный альбомный режим для смартфонов */
-@media screen and (orientation: portrait) and (max-width: 1024px) {
+/* Принудительный поворот экрана */
+@media screen and (orientation: portrait) {
     body::before {
-        content: "ПОЖАЛУЙСТА, ПЕРЕВЕРНИТЕ СМАРТФОН В АЛЬБОМНЫЙ РЕЖИМ RE_ORIENT_DISPLAY...";
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: #111;
-        color: var(--hl-orange);
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 40px;
-        font-size: 18px;
-        font-weight: bold;
-        border: 4px solid var(--hl-orange);
-        box-shadow: inset 0 0 20px rgba(247, 148, 29, 0.5);
+        content: "ПОЖАЛУЙСТА, ПЕРЕВЕРНИТЕ СМАРТФОН В АЛЬБОМНЫЙ РЕЖИМ (RE_ORIENT_DISPLAY)...";
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: #111; color: var(--hl-orange); z-index: 9999;
+        display: flex; justify-content: center; align-items: center;
+        text-align: center; padding: 30px; font-size: 16px; font-weight: bold;
+        border: 4px solid var(--hl-orange); box-shadow: inset 0 0 20px rgba(247, 148, 29, 0.5);
     }
-    .terminal-container {
-        display: none; /* Прячем игру, пока экран не перевернут */
-    }
+    .terminal-container { display: none; }
 }
