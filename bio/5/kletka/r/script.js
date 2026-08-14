@@ -1,55 +1,95 @@
 // ==================== НАСТРОЙКА ИНТЕГРАЦИИ С GOOGLE ====================
 const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLScwmK7HaknWp9kMUiT58fKskwpbFHM9K3bBsIyjqifNi5plPQ/formResponse"; 
 
-// Замените эти entry.XXXXXX на реальные ID полей из вашей Google-формы
 const ENTRY_IDS = {
-    name: "entry.1807934981",   // Поле для ФИО
-    class: "entry.1514005416",  // Поле для Класса
-    score: "entry.2094081297",  // Поле для Баллов
-    grade: "entry.263224971"   // Поле для Оценки
+    name: "entry.1807934981",   
+    class: "entry.151400541",  
+    score: "entry.2094081297",  
+    grade: "entry.263224971"   
 };
 // =======================================================================
 
-// Данные сокетов для растительной клетки (координаты X и Y в % от центра картинки)
-const organelleData = [
-    { id: "wall", name: "Стенка клетки", x: 4.5, y: 16.5 },
-    { id: "vacuol", name: "Центральная вакуоль", x: 5.0, y: 28.5 },
-    { id: "mit", name: "Митохондрии", x: 4.5, y: 36.5 },
-    { id: "goldji", name: "Аппарат Гольджи", x: 5.5, y: 43.5 },
-    { id: "rib", name: "Рибосомы", x: 4.5, y: 51.5 },
-    { id: "core", name: "Ядро", x: 4.5, y: 59.5 },
-    { id: "core-min", name: "Ядрышко", x: 5.5, y: 66.5 },
-    { id: "eps-smooth", name: "Гладкая ЭПС", x: 6.5, y: 76.5 },
-    { id: "cyto", name: "Цитоплазма", x: 6.5, y: 84.5 },
-    { id: "chloro", name: "Хлоропласты", x: 92.5, y: 17.5 },
-    { id: "memb", name: "Плазматическая мембрана", x: 92.5, y: 28.5 },
-    { id: "desma", name: "Плазмодесма", x: 92.5, y: 40.5 },
-    { id: "lyso", name: "Лизосомы", x: 92.5, y: 47.5 },
-    { id: "core-shell", name: "Оболочка ядра", x: 92.5, y: 59.5 },
-    { id: "eps-gran", name: "Гранулярная ЭПС", x: 92.5, y: 70.5 }
-];
+// База данных для ВСЕХ типов клеток (заготовки на будущее)
+const cellDatabases = {
+    rast: [
+        { id: "wall", name: "Стенка клетки", x: 4.5, y: 16.5 },
+        { id: "vacuol", name: "Центральная вакуоль", x: 5.0, y: 28.5 },
+        { id: "mit", name: "Митохондрии", x: 4.5, y: 36.5 },
+        { id: "goldji", name: "Аппарат Гольджи", x: 5.5, y: 43.5 },
+        { id: "rib", name: "Рибосомы", x: 4.5, y: 51.5 },
+        { id: "core", name: "Ядро", x: 4.5, y: 59.5 },
+        { id: "core-min", name: "Ядрышко", x: 5.5, y: 66.5 },
+        { id: "eps-smooth", name: "Гладкая ЭПС", x: 6.5, y: 76.5 },
+        { id: "cyto", name: "Цитоплазма", x: 6.5, y: 84.5 },
+        { id: "chloro", name: "Хлоропласты", x: 92.5, y: 17.5 },
+        { id: "memb", name: "Плазматическая мембрана", x: 92.5, y: 28.5 },
+        { id: "desma", name: "Плазмодесма", x: 92.5, y: 40.5 },
+        { id: "lyso", name: "Лизосомы", x: 92.5, y: 47.5 },
+        { id: "core-shell", name: "Оболочка ядра", x: 92.5, y: 59.5 },
+        { id: "eps-gran", name: "Гранулярная ЭПС", x: 92.5, y: 70.5 }
+    ],
+    jiv: [
+        // Сюда мы добавим органеллы животной клетки на следующем шаге
+        { id: "core", name: "Ядро (Животная)", x: 50, y: 50 } 
+    ],
+    grib: [
+        // Сюда добавим органеллы грибной клетки
+        { id: "wall", name: "Клеточная стенка (Грибы)", x: 50, y: 50 }
+    ]
+};
 
+let currentCellType = "rast";
 let currentScore = 0;
-const totalOrganelles = organelleData.length;
+let totalOrganelles = 0;
 let draggedElement = null;
 
-// Инициализация при загрузке страницы
+// Переменные для умного тача
+let touchStartX = 0;
+let touchStartY = 0;
+let isDraggingActive = false;
+
 document.addEventListener("DOMContentLoaded", () => {
-    initGame();
+    initGame(currentCellType);
     setupFormSubmission();
+    
+    // Кнопка возврата в шапке сбрасывает текущий уровень
+    document.getElementById("menu-btn").addEventListener("click", () => {
+        if(confirm("Вернуться к выбору образцов? Текущий прогресс будет сброшен.")) {
+            initGame(currentCellType);
+        }
+    });
 });
 
-function initGame() {
+// Функция переключения вкладок/клеток
+function switchCell(type) {
+    currentCellType = type;
+    
+    // Меняем активную кнопку в меню
+    document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+    const activeBtn = document.querySelector(`[onclick="switchCell('${type}')"]`);
+    if(activeBtn) activeBtn.classList.add("active");
+    
+    // Меняем саму картинку на экране
+    const imgEl = document.getElementById("cell-image");
+    imgEl.src = `kletka_${type}.png`;
+    
+    initGame(type);
+}
+
+function initGame(type) {
     const draggablesContainer = document.getElementById("draggables-container");
     const socketsContainer = document.getElementById("sockets-container");
     
     draggablesContainer.innerHTML = "";
     socketsContainer.innerHTML = "";
     currentScore = 0;
+    
+    const activeData = cellDatabases[type] || [];
+    totalOrganelles = activeData.length;
     updateScoreDisplay();
 
-    // 1. Создаем плашки (перемешиваем их, чтобы не шли по порядку)
-    const shuffledData = [...organelleData].sort(() => Math.random() - 0.5);
+    // Создаем плашки (перемешиваем)
+    const shuffledData = [...activeData].sort(() => Math.random() - 0.5);
     shuffledData.forEach(item => {
         const block = document.createElement("div");
         block.classList.add("draggable-item");
@@ -57,28 +97,27 @@ function initGame() {
         block.setAttribute("draggable", "true");
         block.dataset.id = item.id;
 
-        // Десктопные события мыши
+        // Десктоп
         block.addEventListener("dragstart", handleDragStart);
         block.addEventListener("dragend", handleDragEnd);
 
-        // Мобильные события Touch (для смартфонов)
-        block.addEventListener("touchstart", handleTouchStart, { passive: false });
+        // Умный Тач для смартфонов
+        block.addEventListener("touchstart", handleTouchStart, { passive: true });
         block.addEventListener("touchmove", handleTouchMove, { passive: false });
         block.addEventListener("touchend", handleTouchEnd);
 
         draggablesContainer.appendChild(block);
     });
 
-    // 2. Создаем зоны-сокеты на картинке
-    organelleData.forEach(item => {
+    // Создаем сокеты
+    activeData.forEach(item => {
         const socket = document.createElement("div");
         socket.classList.add("cell-socket");
         socket.style.left = `${item.x}%`;
         socket.style.top = `${item.y}%`;
         socket.dataset.id = item.id;
-        socket.textContent = "..."; // Индикатор пустого гнезда
+        socket.textContent = "...";
 
-        // События для приема элементов (Десктоп)
         socket.addEventListener("dragover", e => e.preventDefault());
         socket.addEventListener("dragenter", () => socket.classList.add("highlight"));
         socket.addEventListener("dragleave", () => socket.classList.remove("highlight"));
@@ -88,76 +127,70 @@ function initGame() {
     });
 }
 
-// --- ЛОГИКА ДЛЯ ДЕСКТОПА (Drag and Drop) ---
-function handleDragStart(e) {
-    draggedElement = this;
-    this.style.opacity = "0.5";
-}
+// --- ДЕСКТОП ЛОГИКА ---
+function handleDragStart() { draggedElement = this; this.style.opacity = "0.5"; }
+function handleDragEnd() { this.style.opacity = "1"; }
+function handleDrop(e) { e.preventDefault(); this.classList.remove("highlight"); checkMatch(draggedElement, this); }
 
-function handleDragEnd() {
-    this.style.opacity = "1";
-}
-
-function handleDrop(e) {
-    e.preventDefault();
-    this.classList.remove("highlight");
-    checkMatch(draggedElement, this);
-}
-
-// --- ЛОГИКА ДЛЯ СМАРТФОНОВ (Touch Events) ---
-let touchStartNode = null;
-
+// --- МОБИЛЬНАЯ УМНАЯ ЛОГИКА ---
 function handleTouchStart(e) {
     draggedElement = this;
-    touchStartNode = e.target;
-    this.style.position = 'fixed';
-    this.style.zIndex = '1000';
-    moveAt(e.touches[0].pageX, e.touches[0].pageY);
+    const touch = e.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+    isDraggingActive = false; // Изначально считаем, что идет обычный скролл меню
 }
 
 function handleTouchMove(e) {
     if (!draggedElement) return;
+    const touch = e.touches[0];
     
-    // Запрещаем скролл экрана ТОЛЬКО если плашка зафиксирована и перетаскивается
-    if (draggedElement.style.position === 'fixed') {
-        e.preventDefault();
-    }
-    
-    moveAt(e.touches[0].pageX, e.touches[0].pageY);
-}
+    // Вычисляем, куда движется палец
+    const diffX = Math.abs(touch.clientX - touchStartX);
+    const diffY = Math.abs(touch.clientY - touchStartY);
 
-function moveAt(pageX, pageY) {
-    draggedElement.style.left = pageX - draggedElement.offsetWidth / 2 + 'px';
-    draggedElement.style.top = pageY - draggedElement.offsetHeight / 2 + 'px';
+    // Если палец сдвинулся вбок (по оси X) больше чем на 10px — это запуск перетаскивания плашки
+    if (!isDraggingActive && diffX > 10 && diffX > diffY) {
+        isDraggingActive = true;
+        draggedElement.style.position = 'fixed';
+        draggedElement.style.zIndex = '1000';
+        draggedElement.style.width = '140px';
+    }
+
+    // Если режим Drag-and-Drop активирован, двигаем плашку и блокируем скролл интерфейса
+    if (isDraggingActive) {
+        e.preventDefault(); 
+        draggedElement.style.left = touch.pageX - draggedElement.offsetWidth / 2 + 'px';
+        draggedElement.style.top = touch.pageY - draggedElement.offsetHeight / 2 + 'px';
+    }
 }
 
 function handleTouchEnd(e) {
     if (!draggedElement) return;
 
-    // Сбрасываем стили фиксации, чтобы определить элемент под пальцем
-    draggedElement.style.display = 'none';
-    const changedTouch = e.changedTouches[0];
-    const targetElem = document.elementFromPoint(changedTouch.clientX, changedTouch.clientY);
-    draggedElement.style.display = 'block';
+    if (isDraggingActive) {
+        draggedElement.style.display = 'none';
+        const touch = e.changedTouches[0];
+        const targetElem = document.elementFromPoint(touch.clientX, touch.clientY);
+        draggedElement.style.display = 'block';
 
-    // Возвращаем стили в исходное состояние
-    draggedElement.style.position = 'static';
-    draggedElement.style.zIndex = 'auto';
-    draggedElement.style.left = 'auto';
-    draggedElement.style.top = 'auto';
+        // Сброс стилей
+        draggedElement.style.position = 'static';
+        draggedElement.style.zIndex = 'auto';
+        draggedElement.style.width = 'auto';
 
-    const socket = targetElem ? targetElem.closest('.cell-socket') : null;
-    
-    if (socket) {
-        checkMatch(draggedElement, socket);
+        const socket = targetElem ? targetElem.closest('.cell-socket') : null;
+        if (socket) {
+            checkMatch(draggedElement, socket);
+        }
     }
     draggedElement = null;
+    isDraggingActive = false;
 }
 
-// --- ПРОВЕРКА СОВПАДЕНИЯ ---
+// --- ПРОВЕРКА ---
 function checkMatch(item, socket) {
     if (item.dataset.id === socket.dataset.id && !socket.classList.contains("correct")) {
-        // Успешная стыковка в стиле Half-Life
         socket.classList.add("correct");
         socket.style.borderStyle = "solid";
         socket.style.borderColor = "#f7941d";
@@ -165,8 +198,7 @@ function checkMatch(item, socket) {
         socket.style.color = "#f7941d";
         socket.textContent = item.textContent;
         
-        item.remove(); // Удаляем плашку из меню
-        
+        item.remove();
         currentScore++;
         updateScoreDisplay();
         
@@ -174,7 +206,6 @@ function checkMatch(item, socket) {
             showResultWindow();
         }
     } else {
-        // Эффект ошибки — вспышка рамки сокета (кратковременно)
         socket.style.borderColor = "#ff0000";
         setTimeout(() => { if(!socket.classList.contains("correct")) socket.style.borderColor = ""; }, 500);
     }
@@ -184,54 +215,43 @@ function updateScoreDisplay() {
     document.getElementById("score").textContent = currentScore;
 }
 
-// --- РАСЧЕТ ОЦЕНКИ И МОДАЛЬНОЕ ОКНО ---
 function calculateGrade(score) {
-    // Шкала оценок для 15 органелл:
-    if (score >= 14) return "5 (ОТЛИЧНО)";
-    if (score >= 11) return "4 (ХОРОШО)";
-    if (score >= 8)  return "3 (УДОВЛЕТВОРИТЕЛЬНО)";
+    // Динамическая шкала оценок в зависимости от количества органелл на карте
+    const percent = (score / totalOrganelles) * 100;
+    if (percent >= 90) return "5 (ОТЛИЧНО)";
+    if (percent >= 70) return "4 (ХОРОШО)";
+    if (percent >= 50) return "3 (УДОВЛЕТВОРИТЕЛЬНО)";
     return "2 (ТРЕБУЕТСЯ ПОВТОРЕНИЕ)";
 }
 
 function showResultWindow() {
-    const modal = document.getElementById("result-modal");
-    const modalScore = document.getElementById("modal-score");
-    const modalGrade = document.getElementById("modal-grade");
-    const form = document.getElementById("google-form");
-
-    const finalGrade = calculateGrade(currentScore);
-
-    modalScore.textContent = currentScore;
-    modalGrade.textContent = finalGrade;
-    
-    // Подшиваем ссылку на форму в атрибуты
-    form.action = GOOGLE_FORM_URL;
-
-    // Показываем окно терминала
-    modal.classList.remove("hidden");
+    document.getElementById("modal-score").textContent = currentScore;
+    document.getElementById("modal-total").textContent = totalOrganelles;
+    document.getElementById("modal-grade").textContent = calculateGrade(currentScore);
+    document.getElementById("google-form").action = GOOGLE_FORM_URL;
+    document.getElementById("result-modal").classList.remove("hidden");
 }
 
-// --- ОТПРАВКА ДАННЫХ В GOOGLE ТАБЛИЦУ ---
+function closeModal() {
+    document.getElementById("result-modal").classList.add("hidden");
+    initGame(currentCellType); // Перезапускаем текущую клетку для тренировки
+}
+
 function setupFormSubmission() {
     const form = document.getElementById("google-form");
-    
-    form.addEventListener("submit", (e) => {
-        // Подставляем значения в невидимые инпуты перед отправкой
+    form.addEventListener("submit", () => {
         document.getElementById("entry-score").value = currentScore;
         document.getElementById("entry-grade").value = calculateGrade(currentScore);
         
-        // Связываем видимые текстовые поля с именами полей Google-формы
         document.getElementById("student-name").name = ENTRY_IDS.name;
         document.getElementById("student-class").name = ENTRY_IDS.class;
         document.getElementById("entry-score").name = ENTRY_IDS.score;
         document.getElementById("entry-grade").name = ENTRY_IDS.grade;
 
-        // Меняем текст кнопки, показывая ученику, что данные уходят
         const btn = form.querySelector(".submit-btn");
         btn.textContent = "СИНХРОНИЗАЦИЯ С СЕРВЕРОМ...";
         btn.disabled = true;
 
-        // Ждем отправки во фрейм и выводим финальное уведомление
         document.getElementById("hidden-iframe").onload = () => {
             btn.textContent = "ДАННЫЕ УСПЕШНО СОХРАНЕНЫ!";
             btn.style.borderColor = "#00ff00";
