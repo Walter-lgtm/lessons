@@ -1,1 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Глава 1. Растение — живой организм</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="term-container">
+    <div class="term-header">
+        <div class="lambda-logo">λ</div>
+        <div class="system-status">§2. Строение растительной клетки</div>
+    </div>
+
+    <!-- Блок авторизации (UID "ФИО+Класс") -->
+    <div id="auth-block" class="auth-section">
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Инициализация биометрии (Опорные символы: Ф И О)</span>
+            <input type="text" id="student-fio" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Сектор назначения (Опорные символы: К л а с с)</span>
+            <input type="text" id="student-class" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <button id="auth-trigger" class="hud-btn">Доступ к Параграфу №2 (§2)</button>
+        <div id="auth-alert" class="alert-box"></div>
+    </div>
+
+    <!-- Основной контейнер ботанических заданий -->
+    <div id="biology-content" class="hidden-module">
+        
+        <!-- Задание 1 -->
+        <section class="task-card">
+            <div class="task-title">Задание 1 // Соотнеси органоиды клетки с их функциями</div>
+            <div class="task-text" style="font-size: 0.85rem; color: #ff5500; margin-bottom: 10px;">[ПРОТОКОЛ]: Нажмите на ОРГАНОИД слева, затем на соответствующую ФУНКЦИЮ справа.</div>
+            <div class="match-grid-container">
+                <div class="match-column">
+                    <div class="match-element t2-left" data-id="оболочка">Клеточная оболочка</div>
+                    <div class="match-element t2-left" data-id="хромосомы">Хромосомы</div>
+                    <div class="match-element t2-left" data-id="цитоплазма">Цитоплазма</div>
+                    <div class="match-element t2-left" data-id="митохондрии">Митохондрии</div>
+                    <div class="match-element t2-left" data-id="ядро">Ядро</div>
+                </div>
+                <div style="border-top: 1px dashed rgba(0, 255, 102, 0.2); margin: 5px 0;"></div>
+                <div class="match-column">
+                    <div class="match-element t2-right" data-correct="ядро">Регулирует жизнедеятельность</div>
+                    <div class="match-element t2-right" data-correct="цитоплазма">Взаимодействие органоидов</div>
+                    <div class="match-element t2-right" data-correct="хромосомы">Носители наследственной информации</div>
+                    <div class="match-element t2-right" data-correct="оболочка">Обмен веществ</div>
+                    <div class="match-element t2-right" data-correct="митохондрии">Запас энергии</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Задание 2 -->
+        <section class="task-card">
+            <div class="task-title">Задание 2 // Выбери верный ответ</div>
+            <div class="task-text">1. В каком органоиде клетки расположены хромосомы — носители наследственной информации?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task2" value="Митохондрии"> Митохондрии</label>
+                <label class="option-label"><input type="radio" name="task2" value="Лизосомы"> Лизосомы</label>
+                <label class="option-label"><input type="radio" name="task2" value="Вакуоли"> Вакуоли</label>
+                <label class="option-label"><input type="radio" name="task2" value="Ядро"> Ядро</label>
+                <label class="option-label"><input type="radio" name="task2" value="Цитоплазма"> Цитоплазма</label>
+                <label class="option-label"><input type="radio" name="task2" value="Пластиды"> Пластиды</label>
+            </div>
+        </section>
+
+        <!-- Задание 3 -->
+        <section class="task-card">
+            <div class="task-title">Задание 3 // Выбери верный ответ</div>
+            <div class="task-text">1. Органоиды растительной клетки, которые содержат клеточный сок:</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task3" value="Митохондрии"> Митохондрии</label>
+                <label class="option-label"><input type="radio" name="task3" value="Вакуоли"> Вакуоли</label>
+                <label class="option-label"><input type="radio" name="task3" value="Пластиды"> Пластиды</label>
+                <label class="option-label"><input type="radio" name="task3" value="Хромосомы"> Хромосомы</label>
+            </div>
+        </section>
+
+        <!-- Задание 4 -->
+        <section class="task-card">
+            <div class="task-title">Задание 4 // Выбери верный ответ</div>
+            <div class="task-text">1. Как называются пластиды, которые участвуют в фотосинтезе?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task4" value="Хромопласты"> Хромопласты</label>
+                <label class="option-label"><input type="radio" name="task4" value="Хлоропласты"> Хлоропласты</label>
+                <label class="option-label"><input type="radio" name="task4" value="Лейкопласты"> Лейкопласты</label>
+                <label class="option-label"><input type="radio" name="task4" value="Лизосомы"> Лизосомы</label>
+            </div>
+        </section>
+
+        <!-- Задание 5 -->
+        <section class="task-card">
+            <div class="task-title">Задание 5 // Выбери верный ответ</div>
+            <div class="task-text">1. Пластиды, окрашенные в жёлтые, красные и другие цвета, называются:</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task5" value="Хлоропластами"> Хлоропластами</label>
+                <label class="option-label"><input type="radio" name="task5" value="Хромосомами"> Хромосомами</label>
+                <label class="option-label"><input type="radio" name="task5" value="Лейкопластами"> Лейкопластами</label>
+                <label class="option-label"><input type="radio" name="task5" value="Хромопластами"> Хромопластами</label>
+            </div>
+        </section>
+        <!-- Задание 6 -->
+        <section class="task-card">
+            <div class="task-title">Задание 6 // Выбери верный ответ</div>
+            <div class="task-text">1. Эукариотическая клетка отличается от прокариотической наличием:</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task6" value="Ядра"> Ядра</label>
+                <label class="option-label"><input type="radio" name="task6" value="Плазматической мембраны"> Плазматической мембраны</label>
+                <label class="option-label"><input type="radio" name="task6" value="Цитоплазмы"> Цитоплазмы</label>
+                <label class="option-label"><input type="radio" name="task6" value="Хромопластов"> Хромопластов</label>
+            </div>
+        </section>
+
+        <!-- Задание 7 -->
+        <section class="task-card">
+            <div class="task-title">Задание 7 // Выбери верный ответ</div>
+            <div class="task-text">1. Управление всеми процессами жизнедеятельности клетки выполняет:</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task7" value="Цитоплазма"> Цитоплазма</label>
+                <label class="option-label"><input type="radio" name="task7" value="Митохондрия"> Митохондрия</label>
+                <label class="option-label"><input type="radio" name="task7" value="Эндоплазматическая сеть"> Эндоплазматическая сеть</label>
+                <label class="option-label"><input type="radio" name="task7" value="Вакуоль"> Вакуоль</label>
+                <label class="option-label"><input type="radio" name="task7" value="Ядро"> Ядро</label>
+                <label class="option-label"><input type="radio" name="task7" value="Лизосома"> Лизосома</label>
+            </div>
+        </section>
+
+        <!-- Задание 8 -->
+        <section class="task-card">
+            <div class="task-title">Задание 8 // Выбери верный ответ</div>
+            <div class="task-text">1. Строение клетки автотрофного организма отличается от гетеротрофного наличием:</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task8" value="Ядра"> Ядра</label>
+                <label class="option-label"><input type="radio" name="task8" value="Пластид"> Пластид</label>
+                <label class="option-label"><input type="radio" name="task8" value="Митохондрий"> Митохондрий</label>
+                <label class="option-label"><input type="radio" name="task8" value="Вакуолей"> Вакуолей</label>
+                <label class="option-label"><input type="radio" name="task8" value="Хромосом"> Хромосом</label>
+                <label class="option-label"><input type="radio" name="task8" value="Плазматической мембраны"> Плазматической мембраны</label>
+            </div>
+        </section>
+
+        <!-- Задание 9 -->
+        <section class="task-card">
+            <div class="task-title">Задание 9 // Выбери верный ответ</div>
+            <div class="task-text">1. Что придаёт форму растительной клетке?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task9" value="Вакуоль"> Вакуоль</label>
+                <label class="option-label"><input type="radio" name="task9" value="Митохондрии"> Митохондрии</label>
+                <label class="option-label"><input type="radio" name="task9" value="Цитоплазма"> Цитоплазма</label>
+                <label class="option-label"><input type="radio" name="task9" value="Оболочка"> Оболочка</label>
+            </div>
+        </section>
+
+        <!-- Задание 10 -->
+        <section class="task-card">
+            <div class="task-title">Задание 10 // Выбери верный ответ</div>
+            <div class="task-text">1. Что является общим в строении животных и растительных клеток?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task10" value="Наличие ядра"> Наличие ядра</label>
+                <label class="option-label"><input type="radio" name="task10" value="Наличие пластид"> Наличие пластид</label>
+                <label class="option-label"><input type="radio" name="task10" value="Способ питания"> Способ питания</label>
+                <label class="option-label"><input type="radio" name="task10" value="Наличие клеточной стенки"> Наличие клеточной стенки</label>
+            </div>
+        </section>
+
+        <!-- Задание 11 -->
+        <section class="task-card">
+            <div class="task-title">Задание 11 // Выбери верные ответы</div>
+            <div class="task-text">1. Основными отличительными признаками строения растительной клетки от животной являются: (Несколько вариантов)</div>
+            <div class="option-group">
+                <label class="option-label"><input type="checkbox" name="task11" value="Отсутствие ядра"> Отсутствие ядра</label>
+                <label class="option-label"><input type="checkbox" name="task11" value="Наличие пластид"> Наличие пластид</label>
+                <label class="option-label"><input type="checkbox" name="task11" value="Наличие клеточной стенки"> Наличие клеточной стенки</label>
+                <label class="option-label"><input type="checkbox" name="task11" value="Наличие цитоплазмы"> Наличие цитоплазмы</label>
+                <label class="option-label"><input type="checkbox" name="task11" value="Наличие митохондрий"> Наличие митохондрий</label>
+                <label class="option-label"><input type="checkbox" name="task11" value="Наличие хромосом"> Наличие хромосом</label>
+            </div>
+        </section>
+
+        <!-- Задание 12 -->
+        <section class="task-card">
+            <div class="task-title">Задание 12 // Вставь верные биологические термины</div>
+            <div class="task-text">
+                <select id="task12-sel1" class="hud-select">
+                    <option value="">-- выбрать --</option>
+                    <option value="Пластиды">Пластиды</option>
+                    <option value="Вакуоли">Вакуоли</option>
+                    <option value="Митохондрии">Митохондрии</option>
+                </select> 
+                — многочисленные мелкие тельца, находятся в цитоплазме и бывают бесцветными или окрашенными в различные цвета. В бесцветных пластидах — 
+                <select id="task12-sel2" class="hud-select">
+                    <option value="">-- выбрать --</option>
+                    <option value="лейкопластах">лейкопластах</option>
+                    <option value="хлоропластах">хлоропластах</option>
+                    <option value="хромопластах">хромопластах</option>
+                </select> 
+                — накапливаются запасы питательных веществ. Пластиды, окрашенные в жёлтый и красный цвета, — 
+                <select id="task12-sel3" class="hud-select">
+                    <option value="">-- выбрать --</option>
+                    <option value="хромопласты">хромопласты</option>
+                    <option value="хлоропласты">хлоропласты</option>
+                </select> 
+                — определяют окраску цветов, осенних листьев, зрелых плодов.
+            </div>
+        </section>
+
+        <!-- Системная кнопка отправки результатов -->
+        <button id="submit-tasks" class="hud-btn" style="background: #ff5500; border-color: #b33c00; margin-top: 25px;">Синхронизировать отчет</button>
+    
+    </div> <!-- Конец #biology-content -->
+</div> <!-- Конец .term-container -->
+
+<script src="script.js"></script>
+</body>
+</html>
