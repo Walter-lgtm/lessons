@@ -17,8 +17,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Запуск обработчика интерактивного зачеркивания слов (Задание 4)
     initializeWordStriking();
+    // Инициализация новой сенсорной механики сопоставления
+    initMatchMechanic();
 });
 
+function initMatchMechanic() {
+    let selectedLeftT2 = null;
+    const leftItemsT2 = document.querySelectorAll(".t2-left");
+    const rightTargetsT2 = document.querySelectorAll(".t2-right");
+
+    leftItemsT2.forEach(item => {
+        item.addEventListener("click", () => {
+            if (item.classList.contains("matched")) return;
+            // Снимаем выделение с других левых элементов
+            leftItemsT2.forEach(i => i.classList.remove("selected"));
+            selectedLeftT2 = item;
+            item.classList.add("selected");
+        });
+    });
+
+    rightTargetsT2.forEach(target => {
+        target.addEventListener("click", () => {
+            if (target.classList.contains("matched") || !selectedLeftT2) return;
+            
+            // Записываем ID выбранной науки в дата-атрибут ответа
+            target.dataset.userAnswer = selectedLeftT2.dataset.id;
+            
+            // Визуально блокируем элементы
+            target.classList.add("matched");
+            selectedLeftT2.classList.add("matched");
+            selectedLeftT2.classList.remove("selected");
+            
+            // Сбрасываем указатель
+            selectedLeftT2 = null;
+        });
+    });
+}
 // Протокол Авторизации и Защиты "Анти-брутфорс v2.0"
 function executeBiometricAuth() {
     const fioInput = document.getElementById("student-fio").value.trim();
@@ -110,17 +144,27 @@ function collectAndVerifyAnswers() {
     });
     answersReport.push({ isCorrect: task4Correct });
 
-    // Задание 5: Соответствие наук и объектов (7 селекторов)
-    const ans5_1 = document.getElementById("task5-1").value; // Морфология -> Внешнее (4)
-    const ans5_2 = document.getElementById("task5-2").value; // Анатомия -> Внутреннее (1)
-    const ans5_3 = document.getElementById("task5-3").value; // Систематика -> Классификация (5)
-    const ans5_4 = document.getElementById("task5-4").value; // Экология -> Взаимосвязи (6)
-    const ans5_5 = document.getElementById("task5-5").value; // Палеоботаника -> Ископаемые (3)
-    const ans5_6 = document.getElementById("task5-6").value; // Физиология -> Процессы (7)
-    const ans5_7 = document.getElementById("task5-7").value; // География -> Распределение (2)
-    
-    const task5Correct = (ans5_1 === "4" && ans5_2 === "1" && ans5_3 === "5" && 
-                          ans5_4 === "6" && ans5_5 === "3" && ans5_6 === "7" && ans5_7 === "2");
+    // Задание 5: Проверка сенсорного сопоставления пар (все 7 пар должны совпасть)
+    const rightElements = document.querySelectorAll(".t2-right");
+    let task5Correct = true;
+    let totalMatchedCount = 0;
+
+    rightElements.forEach(target => {
+        const correctValue = target.getAttribute("data-correct");
+        const userValue = target.dataset.userAnswer;
+        
+        if (userValue) {
+            totalMatchedCount++;
+        }
+        if (userValue !== correctValue) {
+            task5Correct = false;
+        }
+    });
+
+    // Если сопоставлены не все 7 пар, задание не засчитывается
+    if (totalMatchedCount < 7) {
+        task5Correct = false;
+    }
     answersReport.push({ isCorrect: task5Correct });
 
     // Задание 6: Множественный выбор (НЕ объекты ботаники: Слон, Крокодил, Сыроежка, Майский жук)
