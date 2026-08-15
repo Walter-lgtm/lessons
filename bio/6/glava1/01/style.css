@@ -1,0 +1,102 @@
+/* Глобальные настройки HUD */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Courier New', Courier, monospace;
+}
+body {
+    background-color: #0b130e; /* Сверхтемный болотный */
+    color: #00ff66; /* Изумрудно-зеленый неон */
+    padding: 15px;
+    font-size: 16px;
+    line-height: 1.4;
+}
+/* Контейнер терминала */
+.term-container {
+    border: 2px solid #00ff66;
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+    background: rgba(11, 19, 14, 0.95);
+    padding: 20px;
+    border-radius: 4px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.term-header {
+    border-bottom: 2px dashed #00ff66;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.lambda-logo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #00ff66;
+    text-shadow: 0 0 10px #00ff66;
+    margin-bottom: 5px;
+}
+.system-status {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+/* Формы и поля ввода */
+.auth-section {
+    margin-bottom: 20px;
+}
+.input-group {
+    margin-bottom: 15px;
+}
+.input-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+.hud-input {
+    width: 100%;
+    background: #050a06;
+    border: 1px solid #00ff66;
+    color: #00ff66;
+    padding: 12px;
+    font-size: 1.1rem;
+    outline: none;
+    border-radius: 0;
+}
+.hud-input:focus {
+    border-color: #ff5500; /* Оранжево-ржавый акцент при фокусе */
+    box-shadow: 0 0 8px rgba(255, 85, 0, 0.5);
+}
+/* Оранжево-ржавые управляющие элементы */
+.hud-btn {
+    width: 100%;
+    background: #ff5500;
+    border: 2px solid #b33c00;
+    color: #000000;
+    font-weight: bold;
+    padding: 15px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 10px;
+}
+.hud-btn:active {
+    background: #b33c00;
+    color: #00ff66;
+}
+/* Системные оповещения */
+.alert-box {
+    border: 1px solid #ff5500;
+    background: rgba(255, 85, 0, 0.1);
+    color: #ff5500;
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 0.85rem;
+    display: none;
+}
+/* Скрытие модулей до авторизации */
+.hidden-module {
+    display: none;
+}
