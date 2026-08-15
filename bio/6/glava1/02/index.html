@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>БИОЛОГИЧЕСКИЙ МОДУЛЬ: Глава 1. Растение — живой организм</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="term-container">
+    <div class="term-header">
+        <div class="lambda-logo">λ</div>
+        <div class="system-status">§1. Общие признаки растений</div>
+    </div>
+
+    <!-- Блок авторизации (UID "ФИО+Класс") -->
+    <div id="auth-block" class="auth-section">
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Инициализация биометрии (Опорные символы: Ф И О)</span>
+            <input type="text" id="student-fio" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Сектор назначения (Опорные символы: К л а с с)</span>
+            <input type="text" id="student-class" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <button id="auth-trigger" class="hud-btn">Доступ к Параграфу №1 (§1)</button>
+        <div id="auth-alert" class="alert-box"></div>
+    </div>
+
+    <!-- Основной контейнер ботанических заданий -->
+    <div id="biology-content" class="hidden-module">
+        
+        <!-- Задание 1 -->
+        <section class="task-card">
+            <div class="task-title">Задание 1 // Выбери верные биологические термины</div>
+            <div class="task-text">
+                Окраска растений определяется наличием в их клетках особых красителей — пигментов (от лат. пигментум — краска). У растений наиболее распространён зелёный пигмент — хлорофилл, который содержится в 
+                <select id="task1-sel1" class="hud-select">
+                    <option value="">-- выбрать --</option>
+                    <option value="хромосомах">хромосомах</option>
+                    <option value="хромопластах">хромопластах</option>
+                    <option value="хлоропластах">хлоропластах</option>
+                </select>. 
+                Он играет чрезвычайно важную роль: улавливает 
+                <select id="task1-sel2" class="hud-select">
+                    <option value="">-- выбрать --</option>
+                    <option value="потоки ветра">потоки ветра</option>
+                    <option value="солнечные лучи">солнечные лучи</option>
+                </select> 
+                и обеспечивает усвоение их энергии. Это необходимое условие осуществления 
+                <select id="task1-sel3" class="hud-select">
+                    <option value="">-- выбрать --</option>
+                    <option value="обмена веществ">обмена веществ</option>
+                    <option value="фотосинтеза">фотосинтеза</option>
+                    <option value="дыхания">дыхания</option>
+                </select> — процесса образования органических соединений из неорганических (воды и углекислого газа) за счёт энергии света.
+            </div>
+        </section>
+
+        <!-- Задание 2 -->
+        <section class="task-card">
+            <div class="task-title">Задание 2 // Выбери верный ответ</div>
+            <div class="task-text">1. В экологических сообществах растения играют роль:</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task2" value="Редуцентов"> Редуцентов</label>
+                <label class="option-label"><input type="radio" name="task2" value="Продуцентов"> Продуцентов</label>
+                <label class="option-label"><input type="radio" name="task2" value="Консументов 1-го порядка"> Консументов 1-го порядка</label>
+                <label class="option-label"><input type="radio" name="task2" value="Консументов 2-го порядка"> Консументов 2-го порядка</label>
+            </div>
+        </section>
+
+        <!-- Задание 3 -->
+        <section class="task-card">
+            <div class="task-title">Задание 3 // Выбери верный ответ</div>
+            <div class="task-text">1. В чём заключается сходство между грибами и растениями?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task3" value="Создание органических веществ"> Создание органических веществ из неорганических</label>
+                <label class="option-label"><input type="radio" name="task3" value="Хитиновая оболочка"> Клетки имеют хитиновую оболочку</label>
+                <label class="option-label"><input type="radio" name="task3" value="Не передвигаются"> Не передвигаются активно</label>
+                <label class="option-label"><input type="radio" name="task3" value="Мощная корневая система"> Имеют мощную корневую систему</label>
+            </div>
+        </section>
+
+        <!-- Задание 4 -->
+        <section class="task-card">
+            <div class="task-title">Задание 4 // Соотнеси группы растений с представителями</div>
+            <div class="task-text" style="font-size: 0.85rem; color: #ff5500; margin-bottom: 10px;">[ПРОТОКОЛ]: Нажмите на группу слева, затем на представителя справа.</div>
+            <div class="match-grid-container">
+                <div class="match-column">
+                    <div class="match-element t2-left" data-id="семенные">ВЫСШИЕ СЕМЕННЫЕ</div>
+                    <div class="match-element t2-left" data-id="низшие">НИЗШИЕ РАСТЕНИЯ</div>
+                    <div class="match-element t2-left" data-id="споровые">ВЫСШИЕ СПОРОВЫЕ</div>
+                </div>
+                <div style="border-top: 1px dashed rgba(0, 255, 102, 0.2); margin: 5px 0;"></div>
+                <div class="match-column">
+                    <div class="match-element t2-right" data-correct="низшие">ВОДОРОСЛИ</div>
+                    <div class="match-element t2-right" data-correct="семенные">ПОКРЫТОСЕМЕННЫЕ</div>
+                    <div class="match-element t2-right" data-correct="споровые">МОХОВИДНЫЕ</div>
+                </div>
+            </div>
+        </section>
+        <!-- Задание 5 -->
+        <section class="task-card">
+            <div class="task-title">Задание 5 // Распредели растения по группам</div>
+            <div class="task-text" style="font-size: 0.85rem; color: #ff5500; margin-bottom: 12px;">
+                [ПРОТОКОЛ]: Перетащите элементы флоры в соответствующие технологические ячейки.
+            </div>
+            
+            <!-- Банк перетаскиваемых слов -->
+            <div id="t5-drag-bank" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; padding: 10px; background: rgba(0, 255, 102, 0.02); border: 1px dashed rgba(0, 255, 102, 0.3);">
+                <div class="match-element" draggable="true" data-word="улотрикс" style="padding: 6px 10px; font-size: 0.85rem;">улотрикс</div>
+                <div class="match-element" draggable="true" data-word="папоротник" style="padding: 6px 10px; font-size: 0.85rem;">папоротник</div>
+                <div class="match-element" draggable="true" data-word="лилии" style="padding: 6px 10px; font-size: 0.85rem;">лилии</div>
+                <div class="match-element" draggable="true" data-word="хвощ" style="padding: 6px 10px; font-size: 0.85rem;">хвощ</div>
+                <div class="match-element" draggable="true" data-word="спирогира" style="padding: 6px 10px; font-size: 0.85rem;">спирогира</div>
+                <div class="match-element" draggable="true" data-word="груша" style="padding: 6px 10px; font-size: 0.85rem;">груша</div>
+                <div class="match-element" draggable="true" data-word="хламидомонада" style="padding: 6px 10px; font-size: 0.85rem;">хламидомонада</div>
+                <div class="match-element" draggable="true" data-word="ольха" style="padding: 6px 10px; font-size: 0.85rem;">ольха</div>
+                <div class="match-element" draggable="true" data-word="кукушкин лён" style="padding: 6px 10px; font-size: 0.85rem;">кукушкин лён</div>
+                <div class="match-element" draggable="true" data-word="плаун" style="padding: 6px 10px; font-size: 0.85rem;">плаун</div>
+                <div class="match-element" draggable="true" data-word="хлорелла" style="padding: 6px 10px; font-size: 0.85rem;">хлорелла</div>
+                <div class="match-element" draggable="true" data-word="ландыш" style="padding: 6px 10px; font-size: 0.85rem;">ландыш</div>
+            </div>
+
+            <!-- Зоны сброса (Колонки) -->
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <div style="border: 1px dashed #00ff66; padding: 10px;">
+                    <div style="font-size: 0.9rem; color: #ff5500; font-weight: bold; margin-bottom: 8px;">Низшие растения</div>
+                    <div id="t5-group1" style="min-height: 50px; background: rgba(0, 255, 102, 0.03); display: flex; flex-wrap: wrap; gap: 6px; padding: 5px;"></div>
+                </div>
+                <div style="border: 1px dashed #00ff66; padding: 10px;">
+                    <div style="font-size: 0.9rem; color: #ff5500; font-weight: bold; margin-bottom: 8px;">Высшие споровые растения</div>
+                    <div id="t5-group2" style="min-height: 50px; background: rgba(0, 255, 102, 0.03); display: flex; flex-wrap: wrap; gap: 6px; padding: 5px;"></div>
+                </div>
+                <div style="border: 1px dashed #00ff66; padding: 10px;">
+                    <div style="font-size: 0.9rem; color: #ff5500; font-weight: bold; margin-bottom: 8px;">Высшие семенные растения</div>
+                    <div id="t5-group3" style="min-height: 50px; background: rgba(0, 255, 102, 0.03); display: flex; flex-wrap: wrap; gap: 6px; padding: 5px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Задание 6 -->
+        <section class="task-card">
+            <div class="task-title">Задание 6 // Зачеркни лишние слова</div>
+            <div class="task-text">Нажмите на ЛИШНИЕ слова, чтобы исключить их из логической цепи:</div>
+            <div class="word-bank" id="task6-bank">
+                <span class="word-token" data-word="У">У</span>
+                <span class="word-token" data-word="высших">высших</span>
+                <span class="word-token" data-word="растений">растений</span>
+                <span class="word-token" data-word="тело">тело</span>
+                <span class="word-token" data-word="расчленено">расчленено</span>
+                <span class="word-token" data-word="на">на</span>
+                <span class="word-token" data-word="органы">органы</span>
+                <span class="word-token" data-word="—">—</span>
+                <span class="word-token" data-word="листостебельные">листостебельные</span>
+                <span class="word-token" data-word="побеги">побеги</span>
+                <span class="word-token" data-word="и">и</span>
+                <span class="word-token" data-word="корни">корни</span>
+                <span class="word-token" data-word="(за">(за</span>
+                <span class="word-token" data-word="исключением">исключением</span>
+                <span class="word-token" data-word="мхов),">мхов),</span>
+                <span class="word-token" data-word="которые">которые</span>
+                <span class="word-token" data-word="состоят">состоят</span>
+                <span class="word-token" data-word="из">из</span>
+                <span class="word-token" data-word="различных">различных</span>
+                <span class="word-token" data-word="тканей.">тканей.</span>
+                <span class="word-token" data-word="К">К</span>
+                <span class="word-token" data-word="высшим">высшим</span>
+                <span class="word-token" data-word="споровым">споровым</span>
+                <span class="word-token" data-word="растениям">растениям</span>
+                <span class="word-token" data-word="относятся">относятся</span>
+                <span class="word-token" data-word="ель,">ель,</span>
+                <span class="word-token" data-word="мхи,">мхи,</span>
+                <span class="word-token" data-word="сосна,">сосна,</span>
+                <span class="word-token" data-word="хвощи,">хвощи,</span>
+                <span class="word-token" data-word="калина,">калина,</span>
+                <span class="word-token" data-word="земляника,">земляника,</span>
+                <span class="word-token" data-word="плауны,">плауны,</span>
+                <span class="word-token" data-word="папоротники,">папоротники,</span>
+                <span class="word-token" data-word="спирогира,">спирогира,</span>
+                <span class="word-token" data-word="черника,">черника,</span>
+                <span class="word-token" data-word="которые">которые</span>
+                <span class="word-token" data-word="размножаются">размножаются</span>
+                <span class="word-token" data-word="с">с</span>
+                <span class="word-token" data-word="помощью">помощью</span>
+                <span class="word-token" data-word="спор.">спор.</span>
+            </div>
+        </section>
+
+        <!-- Задание 7 -->
+        <section class="task-card">
+            <div class="task-title">Задание 7 // Выбери верные ответы</div>
+            <div class="task-text">1. Выбери из перечисленных растений сельскохозяйственные культуры: (Несколько вариантов)</div>
+            <div class="option-group">
+                <label class="option-label"><input type="checkbox" name="task7" value="Хлопчатник"> Хлопчатник</label>
+                <label class="option-label"><input type="checkbox" name="task7" value="Пионы"> Пионы</label>
+                <label class="option-label"><input type="checkbox" name="task7" value="Рожь"> Рожь</label>
+                <label class="option-label"><input type="checkbox" name="task7" value="Хвощ"> Хвощ</label>
+                <label class="option-label"><input type="checkbox" name="task7" value="Пшеница"> Пшеница</label>
+                <label class="option-label"><input type="checkbox" name="task7" value="Папоротник"> Папоротник</label>
+                <label class="option-label"><input type="checkbox" name="task7" value="Картофель"> Картофель</label>
+                <label class="option-label"><input type="checkbox" name="task7" value="Васильки"> Васильки</label>
+            </div>
+        </section>
+
+        <!-- Задание 8 -->
+        <section class="task-card">
+            <div class="task-title">Задание 8 // Выбери верные ответы</div>
+            <div class="task-text">1. Выбери из перечисленных растений те, которые НЕ относятся к лекарственным: (Несколько вариантов)</div>
+            <div class="option-group">
+                <label class="option-label"><input type="checkbox" name="task8" value="Ромашка"> Ромашка</label>
+                <label class="option-label"><input type="checkbox" name="task8" value="Яблоня"> Яблоня</label>
+                <label class="option-label"><input type="checkbox" name="task8" value="Череда"> Череда</label>
+                <label class="option-label"><input type="checkbox" name="task8" value="Подорожник"> Подорожник</label>
+                <label class="option-label"><input type="checkbox" name="task8" value="Чистотел"> Чистотел</label>
+                <label class="option-label"><input type="checkbox" name="task8" value="Баклажаны"> Баклажаны</label>
+            </div>
+        </section>
+
+        <!-- Системная кнопка отправки результатов -->
+        <button id="submit-tasks" class="hud-btn" style="background: #ff5500; border-color: #b33c00; margin-top: 25px;">Синхронизировать отчет</button>
+    
+    </div> <!-- Конец #biology-content -->
+</div> <!-- Конец .term-container -->
+
+<script src="script.js"></script>
+</body>
+</html>
