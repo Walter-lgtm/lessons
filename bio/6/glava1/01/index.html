@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>БИОЛОГИЧЕСКИЙ МОДУЛЬ: Глава 1. Растение — живой организм</title>
+    <!-- Подключение локального стиля -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="term-container">
+    <div class="term-header">
+        <div class="lambda-logo">λ</div>
+        <div class="system-status">Глава 1. Растение — живой организм</div>
+    </div>
+
+    <!-- Блок авторизации (UID "ФИО+Класс") -->
+    <div id="auth-block" class="auth-section">
+        <div class="input-group">
+            <span class="input-label">Инициализация биометрии (Опорные символы: Ф И О)</span>
+            <input type="text" id="student-fio" class="hud-input" autocomplete="off" required>
+        </div>
+        <div class="input-group">
+            <span class="input-label">Сектор назначения (Опорные символы: К л а с с)</span>
+            <input type="text" id="student-class" class="hud-input" autocomplete="off" required>
+        </div>
+        <button id="auth-trigger" class="hud-btn">Доступ к Параграфу №1</button>
+        <div id="auth-alert" class="alert-box"></div>
+    </div>
+
+    <!-- Сюда будут инжектироваться ботанические задания -->
+    <div id="biology-content" class="hidden-module">
+        <!-- Место для Параграфа №1 -->
+    </div>
+</div>
+
+<!-- Подключение локального скрипта логики и безопасности -->
+<script src="script.js"></script>
+</body>
+</html>
