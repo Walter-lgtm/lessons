@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Глава 1. Растение — живой организм</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="term-container">
+    <div class="term-header">
+        <div class="lambda-logo">λ</div>
+        <div class="system-status">§3. Химический состав клетки</div>
+    </div>
+
+    <!-- Блок авторизации (UID "ФИО+Класс") -->
+    <div id="auth-block" class="auth-section">
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Инициализация биометрии (Ф И О)</span>
+            <input type="text" id="student-fio" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Сектор назначения (К л а с с)</span>
+            <input type="text" id="student-class" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <button id="auth-trigger" class="hud-btn">Доступ к Параграфу №3 (§3)</button>
+        <div id="auth-alert" class="alert-box"></div>
+    </div>
+
+    <!-- Основной контейнер ботанических заданий -->
+    <div id="biology-content" class="hidden-module">
+        
+        <!-- Задание 1 -->
+        <section class="task-card">
+            <div class="task-title">Задание 1 // Соотнеси органические вещества с их ролью в клетке</div>
+            <div class="task-text" style="font-size: 0.85rem; color: #ff5500; margin-bottom: 10px;">[ПРОТОКОЛ]: Нажмите на ВЕЩЕСТВО слева, затем на соответствующую РОЛЬ справа.</div>
+            <div class="match-grid-container">
+                <div class="match-column">
+                    <div class="match-element t2-left" data-id="белки">Белки</div>
+                    <div class="match-element t2-left" data-id="жиры">Жиры</div>
+                    <div class="match-element t2-left" data-id="кислоты">Нуклеиновые кислоты</div>
+                    <div class="match-element t2-left" data-id="углеводы">Углеводы</div>
+                </div>
+                <div style="border-top: 1px dashed rgba(0, 255, 102, 0.2); margin: 5px 0;"></div>
+                <div class="match-column">
+                    <div class="match-element t2-right" data-correct="жиры">Запас веществ</div>
+                    <div class="match-element t2-right" data-correct="кислоты">Хранение наследственной информации</div>
+                    <div class="match-element t2-right" data-correct="белки">Строительный материал</div>
+                    <div class="match-element t2-right" data-correct="углеводы">Источник энергии</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Задание 2 -->
+        <section class="task-card">
+            <div class="task-title">Задание 2 // Выбери верный ответ</div>
+            <div class="task-text">1. Каких органических соединений в клетке содержится больше всего?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task2" value="Белки"> Белки</label>
+                <label class="option-label"><input type="radio" name="task2" value="Жиры"> Жиры</label>
+                <label class="option-label"><input type="radio" name="task2" value="Углеводы"> Углеводы</label>
+            </div>
+        </section>
+
+        <!-- Задание 3 -->
+        <section class="task-card">
+            <div class="task-title">Задание 3 // Выбери верный ответ</div>
+            <div class="task-text">1. Сколько % от всего химического состава живой клетки составляют белки?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task3" value="0,2–2,0"> 0,2–2,0</label>
+                <label class="option-label"><input type="radio" name="task3" value="10–20"> 10–20</label>
+                <label class="option-label"><input type="radio" name="task3" value="1,0–1,5"> 1,0–1,5</label>
+                <label class="option-label"><input type="radio" name="task3" value="1,0–5,0"> 1,0–5,0</label>
+                <label class="option-label"><input type="radio" name="task3" value="1,0–2,0"> 1,0–2,0</label>
+            </div>
+        </section>
+
+        <!-- Задание 4 -->
+        <section class="task-card">
+            <div class="task-title">Задание 4 // Зачеркни лишние слова</div>
+            <div class="task-text">Нажмите на НЕОРГАНИЧЕСКИЕ вещества, чтобы исключить их из списка органических:</div>
+            <div class="word-bank" id="task4-bank">
+                <span class="word-token" data-word="соли калия ,">соли калия ,</span>
+                <span class="word-token" data-word="угольную кислоту ,">угольную кислоту ,</span>
+                <span class="word-token" data-word="углеводы ,">углеводы ,</span>
+                <span class="word-token" data-word="белки ,">белки ,</span>
+                <span class="word-token" data-word="жиры ,">жиры ,</span>
+                <span class="word-token" data-word="воду ,">воду ,</span>
+                <span class="word-token" data-word="нуклеиновые кислоты ,">нуклеиновые кислоты ,</span>
+                <span class="word-token" data-word="соли кальция ,">соли кальция ,</span>
+                <span class="word-token" data-word="соли магния ,">соли магния ,</span>
+                <span class="word-token" data-word="углекислый газ">углекислый газ</span>
+            </div>
+        </section>
+
+        <!-- Задание 5 -->
+        <section class="task-card">
+            <div class="task-title">Задание 5 // Выбери верный ответ</div>
+            <div class="task-text">1. Какие органические вещества являются хранилищем наследственной информации для клетки?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task5" value="Белки"> Белки</label>
+                <label class="option-label"><input type="radio" name="task5" value="Жиры"> Жиры</label>
+                <label class="option-label"><input type="radio" name="task5" value="Углеводы"> Углеводы</label>
+                <label class="option-label"><input type="radio" name="task5" value="Нуклеиновые кислоты"> Нуклеиновые кислоты</label>
+            </div>
+        </section>
+        <!-- Задание 6 -->
+        <section class="task-card">
+            <div class="task-title">Задание 6 // Выбери верный ответ</div>
+            <div class="task-text">1. Какие органические вещества являются основным источником энергии для клетки?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task6" value="Белки"> Белки</label>
+                <label class="option-label"><input type="radio" name="task6" value="Жиры"> Жиры</label>
+                <label class="option-label"><input type="radio" name="task6" value="Углеводы"> Углеводы</label>
+                <label class="option-label"><input type="radio" name="task6" value="Нуклеиновые кислоты"> Нуклеиновые кислоты</label>
+            </div>
+        </section>
+
+        <!-- Задание 7 -->
+        <section class="task-card">
+            <div class="task-title">Задание 7 // Выбери верный ответ</div>
+            <div class="task-text">1. Какой из перечисленных химических элементов является обязательным в химическом составе клетки и содержится в большом объёме?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task7" value="Кальций"> Кальций</label>
+                <label class="option-label"><input type="radio" name="task7" value="Углерод"> Углерод</label>
+                <label class="option-label"><input type="radio" name="task7" value="Натрий"> Натрий</label>
+                <label class="option-label"><input type="radio" name="task7" value="Магний"> Магний</label>
+                <label class="option-label"><input type="radio" name="task7" value="Кремний"> Кремний</label>
+            </div>
+        </section>
+
+        <!-- Задание 8 -->
+        <section class="task-card">
+            <div class="task-title">Задание 8 // Выбери верный ответ</div>
+            <div class="task-text">1. Сколько % химического элемента кислорода содержится в живой клетке?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task8" value="50%"> 50%</label>
+                <label class="option-label"><input type="radio" name="task8" value="68%"> 68%</label>
+                <label class="option-label"><input type="radio" name="task8" value="12%"> 12%</label>
+                <label class="option-label"><input type="radio" name="task8" value="80%"> 80%</label>
+            </div>
+        </section>
+
+        <!-- Задание 9 -->
+        <section class="task-card">
+            <div class="task-title">Задание 9 // Выбери верный ответ</div>
+            <div class="task-text">1. Где в клетке содержатся вещества, в которых сохранена наследственная информация?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task9" value="В вакуолях"> В вакуолях</label>
+                <label class="option-label"><input type="radio" name="task9" value="В хлоропластах"> В хлоропластах</label>
+                <label class="option-label"><input type="radio" name="task9" value="В хромосомах"> В хромосомах</label>
+                <label class="option-label"><input type="radio" name="task9" value="В митохондриях"> В митохондриях</label>
+            </div>
+        </section>
+
+        <!-- Задание 10 -->
+        <section class="task-card">
+            <div class="task-title">Задание 10 // Вставь верные биологические термины</div>
+            <div class="task-text">
+                Приблизительно 1–1,5% общей массы клетки составляют 
+                <span style="font-size:0.8rem; color:#ff5500;">[М...]</span>
+                <input type="text" id="task10-in1" class="hud-input" style="display:inline-block; width:120px; padding:4px; font-size:0.9rem;" autocomplete="off"> 
+                <span style="font-size:0.8rem; color:#ff5500;">[с...]</span>
+                <input type="text" id="task10-in2" class="hud-input" style="display:inline-block; width:80px; padding:4px; font-size:0.9rem;" autocomplete="off">, 
+                в частности соли кальция, калия, фосфора и др. Эти неорганические вещества используются для синтеза органических молекул 
+                <span style="font-size:0.8rem; color:#ff5500;">[б...]</span>
+                <input type="text" id="task10-in3" class="hud-input" style="display:inline-block; width:100px; padding:4px; font-size:0.9rem;" autocomplete="off">, 
+                <span style="font-size:0.8rem; color:#ff5500;">[н...]</span>
+                <input type="text" id="task10-in4" class="hud-input" style="display:inline-block; width:120px; padding:4px; font-size:0.9rem;" autocomplete="off"> 
+                <span style="font-size:0.8rem; color:#ff5500;">[к...]</span>
+                <input type="text" id="task10-in5" class="hud-input" style="display:inline-block; width:100px; padding:4px; font-size:0.9rem;" autocomplete="off"> и др.
+            </div>
+        </section>
+
+        <!-- Задание 11 -->
+        <section class="task-card">
+            <div class="task-title">Задание 11 // Выбери верный ответ</div>
+            <div class="task-text">1. Какого вещества в растительной клетке может содержаться до 95% от всего химического состава?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task11" value="Минеральных солей"> Минеральных солей</label>
+                <label class="option-label"><input type="radio" name="task11" value="Белков"> Белков</label>
+                <label class="option-label"><input type="radio" name="task11" value="Жиров"> Жиры</label>
+                <label class="option-label"><input type="radio" name="task11" value="Воды"> Воды</label>
+                <label class="option-label"><input type="radio" name="task11" value="Углеводов"> Углеводов</label>
+            </div>
+        </section>
+
+        <!-- Задание 12 -->
+        <section class="task-card">
+            <div class="task-title">Задание 12 // Вставь верные биологические термины</div>
+            <div class="task-text" style="display:flex; flex-direction:column; gap:12px;">
+                <div>
+                    <span style="font-size:0.8rem; color:#ff5500;">[У...]</span>
+                    <input type="text" id="task12-in1" class="hud-input" style="display:inline-block; width:140px; padding:4px; font-size:0.9rem;" autocomplete="off"> 
+                    — важная группа органических веществ, в результате расщепления которых клетки получают энергию, необходимую для их жизнедеятельности. Они входят в состав оболочек клеток, придавая им прочность. Запасающие вещества в клетках — крахмал и сахара, они также относятся к углеводам.
+                </div>
+                <div>
+                    <span style="font-size:0.8rem; color:#ff5500;">[Б...]</span>
+                    <input type="text" id="task12-in2" class="hud-input" style="display:inline-block; width:140px; padding:4px; font-size:0.9rem;" autocomplete="off"> 
+                    играют важнейшую роль в жизни клеток. Они входят в состав разнообразных клеточных структур, регулируют процессы жизнедеятельности и тоже могут запасаться в клетках.
+                </div>
+                <div>
+                    Основная функция 
+                    <span style="font-size:0.8rem; color:#ff5500;">[ж...]</span>
+                    <input type="text" id="task12-in3" class="hud-input" style="display:inline-block; width:100px; padding:4px; font-size:0.9rem;" autocomplete="off"> 
+                    — энергетическая, при их расщеплении высвобождается необходимая живым организмам энергия. Они дают энергии в 2 раза больше, чем углеводы, взятые в этой же массе.
+                </div>
+                <div>
+                    <span style="font-size:0.8rem; color:#ff5500;">[Н...]</span>
+                    <input type="text" id="task12-in4" class="hud-input" style="display:inline-block; width:140px; padding:4px; font-size:0.9rem;" autocomplete="off"> 
+                    <span style="font-size:0.8rem; color:#ff5500;">[к...]</span>
+                    <input type="text" id="task12-in5" class="hud-input" style="display:inline-block; width:120px; padding:4px; font-size:0.9rem;" autocomplete="off"> 
+                    содержатся во всех клетках, это самые крупные молекулы, которые образуют живые организмы. Они представляют собой единую систему, направленную на хранение и реализацию наследственной информации в клетке.
+                </div>
+            </div>
+        </section>
+
+        <!-- Системная кнопка отправки результатов -->
+        <button id="submit-tasks" class="hud-btn" style="background: #ff5500; border-color: #b33c00; margin-top: 25px;">Синхронизировать отчет</button>
+    
+    </div> <!-- Конец #biology-content -->
+</div> <!-- Конец .term-container -->
+
+<script src="script.js"></script>
+</body>
+</html>
