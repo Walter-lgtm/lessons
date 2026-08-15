@@ -13,10 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const tasksArea = document.getElementById("dynamic-tasks-area");
 
     // ==========================================
-    // 1. БАЗА ДАННЫХ ЗАДАНИЙ ГЛАВЫ 2 (ЧАСТЬ 1: §§9-11)
+    // 1. БАЗА ДАННЫХ ЗАДАНИЙ ГЛАВЫ 2 (НАЧАЛО)
     // ==========================================
     const ALL_TASKS_DATABASE = [
-        // --- ПАРАГРАФ 9 ---
+        // --- ПАРАГРАФ 9 (Вопрос 1) ---
         {
             id: "p9_t1",
             paragraph: 9,
@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return (sel && sel.value === "3") ? 1 : 0;
             }
         },
+        // --- ПАРАГРАФ 9 (Вопрос 2) ---
         {
             id: "p9_t2",
             paragraph: 9,
@@ -59,8 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return (el && el.value === "Тубус") ? 1 : 0;
             }
         },
-
-        // --- ПАРАГРАФ 10 ---
+        // --- ПАРАГРАФ 10 (Вопрос 1) ---
         {
             id: "p10_t1",
             paragraph: 10,
@@ -83,6 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return (el && el.value === "Клеточная мембрана") ? 1 : 0;
             }
         },
+        // --- ПАРАГРАФ 10 (Вопрос 2) ---
         {
             id: "p10_t2",
             paragraph: 10,
@@ -103,8 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return (ans.length === 2 && ans.includes("Арбуз") && ans.includes("Берёза")) ? 1 : 0;
             }
         },
-
-        // --- ПАРАГРАФ 11 ---
+        // --- ПАРАГРАФ 11 (Вопрос 1) ---
         {
             id: "p11_t1",
             paragraph: 11,
@@ -114,14 +114,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     <h3>[λ] Задание ${index}. Впиши пропущенный термин (§11)</h3>
                     <p class="question-text">
                         Ф<input type="text" id="p11_t1_ans" class="hl-inline-input" style="width:120px;" autocomplete="off"> 
-                        — процесс образования organic-веществ из углекислого газа и воды в хлоропластах на свету.
+                        — процесс образования органических веществ из углекислого газа и воды в хлоропластах на свету.
                     </p>
                 </section>`,
             check: () => {
                 const val = document.getElementById("p11_t1_ans").value.trim().toLowerCase();
-                return (val === "отосинтез" || val === "фотосинтез") ? 1 : 0;
+                return (val === "оны" || val === "отосинтез" || val === "фотосинтез") ? 1 : 0;
             }
         },
+        // --- ПАРАГРАФ 11 (Вопрос 2) ---
         {
             id: "p11_t2",
             paragraph: 11,
@@ -141,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return (sel && sel.value === "Дыхание") ? 1 : 0;
             }
         },
-      // --- ПАРАГРАФ 12 ---
+        // --- ПАРАГРАФ 12 (Вопрос 1) ---
         {
             id: "p12_t1",
             paragraph: 12,
@@ -152,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="question-text">Выберите все истинные биологические утверждения из списка:</p>
                     <div class="checkbox-group">
                         <label class="hl-checkbox"><input type="checkbox" name="p12_t1_ans" value="1"><span></span> Живые клетки дышат, питаются, растут и размножаются.</label>
-                        <label class="hl-checkbox"><input type="checkbox" name="p12_t1_ans" value="2"><span></span> Вещества, необходимые для жизнедеятельности клеток, поступают в них через хромосомы.</label>
+                        <label class="hl-checkbox"><input type="checkbox" name="p12_t1_ans" value="2"><span></span> Вещества поступают в клетки через хромосомы.</label>
                         <label class="hl-checkbox"><input type="checkbox" name="p12_t1_ans" value="3"><span></span> Клеточная мембрана хорошо пропускает одни вещества и задерживает другие.</label>
                     </div>
                 </section>`,
@@ -161,6 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return (ans.length === 2 && ans.includes("1") && ans.includes("3")) ? 1 : 0;
             }
         },
+        // --- ПАРАГРАФ 12 (Вопрос 2) ---
         {
             id: "p12_t2",
             paragraph: 12,
@@ -180,8 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return (sel && sel.value === "Эукариоты") ? 1 : 0;
             }
         },
-
-        // --- ПАРАГРАФ 13 ---
+        // --- ПАРАГРАФ 13 (Вопрос 1) ---
         {
             id: "p13_t1",
             paragraph: 13,
@@ -204,6 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return (el && el.value === "автотрофами") ? 1 : 0;
             }
         },
+        // --- ПАРАГРАФ 13 (Вопрос 2) ---
         {
             id: "p13_t2",
             paragraph: 13,
@@ -223,8 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return (sel && sel.value === "2") ? 1 : 0;
             }
         },
-
-        // --- ПАРАГРАФ 14 ---
+        // --- ПАРАГРАФ 14 (Вопрос 1) ---
         {
             id: "p14_t1",
             paragraph: 14,
@@ -244,13 +245,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 return (sel && sel.value === "Кольцевую хромосому") ? 1 : 0;
             }
         },
+        // --- ПАРАГРАФ 14 (Вопрос 2) ---
         {
             id: "p14_t2",
             paragraph: 14,
             type: "drag",
             render: (index) => `
                 <section class="task-card" data-task-id="p14_t2">
-                    <h3>[λ] Задание ${index}. Распредели бактерии по группам (Drag-and-Drop) (§14)</h3>
+                    <h3>[λ] Задание ${index}. Распредели по группам (Drag-and-Drop) (§14)</h3>
                     <p class="question-text">Перетащи плашки в соответствующие зоны значения:</p>
                     <div class="drag-words-container dynamic-drag-source">
                         <span class="drag-word" draggable="true" data-word="круговорот">круговорот веществ</span>
@@ -274,17 +276,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 const natureWords = natureZone ? Array.from(natureZone.querySelectorAll('.drag-word')).map(el => el.dataset.word) : [];
                 const humanWords = humanZone ? Array.from(humanZone.querySelectorAll('.drag-word')).map(el => el.dataset.word) : [];
                 
-                return (natureWords.includes("круговорот") && humanWords.includes("очи")) ? 1 : 0; 
-                // Упрощенная и быстрая проверка наличия ключевых плашек в нужных корзинах
                 const nOk = natureWords.length === 1 && natureWords[0] === "круговорот";
                 const hOk = humanWords.length === 1 && humanWords[0] === "очистка";
                 return (nOk && hOk) ? 1 : 0;
             }
         }
-    ]; // Конец базы данных
-            // ==========================================
-    // ==========================================
-    // 2. АВТОРИЗАЦИЯ, КОНТРОЛЬ ПОПЫТОК И РАНДОМИЗАЦИЯ
+    ]; // Массив ALL_TASKS_DATABASE гарантированно закрыт без синтаксических обрывов
+                          // ==========================================
+    // 2. АВТОРИЗАЦИЯ, КОНТРОЛЬ ПОПЫТОК И НАЧАЛО РАНДОМИЗАЦИИ
     // ==========================================
     startBtn.addEventListener("click", () => {
         studentName = inputName.value.trim();
@@ -316,8 +315,14 @@ document.addEventListener("DOMContentLoaded", () => {
         // === АЛГОРИТМ СТРОГОГО СБАЛАНСИРОВАННОГО ОТБОРА (ТЗ) ===
         generatedVariant = [];
         
-        // ВОТ ЭТА СТРОКА С КРИТИЧЕСКИМ ФИКСОМ:
-        const paragraphs =;
+        // Создаем массив параграфов через безопасный синтаксис push, исключающий сбои парсера
+        const paragraphs = [];
+        paragraphs.push(9);
+        paragraphs.push(10);
+        paragraphs.push(11);
+        paragraphs.push(12);
+        paragraphs.push(13);
+        paragraphs.push(14);
         
         // Шаг А: Берем строго по 1 случайному вопросу из каждого параграфа
         paragraphs.forEach(pNum => {
@@ -327,15 +332,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 generatedVariant.push(randomTask);
             }
         });
-
-        // Шаг Б: Добираем еще 4 случайных вопроса из оставшихся в базе (чтобы в сумме было ровно 10)
+        // Шаг Б: Добираем еще 4 случайных вопроса из оставшихся в базе (всего 10)
         const currentIds = generatedVariant.map(t => t.id);
         const remainingTasks = ALL_TASKS_DATABASE.filter(t => !currentIds.includes(t.id));
         
-        // Перемешиваем остаток базы
         const shuffledRemaining = remainingTasks.sort(() => 0.5 - Math.random());
         
-        // Добавляем 4 штуки
         for (let i = 0; i < 4 && i < shuffledRemaining.length; i++) {
             generatedVariant.push(shuffledRemaining[i]);
         }
@@ -353,7 +355,7 @@ document.addEventListener("DOMContentLoaded", () => {
         quizContainer.classList.remove("hidden");
         window.scrollTo(0, 0);
 
-        // Включаем Drag-and-Drop
+        // Включаем Drag-and-Drop после рендеринга
         initDynamicDragAndDrop();
     });
 
@@ -380,7 +382,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 e.preventDefault();
                 if (!draggedElement) return;
 
-                // Защита от перетаскивания плашек между разными карточками заданий
                 const sourceCard = draggedElement.closest(".task-card");
                 const targetCard = zone.closest(".task-card");
                 if (sourceCard !== targetCard) return;
@@ -390,7 +391,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-  // ==========================================
+    // ==========================================
     // 4. КОМПЛЕКСНАЯ ВАЛИДАЦИЯ И ОТПРАВКА ДАННЫХ
     // ==========================================
     const submitBtn = document.getElementById("submit-quiz-btn");
@@ -448,7 +449,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Перепроверьте ID полей этой новой формы с помощью экстрактора v2.0
         formData.append("entry.494673722", name);      
-        formData.append("entry.1297089773", className); 
+        formData.append("entry.129708977", className); 
         formData.append("entry.152799977", score);     
         formData.append("entry.714264275", finalGrade); 
 
