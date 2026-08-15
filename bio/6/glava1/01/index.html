@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>БИОЛОГИЧЕСКИЙ МОДУЛЬ: Глава 1. Растение — живой организм</title>
-    <!-- Подключение локального стиля -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,7 +11,7 @@
 <div class="term-container">
     <div class="term-header">
         <div class="lambda-logo">λ</div>
-        <div class="system-status">Глава 1. Растение — живой организм</div>
+        <div class="system-status">Введение. ботаника — наука о растениях</div>
     </div>
 
     <!-- Блок авторизации (UID "ФИО+Класс") -->
@@ -29,13 +28,258 @@
         <div id="auth-alert" class="alert-box"></div>
     </div>
 
-    <!-- Сюда будут инжектироваться ботанические задания -->
+    <!-- Основной контейнер ботанических заданий -->
     <div id="biology-content" class="hidden-module">
-        <!-- Место для Параграфа №1 -->
-    </div>
-</div>
+        
+        <!-- Задание 1 -->
+        <section class="task-card">
+            <div class="task-title">Задание 1 // Выбери верный биологический термин</div>
+            <div class="task-text">
+                Строение, жизнедеятельность, многообразие, распространение растений, их взаимосвязь с окружающей природой и друг с другом изучает наука о растениях — 
+                <select id="task1-ans" class="hud-select">
+                    <option value="">-- ВЫБРАТЬ --</option>
+                    <option value="география">география</option>
+                    <option value="зоология">зоология</option>
+                    <option value="ботаника">ботаника</option>
+                    <option value="экология">экология</option>
+                </select>.
+            </div>
+        </section>
 
-<!-- Подключение локального скрипта логики и безопасности -->
+        <!-- Задание 2 -->
+        <section class="task-card">
+            <div class="task-title">Задание 2 // Выбери верный ответ</div>
+            <div class="task-text">Какая из перечисленных наук изучает строение, жизнедеятельность, многообразие и распространение растений?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task2" value="Зоология"> Зоология</label>
+                <label class="option-label"><input type="radio" name="task2" value="География"> География</label>
+                <label class="option-label"><input type="radio" name="task2" value="Ботаника"> Ботаника</label>
+                <label class="option-label"><input type="radio" name="task2" value="Экология"> Экология</label>
+            </div>
+        </section>
+
+        <!-- Задание 3 -->
+        <section class="task-card">
+            <div class="task-title">Задание 3 // Выбери верный биологический термин</div>
+            <div class="task-text">
+                Строение, жизнедеятельность, многообразие, распространение растений, их взаимосвязь с окружающей природой и друг с другом изучает наука о растениях — 
+                <select id="task3-ans" class="hud-select">
+                    <option value="">-- ВЫБРАТЬ --</option>
+                    <option value="зоология">зоология</option>
+                    <option value="генетика">генетика</option>
+                    <option value="география">география</option>
+                    <option value="биофизика">биофизика</option>
+                    <option value="ботаника">ботаника</option>
+                </select>.
+            </div>
+        </section>
+        <!-- Задание 4 -->
+        <section class="task-card">
+            <div class="task-title">Задание 4 // Зачеркни лишние слова</div>
+            <div class="task-text">Наука ботаника изучает растения и всё, что с ними связано. Объектами изучения этой науки могут быть (нажмите на ЛИШНИЕ слова, чтобы зачеркнуть):</div>
+            <div class="word-bank" id="task4-bank">
+                <span class="word-token" data-word="ясень">ясень</span>
+                <span class="word-token" data-word="дуб">дуб</span>
+                <span class="word-token" data-word="шампиньон">шампиньон</span>
+                <span class="word-token" data-word="подорожник">подорожник</span>
+                <span class="word-token" data-word="иволга">иволга</span>
+                <span class="word-token" data-word="косуля">косуля</span>
+                <span class="word-token" data-word="хлопчатник">хлопчатник</span>
+                <span class="word-token" data-word="тушканчик">тушканчик</span>
+            </div>
+        </section>
+
+        <!-- Задание 5 -->
+        <section class="task-card">
+            <div class="task-title">Задание 5 // Соотнеси науки и объекты</div>
+            <div class="task-text">Установи соответствие между науками и объектами их изучения:</div>
+            
+            <div class="match-row">
+                <div>Морфология</div>
+                <select id="task5-1" class="hud-select">
+                    <option value="">-- Выбрать объект --</option>
+                    <option value="1">Внутреннее строение растений</option>
+                    <option value="2">Распределение растений</option>
+                    <option value="3">Ископаемые растения</option>
+                    <option value="4">Внешнее строение растения</option>
+                    <option value="5">Классификация растений</option>
+                    <option value="6">Взаимосвязи с организмами и средой</option>
+                    <option value="7">Процессы жизнедеятельности</option>
+                </select>
+            </div>
+            <div class="match-row">
+                <div>Анатомия растений</div>
+                <select id="task5-2" class="hud-select">
+                    <option value="">-- Выбрать объект --</option>
+                    <option value="1">Внутреннее строение растений</option>
+                    <option value="2">Распределение растений</option>
+                    <option value="3">Ископаемые растения</option>
+                    <option value="4">Внешнее строение растения</option>
+                    <option value="5">Классификация растений</option>
+                    <option value="6">Взаимосвязи с организмами и средой</option>
+                    <option value="7">Процессы жизнедеятельности</option>
+                </select>
+            </div>
+            <div class="match-row">
+                <div>Систематика</div>
+                <select id="task5-3" class="hud-select">
+                    <option value="">-- Выбрать объект --</option>
+                    <option value="1">Внутреннее строение растений</option>
+                    <option value="2">Распределение растений</option>
+                    <option value="3">Ископаемые растения</option>
+                    <option value="4">Внешнее строение растения</option>
+                    <option value="5">Классификация растений</option>
+                    <option value="6">Взаимосвязи с организмами и средой</option>
+                    <option value="7">Процессы жизнедеятельности</option>
+                </select>
+            </div>
+            <div class="match-row">
+                <div>Экология растений</div>
+                <select id="task5-4" class="hud-select">
+                    <option value="">-- Выбрать объект --</option>
+                    <option value="1">Внутреннее строение растений</option>
+                    <option value="2">Распределение растений</option>
+                    <option value="3">Ископаемые растения</option>
+                    <option value="4">Внешнее строение растения</option>
+                    <option value="5">Классификация растений</option>
+                    <option value="6">Взаимосвязи с организмами и средой</option>
+                    <option value="7">Процессы жизнедеятельности</option>
+                </select>
+            </div>
+            <div class="match-row">
+                <div>Палеоботаника</div>
+                <select id="task5-5" class="hud-select">
+                    <option value="">-- Выбрать объект --</option>
+                    <option value="1">Внутреннее строение растений</option>
+                    <option value="2">Распределение растений</option>
+                    <option value="3">Ископаемые растения</option>
+                    <option value="4">Внешнее строение растения</option>
+                    <option value="5">Классификация растений</option>
+                    <option value="6">Взаимосвязи с организмами и средой</option>
+                    <option value="7">Процессы жизнедеятельности</option>
+                </select>
+            </div>
+            <div class="match-row">
+                <div>Физиология растений</div>
+                <select id="task5-6" class="hud-select">
+                    <option value="">-- Выбрать объект --</option>
+                    <option value="1">Внутреннее строение растений</option>
+                    <option value="2">Распределение растений</option>
+                    <option value="3">Ископаемые растения</option>
+                    <option value="4">Внешнее строение растения</option>
+                    <option value="5">Классификация растений</option>
+                    <option value="6">Взаимосвязи с организмами и средой</option>
+                    <option value="7">Процессы жизнедеятельности</option>
+                </select>
+            </div>
+            <div class="match-row">
+                <div>География растений</div>
+                <select id="task5-7" class="hud-select">
+                    <option value="">-- Выбрать объект --</option>
+                    <option value="1">Внутреннее строение растений</option>
+                    <option value="2">Распределение растений</option>
+                    <option value="3">Ископаемые растения</option>
+                    <option value="4">Внешнее строение растения</option>
+                    <option value="5">Классификация растений</option>
+                    <option value="6">Взаимосвязи с организмами и средой</option>
+                    <option value="7">Процессы жизнедеятельности</option>
+                </select>
+            </div>
+        </section>
+        <!-- Задание 6 -->
+        <section class="task-card">
+            <div class="task-title">Задание 6 // Выбери верные ответы</div>
+            <div class="task-text">Что из перечисленного НЕ является объектами изучения ботаники? (Выберите все подходящие варианты)</div>
+            <div class="option-group">
+                <label class="option-label"><input type="checkbox" name="task6" value="Слон"> Слон</label>
+                <label class="option-label"><input type="checkbox" name="task6" value="Подсолнечник"> Подсолнечник</label>
+                <label class="option-label"><input type="checkbox" name="task6" value="Крокодил"> Крокодил</label>
+                <label class="option-label"><input type="checkbox" name="task6" value="Сосна"> Сосна</label>
+                <label class="option-label"><input type="checkbox" name="task6" value="Сыроежка"> Сыроежка</label>
+                <label class="option-label"><input type="checkbox" name="task6" value="Майский жук"> Майский жук</label>
+                <label class="option-label"><input type="checkbox" name="task6" value="Ландыши"> Ландыши</label>
+            </div>
+        </section>
+
+        <!-- Задание 7 -->
+        <section class="task-card">
+            <div class="task-title">Задание 7 // Выбери верный ответ</div>
+            <div class="task-text">Для озеленения в городах НЕ используются такие растения, как:</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task7" value="Ясень"> Ясень</label>
+                <label class="option-label"><input type="radio" name="task7" value="Карликовая берёза"> Карликовая берёза</label>
+                <label class="option-label"><input type="radio" name="task7" value="Дуб"> Дуб</label>
+                <label class="option-label"><input type="radio" name="task7" value="Ирисы"> Ирисы</label>
+                <label class="option-label"><input type="radio" name="task7" value="Бархатцы"> Бархатцы</label>
+                <label class="option-label"><input type="radio" name="task7" value="Сирень"> Сирень</label>
+            </div>
+        </section>
+
+        <!-- Задание 8 -->
+        <section class="task-card">
+            <div class="task-title">Задание 8 // Выбери верный ответ</div>
+            <div class="task-text">1. В парках городов много растений. Их вытаптывание отдыхающими — это пример фактора:</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task8" value="Абиотического"> Абиотического</label>
+                <label class="option-label"><input type="radio" name="task8" value="Биотического"> Биотического</label>
+                <label class="option-label"><input type="radio" name="task8" value="Антропогенного"> Антропогенного</label>
+            </div>
+        </section>
+
+        <!-- Задание 9 -->
+        <section class="task-card">
+            <div class="task-title">Задание 9 // Выбери верный ответ</div>
+            <div class="task-text">1. Какой процесс жизнедеятельности растений является наиболее значимым для всей планеты Земля?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task9" value="Обмен веществ"> Обмен веществ</label>
+                <label class="option-label"><input type="radio" name="task9" value="Развитие"> Развитие</label>
+                <label class="option-label"><input type="radio" name="task9" value="Фотосинтез"> Фотосинтез</label>
+                <label class="option-label"><input type="radio" name="task9" value="Дыхание"> Дыхание</label>
+                <label class="option-label"><input type="radio" name="task9" value="Рост"> Рост</label>
+            </div>
+        </section>
+        <!-- Задание 10 -->
+        <section class="task-card">
+            <div class="task-title">Задание 10 // Выбери верный ответ</div>
+            <div class="task-text">1. Какая наука изучает организмы, в клетках которых содержатся хлоропласты?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task10" value="Зоология"> Зоология</label>
+                <label class="option-label"><input type="radio" name="task10" value="Микология"> Микология</label>
+                <label class="option-label"><input type="radio" name="task10" value="Ботаника"> Ботаника</label>
+                <label class="option-label"><input type="radio" name="task10" value="Экология"> Экология</label>
+            </div>
+        </section>
+
+        <!-- Задание 11 -->
+        <section class="task-card">
+            <div class="task-title">Задание 11 // Выбери верный ответ</div>
+            <div class="task-text">1. Какие организмы в процессе жизнедеятельности обогащают воздух кислородом?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task11" value="Животные"> Животные</label>
+                <label class="option-label"><input type="radio" name="task11" value="Грибы"> Грибы</label>
+                <label class="option-label"><input type="radio" name="task11" value="Растения"> Растения</label>
+                <label class="option-label"><input type="radio" name="task11" value="Вирусы"> Вирусы</label>
+            </div>
+        </section>
+
+        <!-- Задание 12 -->
+        <section class="task-card">
+            <div class="task-title">Задание 12 // Выбери верный ответ</div>
+            <div class="task-text">1. Организмы — автотрофы, потому что:</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task12" value="создают органические вещества из неорганических"> создают органические вещества из неорганических</label>
+                <label class="option-label"><input type="radio" name="task12" value="питаются готовыми органическими веществами"> питаются готовыми органическими веществами</label>
+                <label class="option-label"><input type="radio" name="task12" value="питаются минеральными веществами"> питаются минеральными веществами</label>
+                <label class="option-label"><input type="radio" name="task12" value="используют органические вещества отмерших растений"> используют органические вещества отмерших растений</label>
+            </div>
+        </section>
+
+        <!-- Системная кнопка отправки результатов -->
+        <button id="submit-tasks" class="hud-btn" style="background: #ff5500; border-color: #b33c00; margin-top: 25px;">Синхронизировать отчет</button>
+    
+    </div> <!-- Конец #biology-content -->
+</div> <!-- Конец .term-container -->
+
 <script src="script.js"></script>
 </body>
 </html>
