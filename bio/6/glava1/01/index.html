@@ -92,98 +92,34 @@
         <!-- Задание 5 -->
         <section class="task-card">
             <div class="task-title">Задание 5 // Соотнеси науки и объекты</div>
-            <div class="task-text">Установи соответствие между науками и объектами их изучения:</div>
+            <div class="task-text" style="font-size: 0.85rem; color: #ff5500; margin-bottom: 10px;">
+                [ПРОТОКОЛ]: Нажмите на НАУКУ слева (она подсветится), затем нажмите на соответствующий ОБЪЕКТ справа.
+            </div>
             
-            <div class="match-row">
-                <div>Морфология</div>
-                <select id="task5-1" class="hud-select">
-                    <option value="">-- Выбрать объект --</option>
-                    <option value="1">Внутреннее строение растений</option>
-                    <option value="2">Распределение растений</option>
-                    <option value="3">Ископаемые растения</option>
-                    <option value="4">Внешнее строение растения</option>
-                    <option value="5">Классификация растений</option>
-                    <option value="6">Взаимосвязи с организмами и средой</option>
-                    <option value="7">Процессы жизнедеятельности</option>
-                </select>
-            </div>
-            <div class="match-row">
-                <div>Анатомия растений</div>
-                <select id="task5-2" class="hud-select">
-                    <option value="">-- Выбрать объект --</option>
-                    <option value="1">Внутреннее строение растений</option>
-                    <option value="2">Распределение растений</option>
-                    <option value="3">Ископаемые растения</option>
-                    <option value="4">Внешнее строение растения</option>
-                    <option value="5">Классификация растений</option>
-                    <option value="6">Взаимосвязи с организмами и средой</option>
-                    <option value="7">Процессы жизнедеятельности</option>
-                </select>
-            </div>
-            <div class="match-row">
-                <div>Систематика</div>
-                <select id="task5-3" class="hud-select">
-                    <option value="">-- Выбрать объект --</option>
-                    <option value="1">Внутреннее строение растений</option>
-                    <option value="2">Распределение растений</option>
-                    <option value="3">Ископаемые растения</option>
-                    <option value="4">Внешнее строение растения</option>
-                    <option value="5">Классификация растений</option>
-                    <option value="6">Взаимосвязи с организмами и средой</option>
-                    <option value="7">Процессы жизнедеятельности</option>
-                </select>
-            </div>
-            <div class="match-row">
-                <div>Экология растений</div>
-                <select id="task5-4" class="hud-select">
-                    <option value="">-- Выбрать объект --</option>
-                    <option value="1">Внутреннее строение растений</option>
-                    <option value="2">Распределение растений</option>
-                    <option value="3">Ископаемые растения</option>
-                    <option value="4">Внешнее строение растения</option>
-                    <option value="5">Классификация растений</option>
-                    <option value="6">Взаимосвязи с организмами и средой</option>
-                    <option value="7">Процессы жизнедеятельности</option>
-                </select>
-            </div>
-            <div class="match-row">
-                <div>Палеоботаника</div>
-                <select id="task5-5" class="hud-select">
-                    <option value="">-- Выбрать объект --</option>
-                    <option value="1">Внутреннее строение растений</option>
-                    <option value="2">Распределение растений</option>
-                    <option value="3">Ископаемые растения</option>
-                    <option value="4">Внешнее строение растения</option>
-                    <option value="5">Классификация растений</option>
-                    <option value="6">Взаимосвязи с организмами и средой</option>
-                    <option value="7">Процессы жизнедеятельности</option>
-                </select>
-            </div>
-            <div class="match-row">
-                <div>Физиология растений</div>
-                <select id="task5-6" class="hud-select">
-                    <option value="">-- Выбрать объект --</option>
-                    <option value="1">Внутреннее строение растений</option>
-                    <option value="2">Распределение растений</option>
-                    <option value="3">Ископаемые растения</option>
-                    <option value="4">Внешнее строение растения</option>
-                    <option value="5">Классификация растений</option>
-                    <option value="6">Взаимосвязи с организмами и средой</option>
-                    <option value="7">Процессы жизнедеятельности</option>
-                </select>
-            </div>
-            <div class="match-row">
-                <div>География растений</div>
-                <select id="task5-7" class="hud-select">
-                    <option value="">-- Выбрать объект --</option>
-                    <option value="1">Внутреннее строение растений</option>
-                    <option value="2">Распределение растений</option>
-                    <option value="3">Ископаемые растения</option>
-                    <option value="4">Внешнее строение растения</option>
-                    <option value="5">Классификация растений</option>
-                    <option value="6">Взаимосвязи с организмами и средой</option>
-                    <option value="7">Процессы жизнедеятельности</option>
-                </select>
+            <div class="match-grid-container">
+                <!-- Левая колонка: Науки -->
+                <div class="match-column">
+                    <div class="match-element t2-left" data-id="Морфология">Морфология</div>
+                    <div class="match-element t2-left" data-id="Анатомия">Анатомия растений</div>
+                    <div class="match-element t2-left" data-id="Систематика">Систематика</div>
+                    <div class="match-element t2-left" data-id="Экология">Экология растений</div>
+                    <div class="match-element t2-left" data-id="Палеоботаника">Палеоботаника</div>
+                    <div class="match-element t2-left" data-id="Физиология">Физиология растений</div>
+                    <div class="match-element t2-left" data-id="География">География растений</div>
+                </div>
+                
+                <div style="border-top: 1px dashed rgba(0, 255, 102, 0.3); margin: 5px 0;"></div>
+                
+                <!-- Правая колонка: Объекты (перемешаны для честной проверки) -->
+                <div class="match-column">
+                    <div class="match-element t2-right" data-correct="Анатомия">Внутреннее строение растений</div>
+                    <div class="match-element t2-right" data-correct="География">Распределение растений на Земле</div>
+                    <div class="match-element t2-right" data-correct="Палеоботаника">Ископаемые остатки древних растений</div>
+                    <div class="match-element t2-right" data-correct="Морфология">Внешнее строение растения</div>
+                    <div class="match-element t2-right" data-correct="Систематика">Классификация и родство растений</div>
+                    <div class="match-element t2-right" data-correct="Экология">Взаимосвязи растений со средой обитания</div>
+                    <div class="match-element t2-right" data-correct="Физиология">Процессы жизнедеятельности растений</div>
+                </div>
             </div>
         </section>
         <!-- Задание 6 -->
