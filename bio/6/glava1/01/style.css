@@ -177,3 +177,42 @@ body {
 .hidden-module {
     display: none !important;
 }
+/* Новые стили для механики сопоставления Задания 5 */
+.match-grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+.match-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.match-element {
+    background: rgba(0, 255, 102, 0.05);
+    border: 1px solid #00ff66;
+    padding: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+/* Состояния элементов */
+.match-element.selected {
+    background: rgba(0, 255, 102, 0.2);
+    border-color: #00ff66;
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+    animation: hud-blink 1s infinite alternate;
+}
+.match-element.matched {
+    background: rgba(255, 85, 0, 0.1);
+    border-color: rgba(255, 85, 0, 0.4);
+    color: rgba(255, 85, 0, 0.6);
+    cursor: not-allowed;
+}
+@keyframes hud-blink {
+    from { opacity: 1; }
+    to { opacity: 0.6; }
+}
