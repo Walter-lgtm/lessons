@@ -283,6 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     ]; // Конец базы данных
             // ==========================================
+    // ==========================================
     // 2. АВТОРИЗАЦИЯ, КОНТРОЛЬ ПОПЫТОК И РАНДОМИЗАЦИЯ
     // ==========================================
     startBtn.addEventListener("click", () => {
@@ -313,10 +314,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // === КОНЕЦ БЛОКА ПОДВОХА ===
 
         // === АЛГОРИТМ СТРОГОГО СБАЛАНСИРОВАННОГО ОТБОРА (ТЗ) ===
-        // Нам нужно собрать 10 вопросов. У нас 6 параграфов (9, 10, 11, 12, 13, 14).
-        // Сделаем так: берем из каждого параграфа минимум по 1 вопросу, а оставшиеся 4 добираем случайно.
         generatedVariant = [];
         
+        // ВОТ ЭТА СТРОКА С КРИТИЧЕСКИМ ФИКСОМ:
         const paragraphs =;
         
         // Шаг А: Берем строго по 1 случайному вопросу из каждого параграфа
@@ -340,11 +340,11 @@ document.addEventListener("DOMContentLoaded", () => {
             generatedVariant.push(shuffledRemaining[i]);
         }
 
-        // Финальное перемешивание всего варианта из 10 вопросов, чтобы они шли не по порядку тем
+        // Финальное перемешивание всего варианта из 10 вопросов
         generatedVariant.sort(() => 0.5 - Math.random());
 
         // === ДИНАМИЧЕСКИЙ РЕНДЕРИНГ ИНТЕРФЕЙСА ===
-        tasksArea.innerHTML = ""; // Очищаем зону
+        tasksArea.innerHTML = ""; 
         generatedVariant.forEach((task, index) => {
             tasksArea.innerHTML += task.render(index + 1);
         });
@@ -353,7 +353,7 @@ document.addEventListener("DOMContentLoaded", () => {
         quizContainer.classList.remove("hidden");
         window.scrollTo(0, 0);
 
-        // Включаем динамический Drag-and-Drop для перетаскиваемых вопросов, если они отрендерились
+        // Включаем Drag-and-Drop
         initDynamicDragAndDrop();
     });
 
