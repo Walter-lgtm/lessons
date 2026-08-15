@@ -448,10 +448,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const formData = new FormData();
         
         // Перепроверьте ID полей этой новой формы с помощью экстрактора v2.0
-        formData.append("entry.494673722", name);      
-        formData.append("entry.129708977", className); 
-        formData.append("entry.152799977", score);     
-        formData.append("entry.714264275", finalGrade); 
+        formData.append("entry.1668259570", name);      
+        formData.append("entry.41798850", className); 
+        formData.append("entry.997674707", score);     
+        formData.append("entry.1584889637", finalGrade); 
 
         fetch(formURL, {
             method: "POST",
