@@ -252,8 +252,8 @@ document.addEventListener("DOMContentLoaded", () => {
             type: "drag",
             render: (index) => `
                 <section class="task-card" data-task-id="p14_t2">
-                    <h3>[λ] Задание ${index}. Распредели по группам (Drag-and-Drop) (§14)</h3>
-                    <p class="question-text">Перетащи плашки в соответствующие зоны значения:</p>
+                    <h3>[λ] Задание ${index}. Распредели по группам (§14)</h3>
+                    <p class="question-text">Перетащи плашки в соответствующие зоны значения, в которых принимают участие бактерии:</p>
                     <div class="drag-words-container dynamic-drag-source">
                         <span class="drag-word" draggable="true" data-word="круговорот">круговорот веществ</span>
                         <span class="drag-word" draggable="true" data-word="очистка">очистка сточных вод</span>
