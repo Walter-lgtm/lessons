@@ -118,8 +118,8 @@ function initializeWordStriking() {
 function collectAndVerifyAnswers() {
     const answersReport = [];
 
-    // Задание 1: Выпадающий список (селектор)
-    const ans1 = document.getElementById("task1-ans").value;
+    // Задание 1: Самостоятельный текстовый ввод термина с защитой от регистра и пробелов
+    const ans1 = document.getElementById("task1-ans").value.trim().toLowerCase();
     answersReport.push({ isCorrect: ans1 === "ботаника" });
 
     // Задание 2: Одиночный выбор (радиокнопки)
