@@ -1,0 +1,218 @@
+/* Глобальные настройки HUD */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Courier New', Courier, monospace;
+}
+body {
+    background-color: #0b130e; /* Сверхтемный болотный */
+    color: #00ff66; /* Изумрудно-зеленый неон */
+    padding: 10px;
+    font-size: 15px;
+    line-height: 1.4;
+}
+/* Контейнер терминала */
+.term-container {
+    border: 2px solid #00ff66;
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
+    background: rgba(11, 19, 14, 0.95);
+    padding: 15px;
+    border-radius: 4px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.term-header {
+    border-bottom: 2px dashed #00ff66;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.lambda-logo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #00ff66;
+    text-shadow: 0 0 10px #00ff66;
+    margin-bottom: 5px;
+}
+.system-status {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+/* Карточки заданий */
+.task-card {
+    border: 1px solid #00ff66;
+    background: rgba(0, 255, 102, 0.02);
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 2px;
+}
+.task-title {
+    color: #ff5500; /* Оранжево-ржавый акцент для заголовков */
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 85, 0, 0.3);
+    padding-bottom: 3px;
+}
+.task-text {
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+/* Элементы интерактивных форм */
+.hud-select {
+    background: #050a06;
+    border: 1px solid #00ff66;
+    color: #00ff66;
+    padding: 6px;
+    font-size: 0.95rem;
+    outline: none;
+    max-width: 100%;
+}
+.hud-select:focus {
+    border-color: #ff5500;
+}
+/* Механика зачеркивания слов (Задание 4) */
+.word-bank {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+.word-token {
+    background: rgba(0, 255, 102, 0.1);
+    border: 1px solid #00ff66;
+    padding: 6px 12px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.95rem;
+}
+.word-token.struck {
+    border-color: #ff5500;
+    color: #ff5500;
+    text-decoration: line-through;
+    background: rgba(255, 85, 0, 0.1);
+}
+/* Механика радиокнопок и чекбоксов */
+.option-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+.option-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+.option-label input {
+    margin-top: 3px;
+    accent-color: #ff5500;
+}
+/* Механика Сопоставления (Задание 5) */
+.match-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+/* Авторизация и Системные кнопки */
+.auth-section {
+    margin-bottom: 20px;
+}
+.input-group {
+    margin-bottom: 15px;
+}
+.input-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+.hud-input {
+    width: 100%;
+    background: #050a06;
+    border: 1px solid #00ff66;
+    color: #00ff66;
+    padding: 12px;
+    font-size: 1.1rem;
+    outline: none;
+}
+.hud-input:focus {
+    border-color: #ff5500;
+    box-shadow: 0 0 8px rgba(255, 85, 0, 0.4);
+}
+.hud-btn {
+    width: 100%;
+    background: #ff5500;
+    border: 2px solid #b33c00;
+    color: #000000;
+    font-weight: bold;
+    padding: 15px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.hud-btn:active {
+    background: #b33c00;
+    color: #00ff66;
+}
+.alert-box {
+    border: 1px solid #ff5500;
+    background: rgba(255, 85, 0, 0.1);
+    color: #ff5500;
+    padding: 10px;
+    margin-top: 15px;
+    font-size: 0.85rem;
+    display: none;
+}
+.hidden-module {
+    display: none !important;
+}
+/* Новые стили для механики сопоставления Задания 5 */
+.match-grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+.match-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.match-element {
+    background: rgba(0, 255, 102, 0.05);
+    border: 1px solid #00ff66;
+    padding: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+/* Состояния элементов */
+.match-element.selected {
+    background: rgba(0, 255, 102, 0.2);
+    border-color: #00ff66;
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+    animation: hud-blink 1s infinite alternate;
+}
+.match-element.matched {
+    background: rgba(255, 85, 0, 0.1);
+    border-color: rgba(255, 85, 0, 0.4);
+    color: rgba(255, 85, 0, 0.6);
+    cursor: not-allowed;
+}
+@keyframes hud-blink {
+    from { opacity: 1; }
+    to { opacity: 0.6; }
+}
