@@ -125,9 +125,10 @@ const TASKS_DATABASE = {
             id: "t3_q1",
             type: "text-inputs",
             title: "Контроль Темы 3 // Вставь верные биологические термины",
-            text: `Приблизительно 1–1,5% общей массы клетки составляют <span style="color:#ff5500;">[М...]</span> <input type="text" data-idx="0" class="hud-input" style="display:inline-block; width:120px; padding:4px;" autocomplete="off"> <span style="color:#ff5500;">[с...]</span> <input type="text" data-idx="1" class="hud-input" style="display:inline-block; width:80px; padding:4px;" autocomplete="off">, в частности соли кальция, калия, фосфора.`,
-            verify: (card) => {
+            text: 'Приблизительно 1–1,5% общей массы клетки составляют <span style="color:#ff5500;">[М...]</span> <input type="text" data-idx="0" class="hud-input" style="display:inline-block; width:120px; padding:4px;" autocomplete="off"> <span style="color:#ff5500;">[с...]</span> <input type="text" data-idx="1" class="hud-input" style="display:inline-block; width:80px; padding:4px;" autocomplete="off">, в частности соли кальция, калия, фосфора.',
+            verify: function(card) {
                 const inputs = card.querySelectorAll('input[type="text"]');
+                if (inputs.length < 2) return false;
                 const val1 = inputs[0].value.trim().toLowerCase();
                 const val2 = inputs[1].value.trim().toLowerCase();
                 return val1.startsWith("минераль") && val2.startsWith("сол");
@@ -139,7 +140,7 @@ const TASKS_DATABASE = {
             title: "Контроль Темы 3 // Выбери верный ответ",
             text: "Какие органические вещества являются хранилищем наследственной информации для клетки?",
             options: ["Белки", "Жиры", "Углеводы", "Нуклеиновые кислоты"],
-            verify: (card) => {
+            verify: function(card) {
                 const rad = card.querySelector('input[type="radio"]:checked');
                 return rad && rad.value === "Нуклеиновые кислоты";
             }
@@ -155,18 +156,18 @@ const TASKS_DATABASE = {
             text: "Перетащите элементы флоры в соответствующие технологические ячейки:",
             bank: ["улотрикс", "папоротник", "лилии", "хвощ", "груша", "ольха"],
             groups: ["Низшие растения", "Высшие споровые", "Высшие семенные"],
-            verify: (card) => {
-                const g1 = Array.from(card.querySelectorAll("[data-group='0'] [data-word]")).map(el => el.dataset.word);
-                const g2 = Array.from(card.querySelectorAll("[data-group='1'] [data-word]")).map(el => el.dataset.word);
-                const g3 = Array.from(document.querySelectorAll("[data-group='2'] [data-word]")).map(el => el.dataset.word);
+            verify: function(card) {
+                const g1 = Array.from(card.querySelectorAll("[data-group='0'] [data-word]")).map(function(el) { return el.dataset.word; });
+                const g2 = Array.from(card.querySelectorAll("[data-group='1'] [data-word]")).map(function(el) { return el.dataset.word; });
+                const g3 = Array.from(card.querySelectorAll("[data-group='2'] [data-word]")).map(function(el) { return el.dataset.word; });
                 
                 const exp1 = ["улотрикс"];
                 const exp2 = ["папоротник", "хвощ"];
                 const exp3 = ["лилии", "груша", "ольха"];
                 
-                return g1.length === exp1.length && g1.every(v => exp1.includes(v)) &&
-                       g2.length === exp2.length && g2.every(v => exp2.includes(v)) &&
-                       g3.length === exp3.length && g3.every(v => exp3.includes(v));
+                return g1.length === exp1.length && g1.every(function(v) { return exp1.includes(v); }) &&
+                       g2.length === exp2.length && g2.every(function(v) { return exp2.includes(v); }) &&
+                       g3.length === exp3.length && g3.every(function(v) { return exp3.includes(v); });
             }
         },
         {
@@ -184,18 +185,18 @@ const TASKS_DATABASE = {
                 { corr: "семенные", txt: "ПОКРЫТОСЕМЕННЫЕ" },
                 { corr: "споровые", txt: "МОХОВИДНЫЕ" }
             ],
-            verify: (card) => {
-                const rights = card.querySelectorAll(".t2-right");
+            verify: function(card) {
+                const rights = card.querySelectorAll(".ctrl-right");
                 let correct = true;
                 let count = 0;
-                rights.forEach(r => {
+                rights.forEach(function(r) {
                     if (r.dataset.userAnswer) count++;
                     if (r.dataset.userAnswer !== r.getAttribute("data-correct")) correct = false;
                 });
                 return correct && count === 3;
             }
         }
-    ]
+    ],
 // ЗАВЕРШЕНИЕ РАСПРЕДЕЛЕННОЙ БАЗЫ ДАННЫХ (ТЕМЫ 5-6 ИЗ 6)
 // Добавляется строго внутрь объекта TASKS_DATABASE после theme4
 
