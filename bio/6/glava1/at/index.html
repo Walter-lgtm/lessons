@@ -1,1 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ГГЛАВА 1 ТЕСТОВЫЙ КОНТРОЛЬ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="term-container">
+    <div class="term-header">
+        <div class="lambda-logo">λ</div>
+        <div class="system-status">Тестовый контроль: Глава 1</div>
+    </div>
+
+    <!-- Блок авторизации (UID "ФИО+Класс") -->
+    <div id="auth-block" class="auth-section">
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Инициализация биометрии (Ф И О)</span>
+            <input type="text" id="student-fio" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Сектор назначения (К л а с с)</span>
+            <input type="text" id="student-class" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <button id="auth-trigger" class="hud-btn">Генерировать случайный вариант</button>
+        <div id="auth-alert" class="alert-box"></div>
+    </div>
+
+    <!-- Основной контейнер динамических заданий -->
+    <div id="biology-content" class="hidden-module">
+        <div style="border: 1px dashed rgba(0, 255, 102, 0.4); padding: 10px; margin-bottom: 20px; text-align: center; background: rgba(0,255,102,0.02);">
+            <span style="color: #ff5500; font-weight: bold; font-size: 0.85rem;">[ДИРЕКТИВА λ-CORE]:</span> 
+            <span style="font-size: 0.85rem;">Сформирован уникальный вариант. Всего заданий: 6 (по 1 вопросу из каждой темы ГЛАВЫ 1). Максимальный балл: 6.</span>
+        </div>
+
+        <!-- Сюда JavaScript динамически вставит 6 случайных карточек -->
+        <div id="dynamic-tasks-container"></div>
+
+        <!-- Системная кнопка отправки результатов -->
+        <button id="submit-tasks" class="hud-btn" style="background: #ff5500; border-color: #b33c00; margin-top: 25px;">Синхронизировать отчет контроля</button>
+    
+    </div> <!-- Конец #biology-content -->
+</div> <!-- Конец .term-container -->
+
+<script src="script.js"></script>
+</body>
+</html>
