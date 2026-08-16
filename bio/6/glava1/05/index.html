@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Глава 1. Растение — живой организм</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="term-container">
+    <div class="term-header">
+        <div class="lambda-logo">λ</div>
+        <div class="system-status">§ 4. Жизнедеятельность клетки, её деление и рост</div>
+    </div>
+
+    <!-- Блок авторизации (UID "ФИО+Класс") -->
+    <div id="auth-block" class="auth-section">
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Инициализация биометрии (Опорные символы: Ф И О)</span>
+            <input type="text" id="student-fio" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Сектор назначения (Опорные символы: К л а с с)</span>
+            <input type="text" id="student-class" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <button id="auth-trigger" class="hud-btn">Доступ к Лаборатории</button>
+        <div id="auth-alert" class="alert-box"></div>
+    </div>
+
+    <!-- Основной контейнер ботанических заданий -->
+    <div id="biology-content" class="hidden-module">
+        
+        <!-- Задание 1 -->
+        <section class="task-card">
+            <div class="task-title">Задание 1 // Вставь верные биологические термины</div>
+            <div class="task-text">
+                Живое содержимое клетки — 
+                <span style="font-size:0.8rem; color:#ff5500;">[Ц...]</span>
+                <input type="text" id="task1-in1" class="hud-input" style="display:inline-block; width:120px; padding:4px; font-size:0.9rem;" autocomplete="off"> 
+                постоянно перемещается внутри клетки. Это движение легко заметить по движению 
+                <span style="font-size:0.8rem; color:#ff5500;">[о...]</span>
+                <input type="text" id="task1-in2" class="hud-input" style="display:inline-block; width:100px; padding:4px; font-size:0.9rem;" autocomplete="off"> -
+                <span style="font-size:0.8rem; color:#ff5500;">[д...]</span>
+                <input type="text" id="task1-in3" class="hud-input" style="display:inline-block; width:100px; padding:4px; font-size:0.9rem;" autocomplete="off">.
+                Движение 
+                <span style="font-size:0.8rem; color:#ff5500;">[ц...]</span>
+                <input type="text" id="task1-in4" class="hud-input" style="display:inline-block; width:120px; padding:4px; font-size:0.9rem;" autocomplete="off"> 
+                способствует перемещению в клетках питательных веществ, 
+                <span style="font-size:0.8rem; color:#ff5500;">[в...]</span>
+                <input type="text" id="task1-in5" class="hud-input" style="display:inline-block; width:80px; padding:4px; font-size:0.9rem;" autocomplete="off"> и воздуха. Чем активнее 
+                <span style="font-size:0.8rem; color:#ff5500;">[ж...]</span>
+                <input type="text" id="task1-in6" class="hud-input" style="display:inline-block; width:150px; padding:4px; font-size:0.9rem;" autocomplete="off"> клетки, тем больше скорость движения цитоплазмы.
+            </div>
+        </section>
+
+        <!-- Задание 2 -->
+        <section class="task-card">
+            <div class="task-title">Задание 2 // Выбери верный ответ</div>
+            <div class="task-text">1. В каких органоидах клетки запасается энергия?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task2" value="В хлоропластах"> В хлоропластах</label>
+                <label class="option-label"><input type="radio" name="task2" value="В хромосомах"> В хромосомах</label>
+                <label class="option-label"><input type="radio" name="task2" value="В хромопластах"> В хромопластах</label>
+                <label class="option-label"><input type="radio" name="task2" value="В митохондриях"> В митохондриях</label>
+                <label class="option-label"><input type="radio" name="task2" value="В лизосомах"> В лизосомах</label>
+                <label class="option-label"><input type="radio" name="task2" value="В вакуолях"> В вакуолях</label>
+            </div>
+        </section>
+
+        <!-- Задание 3 -->
+        <section class="task-card">
+            <div class="task-title">Задание 3 // Выбери верный ответ</div>
+            <div class="task-text">1. Период существования клетки с момента её возникновения (путём деления материнской клетки) до собственного деления и гибели называют:</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task3" value="Ростом"> Ростом</label>
+                <label class="option-label"><input type="radio" name="task3" value="Размножением"> Размножением</label>
+                <label class="option-label"><input type="radio" name="task3" value="Жизненным циклом"> Жизненным циклом</label>
+                <label class="option-label"><input type="radio" name="task3" value="Старением"> Старением</label>
+            </div>
+        </section>
+
+        <!-- Задание 4 -->
+        <section class="task-card">
+            <div class="task-title">Задание 4 // Выбери верный ответ</div>
+            <div class="task-text">1. Какой известный учёный открыл процесс деления клеток?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task4" value="Гук"> Гук</label>
+                <label class="option-label"><input type="radio" name="task4" value="Левенгук"> Левенгук</label>
+                <label class="option-label"><input type="radio" name="task4" value="Шванн"> Шванн</label>
+                <label class="option-label"><input type="radio" name="task4" value="Шлейден"> Шлейден</label>
+                <label class="option-label"><input type="radio" name="task4" value="Вирхов"> Вирхов</label>
+                <label class="option-label"><input type="radio" name="task4" value="Реди"> Реди</label>
+            </div>
+        </section>
+
+        <!-- Задание 5 -->
+        <section class="task-card">
+            <div class="task-title">Задание 5 // Вставь верный биологический термин</div>
+            <div class="task-text">
+                Живые растущие клетки растения могут изменять свою форму. И оболочки округляются и местами отходят друг от друга. В этих участках межклеточное вещество разрушается. Возникают 
+                <select id="task5-sel" class="hud-select">
+                    <option value="">-- выбрать --</option>
+                    <option value="пластиды">пластиды</option>
+                    <option value="вакуоли">вакуоли</option>
+                    <option value="межклетники">межклетники</option>
+                </select>, заполненные воздухом.
+            </div>
+        </section>
+        <!-- Задание 6 -->
+        <section class="task-card">
+            <div class="task-title">Задание 6 // Выбери верный ответ</div>
+            <div class="task-text">1. Как называется свойство живых клеток реагировать на внутреннее и внешнее воздействие?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task6" value="Рост"> Рост</label>
+                <label class="option-label"><input type="radio" name="task6" value="Размножение"> Размножение</label>
+                <label class="option-label"><input type="radio" name="task6" value="Раздражимость"> Раздражимость</label>
+                <label class="option-label"><input type="radio" name="task6" value="Обмен веществ"> Обмен веществ</label>
+            </div>
+        </section>
+
+        <!-- Задание 7 -->
+        <section class="task-card">
+            <div class="task-title">Задание 7 // Анализ графической схемы [cell.png]</div>
+            <div class="task-text">1. Какой цифрой на рисунке строения растительной клетки указано, где располагаются поры для взаимодействия клеток между собой?</div>
+            <div style="text-align: center; margin: 10px 0;">
+                <img src="cell.png" alt="Растительная клетка" style="max-width: 100%; height: auto; border: 1px solid #00ff66;">
+            </div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task7" value="4"> 4</label>
+                <label class="option-label"><input type="radio" name="task7" value="5"> 5</label>
+                <label class="option-label"><input type="radio" name="task7" value="7"> 7</label>
+                <label class="option-label"><input type="radio" name="task7" value="2"> 2</label>
+            </div>
+        </section>
+
+        <!-- Задание 8 -->
+        <section class="task-card">
+            <div class="task-title">Задание 8 // Анализ стадий развития [cell_01.png]</div>
+            <div class="task-text">1. Выбери правильную последовательность расположения клеток от самой молодой до самой старой.</div>
+            <div style="text-align: center; margin: 10px 0;">
+                <img src="cell_01.png" alt="Возраст клетки" style="max-width: 100%; height: auto; border: 1px solid #00ff66;">
+            </div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task8" value="3, 5, 1, 4, 2"> 3, 5, 1, 4, 2</label>
+                <label class="option-label"><input type="radio" name="task8" value="5, 2, 1, 3, 4"> 5, 2, 1, 3, 4</label>
+                <label class="option-label"><input type="radio" name="task8" value="1, 2, 3, 4, 5"> 1, 2, 3, 4, 5</label>
+            </div>
+        </section>
+
+        <!-- Задание 9 -->
+        <section class="task-card">
+            <div class="task-title">Задание 9 // Схема деления [dell.png]</div>
+            <div class="task-text">1. Выбери правильную последовательность расположения клеток в процессе деления.</div>
+            <div style="text-align: center; margin: 10px 0;">
+                <img src="dell.png" alt="Деление клетки" style="max-width: 100%; height: auto; border: 1px solid #00ff66;">
+            </div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task9" value="2, 1, 3, 5, 6, 4"> 2, 1, 3, 5, 6, 4</label>
+                <label class="option-label"><input type="radio" name="task9" value="5, 2, 1, 3, 4, 6"> 5, 2, 1, 3, 4, 6</label>
+                <label class="option-label"><input type="radio" name="task9" value="1, 2, 3, 4, 5, 6"> 1, 2, 3, 4, 5, 6</label>
+                <label class="option-label"><input type="radio" name="task9" value="5, 4, 3, 2, 1, 6"> 5, 4, 3, 2, 1, 6</label>
+            </div>
+        </section>
+
+        <!-- Задание 10 -->
+        <section class="task-card">
+            <div class="task-title">Задание 10 // Контроль клетки [cell.png]</div>
+            <div class="task-text">1. Какой цифрой выделен органоид, который полностью контролирует жизнедеятельность растительной клетки?</div>
+            <div style="text-align: center; margin: 10px 0;">
+                <img src="cell.png" alt="Растительная клетка control" style="max-width: 100%; height: auto; border: 1px solid #00ff66;">
+            </div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task10" value="2"> 2</label>
+                <label class="option-label"><input type="radio" name="task10" value="3"> 3</label>
+                <label class="option-label"><input type="radio" name="task10" value="1"> 1</label>
+                <label class="option-label"><input type="radio" name="task10" value="6"> 6</label>
+            </div>
+        </section>
+
+        <!-- Задание 11 -->
+        <section class="task-card">
+            <div class="task-title">Задание 11 // Фазы митоза [dell.png]</div>
+            <div class="task-text">1. Какой цифрой на рисунке отмечена клетка с расхождением хроматид к разным полюсам?</div>
+            <div style="text-align: center; margin: 10px 0;">
+                <img src="dell.png" alt="Деление клетки анафаза" style="max-width: 100%; height: auto; border: 1px solid #00ff66;">
+            </div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task11" value="1"> 1</label>
+                <label class="option-label"><input type="radio" name="task11" value="3"> 3</label>
+                <label class="option-label"><input type="radio" name="task11" value="5"> 5</label>
+                <label class="option-label"><input type="radio" name="task11" value="6"> 6</label>
+            </div>
+        </section>
+
+        <!-- Задание 12 -->
+        <section class="task-card">
+            <div class="task-title">Задание 12 // Органоиды [cell_02.png]</div>
+            <div class="task-text">1. Как называется органоид растительной клетки, отмеченный цифрой 6?</div>
+            <div style="text-align: center; margin: 10px 0;">
+                <img src="cell_02.png" alt="Растительная клетка митохондрия" style="max-width: 100%; height: auto; border: 1px solid #00ff66;">
+            </div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task12" value="Ядро"> Ядро</label>
+                <label class="option-label"><input type="radio" name="task12" value="Вакуоль"> Вакуоль</label>
+                <label class="option-label"><input type="radio" name="task12" value="Хлоропласт"> Хлоропласт</label>
+                <label class="option-label"><input type="radio" name="task12" value="Митохондрия"> Митохондрия</label>
+            </div>
+        </section>
+
+        <!-- Системная кнопка отправки результатов -->
+        <button id="submit-tasks" class="hud-btn" style="background: #ff5500; border-color: #b33c00; margin-top: 25px;">Синхронизировать отчет</button>
+    
+    </div> <!-- Конец #biology-content -->
+</div> <!-- Конец .term-container -->
+
+<script src="script.js"></script>
+</body>
+</html>
