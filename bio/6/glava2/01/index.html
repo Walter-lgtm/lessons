@@ -1,1 +1,365 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Глава 2. Строение и многообразие покрытосеменных растений</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="term-container">
+    <div class="term-header">
+        <div class="lambda-logo">λ</div>
+        <div class="system-status">§7. Строение семян</div>
+    </div>
+
+    <!-- Блок авторизации (UID "ФИО+Класс") -->
+    <div id="auth-block" class="auth-section">
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Инициализация биометрии (Ф И О)</span>
+            <input type="text" id="student-fio" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Сектор назначения (К л а с с)</span>
+            <input type="text" id="student-class" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <button id="auth-trigger" class="hud-btn">Доступ к Параграфу №7 (§7)</button>
+        <div id="auth-alert" class="alert-box"></div>
+    </div>
+
+    <!-- Основной контейнер ботанических заданий -->
+    <div id="biology-content" class="hidden-module">
+        
+        <!-- Задание 1 -->
+        <section class="task-card">
+            <div class="task-title">Задание 1 // Распредели по группам растения по строению семян</div>
+            <div class="task-text" style="font-size: 0.85rem; color: #ff5500; margin-bottom: 12px;">[ПРОТОКОЛ]: Перетащите структуры в технологические контейнеры.</div>
+            <div id="t1-drag-bank" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; padding: 10px; background: rgba(0, 255, 102, 0.02); border: 1px dashed rgba(0, 255, 102, 0.3);">
+                <div class="match-element" draggable="true" data-word="лилия">лилия</div>
+                <div class="match-element" draggable="true" data-word="редис">редис</div>
+                <div class="match-element" draggable="true" data-word="кукуруза">кукуруза</div>
+                <div class="match-element" draggable="true" data-word="томаты">томаты</div>
+                <div class="match-element" draggable="true" data-word="пшеница">пшеница</div>
+                <div class="match-element" draggable="true" data-word="свёкла">свёкла</div>
+                <div class="match-element" draggable="true" data-word="рожь">рожь</div>
+                <div class="match-element" draggable="true" data-word="яблоня">яблоня</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <div style="border: 1px dashed #00ff66; padding: 10px;">
+                    <div style="font-size: 0.9rem; color: #ff5500; font-weight: bold; margin-bottom: 8px;">Однодольные</div>
+                    <div id="t1-group1" style="min-height: 50px; background: rgba(0, 255, 102, 0.03); display: flex; flex-wrap: wrap; gap: 6px; padding: 5px;"></div>
+                </div>
+                <div style="border: 1px dashed #00ff66; padding: 10px;">
+                    <div style="font-size: 0.9rem; color: #ff5500; font-weight: bold; margin-bottom: 8px;">Двудольные</div>
+                    <div id="t1-group2" style="min-height: 50px; background: rgba(0, 255, 102, 0.03); display: flex; flex-wrap: wrap; gap: 6px; padding: 5px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Задание 2 -->
+        <section class="task-card">
+            <div class="task-title">Задание 2 // Распредели по группам растения по строению семян</div>
+            <div id="t2-drag-bank" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; padding: 10px; background: rgba(0, 255, 102, 0.02); border: 1px dashed rgba(0, 255, 102, 0.3);">
+                <div class="match-element" draggable="true" data-word="морковь">морковь</div>
+                <div class="match-element" draggable="true" data-word="ландыш">ландыш</div>
+                <div class="match-element" draggable="true" data-word="слива">слива</div>
+                <div class="match-element" draggable="true" data-word="овёс">овёс</div>
+                <div class="match-element" draggable="true" data-word="ячмень">ячмень</div>
+                <div class="match-element" draggable="true" data-word="капуста">капуста</div>
+                <div class="match-element" draggable="true" data-word="чеснок">чеснок</div>
+                <div class="match-element" draggable="true" data-word="подсолнечник">подсолнечник</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <div style="border: 1px dashed #00ff66; padding: 10px;">
+                    <div style="font-size: 0.9rem; color: #ff5500; font-weight: bold; margin-bottom: 8px;">Однодольные</div>
+                    <div id="t2-group1" style="min-height: 50px; background: rgba(0, 255, 102, 0.03); display: flex; flex-wrap: wrap; gap: 6px; padding: 5px;"></div>
+                </div>
+                <div style="border: 1px dashed #00ff66; padding: 10px;">
+                    <div style="font-size: 0.9rem; color: #ff5500; font-weight: bold; margin-bottom: 8px;">Двудольные</div>
+                    <div id="t2-group2" style="min-height: 50px; background: rgba(0, 255, 102, 0.03); display: flex; flex-wrap: wrap; gap: 6px; padding: 5px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Задание 3 -->
+        <section class="task-card">
+            <div class="task-title">Задание 3 // Распредели по группам растения по локализации запаса веществ</div>
+            <div id="t3-drag-bank" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; padding: 10px; background: rgba(0, 255, 102, 0.02); border: 1px dashed rgba(0, 255, 102, 0.3);">
+                <div class="match-element" draggable="true" data-word="сирень">сирень</div>
+                <div class="match-element" draggable="true" data-word="ячмень">ячмень</div>
+                <div class="match-element" draggable="true" data-word="картофель">картофель</div>
+                <div class="match-element" draggable="true" data-word="лук">лук</div>
+                <div class="match-element" draggable="true" data-word="рожь">рожь</div>
+                <div class="match-element" draggable="true" data-word="фасоль">фасоль</div>
+                <div class="match-element" draggable="true" data-word="тигровая лилия">тигровая лилия</div>
+                <div class="match-element" draggable="true" data-word="вишня">вишня</div>
+                <div class="match-element" draggable="true" data-word="баклажан">баклажан</div>
+                <div class="match-element" draggable="true" data-word="горох">горох</div>
+                <div class="match-element" draggable="true" data-word="кукуруза">кукуруза</div>
+                <div class="match-element" draggable="true" data-word="тюльпан">тюльпан</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <div style="border: 1px dashed #00ff66; padding: 10px;">
+                    <div style="font-size: 0.9rem; color: #ff5500; font-weight: bold; margin-bottom: 8px;">Запас питательных веществ только в эндосперме</div>
+                    <div id="t3-group1" style="min-height: 50px; background: rgba(0, 255, 102, 0.03); display: flex; flex-wrap: wrap; gap: 6px; padding: 5px;"></div>
+                </div>
+                <div style="border: 1px dashed #00ff66; padding: 10px;">
+                    <div style="font-size: 0.9rem; color: #ff5500; font-weight: bold; margin-bottom: 8px;">Запас питательных веществ в семядолях</div>
+                    <div id="t3-group2" style="min-height: 50px; background: rgba(0, 255, 102, 0.03); display: flex; flex-wrap: wrap; gap: 6px; padding: 5px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Задание 4 -->
+        <section class="task-card">
+            <div class="task-title">Задание 4 // Выбери верный ответ</div>
+            <div class="task-text">1. Рассмотри таблицу масличности семян. Выбери верный ответ с тремя растениями, которые содержат больше всего жира в семенах:</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task4" value="1"> Грецкий орех, какао, кокосовая пальма</label>
+                <label class="option-label"><input type="radio" name="task4" value="2"> Лесной орех, грецкий орех, подсолнечник</label>
+                <label class="option-label"><input type="radio" name="task4" value="3"> Лесной орех, кокосовая пальма, какао</label>
+                <label class="option-label"><input type="radio" name="task4" value="4"> Лесной орех, кокосовая пальма, подсолнечник</label>
+            </div>
+        </section>
+
+        <!-- Задание 5 -->
+        <section class="task-card">
+            <div class="task-title">Задание 5 // Выбери верный ответ</div>
+            <div class="task-text">1. К каким органам растения относятся семена?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task5" value="Вегетативным"> Вегетативным</label>
+                <label class="option-label"><input type="radio" name="task5" value="Генеративным"> Генеративным</label>
+                <label class="option-label"><input type="radio" name="task5" value="Побеговым"> Побеговым</label>
+                <label class="option-label"><input type="radio" name="task5" value="Корневым"> Корневым</label>
+            </div>
+        </section>
+        <!-- Задание 6 -->
+        <section class="task-card">
+            <div class="task-title">Задание 6 // Выбери верные ответы</div>
+            <div class="task-text">1. Определи по характеристикам строения цветков и семян, к каким биологическим группам относится фасоль? (Несколько вариантов)</div>
+            <div class="option-group">
+                <label class="option-label"><input type="checkbox" name="task6" value="Однодольные"> Однодольные</label>
+                <label class="option-label"><input type="checkbox" name="task6" value="Двудольные"> Двудольные</label>
+                <label class="option-label"><input type="checkbox" name="task6" value="Раздельнополые"> Раздельнополые</label>
+                <label class="option-label"><input type="checkbox" name="task6" value="Обоеполые"> Обоеполые</label>
+            </div>
+        </section>
+
+        <!-- Задание 7 -->
+        <section class="task-card">
+            <div class="task-title">Задание 7 // Впиши верные биологические термины</div>
+            <div class="task-text" style="line-height: 1.8;">
+                <span style="font-size:0.8rem; color:#ff5500;">[З...]</span>
+                <input type="text" id="task7-in1" class="hud-input" style="display:inline-block; width:110px; padding:4px; font-size:0.9rem;" autocomplete="off"> 
+                — зачаток будущего растения. Запас питательных веществ семени большинства видов находится в особой запасающей ткани — 
+                <span style="font-size:0.8rem; color:#ff5500;">[э...]</span>
+                <input type="text" id="task7-in2" class="hud-input" style="display:inline-block; width:110px; padding:4px; font-size:0.9rem;" autocomplete="off">. 
+                В 
+                <span style="font-size:0.8rem; color:#ff5500;">[з...]</span>
+                <input type="text" id="task7-in3" class="hud-input" style="display:inline-block; width:100px; padding:4px; font-size:0.9rem;" autocomplete="off"> 
+                различают 
+                <span style="font-size:0.8rem; color:#ff5500;">[к...]</span>
+                <input type="text" id="task7-in4" class="hud-input" style="display:inline-block; width:100px; padding:4px; font-size:0.9rem;" autocomplete="off">, 
+                <span style="font-size:0.8rem; color:#ff5500;">[с...]</span>
+                <input type="text" id="task7-in5" class="hud-input" style="display:inline-block; width:100px; padding:4px; font-size:0.9rem;" autocomplete="off">, 
+                <span style="font-size:0.8rem; color:#ff5500;">[п...]</span>
+                <input type="text" id="task7-in6" class="hud-input" style="display:inline-block; width:100px; padding:4px; font-size:0.9rem;" autocomplete="off"> и 
+                <span style="font-size:0.8rem; color:#ff5500;">[с...]</span>
+                <input type="text" id="task7-in7" class="hud-input" style="display:inline-block; width:100px; padding:4px; font-size:0.9rem;" autocomplete="off">. 
+                <span style="font-size:0.8rem; color:#ff5500;">[С...]</span>
+                <input type="text" id="task7-in8" class="hud-input" style="display:inline-block; width:110px; padding:4px; font-size:0.9rem;" autocomplete="off"> 
+                — это первые листья зародыша растения.
+            </div>
+        </section>
+
+        <!-- Задание 8 -->
+        <section class="task-card">
+            <div class="task-title">Задание 8 // Зачеркни лишние слова</div>
+            <div class="task-text" style="line-height: 1.8;" id="task8-bank">
+                У фасоли , <span class="word-token" data-word="пшеницы ,">пшеницы ,</span> гороха , <span class="word-token" data-word="тюльпана ,">тюльпана ,</span> вишни и сливы , малины , <span class="word-token" data-word="овса и">овса и</span> многих других растений зародыши семян имеют две семядоли. Эти растения называют двудольными. <br><br>
+                Растения, имеющие в зародыше семени одну семядолю, называют однодольными. К ним относят <span class="word-token" data-word="горох ,">горох ,</span> <span class="word-token" data-word="капусту ,">капусту ,</span> пшеницу, лук, кукурузу и <span class="word-token" data-word="яблоню ,">яблоню ,</span> <span class="word-token" data-word="томаты ,">томаты ,</span> <span class="word-token" data-word="огурец">огурец</span> и <span class="word-token" data-word="картофель.">картофель.</span>
+            </div>
+        </section>
+
+        <!-- Задание 9 -->
+        <section class="task-card">
+            <div class="task-title">Задание 9 // Выбери верный ответ</div>
+            <div class="task-text">1. У какого из перечисленных растений плод зерновка?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task9" value="Горох"> Горох</label>
+                <label class="option-label"><input type="radio" name="task9" value="Фасоль"> Фасоль</label>
+                <label class="option-label"><input type="radio" name="task9" value="Пшеница"> Пшеница</label>
+                <label class="option-label"><input type="radio" name="task9" value="Мак"> Мак</label>
+                <label class="option-label"><input type="radio" name="task9" value="Вишня"> Вишня</label>
+                <label class="option-label"><input type="radio" name="task9" value="Хлопчатник"> Хлопчатник</label>
+            </div>
+        </section>
+
+        <!-- Задание 10 -->
+        <section class="task-card">
+            <div class="task-title">Задание 10 // Выбери верные ответы</div>
+            <div class="task-text">1. Какие из перечисленных растений НЕ относятся к однодольным? (Несколько вариантов)</div>
+            <div class="option-group">
+                <label class="option-label"><input type="checkbox" name="task10" value="Свёкла"> Свёкла</label>
+                <label class="option-label"><input type="checkbox" name="task10" value="Овёс"> Овёс</label>
+                <label class="option-label"><input type="checkbox" name="task10" value="Рожь"> Рожь</label>
+                <label class="option-label"><input type="checkbox" name="task10" value="Лилия"> Лилия</label>
+                <label class="option-label"><input type="checkbox" name="task10" value="Тюльпан"> Тюльпан</label>
+                <label class="option-label"><input type="checkbox" name="task10" value="Морковь"> Морковь</label>
+            </div>
+        </section>
+
+        <!-- Задание 11 -->
+        <section class="task-card">
+            <div class="task-title">Задание 11 // Выбери верные ответы</div>
+            <div class="task-text">1. Какие из перечисленных растений НЕ относятся к двудольным? (Несколько вариантов)</div>
+            <div class="option-group">
+                <label class="option-label"><input type="checkbox" name="task11" value="Рожь"> Рожь</label>
+                <label class="option-label"><input type="checkbox" name="task11" value="Ландыш"> Ландыш</label>
+                <label class="option-label"><input type="checkbox" name="task11" value="Персик"> Персик</label>
+                <label class="option-label"><input type="checkbox" name="task11" value="Арбуз"> Арбуз</label>
+                <label class="option-label"><input type="checkbox" name="task11" value="Болгарский перец"> Болгарский перец</label>
+                <label class="option-label"><input type="checkbox" name="task11" value="Кабачок"> Кабачок</label>
+            </div>
+        </section>
+
+        <!-- Задание 12 -->
+        <section class="task-card">
+            <div class="task-title">Задание 12 // Анализ графической схемы [sem.png]</div>
+            <div class="task-text">1. Какой цифрой на рисунке обозначена семядоля в строении семени?</div>
+            <div style="text-align: center; margin: 10px 0;">
+                <img src="sem.png" alt="Зерновка пшеницы" style="max-width: 100%; height: auto; border: 1px solid #00ff66;">
+            </div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task12" value="6"> 6</label>
+                <label class="option-label"><input type="radio" name="task12" value="5"> 5</label>
+                <label class="option-label"><input type="radio" name="task12" value="3"> 3</label>
+                <label class="option-label"><input type="radio" name="task12" value="1"> 1</label>
+                <label class="option-label"><input type="radio" name="task12" value="2"> 2</label>
+                <label class="option-label"><input type="radio" name="task12" value="4"> 4</label>
+            </div>
+        </section>
+        <!-- Задание 13 -->
+        <section class="task-card">
+            <div class="task-title">Задание 13 // Анализ графической схемы [sem.png]</div>
+            <div class="task-text">1. Какое растение по строению семени представлено на рисунке?</div>
+            <div style="text-align: center; margin: 10px 0;">
+                <img src="sem.png" alt="Зерновка пшеницы класс" style="max-width: 100%; height: auto; border: 1px solid #00ff66;">
+            </div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task13" value="Двудольное"> Двудольное</label>
+                <label class="option-label"><input type="radio" name="task13" value="Однодольное"> Однодольное</label>
+                <label class="option-label"><input type="radio" name="task13" value="Однодомное"> Однодомное</label>
+                <label class="option-label"><input type="radio" name="task13" value="Двудомное"> Двудомное</label>
+                <label class="option-label"><input type="radio" name="task13" value="Обоеполое"> Обоеполое</label>
+            </div>
+        </section>
+
+        <!-- Задание 14 -->
+        <section class="task-card">
+            <div class="task-title">Задание 14 // Анализ прорастания [seed_leaves.png]</div>
+            <div class="task-text">1. Рассмотри рисунок. Какая часть семени является зародышевыми листьями растения?</div>
+            <div style="text-align: center; margin: 10px 0;">
+                <img src="seed_leaves.png" alt="Прорастание" style="max-width: 100%; height: auto; border: 1px solid #00ff66;">
+            </div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task14" value="Семядоли"> Семядоли</label>
+                <label class="option-label"><input type="radio" name="task14" value="Почечка"> Почечка</label>
+                <label class="option-label"><input type="radio" name="task14" value="Стебелёк"> Стебелёк</label>
+                <label class="option-label"><input type="radio" name="task14" value="Корешок"> Корешок</label>
+            </div>
+        </section>
+
+        <!-- Задание 15 -->
+        <section class="task-card">
+            <div class="task-title">Задание 15 // Анализ строения семян [seed_compare.png]</div>
+            <div class="task-text">1. Какой рисунок (слева или справа) отображает строение семян персика?</div>
+            <div style="text-align: center; margin: 10px 0;">
+                <img src="seed_compare.png" alt="Сравнение семян" style="max-width: 100%; height: auto; border: 1px solid #00ff66;">
+            </div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task15" value="Справа"> Справа</label>
+                <label class="option-label"><input type="radio" name="task15" value="Слева"> Слева</label>
+                <label class="option-label"><input type="radio" name="task15" value="Оба"> Оба</label>
+                <label class="option-label"><input type="radio" name="task15" value="Никакой"> Никакой</label>
+            </div>
+        </section>
+
+        <!-- Задание 16 -->
+        <section class="task-card">
+            <div class="task-title">Задание 16 // Классификация растений [seed_compare.png]</div>
+            <div class="task-text">1. Рассмотри рисунок. Чем различаются двудольные и однодольные растения?</div>
+            <div style="text-align: center; margin: 10px 0;">
+                <img src="seed_compare.png" alt="Сравнение семян повтор" style="max-width: 100%; height: auto; border: 1px solid #00ff66;">
+            </div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task16" value="Количеством семядолей"> Количеством семядолей</label>
+                <label class="option-label"><input type="radio" name="task16" value="Строением корешка"> Строением корешка</label>
+                <label class="option-label"><input type="radio" name="task16" value="Строением стебелька"> Строением стебелька</label>
+                <label class="option-label"><input type="radio" name="task16" value="Количеством почек"> Количеством почек</label>
+            </div>
+        </section>
+
+        <!-- Задание 17 -->
+        <section class="task-card">
+            <div class="task-title">Задание 17 // Выбери верные биологические термины</div>
+            <div class="task-text" style="line-height: 2;">
+                <select id="task17-sel1" class="hud-select">
+                    <option value="">-- выбрать --</option>
+                    <option value="Зародыш">Зародыш</option>
+                    <option value="Побёг">Побег</option>
+                    <option value="Лист">Лист</option>
+                </select> 
+                — зачаток будущего растения. Запас питательных веществ семени большинства видов однодольных растений находится в особой запасающей ткани — 
+                <select id="task17-sel2" class="hud-select">
+                    <option value="">-- выбрать --</option>
+                    <option value="семядоле">семядоле</option>
+                    <option value="эндосперме">эндосперме</option>
+                    <option value="семяпочке">семяпочке</option>
+                </select>. 
+                <select id="task17-sel3" class="hud-select">
+                    <option value="">-- выбрать --</option>
+                    <option value="Семядоли">Семядоли</option>
+                    <option value="Семяпочки">Семяпочки</option>
+                </select> 
+                — это первые листья зародыша растения. У многих растений зародыши семян имеют две семядоли. Эти растения называют 
+                <select id="task17-sel4" class="hud-select">
+                    <option value="">-- выбрать --</option>
+                    <option value="двудольными">двудольными</option>
+                    <option value="однодольными">однодольными</option>
+                </select>. Растения, имеющие в зародыше семени одну семядолю, называют 
+                <select id="task17-sel5" class="hud-select">
+                    <option value="">-- выбрать --</option>
+                    <option value="однодольными">однодольными</option>
+                    <option value="однодомными">однодомными</option>
+                </select>.
+            </div>
+        </section>
+
+        <!-- Задание 18 -->
+        <section class="task-card">
+            <div class="task-title">Задание 18 // Анатомия органов зародыша [sem.png]</div>
+            <div class="task-text">1. Какой цифрой обозначен орган растения в строении семени, с помощью которого растение закрепляется в почве?</div>
+            <div style="text-align: center; margin: 10px 0;">
+                <img src="sem.png" alt="Зерновка пшеницы корень" style="max-width: 100%; height: auto; border: 1px solid #00ff66;">
+            </div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task18" value="1"> 1</label>
+                <label class="option-label"><input type="radio" name="task18" value="6"> 6</label>
+                <label class="option-label"><input type="radio" name="task18" value="5"> 5</label>
+                <label class="option-label"><input type="radio" name="task18" value="4"> 4</label>
+                <label class="option-label"><input type="radio" name="task18" value="3"> 3</label>
+                <label class="option-label"><input type="radio" name="task18" value="2"> 2</label>
+            </div>
+        </section>
+
+        <!-- Системная кнопка отправки результатов -->
+        <button id="submit-tasks" class="hud-btn" style="background: #ff5500; border-color: #b33c00; margin-top: 25px;">Синхронизировать отчет</button>
+    
+    </div> <!-- Конец #biology-content -->
+</div> <!-- Конец .term-container -->
+
+<script src="script.js"></script>
+</body>
+</html>
