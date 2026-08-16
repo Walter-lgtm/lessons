@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Глава 1. Растение — живой организм</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="term-container">
+    <div class="term-header">
+        <div class="lambda-logo">λ</div>
+        <div class="system-status">§6. Органы растения</div>
+    </div>
+
+    <!-- Блок авторизации (UID "ФИО+Класс") -->
+    <div id="auth-block" class="auth-section">
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Инициализация биометрии (Опорные символы: Ф И О)</span>
+            <input type="text" id="student-fio" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Сектор назначения (Опорные символы: К л а с с)</span>
+            <input type="text" id="student-class" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <button id="auth-trigger" class="hud-btn">Доступ к Параграфу №6 (§6)</button>
+        <div id="auth-alert" class="alert-box"></div>
+    </div>
+
+    <!-- Основной контейнер ботанических заданий -->
+    <div id="biology-content" class="hidden-module">
+        
+        <!-- Задание 1 -->
+        <section class="task-card">
+            <div class="task-title">Задание 1 // Распредели по группам органы растения по их функциям</div>
+            <div class="task-text" style="font-size: 0.85rem; color: #ff5500; margin-bottom: 12px;">
+                [ПРОТОКОЛ]: Перетащите органы в соответствующие технологические контейнеры.
+            </div>
+            
+            <!-- Банк перетаскиваемых слов -->
+            <div id="t1-drag-bank" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; padding: 10px; background: rgba(0, 255, 102, 0.02); border: 1px dashed rgba(0, 255, 102, 0.3);">
+                <div class="match-element" draggable="true" data-word="стебель" style="padding: 6px 10px; font-size: 0.85rem;">стебель</div>
+                <div class="match-element" draggable="true" data-word="цветок" style="padding: 6px 10px; font-size: 0.85rem;">цветок</div>
+                <div class="match-element" draggable="true" data-word="корень" style="padding: 6px 10px; font-size: 0.85rem;">корень</div>
+                <div class="match-element" draggable="true" data-word="лист" style="padding: 6px 10px; font-size: 0.85rem;">лист</div>
+                <div class="match-element" draggable="true" data-word="почки" style="padding: 6px 10px; font-size: 0.85rem;">почки</div>
+                <div class="match-element" draggable="true" data-word="семена" style="padding: 6px 10px; font-size: 0.85rem;">семена</div>
+                <div class="match-element" draggable="true" data-word="плод" style="padding: 6px 10px; font-size: 0.85rem;">плод</div>
+            </div>
+
+            <!-- Зоны сброса (2 колонки) -->
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <div style="border: 1px dashed #00ff66; padding: 10px;">
+                    <div style="font-size: 0.9rem; color: #ff5500; font-weight: bold; margin-bottom: 8px;">Вегетативные</div>
+                    <div id="t1-group1" style="min-height: 50px; background: rgba(0, 255, 102, 0.03); display: flex; flex-wrap: wrap; gap: 6px; padding: 5px;"></div>
+                </div>
+                <div style="border: 1px dashed #00ff66; padding: 10px;">
+                    <div style="font-size: 0.9rem; color: #ff5500; font-weight: bold; margin-bottom: 8px;">Генеративные</div>
+                    <div id="t1-group2" style="min-height: 50px; background: rgba(0, 255, 102, 0.03); display: flex; flex-wrap: wrap; gap: 6px; padding: 5px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Задание 2 -->
+        <section class="task-card">
+            <div class="task-title">Задание 2 // Выбери верный биологический термин</div>
+            <div class="task-text">
+                <select id="task2-ans" class="hud-select">
+                    <option value="">-- ВЫБРАТЬ --</option>
+                    <option value="Орган">Орган</option>
+                    <option value="Ткань">Ткань</option>
+                    <option value="Система органов">Система органов</option>
+                    <option value="Организм">Организм</option>
+                </select> — это часть тела, выполняющая определённые функции, имеющая определённое строение, связанное с выполняемыми функциями.
+            </div>
+        </section>
+
+        <!-- Задание 3 -->
+        <section class="task-card">
+            <div class="task-title">Задание 3 // Выбери верный ответ</div>
+            <div class="task-text">1. Какой процесс жизнедеятельности растений связан с цветками, плодами и семенами?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task3" value="Рост"> Рост</label>
+                <label class="option-label"><input type="radio" name="task3" value="Размножение"> Размножение</label>
+                <label class="option-label"><input type="radio" name="task3" value="Питание"> Питание</label>
+                <label class="option-label"><input type="radio" name="task3" value="Дыхание"> Дыхание</label>
+            </div>
+        </section>
+
+        <!-- Задание 4 -->
+        <section class="task-card">
+            <div class="task-title">Задание 4 // Выбери верный ответ</div>
+            <div class="task-text">1. Какой орган обеспечивает минеральное питание растению?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task4" value="Корень"> Корень</label>
+                <label class="option-label"><input type="radio" name="task4" value="Стебель"> Стебель</label>
+                <label class="option-label"><input type="radio" name="task4" value="Лист"> Лист</label>
+                <label class="option-label"><input type="radio" name="task4" value="Цветок"> Цветок</label>
+            </div>
+        </section>
+
+        <!-- Задание 5 -->
+        <section class="task-card">
+            <div class="task-title">Задание 5 // Выбери верный ответ</div>
+            <div class="task-text">1. Какой орган растения НЕ входит в состав побега?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task5" value="Корень"> Корень</label>
+                <label class="option-label"><input type="radio" name="task5" value="Лист"> Лист</label>
+                <label class="option-label"><input type="radio" name="task5" value="Стебель"> Стебель</label>
+                <label class="option-label"><input type="radio" name="task5" value="Плод"> Плод</label>
+                <label class="option-label"><input type="radio" name="task5" value="Почки"> Почки</label>
+                <label class="option-label"><input type="radio" name="task5" value="Междоузлия"> Междоузлия</label>
+            </div>
+        </section>
+        <!-- Задание 6 -->
+        <section class="task-card">
+            <div class="task-title">Задание 6 // Вставь верные биологические термины</div>
+            <div class="task-text">
+                Совокупность клеток и межклеточного вещества, имеющих сходное строение и выполняющих определённые функции, образует 
+                <span style="font-size:0.8rem; color:#ff5500;">[т...]</span>
+                <input type="text" id="task6-in1" class="hud-input" style="display:inline-block; width:100px; padding:4px; font-size:0.9rem;" autocomplete="off">, 
+                которые формируют 
+                <span style="font-size:0.8rem; color:#ff5500;">[о...]</span>
+                <input type="text" id="task6-in2" class="hud-input" style="display:inline-block; width:100px; padding:4px; font-size:0.9rem;" autocomplete="off">. 
+                Совокупность взаимосвязанных между собой органов образует 
+                <span style="font-size:0.8rem; color:#ff5500;">[о...]</span>
+                <input type="text" id="task6-in3" class="hud-input" style="display:inline-block; width:120px; padding:4px; font-size:0.9rem;" autocomplete="off">, 
+                все части которого функционируют как единое целое.
+            </div>
+        </section>
+
+        <!-- Задание 7 -->
+        <section class="task-card">
+            <div class="task-title">Задание 7 // Выбери верный ответ</div>
+            <div class="task-text">1. Выбери правильную последовательность уровней организации растительного организма:</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task7" value="1"> Клетка → организм → орган → ткань</label>
+                <label class="option-label"><input type="radio" name="task7" value="2"> Клетка → ткань → орган → организм</label>
+                <label class="option-label"><input type="radio" name="task7" value="3"> Клетка → орган → ткань → организм</label>
+                <label class="option-label"><input type="radio" name="task7" value="4"> Клетка → ткань → организм → орган</label>
+            </div>
+        </section>
+
+        <!-- Задание 8 -->
+        <section class="task-card">
+            <div class="task-title">Задание 8 // Вставь верные биологические термины</div>
+            <div class="task-text" style="display:flex; flex-direction:column; gap:10px;">
+                <div>
+                    <span style="font-size:0.8rem; color:#ff5500;">[Ц...]</span>
+                    <input type="text" id="task8-in1" class="hud-input" style="display:inline-block; width:100px; padding:4px; font-size:0.9rem;" autocomplete="off"> 
+                    — это укороченный (с ограниченным ростом) побег, выполняющий функции семенного размножения, образования плодов и семян.
+                </div>
+                <div>
+                    В состав цветков входят 
+                    <span style="font-size:0.8rem; color:#ff5500;">[т...]</span>
+                    <input type="text" id="task8-in2" class="hud-input" style="display:inline-block; width:100px; padding:4px; font-size:0.9rem;" autocomplete="off">, 
+                    <span style="font-size:0.8rem; color:#ff5500;">[п...]</span>
+                    <input type="text" id="task8-in3" class="hud-input" style="display:inline-block; width:100px; padding:4px; font-size:0.9rem;" autocomplete="off">, 
+                    а также окружающий их 
+                    <span style="font-size:0.8rem; color:#ff5500;">[о...]</span>
+                    <input type="text" id="task8-in4" class="hud-input" style="display:inline-block; width:140px; padding:4px; font-size:0.9rem;" autocomplete="off">.
+                </div>
+                <div>
+                    Внутри пестика находятся один или несколько с... Из них после оплодотворения образуется 
+                    <span style="font-size:0.8rem; color:#ff5500;">[с...]</span>
+                    <input type="text" id="task8-in5" class="hud-input" style="display:inline-block; width:100px; padding:4px; font-size:0.9rem;" autocomplete="off">.
+                </div>
+            </div>
+        </section>
+
+        <!-- Задание 9 -->
+        <section class="task-card">
+            <div class="task-title">Задание 9 // Выбери верные ответы</div>
+            <div class="task-text">1. Какие из перечисленных растений относятся к покрытосеменным (цветковым) растениям? (Несколько вариантов)</div>
+            <div class="option-group">
+                <label class="option-label"><input type="checkbox" name="task9" value="Сосна"> Сосна</label>
+                <label class="option-label"><input type="checkbox" name="task9" value="Ольха"> Ольха</label>
+                <label class="option-label"><input type="checkbox" name="task9" value="Кукушкин лён"> Кукушкин лён</label>
+                <label class="option-label"><input type="checkbox" name="task9" value="Яблоня"> Яблоня</label>
+                <label class="option-label"><input type="checkbox" name="task9" value="Хвощ полевой"> Хвощ полевой</label>
+                <label class="option-label"><input type="checkbox" name="task9" value="Плаун"> Плаун</label>
+                <label class="option-label"><input type="checkbox" name="task9" value="Васильки"> Васильки</label>
+            </div>
+        </section>
+
+        <!-- Задание 10 -->
+        <section class="task-card">
+            <div class="task-title">Задание 10 // Анализ графической схемы [bio_flower.png]</div>
+            <div class="task-text">1. Наличие каких органов указывает, что на рисунке изображено цветковое растение? (Несколько вариантов)</div>
+            <div style="text-align: center; margin: 10px 0;">
+                <img src="bio_flower.png" alt="Цветковое растение" style="max-width: 100%; height: auto; border: 1px solid #00ff66;">
+            </div>
+            <div class="option-group">
+                <label class="option-label"><input type="checkbox" name="task10" value="Стебель"> Стебель</label>
+                <label class="option-label"><input type="checkbox" name="task10" value="Листья"> Листья</label>
+                <label class="option-label"><input type="checkbox" name="task10" value="Побег"> Побег</label>
+                <label class="option-label"><input type="checkbox" name="task10" value="Цветок"> Цветок</label>
+                <label class="option-label"><input type="checkbox" name="task10" value="Плод"> Плод</label>
+                <label class="option-label"><input type="checkbox" name="task10" value="Корень"> Корень</label>
+                <label class="option-label"><input type="checkbox" name="task10" value="Семена"> Семена</label>
+            </div>
+        </section>
+
+        <!-- Задание 11 -->
+        <section class="task-card">
+            <div class="task-title">Задание 11 // Зачеркни лишние слова</div>
+            <div class="task-text">Нажмите на ГЕНЕРАТИВНЫЕ органы, чтобы убрать их из определения вегетативных органов:</div>
+            <div class="word-bank" id="task11-bank">
+                <span class="word-token" data-word="Корни ,">Корни ,</span>
+                <span class="word-token" data-word="цветки ,">цветки ,</span>
+                <span class="word-token" data-word="плоды ,">плоды ,</span>
+                <span class="word-token" data-word="побеги и">побеги и</span>
+                <span class="word-token" data-word="семена">семена</span>
+            </div>
+        </section>
+
+        <!-- Задание 12 -->
+        <section class="task-card">
+            <div class="task-title">Задание 12 // Вставь верный биологический термин [bio_flower.png]</div>
+            <div style="text-align: center; margin: 10px 0;">
+                <img src="bio_flower.png" alt="Цветковое растение 2" style="max-width: 100%; height: auto; border: 1px solid #00ff66;">
+            </div>
+            <div class="task-text">
+                У некоторых растений, таких как свёкла, морковь, репа, редис, корни служат местом запасания питательных веществ. Такие корни называют к
+                <input type="text" id="task12-ans" class="hud-input" style="display:inline-block; width:150px; padding:4px; font-size:0.9rem;" autocomplete="off">.
+            </div>
+        </section>
+
+        <!-- Системная кнопка отправки результатов -->
+        <button id="submit-tasks" class="hud-btn" style="background: #ff5500; border-color: #b33c00; margin-top: 25px;">Синхронизировать отчет</button>
+    
+    </div> <!-- Конец #biology-content -->
+</div> <!-- Конец .term-container -->
+
+<script src="script.js"></script>
+</body>
+</html>
