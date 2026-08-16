@@ -11,6 +11,7 @@
     padding: 0;
     user-select: none;
     font-family: 'Courier New', Courier, monospace;
+    -webkit-tap-highlight-color: transparent; /* Убирает синюю рамку при тапе на смартфонах */
 }
 
 body {
@@ -18,6 +19,7 @@ body {
     color: var(--hl-text);
     width: 100vw;
     height: 100vh;
+    height: 100dvh; /* Динамическая высота для мобильных браузеров */
     overflow: hidden;
 }
 
@@ -26,6 +28,7 @@ body {
         content: "ПОЖАЛУЙСТА, ПЕРЕВЕРНИТЕ СМАРТФОН В АЛЬБОМНЫЙ РЕЖИМ";
         position: fixed;
         top: 0; left: 0; width: 100vw; height: 100vh;
+        height: 100dvh;
         background: var(--hl-bg);
         color: var(--hl-orange);
         display: flex;
@@ -43,7 +46,7 @@ body {
     display: none;
     width: 100%;
     height: 100%;
-    padding: 10px;
+    padding: 8px;
 }
 
 .screen.active {
@@ -75,7 +78,12 @@ h2 { font-size: 0.9rem; margin-bottom: 15px; color: #888; }
 .hl-btn:hover { background: #ff9100; box-shadow: 0 0 10px rgba(245,124,0,0.5); }
 .hidden { display: none !important; }
 
-#game-screen { display: none; grid-template-rows: auto 1fr; gap: 5px; }
+#game-screen { 
+    display: none; 
+    grid-template-rows: auto 1fr; 
+    gap: 4px;
+    height: 100%;
+}
 #game-screen.active { display: grid; }
 
 .top-panel {
@@ -83,26 +91,27 @@ h2 { font-size: 0.9rem; margin-bottom: 15px; color: #888; }
     grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
     background: var(--hl-panel);
-    padding: 6px 15px;
+    padding: 4px 15px;
     border-bottom: 2px solid var(--hl-orange);
 }
 
-.info-block { font-size: 0.85rem; color: #aaa; }
+.info-block { font-size: 0.8rem; color: #aaa; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .text-right { text-align: right; }
 .target-block { text-align: center; position: relative; }
-#target-element { font-size: 1.5rem; font-weight: bold; color: var(--hl-orange); text-shadow: 0 0 5px rgba(245,124,0,0.5); }
+#target-element { font-size: 1.4rem; font-weight: bold; color: var(--hl-orange); text-shadow: 0 0 5px rgba(245,124,0,0.5); }
 
-.timer-bar { width: 100%; height: 5px; background: #333; margin-bottom: 4px; overflow: hidden; }
+.timer-bar { width: 100%; height: 4px; background: #333; margin-bottom: 2px; overflow: hidden; }
 #timer-progress { width: 100%; height: 100%; background: var(--hl-orange); transition: width 0.1s linear; }
 
-/* НОВАЯ СЕТКА: Короткая форма (8 колонок) */
+/* Короткая форма: сетка 4 ряда на 8 групп. Максимально утилизирует высоту */
 .short-table-container {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     gap: 4px;
-    padding: 5px;
+    padding: 2px;
     height: 100%;
-    width: 100%;
+    overflow: hidden; /* Защита от случайного скролла */
 }
 
 .cell {
@@ -112,7 +121,7 @@ h2 { font-size: 0.9rem; margin-bottom: 15px; color: #888; }
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    font-size: 1.2rem; /* Символы стали крупнее */
+    font-size: 1.1rem;
     color: var(--hl-text);
     cursor: pointer;
     border-radius: 2px;
