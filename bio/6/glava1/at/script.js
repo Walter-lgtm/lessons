@@ -12,7 +12,7 @@ const totalPointsPossible = 6; // В итоговом тесте всегда р
 let activeVariantTasks = [];   // Здесь будут храниться 6 выбранных на текущую сессию задач
 
 // Инициализация при первичной загрузке страницы
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("auth-trigger").addEventListener("click", executeBiometricAuth);
 });
 
@@ -28,7 +28,7 @@ function executeBiometricAuth() {
         return;
     }
 
-    studentUID = btoa(unescape(encodeURIComponent(`${fioInput}_${classInput}`)));
+    studentUID = btoa(unescape(encodeURIComponent(fioInput + "_" + classInput)));
     const savedUID = localStorage.getItem("bme_g1_control_uid");
 
     if (savedUID === studentUID) {
@@ -36,7 +36,7 @@ function executeBiometricAuth() {
         penaltyPoints = currentPenalty + 1;
         localStorage.setItem("bme_g1_control_penalty", penaltyPoints);
         
-        alertBox.textContent = `ВНИМАНИЕ: ОБНАРУЖЕН ПОВТОРНЫЙ ВХОД. АКТИВИРОВАН ШТРАФ: -${penaltyPoints} БАЛЛ.`;
+        alertBox.textContent = "ВНИМАНИЕ: ОБНАРУЖЕН ПОВТОРНЫЙ ВХОД. АКТИВИРОВАН ШТРАФ: -" + penaltyPoints + " БАЛЛ.";
         alertBox.style.color = "#ff5500";
         alertBox.style.display = "block";
     } else {
@@ -47,7 +47,6 @@ function executeBiometricAuth() {
 
     document.getElementById("auth-block").style.display = "none";
     
-    // Запуск интеллектуального генератора вариантов перед показом интерфейса
     generateAndRenderVariant();
 
     const bioContent = document.getElementById("biology-content");
@@ -60,7 +59,7 @@ function executeBiometricAuth() {
     }
 }
 
-// РАСПРЕДЕЛЕННАЯ БАЗА ДАННЫХ ЗАДАНИЙ ГЛАВЫ 1 (ТЕМЫ 1-2 ИЗ 6)
+// РАСПРЕДЕЛЕННАЯ БАЗА ДАННЫХ ЗАДАНИЙ ГЛАВЫ 1 (НАЧАЛО)
 const TASKS_DATABASE = {
     // ТЕМА 1: Введение в ботанику (Параграф "Наука ботаника")
     theme1: [
@@ -70,7 +69,7 @@ const TASKS_DATABASE = {
             title: "Контроль Темы 1 // Выбери верный ответ",
             text: "Для озеленения в городах НЕ используются такие растения, как:",
             options: ["Ясень", "Карликовая берёза", "Дуб", "Ирисы", "Бархатцы", "Сирень"],
-            verify: (card) => {
+            verify: function(card) {
                 const rad = card.querySelector('input[type="radio"]:checked');
                 return rad && rad.value === "Карликовая берёза";
             }
@@ -81,13 +80,12 @@ const TASKS_DATABASE = {
             title: "Контроль Темы 1 // Выбери верный ответ",
             text: "В парках городов много растений. Их вытаптывание отдыхающими — это пример фактора:",
             options: ["Абиотического", "Биотического", "Антропогенного"],
-            verify: (card) => {
+            verify: function(card) {
                 const rad = card.querySelector('input[type="radio"]:checked');
                 return rad && rad.value === "Антропогенного";
             }
         }
     ],
-
     // ТЕМА 2: Строение растительной клетки (§2)
     theme2: [
         {
@@ -97,7 +95,7 @@ const TASKS_DATABASE = {
             text: "Какой цифрой на рисунке строения растительной клетки указано, где располагаются поры для взаимодействия клеток между собой?",
             image: "cell.png",
             options: ["4", "5", "7", "2"],
-            verify: (card) => {
+            verify: function(card) {
                 const rad = card.querySelector('input[type="radio"]:checked');
                 return rad && rad.value === "4";
             }
@@ -109,28 +107,49 @@ const TASKS_DATABASE = {
             text: "Выбери правильную последовательность расположения клеток от самой молодой до самой старой.",
             image: "cell_01.png",
             options: ["3, 5, 1, 4, 2", "5, 2, 1, 3, 4", "1, 2, 3, 4, 5"],
-            verify: (card) => {
+            verify: function(card) {
                 const rad = card.querySelector('input[type="radio"]:checked');
                 return rad && rad.value === "3, 5, 1, 4, 2";
             }
+        },
+        {
+            id: "t2_q3",
+            type: "image-radio",
+            title: "Контроль Темы 2 // Управление процессами [cell.png]",
+            text: "Какой цифрой выделен органоид, который полностью контролирует жизнедеятельность растительной клетки?",
+            image: "cell.png",
+            options: ["2", "3", "1", "6"],
+            verify: function(card) {
+                const rad = card.querySelector('input[type="radio"]:checked');
+                return rad && rad.value === "1";
+            }
+        },
+        {
+            id: "t2_q4",
+            type: "image-radio",
+            title: "Контроль Темы 2 // Идентификация структур [cell_02.png]",
+            text: "Как называется органоид растительной клетки, отмеченный цифрой 6?",
+            image: "cell_02.png",
+            options: ["Ядро", "Вакуоль", "Хлоропласт", "Митохондрия"],
+            verify: function(card) {
+                const rad = card.querySelector('input[type="radio"]:checked');
+                return rad && rad.value === "Митохондрия";
+            }
         }
-    ]
-};
-// ПРОДОЛЖЕНИЕ РАСПРЕДЕЛЕННОЙ БАЗЫ ДАННЫХ (ТЕМЫ 3-4 ИЗ 6)
-// Добавляется строго внутрь объекта TASKS_DATABASE после theme2
-
-    // ТЕМА 3: Химический состав клетки (§3)
+    ],
+// ТЕМА 3: Химический состав клетки (§3)
     theme3: [
         {
             id: "t3_q1",
             type: "text-inputs",
             title: "Контроль Темы 3 // Вставь верные биологические термины",
-            text: 'Приблизительно 1–1,5% общей массы клетки составляют <span style="color:#ff5500;">[М...]</span> <input type="text" data-idx="0" class="hud-input" style="display:inline-block; width:120px; padding:4px;" autocomplete="off"> <span style="color:#ff5500;">[с...]</span> <input type="text" data-idx="1" class="hud-input" style="display:inline-block; width:80px; padding:4px;" autocomplete="off">, в частности соли кальция, калия, фосфора.',
+            text: 'Приблизительно 1–1,5% общей массы клетки составляют <span style="color:#ff5500;">[М...]</span> <input type="text" class="hud-input input-block-1" style="display:inline-block; width:120px; padding:4px;" autocomplete="off"> <span style="color:#ff5500;">[с...]</span> <input type="text" class="hud-input input-block-2" style="display:inline-block; width:80px; padding:4px;" autocomplete="off">, в частности соли кальция, калия, фосфора.',
             verify: function(card) {
-                const inputs = card.querySelectorAll('input[type="text"]');
-                if (inputs.length < 2) return false;
-                const val1 = inputs[0].value.trim().toLowerCase();
-                const val2 = inputs[1].value.trim().toLowerCase();
+                const in1 = card.querySelector('.input-block-1');
+                const in2 = card.querySelector('.input-block-2');
+                if (!in1 || !in2) return false;
+                const val1 = in1.value.trim().toLowerCase();
+                const val2 = in2.value.trim().toLowerCase();
                 return val1.startsWith("минераль") && val2.startsWith("сол");
             }
         },
@@ -197,9 +216,6 @@ const TASKS_DATABASE = {
             }
         }
     ],
-// ЗАВЕРШЕНИЕ РАСПРЕДЕЛЕННОЙ БАЗЫ ДАННЫХ (ТЕМЫ 5-6 ИЗ 6)
-// Добавляется строго внутрь объекта TASKS_DATABASE после theme4
-
     // ТЕМА 5: Особенности строения и функции растительных тканей (§5)
     theme5: [
         {
@@ -209,23 +225,23 @@ const TASKS_DATABASE = {
             text: "Перетащите структуры в соответствующие технологические контейнеры:",
             bank: ["пробка", "сосуды", "конус нарастания", "фотосинтезирующая", "камбий"],
             groups: ["Образовательная", "Основная", "Покровная", "Проводящая", "Механическая"],
-            verify: (card) => {
-                const g1 = Array.from(card.querySelectorAll("[data-group='0'] [data-word]")).map(el => el.dataset.word);
-                const g2 = Array.from(card.querySelectorAll("[data-group='1'] [data-word]")).map(el => el.dataset.word);
-                const g3 = Array.from(card.querySelectorAll("[data-group='2'] [data-word]")).map(el => el.dataset.word);
-                const g4 = Array.from(card.querySelectorAll("[data-group='3'] [data-word]")).map(el => el.dataset.word);
-                const g5 = Array.from(card.querySelectorAll("[data-group='4'] [data-word]")).map(el => el.dataset.word);
+            verify: function(card) {
+                const g1 = Array.from(card.querySelectorAll("[data-group='0'] [data-word]")).map(function(el) { return el.dataset.word; });
+                const g2 = Array.from(card.querySelectorAll("[data-group='1'] [data-word]")).map(function(el) { return el.dataset.word; });
+                const g3 = Array.from(card.querySelectorAll("[data-group='2'] [data-word]")).map(function(el) { return el.dataset.word; });
+                const g4 = Array.from(card.querySelectorAll("[data-group='3'] [data-word]")).map(function(el) { return el.dataset.word; });
+                const g5 = Array.from(card.querySelectorAll("[data-group='4'] [data-word]")).map(function(el) { return el.dataset.word; });
 
                 const exp1 = ["конус нарастания", "камбий"];
                 const exp2 = ["фотосинтезирующая"];
                 const exp3 = ["пробка"];
                 const exp4 = ["сосуды"];
-                const exp5 = []; // Пустая группа
+                const exp5 = [];
 
-                return g1.length === exp1.length && g1.every(v => exp1.includes(v)) &&
-                       g2.length === exp2.length && g2.every(v => exp2.includes(v)) &&
-                       g3.length === exp3.length && g3.every(v => exp3.includes(v)) &&
-                       g4.length === exp4.length && g4.every(v => exp4.includes(v)) &&
+                return g1.length === exp1.length && g1.every(function(v) { return exp1.includes(v); }) &&
+                       g2.length === exp2.length && g2.every(function(v) { return exp2.includes(v); }) &&
+                       g3.length === exp3.length && g3.every(function(v) { return exp3.includes(v); }) &&
+                       g4.length === exp4.length && g4.every(function(v) { return exp4.includes(v); }) &&
                        g5.length === exp5.length;
             }
         },
@@ -235,7 +251,7 @@ const TASKS_DATABASE = {
             title: "Контроль Темы 5 // Выбери верный ответ",
             text: "Учёный, который впервые ввёл термин «ткань» в ботанику:",
             options: ["Мальпиги", "Гук", "Грю", "Левенгук"],
-            verify: (card) => {
+            verify: function(card) {
                 const rad = card.querySelector('input[type="radio"]:checked');
                 return rad && rad.value === "Грю";
             }
@@ -251,25 +267,38 @@ const TASKS_DATABASE = {
             text: "Наличие каких органов указывает, что на рисунке изображено цветковое растение? (Несколько вариантов)",
             image: "bio_flower.png",
             options: ["Стебель", "Листья", "Побег", "Цветок", "Плод", "Корень", "Семена"],
-            verify: (card) => {
-                const checked = Array.from(card.querySelectorAll('input[type="checkbox"]:checked')).map(el => el.value);
+            verify: function(card) {
+                const checked = Array.from(card.querySelectorAll('input[type="checkbox"]:checked')).map(function(el) { return el.value; });
                 const expected = ["Цветок", "Плод", "Семена"];
-                return checked.length === expected.length && checked.every(v => expected.includes(v));
+                return checked.length === expected.length && checked.every(function(v) { return expected.includes(v); });
             }
         },
         {
             id: "t6_q2",
-            type: "text-inputs",
-            title: "Контроль Темы 6 // Вставь верный биологический термин",
-            text: `У некоторых растений, таких как свёкла, морковь, репа, редис, корни служат местом запасания питательных веществ. Такие корни называют к <input type="text" data-idx="0" class="hud-input" style="display:inline-block; width:150px; padding:4px;" autocomplete="off">.`,
-            verify: (card) => {
-                const input = card.querySelector('input[type="text"]');
-                const val = input.value.trim().toLowerCase();
-                return val.startsWith("орнеплод"); // С учетом опорной "к" перед полем
+            type: "image-radio",
+            title: "Контроль Темы 6 // Процесс митоза [dell.png]",
+            text: "Какой цифрой на рисунке отмечена клетка с расхождением хроматид к разным полюсам?",
+            image: "dell.png",
+            options: ["1", "3", "5", "6"],
+            verify: function(card) {
+                const rad = card.querySelector('input[type="radio"]:checked');
+                return rad && rad.value === "5";
+            }
+        },
+        {
+            id: "t6_q3",
+            type: "image-radio",
+            title: "Контроль Темы 6 // Схема деления [dell.png]",
+            text: "Выбери правильную последовательность расположения клеток в процессе деления.",
+            image: "dell.png",
+            options: ["2, 1, 3, 5, 6, 4", "5, 2, 1, 3, 4, 6", "1, 2, 3, 4, 5, 6"],
+            verify: function(card) {
+                const rad = card.querySelector('input[type="radio"]:checked');
+                return rad && rad.value === "2, 1, 3, 5, 6, 4";
             }
         }
     ]
-}; // КОРНЕВОЙ ОБЪЕКТ БАЗЫ ДАННЫХ ЗАКРЫТ ШТАТНО
+}; // ОБЪЕКТ СТРУКТУРЫ БАЗЫ ДАННЫХ ПОЛНОСТЬЮ ЗАКРЫТ
 // Интеллектуальный генератор случайных вариантов (По 1 задаче из 6 тем)
 function generateAndRenderVariant() {
     activeVariantTasks = [];
@@ -278,102 +307,101 @@ function generateAndRenderVariant() {
 
     // Извлекаем по одному случайному вопросу из пула каждой темы
     const themes = ["theme1", "theme2", "theme3", "theme4", "theme5", "theme6"];
-    themes.forEach(themeKey => {
+    themes.forEach(function(themeKey) {
         const pool = TASKS_DATABASE[themeKey];
         const randomTask = pool[Math.floor(Math.random() * pool.length)];
         activeVariantTasks.push(randomTask);
     });
 
     // На лету генерируем HTML-карточки и внедряем их в DOM
-    activeVariantTasks.forEach((task, index) => {
+    activeVariantTasks.forEach(function(task, index) {
         const cardNode = document.createElement("section");
         cardNode.className = "task-card";
-        cardNode.id = `rendered-card-${task.id}`;
+        cardNode.id = "rendered-card-" + task.id;
         cardNode.dataset.taskIndex = index;
 
-        let innerContent = `<div class="task-title">№${index + 1} // ${task.title}</div>`;
+        let innerContent = '<div class="task-title">№' + (index + 1) + " // " + task.title + "</div>";
 
         // Рендеринг в зависимости от типа механики вопроса
         if (task.type === "radio" || task.type === "image-radio") {
-            innerContent += `<div class="task-text">${task.text}</div>`;
+            innerContent += '<div class="task-text">' + task.text + "</div>";
             if (task.image) {
-                innerContent += `<div style="text-align:center; margin:10px 0;"><img src="${task.image}" style="max-width:100%; height:auto; border:1px solid #00ff66;"></div>`;
+                innerContent += '<div style="text-align:center; margin:10px 0;"><img src="' + task.image + '" style="max-width:100%; height:auto; border:1px solid #00ff66;"></div>';
             }
-            innerContent += `<div class="option-group">`;
-            task.options.forEach(opt => {
-                innerContent += `<label class="option-label"><input type="radio" name="variant_rad_${task.id}" value="${opt}"> ${opt}</label>`;
+            innerContent += '<div class="option-group">';
+            task.options.forEach(function(opt) {
+                innerContent += '<label class="option-label"><input type="radio" name="variant_rad_' + task.id + '" value="' + opt + '"> ' + opt + "</label>";
             });
-            innerContent += `</div>`;
+            innerContent += "</div>";
         } 
         else if (task.type === "image-checkbox") {
-            innerContent += `<div class="task-text">${task.text}</div>`;
-            innerContent += `<div style="text-align:center; margin:10px 0;"><img src="${task.image}" style="max-width:100%; height:auto; border:1px solid #00ff66;"></div>`;
-            innerContent += `<div class="option-group">`;
-            task.options.forEach(opt => {
-                innerContent += `<label class="option-label"><input type="checkbox" value="${opt}"> ${opt}</label>`;
+            innerContent += '<div class="task-text">' + task.text + "</div>";
+            innerContent += '<div style="text-align:center; margin:10px 0;"><img src="' + task.image + '" style="max-width:100%; height:auto; border:1px solid #00ff66;"></div>';
+            innerContent += '<div class="option-group">';
+            task.options.forEach(function(opt) {
+                innerContent += '<label class="option-label"><input type="checkbox" value="' + opt + '"> ' + opt + "</label>";
             });
-            innerContent += `</div>`;
+            innerContent += "</div>";
         } 
         else if (task.type === "text-inputs") {
-            innerContent += `<div class="task-text">${task.text}</div>`;
+            innerContent += '<div class="task-text">' + task.text + "</div>";
         } 
         else if (task.type === "match-pairs") {
-            innerContent += `<div class="task-text" style="margin-bottom:10px;">${task.text}</div>`;
-            innerContent += `<div class="match-grid-container">
-                <div class="match-column">`;
-            task.left.forEach(l => {
-                innerContent += `<div class="match-element ctrl-left" data-id="${l.id}">${l.txt}</div>`;
+            innerContent += '<div class="task-text" style="margin-bottom:10px;">' + task.text + "</div>";
+            innerContent += '<div class="match-grid-container"><div class="match-column">';
+            task.left.forEach(function(l) {
+                innerContent += '<div class="match-element ctrl-left" data-id="' + l.id + '">' + l.txt + "</div>";
             });
-            innerContent += `</div><div style="border-top:1px dashed rgba(0,255,102,0.2); margin:5px 0;"></div><div class="match-column">`;
-            task.right.forEach(r => {
-                innerContent += `<div class="match-element ctrl-right" data-correct="${r.corr}">${r.txt}</div>`;
+            innerContent += '</div><div style="border-top:1px dashed rgba(0,255,102,0.2); margin:5px 0;"></div><div class="match-column">';
+            task.right.forEach(function(r) {
+                innerContent += '<div class="match-element ctrl-right" data-correct="' + r.corr + '">' + r.txt + "</div>";
             });
-            innerContent += `</div></div>`;
+            innerContent += "</div></div>";
         } 
         else if (task.type === "drag-drop-3" || task.type === "drag-drop-5") {
-            innerContent += `<div class="task-text" style="margin-bottom:10px;">${task.text}</div>`;
+            innerContent += '<div class="task-text" style="margin-bottom:10px;">' + task.text + "</div>";
             // Банк слов
-            innerContent += `<div class="ctrl-drag-bank" style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; padding:10px; background:rgba(0,255,102,0.02); border:1px dashed rgba(0,255,102,0.3);">`;
-            task.bank.forEach(word => {
-                innerContent += `<div class="match-element" draggable="true" data-word="${word}" style="padding:6px 10px; font-size:0.85rem;">${word}</div>`;
+            innerContent += '<div class="ctrl-drag-bank" style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; padding:10px; background:rgba(0,255,102,0.02); border:1px dashed rgba(0,255,102,0.3);">';
+            task.bank.forEach(function(word) {
+                innerContent += '<div class="match-element" draggable="true" data-word="' + word + '" style="padding:6px 10px; font-size:0.85rem;">' + word + "</div>";
             });
-            innerContent += `</div><div style="display:flex; flex-direction:column; gap:15px;">`;
+            innerContent += '</div><div style="display:flex; flex-direction:column; gap:15px;">';
             // Контейнеры сброса
-            task.groups.forEach((groupName, gIdx) => {
-                innerContent += `<div style="border:1px dashed #00ff66; padding:10px;">
-                    <div style="font-size:0.9rem; color:#ff5500; font-weight:bold; margin-bottom:8px;">${groupName}</div>
-                    <div class="ctrl-drop-zone" data-group="${gIdx}" style="min-height:50px; background:rgba(0,255,102,0.03); display:flex; flex-wrap:wrap; gap:6px; padding:5px;"></div>
-                </div>`;
+            task.groups.forEach(function(groupName, gIdx) {
+                innerContent += '<div style="border:1px dashed #00ff66; padding:10px;">' +
+                    '<div style="font-size:0.9rem; color:#ff5500; font-weight:bold; margin-bottom:8px;">' + groupName + "</div>" +
+                    '<div class="ctrl-drop-zone" data-group="' + gIdx + '" style="min-height:50px; background:rgba(0,255,102,0.03); display:flex; flex-wrap:wrap; gap:6px; padding:5px;"></div>' +
+                "</div>";
             });
-            innerContent += `</div>`;
+            innerContent += "</div>";
         }
 
         cardNode.innerHTML = innerContent;
         container.appendChild(cardNode);
     });
 
-    // После инжекции разметки инициализируем динамические интерактивные обработчики
+    // После инжекции разметки активируем интерактивные обработчики
     attachDynamicInteractions();
 }
 // Активация интерактивных обработчиков событий для динамических карточек
 function attachDynamicInteractions() {
     // 1. Механика динамического сенсорного сопоставления пар (Тап слева -> Тап справа)
-    document.querySelectorAll(".task-card").forEach(card => {
+    document.querySelectorAll(".task-card").forEach(function(card) {
         let selectedLeft = null;
         const leftItems = card.querySelectorAll(".ctrl-left");
         const rightTargets = card.querySelectorAll(".ctrl-right");
 
-        leftItems.forEach(item => {
-            item.addEventListener("click", () => {
+        leftItems.forEach(function(item) {
+            item.addEventListener("click", function() {
                 if (item.classList.contains("matched")) return;
-                leftItems.forEach(i => i.classList.remove("selected"));
+                leftItems.forEach(function(i) { i.classList.remove("selected"); });
                 selectedLeft = item;
                 item.classList.add("selected");
             });
         });
 
-        rightTargets.forEach(target => {
-            target.addEventListener("click", () => {
+        rightTargets.forEach(function(target) {
+            target.addEventListener("click", function() {
                 if (target.classList.contains("matched") || !selectedLeft) return;
                 target.dataset.userAnswer = selectedLeft.dataset.id;
                 target.classList.add("matched");
@@ -384,29 +412,30 @@ function attachDynamicInteractions() {
         });
     });
 
-    // 2. Механика динамического Drag-and-Drop (на 3 или 5 зон сброса)
-    document.querySelectorAll(".task-card").forEach(card => {
+    // 2. Механика динамического Drag-and-Drop
+    document.querySelectorAll(".task-card").forEach(function(card) {
         const dragItems = card.querySelectorAll('.ctrl-drag-bank [draggable="true"]');
         const dropZones = card.querySelectorAll('.ctrl-drop-zone');
 
-        dragItems.forEach(item => {
-            item.addEventListener('dragstart', (e) => {
+        dragItems.forEach(function(item) {
+            item.addEventListener('dragstart', function(e) {
                 e.dataTransfer.setData('text/plain', item.dataset.word);
                 item.classList.add('selected');
             });
-            item.addEventListener('dragend', () => {
+            item.addEventListener('dragend', function() {
                 item.classList.remove('selected');
             });
         });
 
-        dropZones.forEach(zone => {
-            zone.addEventListener('dragover', (e) => {
+        dropZones.forEach(function(zone) {
+            zone.addEventListener('dragover', function(e) {
                 e.preventDefault();
             });
-            zone.addEventListener('drop', (e) => {
+            zone.addEventListener('drop', function(e) {
                 e.preventDefault();
-                const wordData = e.dataTransfer.getData('text/plain');
-                const draggedNode = card.querySelector(`[data-word="${wordData}"]`);
+                const wordData = e.dataTransfer.setData ? e.dataTransfer.getData('text/plain') : "";
+                if (!wordData) return;
+                const draggedNode = card.querySelector('[data-word="' + wordData + '"]');
                 if (draggedNode) {
                     zone.appendChild(draggedNode);
                     draggedNode.style.margin = "2px";
@@ -422,10 +451,10 @@ function collectAndVerifyAnswers() {
     const answersReport = [];
 
     // Бежим строго по тем 6 заданиям, которые были сгенерированы в текущую сессию
-    activeVariantTasks.forEach(task => {
-        const cardContainer = document.getElementById(`rendered-card-${task.id}`);
+    activeVariantTasks.forEach(function(task) {
+        const cardContainer = document.getElementById("rendered-card-" + task.id);
         if (cardContainer) {
-            // Запускаем встроенную в объект задачи функцию изолированной проверки verify()
+            // Запускаем встроенную функцию изолированной проверки конкретной задачи
             const isCorrect = task.verify(cardContainer);
             answersReport.push({ isCorrect: isCorrect });
         } else {
@@ -452,7 +481,7 @@ function transmitDataToBlackMesa(studentAnswers) {
     let classField = document.getElementById("student-class").value.trim();
     
     let rawScore = 0;
-    studentAnswers.forEach(ans => { if (ans.isCorrect) rawScore++; });
+    studentAnswers.forEach(function(ans) { if (ans.isCorrect) rawScore++; });
     
     let finalScore = rawScore - penaltyPoints;
     if (finalScore < 0) finalScore = 0;
@@ -460,7 +489,7 @@ function transmitDataToBlackMesa(studentAnswers) {
     const finalMark = calculateGrade(finalScore);
 
     if (penaltyPoints > 0) {
-        classField += ` [ПОВТОР: -${penaltyPoints}]`;
+        classField += " [ПОВТОР: -" + penaltyPoints + "]";
     }
 
     const formData = new FormData();
@@ -481,10 +510,10 @@ function transmitDataToBlackMesa(studentAnswers) {
         mode: "no-cors",
         body: formData
     })
-    .then(() => {
+    .then(function() {
         displayFinalHUDReport(finalScore, finalMark);
     })
-    .catch((error) => {
+    .catch(function(error) {
         console.error("Критический сбой синхронизации контроля:", error);
         alert("ОШИБКА СВЯЗИ. Данные контроля не переданы. Попробуйте еще раз.");
         if (submitBtn) {
