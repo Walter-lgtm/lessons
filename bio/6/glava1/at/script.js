@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Протокол Авторизации и Защиты "Анти-брутфорс v2.0"
 function executeBiometricAuth() {
+    window.onerror = function(msg, url, line) { alert("КРИТИЧЕСКИЙ СБОЙ: " + msg + "\nСтрока: " + line); };
     const fioInput = document.getElementById("student-fio").value.trim();
     const classInput = document.getElementById("student-class").value.trim();
     const alertBox = document.getElementById("auth-alert");
