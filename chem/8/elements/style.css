@@ -103,17 +103,20 @@ h2 { font-size: 0.9rem; margin-bottom: 15px; color: #888; }
 .timer-bar { width: 100%; height: 4px; background: #333; margin-bottom: 2px; overflow: hidden; }
 #timer-progress { width: 100%; height: 100%; background: var(--hl-orange); transition: width 0.1s linear; }
 
-/* Короткая форма: сетка 4 ряда на 8 групп. Максимально утилизирует высоту */
+/* Уменьшаем отступы сетки, чтобы она занимала меньше места */
 .short-table-container {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    gap: 4px;
+    gap: 3px;          /* Было 4px — уменьшили зазоры */
     padding: 2px;
-    height: 100%;
-    overflow: hidden; /* Защита от случайного скролла */
+    height: 95%;       /* Даем небольшой запас по высоте (было 100%) */
+    max-height: 280px; /* Жесткое ограничение для сверхкоротких экранов */
+    width: 100%;
+    margin: 0 auto;
 }
 
+/* Оптимизируем размер ячеек */
 .cell {
     background: var(--hl-panel);
     border: 1px solid #444;
@@ -121,10 +124,19 @@ h2 { font-size: 0.9rem; margin-bottom: 15px; color: #888; }
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1rem;   /* Слегка уменьшили шрифт (было 1.1rem) */
     color: var(--hl-text);
     cursor: pointer;
     border-radius: 2px;
+    transition: background-color 0.1s ease, box-shadow 0.1s ease; /* Плавный возврат к исходному цвету */
+}
+
+/* НОВЫЙ КЛАСС: Эффект неоновой оранжевой вспышки Half-Life */
+.cell.flash-active {
+    background-color: var(--hl-orange) !important;
+    color: #000 !important;
+    box-shadow: 0 0 15px var(--hl-orange), 0 0 5px #fff;
+    border-color: #fff;
 }
 
 .cell.empty { background: transparent; border: none; pointer-events: none; }
