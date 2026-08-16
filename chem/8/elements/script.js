@@ -122,11 +122,20 @@ function renderShortTable() {
                 }
                 
                 cell.addEventListener('click', () => {
-                    playHLSound(); // Активируется по тапу
-                    // Проверяем, совпадает ли клик с любым элементом из этой ячейки
-                    const isCorrect = elements.some(e => e.symbol === testElements[currentIndex].symbol);
-                    handleCellClick(isCorrect);
-                });
+    playHLSound(); // Активируется по тапу
+    
+    // Добавляем класс неоновой вспышки
+    cell.classList.add('flash-active');
+    
+    // Проверяем правильность элемента
+    const isCorrect = elements.some(e => e.symbol === testElements[currentIndex].symbol);
+    
+    // Через 150 миллисекунд убираем вспышку и переключаем вопрос
+    setTimeout(() => {
+        cell.classList.remove('flash-active');
+        handleCellClick(isCorrect);
+    }, 150); 
+});
                 tableContainer.appendChild(cell);
             } else {
                 const cell = document.createElement('div');
