@@ -1,4 +1,4 @@
-// Расширенная база данных: 32 химических элемента (Полные первые 4 периода короткой формы ПСХЭ)
+// Исправленная база данных: 32 элемента, где у каждого СВОЯ отдельная ячейка (Сетка 6 рядов на 8 групп)
 const elementsData = [
     // Ряд 1
     { symbol: 'H', name: 'Водород', row: 1, col: 1 },
@@ -21,7 +21,7 @@ const elementsData = [
     { symbol: 'S', name: 'Сера', row: 3, col: 6 },
     { symbol: 'Cl', name: 'Хлор', row: 3, col: 7 },
     { symbol: 'Ar', name: 'Аргон', row: 3, col: 8 },
-    // Ряд 4 (Весь большой 4-й период, собранный по группам короткой формы I-VIII)
+    // Ряд 4 (Первый ряд 4-го периода)
     { symbol: 'K', name: 'Калий', row: 4, col: 1 },
     { symbol: 'Ca', name: 'Кальций', row: 4, col: 2 },
     { symbol: 'Sc', name: 'Скандий', row: 4, col: 3 },
@@ -30,16 +30,18 @@ const elementsData = [
     { symbol: 'Cr', name: 'Хром', row: 4, col: 6 },
     { symbol: 'Mn', name: 'Марганец', row: 4, col: 7 },
     { symbol: 'Fe', name: 'Железо', row: 4, col: 8 },
-    { symbol: 'Co', name: 'Кобальт', row: 4, col: 8 }, // В короткой форме триады VIII группы делят ячейку/колонку
-    { symbol: 'Ni', name: 'Никель', row: 4, col: 8 },
-    { symbol: 'Cu', name: 'Медь', row: 4, col: 1 },
-    { symbol: 'Zn', name: 'Цинк', row: 4, col: 2 },
-    { symbol: 'Ga', name: 'Галлий', row: 4, col: 3 },
-    { symbol: 'Ge', name: 'Германий', row: 4, col: 4 },
-    { symbol: 'As', name: 'Мышьяк', row: 4, col: 5 },
-    { symbol: 'Se', name: 'Селен', row: 4, col: 6 },
-    { symbol: 'Br', name: 'Бром', row: 4, col: 7 },
-    { symbol: 'Kr', name: 'Криптон', row: 4, col: 8 }
+    // Ряд 5 (Второй ряд 4-го периода - теперь под ними!)
+    { symbol: 'Co', name: 'Кобальт', row: 5, col: 1 },
+    { symbol: 'Ni', name: 'Никель', row: 5, col: 2 },
+    { symbol: 'Cu', name: 'Медь', row: 5, col: 3 },
+    { symbol: 'Zn', name: 'Цинк', row: 5, col: 4 },
+    { symbol: 'Ga', name: 'Галлий', row: 5, col: 5 },
+    { symbol: 'Ge', name: 'Германий', row: 5, col: 6 },
+    { symbol: 'As', name: 'Мышьяк', row: 5, col: 7 },
+    { symbol: 'Se', name: 'Селен', row: 5, col: 8 },
+    // Ряд 6 (Остатки 4-го периода, уходящие в правый край)
+    { symbol: 'Br', name: 'Бром', row: 6, col: 7 },
+    { symbol: 'Kr', name: 'Криптон', row: 6, col: 8 }
 ];
 
 // Web Audio API Синтезатор звука (Безошибочный метод воспроизведения звука клика Half-Life)
@@ -99,45 +101,34 @@ function renderShortTable() {
     const tableContainer = document.getElementById('periodic-table');
     tableContainer.innerHTML = '';
     
-    // Отрисовка стабильной сетки 4х8
-    for (let r = 1; r <= 4; r++) {
+    // Отрисовка стабильной сетки 6 рядов на 8 групп
+    for (let r = 1; r <= 6; r++) {
         for (let c = 1; c <= 8; c++) {
-            // Находим элементы для текущей ячейки
-            const elements = elementsData.filter(e => e.row === r && e.col === c);
+            // Ищем элемент для текущей ячейки
+            const element = elementsData.find(e => e.row === r && e.col === c);
             
-            if (elements.length > 0) {
+            if (element) {
                 const cell = document.createElement('div');
                 cell.className = 'cell';
-                
-                // Если в ячейке по классической схеме несколько элементов (например Fe, Co, Ni в 4 ряду 8 группы), 
-                // выводим их через слэш, но для теста выберем первый попавшийся символ как целевой клик, 
-                // либо, если они разделены, берем случайный. Для простоты склеим их визуально.
-                if (elements.length > 1) {
-                    cell.textContent = elements.map(e => e.symbol).join('/');
-                    cell.style.fontSize = '0.8rem'; // Ужимаем шрифт для триад
-                    cell.dataset.symbol = elements[0].symbol; // Привязка к первому (или обработка любого ниже)
-                } else {
-                    cell.textContent = elements[0].symbol;
-                    cell.dataset.symbol = elements[0].symbol;
-                }
+                cell.textContent = element.symbol;
+                cell.dataset.symbol = element.symbol;
                 
                 cell.addEventListener('click', () => {
-    playHLSound(); // Активируется по тапу
-    
-    // Добавляем класс неоновой вспышки
-    cell.classList.add('flash-active');
-    
-    // Проверяем правильность элемента
-    const isCorrect = elements.some(e => e.symbol === testElements[currentIndex].symbol);
-    
-    // Через 150 миллисекунд убираем вспышку и переключаем вопрос
-    setTimeout(() => {
-        cell.classList.remove('flash-active');
-        handleCellClick(isCorrect);
-    }, 150); 
-});
+                    playHLSound(); // Вспышка и звук терминала
+                    
+                    cell.classList.add('flash-active');
+                    
+                    // Проверяем, совпадает ли клик с текущим загаданным элементом
+                    const isCorrect = (element.symbol === testElements[currentIndex].symbol);
+                    
+                    setTimeout(() => {
+                        cell.classList.remove('flash-active');
+                        handleCellClick(isCorrect);
+                    }, 150);
+                });
                 tableContainer.appendChild(cell);
             } else {
+                // Если элемента в этих координатах нет, создаем пустую некликабельную зону
                 const cell = document.createElement('div');
                 cell.className = 'cell empty';
                 tableContainer.appendChild(cell);
