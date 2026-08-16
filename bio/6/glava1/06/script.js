@@ -1,5 +1,5 @@
 // Конфигурация шлюза Google Form (Сюда вносятся данные экстрактора v4.0)
-const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSe1GAz8Yb6HKFBJ4-dhAcXylXEk-iXmHTEu9roB2XW2gAlDCA/fprnResponse";
+const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSe1GAz8Yb6HKFBJ4-dhAcXylXEk-iXmHTEu9roB2XW2gAlDCA/formResponse";
 const ENTRY_FIO = "entry.953902753";       // ID поля ФИО
 const ENTRY_CLASS = "entry.997093366";     // ID поля Класс (передача маркера штрафа)
 const ENTRY_SCORE = "entry.1150902725";     // ID поля Баллы
