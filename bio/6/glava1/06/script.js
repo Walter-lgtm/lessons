@@ -97,10 +97,16 @@ function initMatchMechanic() {
     });
 }
 
-// Механика Задания 9: Кроссплатформенный Drag-and-Drop (Сортировка по контейнерам)
+// Механика Задания 9: Кроссплатформенный Drag-and-Drop на ПЯТЬ зон
 function initializeDragAndDrop() {
     const dragItems = document.querySelectorAll('#t9-drag-bank [draggable="true"]');
-    const dropZones = [document.getElementById('t9-group1'), document.getElementById('t9-group2'), document.getElementById('t9-group3')];
+    const dropZones = [
+        document.getElementById('t9-group1'), 
+        document.getElementById('t9-group2'), 
+        document.getElementById('t9-group3'),
+        document.getElementById('t9-group4'),
+        document.getElementById('t9-group5')
+    ];
 
     dragItems.forEach(item => {
         item.addEventListener('dragstart', (e) => {
@@ -201,19 +207,25 @@ function collectAndVerifyAnswers() {
     const rad8 = document.querySelector('input[name="task8"]:checked');
     answersReport.push({ isCorrect: rad8 && rad8.value === "Основная" });
 
-    // Задание 9: Сверка массивов Drag-and-Drop по трем группам тканей
+    // Задание 9: Сверка массивов Drag-and-Drop по ПЯТИ группам растительных тканей
     let task9Correct = true;
     const group1 = Array.from(document.querySelectorAll("#t9-group1 [data-word]")).map(el => el.dataset.word);
     const group2 = Array.from(document.querySelectorAll("#t9-group2 [data-word]")).map(el => el.dataset.word);
     const group3 = Array.from(document.querySelectorAll("#t9-group3 [data-word]")).map(el => el.dataset.word);
+    const group4 = Array.from(document.querySelectorAll("#t9-group4 [data-word]")).map(el => el.dataset.word);
+    const group5 = Array.from(document.querySelectorAll("#t9-group5 [data-word]")).map(el => el.dataset.word);
 
     const expectedG1 = ["конус нарастания", "камбий"];
     const expectedG2 = ["запасающая", "фотосинтезирующая"];
-    const expectedG3 = ["эпидермис", "волоски корня", "пробка"];
+    const expectedG3 = ["пробка", "волоски корня", "эпидермис"];
+    const expectedG4 = ["сосуды", "ситовидные трубки"];
+    const expectedG5 = []; // Механическая ткань остается пустой по текущему банку слов
 
     if (group1.length !== expectedG1.length || !group1.every(v => expectedG1.includes(v))) task9Correct = false;
     if (group2.length !== expectedG2.length || !group2.every(v => expectedG2.includes(v))) task9Correct = false;
     if (group3.length !== expectedG3.length || !group3.every(v => expectedG3.includes(v))) task9Correct = false;
+    if (group4.length !== expectedG4.length || !group4.every(v => expectedG4.includes(v))) task9Correct = false;
+    if (group5.length !== expectedG5.length) task9Correct = false;
     answersReport.push({ isCorrect: task9Correct });
 
     // Задание 10: Зачеркнутые токены (лишние ткани, не являющиеся основными: покровную, механическую, проводящую)
