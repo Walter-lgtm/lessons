@@ -1,0 +1,194 @@
+:root {
+    --hl-orange: #f57c00;
+    --hl-bg: #121212;
+    --hl-panel: #1c1c1c;
+    --hl-text: #e0e0e0;
+    --hl-grid-empty: #262626;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+    background-color: var(--hl-bg);
+    color: var(--hl-text);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Ограничение под альбомную ориентацию */
+@media (orientation: portrait) {
+    body::before {
+        content: "ПОЖАЛУЙСТА, ПЕРЕВЕРНИТЕ СМАРТФОН В АЛЬБОМНЫЙ РЕЖИМ";
+        position: fixed;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+        background: var(--hl-bg);
+        color: var(--hl-orange);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        z-index: 9999;
+        padding: 20px;
+    }
+}
+
+.screen {
+    display: none;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Терминальные боксы */
+.terminal-box {
+    background: var(--hl-panel);
+    border: 2px solid var(--hl-orange);
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(245, 124, 0, 0.3);
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+}
+
+h1 { color: var(--hl-orange); font-size: 1.4rem; margin-bottom: 5px; letter-spacing: 2px; }
+h2 { font-size: 1rem; margin-bottom: 20px; color: #888; }
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    color: var(--hl-orange);
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.input-group input {
+    width: 100%;
+    background: #000;
+    border: 1px solid #555;
+    color: #fff;
+    padding: 8px;
+    font-size: 1rem;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--hl-orange);
+}
+
+.hl-btn {
+    background: var(--hl-orange);
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.2s;
+}
+
+.hl-btn:hover { background: #ff9100; box-shadow: 0 0 10px rgba(245,124,0,0.5); }
+.hidden { display: none !important; }
+
+/* Игровой интерфейс */
+#game-screen {
+    display: none;
+    grid-template-rows: auto 1fr;
+    gap: 5px;
+}
+
+#game-screen.active { display: grid; }
+
+.top-panel {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    background: var(--hl-panel);
+    padding: 5px 15px;
+    border-bottom: 2px solid var(--hl-orange);
+}
+
+.info-block { font-size: 0.85rem; color: #aaa; }
+.text-right { text-align: right; }
+
+.target-block {
+    text-align: center;
+    position: relative;
+}
+
+#target-element {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--hl-orange);
+    text-shadow: 0 0 5px rgba(245,124,0,0.5);
+}
+
+.timer-bar {
+    width: 100%;
+    height: 4px;
+    background: #333;
+    margin-bottom: 4px;
+    overflow: hidden;
+}
+
+#timer-progress {
+    width: 100%;
+    height: 100%;
+    background: var(--hl-orange);
+    transition: width 0.1s linear;
+}
+
+/* Сетка таблицы Менделеева */
+.table-container {
+    display: grid;
+    grid-template-columns: repeat(18, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 3px;
+    padding: 5px;
+    height: 100%;
+    width: 100%;
+}
+
+.cell {
+    background: var(--hl-panel);
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--hl-text);
+    cursor: pointer;
+}
+
+.cell.empty {
+    background: transparent;
+    border: none;
+    pointer-events: none;
+}
+
+.cell:active:not(.empty) {
+    background: var(--hl-orange);
+    color: #000;
+}
+
+.highlight { color: var(--hl-orange); font-weight: bold; font-size: 1.5rem; }
