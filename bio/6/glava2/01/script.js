@@ -65,7 +65,7 @@ function executeBiometricAuth() {
 }
 // Управляющий модуль независимого распределения для Заданий 1, 2 и 3
 function initializeTripleDragAndDrop() {
-    const ids =;
+    const ids =[];
     ids.forEach(function(id) {
         const dragItems = document.querySelectorAll("#t" + id + '-drag-bank [draggable="true"]');
         const dropZones = [document.getElementById("t" + id + "-group1"), document.getElementById("t" + id + "-group2")];
