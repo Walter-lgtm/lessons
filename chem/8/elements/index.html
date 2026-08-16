@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, orientation=landscape">
-    <title>Black Mesa: Chemistry Terminal</title>
+    <title>λ - CORE TERMINAL</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,7 +11,7 @@
     <div id="auth-screen" class="screen active">
         <div class="terminal-box">
             <h1>BLACK MESA RESEARCH FACILITY</h1>
-            <h2>Химический Терминал v1.0</h2>
+            <h2>Химический Терминал</h2>
             <div class="input-group">
                 <label>Введите ФИО:</label>
                 <input type="text" id="student-name" placeholder="Иванов И.И." required>
@@ -20,7 +20,7 @@
                 <label>Класс:</label>
                 <input type="text" id="student-class" placeholder="8-А" required>
             </div>
-            <button id="start-btn" class="hl-btn">ИНИЦИИРОВАТЬ ТЕСТ</button>
+            <button id="start-btn" class="hl-btn">ПРИСТУПИТЬ К ТРЕНИРОВКЕ</button>
         </div>
     </div>
 
@@ -35,14 +35,14 @@
             <div class="info-block text-right">Прогресс: <span id="current-step">0</span>/21</div>
         </div>
         
-        <!-- Контейнер для ПСХЭ -->
-        <div id="periodic-table" class="table-container"></div>
+        <!-- Контейнер для КОРОТКОЙ формы ПСХЭ -->
+        <div id="periodic-table" class="short-table-container"></div>
     </div>
 
     <!-- Финальный экран -->
     <div id="final-screen" class="screen">
         <div class="terminal-box">
-            <h1>ТЕСТИРОВАНИЕ ЗАВЕРШЕНО</h1>
+            <h1>ТРЕНИРОВКА ЗАВЕРШЕНА</h1>
             <div class="results-list">
                 <p>Ваш результат: <span id="final-score" class="highlight">0</span> / 21</p>
                 <p>Оценка: <span id="final-grade" class="highlight">-</span></p>
