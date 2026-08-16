@@ -1,1 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, orientation=landscape">
+    <title>Black Mesa: Chemistry Terminal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Экран авторизации -->
+    <div id="auth-screen" class="screen active">
+        <div class="terminal-box">
+            <h1>BLACK MESA RESEARCH FACILITY</h1>
+            <h2>Химический Терминал v1.0</h2>
+            <div class="input-group">
+                <label>Введите ФИО:</label>
+                <input type="text" id="student-name" placeholder="Иванов И.И." required>
+            </div>
+            <div class="input-group">
+                <label>Класс:</label>
+                <input type="text" id="student-class" placeholder="8-А" required>
+            </div>
+            <button id="start-btn" class="hl-btn">ИНИЦИИРОВАТЬ ТЕСТ</button>
+        </div>
+    </div>
 
+    <!-- Игровой экран -->
+    <div id="game-screen" class="screen">
+        <div class="top-panel">
+            <div class="info-block">Участник: <span id="display-name"></span></div>
+            <div class="target-block">
+                <div class="timer-bar"><div id="timer-progress"></div></div>
+                <div id="target-element">ЗАГРУЗКА...</div>
+            </div>
+            <div class="info-block text-right">Прогресс: <span id="current-step">0</span>/21</div>
+        </div>
+        
+        <!-- Контейнер для ПСХЭ -->
+        <div id="periodic-table" class="table-container"></div>
+    </div>
+
+    <!-- Финальный экран -->
+    <div id="final-screen" class="screen">
+        <div class="terminal-box">
+            <h1>ТЕСТИРОВАНИЕ ЗАВЕРШЕНО</h1>
+            <div class="results-list">
+                <p>Ваш результат: <span id="final-score" class="highlight">0</span> / 21</p>
+                <p>Оценка: <span id="final-grade" class="highlight">-</span></p>
+            </div>
+            <div id="sync-status">Отправка данных в Black Mesa Cloud...</div>
+            <button id="restart-btn" class="hl-btn hidden" onclick="location.reload()">ПОВТОРИТЬ</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
