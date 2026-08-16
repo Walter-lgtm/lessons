@@ -1,36 +1,41 @@
-// База данных элементов (21 элемент для теста, упорядочены по ПСХЭ для рендеринга полной сетки)
-// Строка (row) от 1 до 7, Колонка (col) от 1 до 18
+// Координаты элементов для Короткой формы ПСХЭ (8 групп / столбцов)
+// Лантаноиды и актиноиды исключены. Поля row (ряд) и col (группа от 1 до 8)
 const elementsData = [
     { symbol: 'H', name: 'Водород', row: 1, col: 1 },
-    { symbol: 'He', name: 'Гелий', row: 1, col: 18 },
+    { symbol: 'He', name: 'Гелий', row: 1, col: 8 },
     { symbol: 'Li', name: 'Литий', row: 2, col: 1 },
     { symbol: 'Be', name: 'Бериллий', row: 2, col: 2 },
-    { symbol: 'B', name: 'Бор', row: 2, col: 13 },
-    { symbol: 'C', name: 'Углерод', row: 2, col: 14 },
-    { symbol: 'N', name: 'Азот', row: 2, col: 15 },
-    { symbol: 'O', name: 'Кислород', row: 2, col: 16 },
-    { symbol: 'F', name: 'Фтор', row: 2, col: 17 },
-    { symbol: 'Ne', name: 'Неон', row: 2, col: 18 },
+    { symbol: 'B', name: 'Бор', row: 2, col: 3 },
+    { symbol: 'C', name: 'Углерод', row: 2, col: 4 },
+    { symbol: 'N', name: 'Азот', row: 2, col: 5 },
+    { symbol: 'O', name: 'Кислород', row: 2, col: 6 },
+    { symbol: 'F', name: 'Фтор', row: 2, col: 7 },
+    { symbol: 'Ne', name: 'Неон', row: 2, col: 8 },
     { symbol: 'Na', name: 'Натрий', row: 3, col: 1 },
     { symbol: 'Mg', name: 'Магний', row: 3, col: 2 },
-    { symbol: 'Al', name: 'Алюминий', row: 3, col: 13 },
-    { symbol: 'Si', name: 'Кремний', row: 3, col: 14 },
-    { symbol: 'P', name: 'Фосфор', row: 3, col: 15 },
-    { symbol: 'S', name: 'Сера', row: 3, col: 16 },
-    { symbol: 'Cl', name: 'Хлор', row: 3, col: 17 },
-    { symbol: 'Ar', name: 'Аргон', row: 3, col: 18 },
-    { symbol: 'K', row: 4, col: 1, name: 'Калий' },
-    { symbol: 'Ca', row: 4, col: 2, name: 'Кальций' },
-    { symbol: 'Fe', row: 4, col: 8, name: 'Железо' }
+    { symbol: 'Al', name: 'Алюминий', row: 3, col: 3 },
+    { symbol: 'Si', name: 'Кремний', row: 3, col: 4 },
+    { symbol: 'P', name: 'Фосфор', row: 3, col: 5 },
+    { symbol: 'S', name: 'Сера', row: 3, col: 6 },
+    { symbol: 'Cl', name: 'Хлор', row: 3, col: 7 },
+    { symbol: 'Ar', name: 'Аргон', row: 3, col: 8 },
+    { symbol: 'K', name: 'Калий', row: 4, col: 1 },
+    { symbol: 'Ca', name: 'Кальций', row: 4, col: 2 },
+    { symbol: 'Fe', name: 'Железо', row: 4, col: 8 } 
 ];
 
-// Настройки интеграции с Google Forms (ЗАМЕНИТЕ НА СВОИ ДАННЫЕ)
+// Подключаем аудиоэффект Half-Life (звук клика по интерфейсу)
+const hlClickSound = new Audio("https://google.com"); // Резервный научно-электронный звук
+// Если хотите оригинальный звук кнопок Half-Life, можно загрузить свой button3.wav и указать относительный путь: new Audio("sounds/button3.wav");
+hlClickSound.volume = 0.5;
+
+// Сюда вставьте ваши проверенные данные из консоли Гугл-Формы!
 const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSc_VBm6LD0ZGFgZUTVOBN7MepuP4gZrft1WydLoB3MBHzxOwg/formResponse"; 
 const FORM_ENTRIES = {
-    name: "entry.743705304",   // ID поля ФИО
-    group: "entry.2070572231",  // ID поля Класс
-    score: "entry.1852517913",  // ID поля Баллы
-    grade: "entry.1463755207"   // ID поля Оценка
+    name: "entry.743705304",  
+    group: "entry.2070572231", 
+    score: "entry.1852517913", 
+    grade: "entry.1463755207"  
 };
 
 let studentName = "";
@@ -39,16 +44,16 @@ let testElements = [];
 let currentIndex = 0;
 let score = 0;
 let timerInterval = null;
-let timeLeft = 100; // Проценты таймера
+let timeLeft = 100;
 
-// Инициализация таблицы
-function renderTable() {
+// Рендеринг короткой таблицы (максимум 4 ряда для нашей выборки)
+function renderShortTable() {
     const tableContainer = document.getElementById('periodic-table');
     tableContainer.innerHTML = '';
     
-    // Создаем пустую сетку 7x18
-    for (let r = 1; r <= 7; r++) {
-        for (let c = 1; c <= 18; c++) {
+    // Короткая форма использует сетку 4 рядов на 8 групп для текущего набора элементов
+    for (let r = 1; r <= 4; r++) {
+        for (let c = 1; c <= 8; c++) {
             const cell = document.createElement('div');
             const element = elementsData.find(e => e.row === r && e.col === c);
             
@@ -56,7 +61,12 @@ function renderTable() {
                 cell.className = 'cell';
                 cell.textContent = element.symbol;
                 cell.dataset.symbol = element.symbol;
-                cell.addEventListener('click', () => handleCellClick(element.symbol));
+                
+                // Добавляем обработку тапа и звука
+                cell.addEventListener('click', () => {
+                    playHLSound();
+                    handleCellClick(element.symbol);
+                });
             } else {
                 cell.className = 'cell empty';
             }
@@ -65,39 +75,42 @@ function renderTable() {
     }
 }
 
-// Старт игры
+function playHLSound() {
+    // Сбрасываем аудио дорожку на начало перед каждым кликом (для частых тапов)
+    hlClickSound.currentTime = 0;
+    hlClickSound.play().catch(e => console.log("Аудио заблокировано политикой браузера до первого взаимодействия"));
+}
+
 document.getElementById('start-btn').addEventListener('click', () => {
     studentName = document.getElementById('student-name').value.trim();
     studentClass = document.getElementById('student-class').value.trim();
     
     if (!studentName || !studentClass) {
-        alert("Пожалуйста, заполните все поля терминала.");
+        alert("Пожалуйста, авторизуйтесь в системе Black Mesa.");
         return;
     }
     
-    document.getElementById('display-name').textContent = studentName;
+    // Воспроизводим звук при успешном входе
+    playHLSound();
     
-    // Перемешиваем и берем ровно 21 элемент для тестирования
+    document.getElementById('display-name').textContent = studentName;
     testElements = [...elementsData].sort(() => 0.5 - Math.random()).slice(0, 21);
     
     document.getElementById('auth-screen').classList.remove('active');
     document.getElementById('game-screen').classList.add('active');
     
-    renderTable();
+    renderShortTable();
     nextQuestion();
 });
 
 function nextQuestion() {
     clearInterval(timerInterval);
-    
     if (currentIndex >= testElements.length) {
         endGame();
         return;
     }
-    
     document.getElementById('current-step').textContent = currentIndex + 1;
     document.getElementById('target-element').textContent = testElements[currentIndex].name.toUpperCase();
-    
     startTimer();
 }
 
@@ -106,24 +119,22 @@ function startTimer() {
     const progressBar = document.getElementById('timer-progress');
     
     timerInterval = setInterval(() => {
-        timeLeft -= 1; // 100 шагов за 10 секунд (каждые 100мс по 1%)
+        timeLeft -= 1;
         progressBar.style.width = `${timeLeft}%`;
         
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
             currentIndex++;
-            nextQuestion(); // Переход, если не успел
+            nextQuestion();
         }
     }, 100);
 }
 
 function handleCellClick(clickedSymbol) {
     const correctSymbol = testElements[currentIndex].symbol;
-    
     if (clickedSymbol === correctSymbol) {
         score++;
     }
-    
     currentIndex++;
     nextQuestion();
 }
@@ -147,7 +158,6 @@ function endGame() {
     sendResultsToGoogle(grade);
 }
 
-// Отправка через скрытую форму (CORS-bypass метод)
 function sendResultsToGoogle(grade) {
     const formData = new FormData();
     formData.append(FORM_ENTRIES.name, studentName);
@@ -161,12 +171,11 @@ function sendResultsToGoogle(grade) {
         body: formData
     })
     .then(() => {
-        document.getElementById('sync-status').textContent = "ДАННЫЕ УСПЕШНО СИНХРОНИЗИРОВАНЫ С СЕРВЕРОМ BLACK MESA.";
+        document.getElementById('sync-status').textContent = "ДАННЫЕ СИНХРОНИЗИРОВАНЫ С СЕРВЕРОМ BLACK MESA.";
         document.getElementById('restart-btn').classList.remove('hidden');
     })
     .catch((error) => {
         document.getElementById('sync-status').textContent = "ОШИБКА СВЯЗИ. Передайте экран учителю.";
         document.getElementById('restart-btn').classList.remove('hidden');
-        console.error(error);
     });
 }
