@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Глава 1. Растение — живой организм</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="term-container">
+    <div class="term-header">
+        <div class="lambda-logo">λ</div>
+        <div class="system-status">§ 5. Особенности строения и функции растительных тканей</div>
+    </div>
+
+    <!-- Блок авторизации (UID "ФИО+Класс") -->
+    <div id="auth-block" class="auth-section">
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Инициализация биометрии (Ф И О)</span>
+            <input type="text" id="student-fio" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Сектор назначения (К л а с с)</span>
+            <input type="text" id="student-class" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <button id="auth-trigger" class="hud-btn">Доступ к Параграфу №5 (§5)</button>
+        <div id="auth-alert" class="alert-box"></div>
+    </div>
+
+    <!-- Основной контейнер ботанических заданий -->
+    <div id="biology-content" class="hidden-module">
+        
+        <!-- Задание 1 -->
+        <section class="task-card">
+            <div class="task-title">Задание 1 // Соотнеси виды тканей с их функциями</div>
+            <div class="task-text" style="font-size: 0.85rem; color: #ff5500; margin-bottom: 10px;">[ПРОТОКОЛ]: Нажмите на ТКАНЬ слева, затем на соответствующую ФУНКЦИЮ справа.</div>
+            <div class="match-grid-container">
+                <div class="match-column">
+                    <div class="match-element t2-left" data-id="образовательные">Образовательные</div>
+                    <div class="match-element t2-left" data-id="проводящие">Проводящие</div>
+                    <div class="match-element t2-left" data-id="покровные">Покровные</div>
+                    <div class="match-element t2-left" data-id="основные">Основные</div>
+                    <div class="match-element t2-left" data-id="механические">Механические</div>
+                </div>
+                <div style="border-top: 1px dashed rgba(0, 255, 102, 0.2); margin: 5px 0;"></div>
+                <div class="match-column">
+                    <div class="match-element t2-right" data-correct="механические">Прочность</div>
+                    <div class="match-element t2-right" data-correct="покровные">Защита</div>
+                    <div class="match-element t2-right" data-correct="проводящие">Транспорт веществ</div>
+                    <div class="match-element t2-right" data-correct="образовательные">Рост</div>
+                    <div class="match-element t2-right" data-correct="основные">Фотосинтез, запас, дыхание</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Задание 2 -->
+        <section class="task-card">
+            <div class="task-title">Задание 2 // Зачеркни лишние слова</div>
+            <div class="task-text">Нажмите на ткани ЖИВОТНЫХ организмов, чтобы исключить их из списка растительных тканей:</div>
+            <div class="word-bank" id="task2-bank">
+                <span class="word-token" data-word="соединительные ,">соединительные ,</span>
+                <span class="word-token" data-word="образовательные ,">образовательные ,</span>
+                <span class="word-token" data-word="покровные ,">покровные ,</span>
+                <span class="word-token" data-word="мышечные ,">мышечные ,</span>
+                <span class="word-token" data-word="механические ,">механические ,</span>
+                <span class="word-token" data-word="жировые ,">жировые ,</span>
+                <span class="word-token" data-word="проводящие и">проводящие и</span>
+                <span class="word-token" data-word="основные.">основные.</span>
+            </div>
+        </section>
+
+        <!-- Задание 3 -->
+        <section class="task-card">
+            <div class="task-title">Задание 3 // Выбери верный биологический термин</div>
+            <div class="task-text">
+                Совокупность клеток и межклеточного вещества, имеющих общее происхождение, строение и выполняющих определённые функции, называют 
+                <select id="task3-ans" class="hud-select">
+                    <option value="">-- ВЫБРАТЬ --</option>
+                    <option value="органом">органом</option>
+                    <option value="тканью">тканью</option>
+                    <option value="системой органов">системой органов</option>
+                </select>.
+            </div>
+        </section>
+
+        <!-- Задание 4 -->
+        <section class="task-card">
+            <div class="task-title">Задание 4 // Выбери верный ответ</div>
+            <div class="task-text">1. За счёт какой ткани растений происходит рост корня и стебля в длину?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task4" value="Проводящей"> Проводящей</label>
+                <label class="option-label"><input type="radio" name="task4" value="Покровной"> Покровной</label>
+                <label class="option-label"><input type="radio" name="task4" value="Образовательной"> Образовательной</label>
+                <label class="option-label"><input type="radio" name="task4" value="Основной"> Основной</label>
+            </div>
+        </section>
+
+        <!-- Задание 5 -->
+        <section class="task-card">
+            <div class="task-title">Задание 5 // Выбери верный ответ</div>
+            <div class="task-text">1. Как называется верхушка стебля и кончик корня, за счёт которой происходит рост в длину?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task5" value="Почка"> Почка</label>
+                <label class="option-label"><input type="radio" name="task5" value="Конус нарастания"> Конус нарастания</label>
+                <label class="option-label"><input type="radio" name="task5" value="Камбий"> Камбий</label>
+                <label class="option-label"><input type="radio" name="task5" value="Меристемы"> Меристемы</label>
+            </div>
+        </section>
+
+        <!-- Задание 6 -->
+        <section class="task-card">
+            <div class="task-title">Задание 6 // Выбери верный ответ</div>
+            <div class="task-text">1. За счёт какой ткани происходит рост стебля и корня в толщину?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task6" value="Основной"> Основной</label>
+                <label class="option-label"><input type="radio" name="task6" value="Камбия"> Камбия</label>
+                <label class="option-label"><input type="radio" name="task6" value="Проводящей"> Проводящей</label>
+                <label class="option-label"><input type="radio" name="task6" value="Покровной"> Покровной</label>
+            </div>
+        </section>
+        <!-- Задание 7 -->
+        <section class="task-card">
+            <div class="task-title">Задание 7 // Вставь верный биологический термин</div>
+            <div class="task-text">
+                Если ткань состоит только из одинаковых клеток, то она называется 
+                <span style="font-size:0.8rem; color:#ff5500;">[п...]</span>
+                <input type="text" id="task7-in1" class="hud-input" style="display:inline-block; width:120px; padding:4px; font-size:0.9rem;" autocomplete="off">, 
+                если она построена из нескольких разных клеток, то она именуется 
+                <span style="font-size:0.8rem; color:#ff5500;">[с...]</span>
+                <input type="text" id="task7-in2" class="hud-input" style="display:inline-block; width:120px; padding:4px; font-size:0.9rem;" autocomplete="off">.
+            </div>
+        </section>
+
+        <!-- Задание 8 -->
+        <section class="task-card">
+            <div class="task-title">Задание 8 // Выбери верный ответ</div>
+            <div class="task-text">1. Какая ткань принимает участие в фотосинтезе у высших растений?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task8" value="Покровная"> Покровная</label>
+                <label class="option-label"><input type="radio" name="task8" value="Проводящая"> Проводящая</label>
+                <label class="option-label"><input type="radio" name="task8" value="Образовательная"> Образовательная</label>
+                <label class="option-label"><input type="radio" name="task8" value="Основная"> Основная</label>
+            </div>
+        </section>
+
+        <!-- Задание 9 -->
+        <section class="task-card">
+            <div class="task-title">Задание 9 // Распредели по группам ткани согласно их функциям</div>
+            <div class="task-text" style="font-size: 0.85rem; color: #ff5500; margin-bottom: 12px;">
+                [ПРОТОКОЛ]: Перетащите структуры в соответствующие технологические контейнеры.
+            </div>
+            
+            <!-- Банк перетаскиваемых слов -->
+            <div id="t9-drag-bank" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; padding: 10px; background: rgba(0, 255, 102, 0.02); border: 1px dashed rgba(0, 255, 102, 0.3);">
+                <div class="match-element" draggable="true" data-word="сосуды" style="padding: 6px 10px; font-size: 0.85rem;">сосуды</div>
+                <div class="match-element" draggable="true" data-word="эпидермис" style="padding: 6px 10px; font-size: 0.85rem;">эпидермис</div>
+                <div class="match-element" draggable="true" data-word="конус нарастания" style="padding: 6px 10px; font-size: 0.85rem;">конус нарастания</div>
+                <div class="match-element" draggable="true" data-word="запасающая" style="padding: 6px 10px; font-size: 0.85rem;">запасающая</div>
+                <div class="match-element" draggable="true" data-word="волоски корня" style="padding: 6px 10px; font-size: 0.85rem;">волоски корня</div>
+                <div class="match-element" draggable="true" data-word="пробка" style="padding: 6px 10px; font-size: 0.85rem;">пробка</div>
+                <div class="match-element" draggable="true" data-word="ситовидные трубки" style="padding: 6px 10px; font-size: 0.85rem;">ситовидные трубки</div>
+                <div class="match-element" draggable="true" data-word="камбий" style="padding: 6px 10px; font-size: 0.85rem;">камбий</div>
+                <div class="match-element" draggable="true" data-word="фотосинтезирующая" style="padding: 6px 10px; font-size: 0.85rem;">фотосинтезирующая</div>
+            </div>
+
+            <!-- Зоны сброса -->
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <div style="border: 1px dashed #00ff66; padding: 10px;">
+                    <div style="font-size: 0.9rem; color: #ff5500; font-weight: bold; margin-bottom: 8px;">Образовательная ткань</div>
+                    <div id="t9-group1" style="min-height: 50px; background: rgba(0, 255, 102, 0.03); display: flex; flex-wrap: wrap; gap: 6px; padding: 5px;"></div>
+                </div>
+                <div style="border: 1px dashed #00ff66; padding: 10px;">
+                    <div style="font-size: 0.9rem; color: #ff5500; font-weight: bold; margin-bottom: 8px;">Основная ткань</div>
+                    <div id="t9-group2" style="min-height: 50px; background: rgba(0, 255, 102, 0.03); display: flex; flex-wrap: wrap; gap: 6px; padding: 5px;"></div>
+                </div>
+                <div style="border: 1px dashed #00ff66; padding: 10px;">
+                    <div style="font-size: 0.9rem; color: #ff5500; font-weight: bold; margin-bottom: 8px;">Покровная ткань</div>
+                    <div id="t9-group3" style="min-height: 50px; background: rgba(0, 255, 102, 0.03); display: flex; flex-wrap: wrap; gap: 6px; padding: 5px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Задание 10 -->
+        <section class="task-card">
+            <div class="task-title">Задание 10 // Зачеркни лишние слова</div>
+            <div class="task-text">Нажмите на ЛИШНИЕ виды тканей, которые НЕ относятся к основным тканям:</div>
+            <div class="word-bank" id="task10-bank">
+                <span class="word-token" data-word="покровную ,">покровную ,</span>
+                <span class="word-token" data-word="фотосинтезирующую ,">фотосинтезирующую ,</span>
+                <span class="word-token" data-word="механическую ,">механическую ,</span>
+                <span class="word-token" data-word="воздухоносную ,">воздухоносную ,</span>
+                <span class="word-token" data-word="запасающую ,">запасающую ,</span>
+                <span class="word-token" data-word="проводящую">проводящую</span>
+            </div>
+        </section>
+
+        <!-- Задание 11 -->
+        <section class="task-card">
+            <div class="task-title">Задание 11 // Выбери верный ответ</div>
+            <div class="task-text">1. За счёт какой ткани стебель растёт в толщину, а у деревьев образуются годичные кольца?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task11" value="Сосудов"> Сосудов</label>
+                <label class="option-label"><input type="radio" name="task11" value="Камбия"> Камбия</label>
+                <label class="option-label"><input type="radio" name="task11" value="Ситовидных трубок"> Ситовидных трубок</label>
+                <label class="option-label"><input type="radio" name="task11" value="Эпидермиса"> Эпидермиса</label>
+            </div>
+        </section>
+
+        <!-- Задание 12 -->
+        <section class="task-card">
+            <div class="task-title">Задание 12 // Выбери верный ответ</div>
+            <div class="task-text">1. Учёный, который впервые ввёл термин «ткань» в ботанику:</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task12" value="Мальпиги"> Мальпиги</label>
+                <label class="option-label"><input type="radio" name="task12" value="Гук"> Гук</label>
+                <label class="option-label"><input type="radio" name="task12" value="Грю"> Грю</label>
+                <label class="option-label"><input type="radio" name="task12" value="Левенгук"> Левенгук</label>
+            </div>
+        </section>
+
+        <!-- Системная кнопка отправки результатов -->
+        <button id="submit-tasks" class="hud-btn" style="background: #ff5500; border-color: #b33c00; margin-top: 25px;">Синхронизировать отчет</button>
+    
+    </div> <!-- Конец #biology-content -->
+</div> <!-- Конец .term-container -->
+
+<script src="script.js"></script>
+</body>
+</html>
