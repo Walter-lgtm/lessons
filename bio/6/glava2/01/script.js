@@ -41,7 +41,7 @@ function executeBiometricAuth() {
         penaltyPoints = currentPenalty + 1;
         localStorage.setItem("bme_p7_seeds_penalty", penaltyPoints);
         
-        alertBox.textContent = "ВНИМАНИЕ: ОБНАРУЖЕН ПОВТОРНЫЙ ВХОД. АКТИВИРОВАН ШТРАФ: -" + penaltyPoints + " БАЛЛ.";
+        alertBox.textContent = "ВНИМАНИЕ: ОБНАРУЖЕН ПОВТОР ПРОВЕРКИ. АКТИВИРОВАН ШТРАФ: -" + penaltyPoints + " БАЛЛ.";
         alertBox.style.color = "#ff5500";
         alertBox.style.display = "block";
     } else {
@@ -63,7 +63,6 @@ function executeBiometricAuth() {
         submitBtn.addEventListener("click", collectAndVerifyAnswers);
     }
 }
-
 // Управляющий модуль независимого распределения для Заданий 1, 2 и 3
 function initializeTripleDragAndDrop() {
     const ids =;
@@ -141,7 +140,6 @@ function collectAndVerifyAnswers() {
     // Задание 5: Радиокнопка (Генеративным)
     const rad5 = document.querySelector('input[name="task5"]:checked');
     answersReport.push({ isCorrect: rad5 && rad5.value === "Генеративным" });
-
     // Задание 6: Чекбоксы (Двудольные, Обоеполые)
     const checked6 = Array.from(document.querySelectorAll('input[name="task6"]:checked')).map(function(el) { return el.value; });
     const expected6 = ["Двудольные", "Обоеполые"];
@@ -160,7 +158,8 @@ function collectAndVerifyAnswers() {
                       t7_4.startsWith("кореш") && t7_5.startsWith("стебел") && t7_6.startsWith("почеч") && 
                       t7_7.startsWith("семядол") && t7_8.startsWith("семядол");
     answersReport.push({ isCorrect: t7Correct });
-  // Задание 8: Зачеркнутые токены (лишние однодольные в 1 абз и лишние двудольные во 2 абз)
+
+    // Задание 8: Зачеркнутые токены
     const tokens8 = document.querySelectorAll("#task8-bank .word-token");
     let task8Correct = true;
     tokens8.forEach(function(token) {
@@ -184,7 +183,6 @@ function collectAndVerifyAnswers() {
     const checked11 = Array.from(document.querySelectorAll('input[name="task11"]:checked')).map(function(el) { return el.value; });
     const expected11 = ["Рожь", "Ландыш"];
     answersReport.push({ isCorrect: checked11.length === expected11.length && checked11.every(function(v) { return expected11.includes(v); }) });
-
     // Задание 12: Радиокнопка по sem.png (3)
     const rad12 = document.querySelector('input[name="task12"]:checked');
     answersReport.push({ isCorrect: rad12 && rad12.value === "3" });
@@ -217,7 +215,7 @@ function collectAndVerifyAnswers() {
     const rad18 = document.querySelector('input[name="task18"]:checked');
     answersReport.push({ isCorrect: rad18 && rad18.value === "6" });
 
-    // Отправка пакета на модуль трансляции данных
+    // Запуск процесса трансляции пакета данных
     transmitDataToBlackMesa(answersReport);
 }
 // Подсчет результатов по 5-балльной шкале (для 18 заданий)
