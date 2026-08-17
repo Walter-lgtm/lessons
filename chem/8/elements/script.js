@@ -109,10 +109,18 @@ function renderShortTable() {
     const tableContainer = document.getElementById('periodic-table');
     tableContainer.innerHTML = '';
     
-    // Отрисовка стабильной сетки 6 рядов на 8 групп
-    for (let r = 1; r <= 6; r++) {
-        for (let c = 1; c <= 8; c++) {
-            // Ищем элемент для текущей ячейки
+    // Отрисовка точной копии сетки: 5 рядов на 10 колонок (чтобы влезли Fe/Co/Ni отдельно)
+    for (let r = 1; r <= 5; r++) {
+        for (let c = 1; c <= 10; c++) {
+            
+            // Исключаем пустые ячейки в конце рядов 1, 2, 3, чтобы соответствовать картинке
+            if ((r === 1 && c > 1 && c < 8) || (r < 4 && c > 8)) {
+                const cell = document.createElement('div');
+                cell.className = 'cell empty';
+                tableContainer.appendChild(cell);
+                continue;
+            }
+
             const element = elementsData.find(e => e.row === r && e.col === c);
             
             if (element) {
@@ -122,11 +130,9 @@ function renderShortTable() {
                 cell.dataset.symbol = element.symbol;
                 
                 cell.addEventListener('click', () => {
-                    playHLSound(); // Вспышка и звук терминала
-                    
+                    playHLSound();
                     cell.classList.add('flash-active');
                     
-                    // Проверяем, совпадает ли клик с текущим загаданным элементом
                     const isCorrect = (element.symbol === testElements[currentIndex].symbol);
                     
                     setTimeout(() => {
@@ -136,7 +142,6 @@ function renderShortTable() {
                 });
                 tableContainer.appendChild(cell);
             } else {
-                // Если элемента в этих координатах нет, создаем пустую некликабельную зону
                 const cell = document.createElement('div');
                 cell.className = 'cell empty';
                 tableContainer.appendChild(cell);
