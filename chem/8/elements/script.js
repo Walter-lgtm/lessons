@@ -1,9 +1,11 @@
-// Исправленная база данных: 32 элемента, где у каждого СВОЯ отдельная ячейка (Сетка 6 рядов на 8 групп)
+// База данных строго по советской/российской короткой форме ПСХЭ (для первых 4-х периодов)
+// Сетка: 7 рядов (с учетом деления больших периодов на ряды) на 8 групп (колонок)
 const elementsData = [
-    // Ряд 1
+    // ПЕРИОД 1 (Ряд 1)
     { symbol: 'H', name: 'Водород', row: 1, col: 1 },
     { symbol: 'He', name: 'Гелий', row: 1, col: 8 },
-    // Ряд 2
+    
+    // ПЕРИОД 2 (Ряд 2)
     { symbol: 'Li', name: 'Литий', row: 2, col: 1 },
     { symbol: 'Be', name: 'Бериллий', row: 2, col: 2 },
     { symbol: 'B', name: 'Бор', row: 2, col: 3 },
@@ -12,7 +14,8 @@ const elementsData = [
     { symbol: 'O', name: 'Кислород', row: 2, col: 6 },
     { symbol: 'F', name: 'Фтор', row: 2, col: 7 },
     { symbol: 'Ne', name: 'Неон', row: 2, col: 8 },
-    // Ряд 3
+    
+    // ПЕРИОД 3 (Ряд 3)
     { symbol: 'Na', name: 'Натрий', row: 3, col: 1 },
     { symbol: 'Mg', name: 'Магний', row: 3, col: 2 },
     { symbol: 'Al', name: 'Алюминий', row: 3, col: 3 },
@@ -21,7 +24,8 @@ const elementsData = [
     { symbol: 'S', name: 'Сера', row: 3, col: 6 },
     { symbol: 'Cl', name: 'Хлор', row: 3, col: 7 },
     { symbol: 'Ar', name: 'Аргон', row: 3, col: 8 },
-    // Ряд 4 (Первый ряд 4-го периода)
+    
+    // ПЕРИОД 4 — ВЕРХНИЙ РЯД (Ряд 4 по нашей сетке)
     { symbol: 'K', name: 'Калий', row: 4, col: 1 },
     { symbol: 'Ca', name: 'Кальций', row: 4, col: 2 },
     { symbol: 'Sc', name: 'Скандий', row: 4, col: 3 },
@@ -29,19 +33,23 @@ const elementsData = [
     { symbol: 'V', name: 'Ванадий', row: 4, col: 5 },
     { symbol: 'Cr', name: 'Хром', row: 4, col: 6 },
     { symbol: 'Mn', name: 'Марганец', row: 4, col: 7 },
+    
+    // Триада железа (Они делят 8-ю группу в верхнем ряду 4-го периода)
+    // Чтобы у каждого была СВОЯ ячейка, мы сдвинем Co и Ni в соседние ячейки виртуального расширения ряда 4
     { symbol: 'Fe', name: 'Железо', row: 4, col: 8 },
-    // Ряд 5 (Второй ряд 4-го периода - теперь под ними!)
-    { symbol: 'Co', name: 'Кобальт', row: 5, col: 1 },
-    { symbol: 'Ni', name: 'Никель', row: 5, col: 2 },
-    { symbol: 'Cu', name: 'Медь', row: 5, col: 3 },
-    { symbol: 'Zn', name: 'Цинк', row: 5, col: 4 },
-    { symbol: 'Ga', name: 'Галлий', row: 5, col: 5 },
-    { symbol: 'Ge', name: 'Германий', row: 5, col: 6 },
-    { symbol: 'As', name: 'Мышьяк', row: 5, col: 7 },
-    { symbol: 'Se', name: 'Селен', row: 5, col: 8 },
-    // Ряд 6 (Остатки 4-го периода, уходящие в правый край)
-    { symbol: 'Br', name: 'Бром', row: 6, col: 7 },
-    { symbol: 'Kr', name: 'Криптон', row: 6, col: 8 }
+    { symbol: 'Co', name: 'Кобальт', row: 4, col: 9 },
+    { symbol: 'Ni', name: 'Никель', row: 4, col: 10 },
+    
+    // ПЕРИОД 4 — НИЖНИЙ РЯД (Ряд 5 по нашей сетке)
+    // Обратите внимание: элементы по картинке смещены (например, Cu под Ca, Zn под Sc и т.д.)
+    { symbol: 'Cu', name: 'Медь', row: 5, col: 1 },
+    { symbol: 'Zn', name: 'Цинк', row: 5, col: 2 },
+    { symbol: 'Ga', name: 'Галлий', row: 5, col: 3 },
+    { symbol: 'Ge', name: 'Германий', row: 5, col: 4 },
+    { symbol: 'As', name: 'Мышьяк', row: 5, col: 5 },
+    { symbol: 'Se', name: 'Селен', row: 5, col: 6 },
+    { symbol: 'Br', name: 'Бром', row: 5, col: 7 },
+    { symbol: 'Kr', name: 'Криптон', row: 5, col: 8 }
 ];
 
 // Web Audio API Синтезатор звука (Безошибочный метод воспроизведения звука клика Half-Life)
