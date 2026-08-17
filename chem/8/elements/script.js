@@ -184,18 +184,50 @@ function nextQuestion() {
     startTimer();
 }
 
+let currentQuestionMaxTime = 10000; // Хранит текущее максимальное время на вопрос в миллисекундах
+
 function startTimer() {
-    timeLeft = 100;
-    const progressBar = document.getElementById('timer-progress');
+    // ДИНАМИЧЕСКАЯ СЛОЖНОСТЬ (Каскадный таймер):
+    // Вопросы 1-5:  10 секунд (базовый уровень)
+    // Вопросы 6-10:  8 секунд (система ускоряется)
+    // Вопросы 11-15: 6 секунд (высокое давление)
+    // Вопросы 16-21: 4 секунды (критический режим Black Mesa!)
     
+    if (currentIndex < 5) {
+        currentQuestionMaxTime = 10000; 
+    } else if (currentIndex < 10) {
+        currentQuestionMaxTime = 8000;
+    } else if (currentIndex < 15) {
+        currentQuestionMaxTime = 6000;
+    } else {
+        currentQuestionMaxTime = 4000;
+    }
+
+    timeLeft = 100; // Проценты полосы таймера
+    const progressBar = document.getElementById('timer-progress');
+    const targetText = document.getElementById('target-element');
+    
+    // Сбрасываем паническую анимацию текста, если она была включена на прошлом шаге
+    targetText.classList.remove('time-panic');
+
+    // Рассчитываем шаг уменьшения процентов. 
+    // Интервал срабатывает каждые 100мс. Значит, всего шагов будет: (Время в мс / 100)
+    const totalSteps = currentQuestionMaxTime / 100;
+    const percentPerStep = 100 / totalSteps;
+
     timerInterval = setInterval(() => {
-        timeLeft -= 1;
-        progressBar.style.width = `${timeLeft}%`;
+        timeLeft -= percentPerStep;
+        progressBar.style.width = `${Math.max(0, timeLeft)}%`;
+        
+        // Визуальное предупреждение: если осталось меньше 30% времени, текст элемента начинает панически пульсировать красным
+        if (timeLeft <= 30) {
+            targetText.classList.add('time-panic');
+        }
         
         if (timeLeft <= 0) {
             clearInterval(timerInterval);
             currentIndex++;
-            nextQuestion();
+            nextQuestion(); // Переход к следующему элементу, если время вышло
         }
     }, 100);
 }
