@@ -103,14 +103,14 @@ h2 { font-size: 0.9rem; margin-bottom: 15px; color: #888; }
 .timer-bar { width: 100%; height: 4px; background: #333; margin-bottom: 2px; overflow: hidden; }
 #timer-progress { width: 100%; height: 100%; background: var(--hl-orange); transition: width 0.1s linear; }
 
-/* Обновляем сетку под 6 рядов */
+/* Обновленная сетка: 10 колонок в ширину, 5 рядов в высоту */
 .short-table-container {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(6, 1fr); /* Стало 6 рядов */
+    grid-template-columns: repeat(10, 1fr); /* Изменили на 10 */
+    grid-template-rows: repeat(5, 1fr);    /* Изменили на 5 */
     gap: 3px;
     padding: 2px;
-    height: 98%;
+    height: 96%;
     width: 100%;
     margin: 0 auto;
 }
