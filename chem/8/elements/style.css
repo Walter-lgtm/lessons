@@ -165,3 +165,41 @@ h2 { font-size: 0.9rem; margin-bottom: 15px; color: #888; }
     border-color: #fff !important;
     text-shadow: none;
 }
+/* ЭЛТ-эффект сканирующих линий поверх всей страницы */
+body::after {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 999;
+    background-size: 100% 4px, 6px 100%;
+    pointer-events: none; /* Пропускает тапы сквозь себя */
+}
+
+/* Легкое мерцание люминофора для терминальных боксов */
+.terminal-box, .top-panel {
+    animation: hl-flicker 0.15s infinite;
+}
+
+@keyframes hl-flicker {
+    0% { opacity: 0.99; }
+    50% { opacity: 1; }
+    100% { opacity: 0.99; }
+}
+
+/* Стилизация текста таймера для наглядности (опционально) */
+#target-element {
+    transition: color 0.3s ease;
+}
+/* Если времени мало — подсветим красным */
+.time-panic {
+    color: #ff3333 !important;
+    text-shadow: 0 0 8px rgba(255,51,51,0.8) !important;
+    animation: hl-pulse 0.5s infinite alternate;
+}
+
+@keyframes hl-pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
