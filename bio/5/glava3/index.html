@@ -1,1 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§13. Среды обитания организмов</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Введите ваши данные для доступа к терминалу Сектора С:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: ГЛАВА 3 (§13. СРЕДЫ ОБИТАНИЯ ОРГАНИЗМОВ)</p>
+            </div>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Вставь верный термин (Без подсказок)</h3>
+            <p class="question-text">
+                Часть природы, окружающая живой организм и оказывающая на него влияние, называется с<input type="text" id="t1-ans1" class="hl-inline-input" style="width: 100px;" autocomplete="off">оми.
+            </p>
+            <p class="question-text">
+                Э<input type="text" id="t1-ans2" class="hl-inline-input" style="width: 130px;" autocomplete="off"> ф<input type="text" id="t1-ans3" class="hl-inline-input" style="width: 100px;" autocomplete="off"> — это явления, свойства и элементы среды обитания, которые влияют на организм.
+            </p>
+            <p class="question-text">
+                Экологические факторы включают у<input type="text" id="t1-ans4" class="hl-inline-input" style="width: 100px;" autocomplete="off"> и р<input type="text" id="t1-ans5" class="hl-inline-input" style="width: 100px;" autocomplete="off">.
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Вычеркни лишние слова (Кликни, чтобы вычеркнуть)</h3>
+            <p class="question-text">Вычеркни те факторы, которые НЕ относятся к условиям обитания (являются ресурсами):</p>
+            <div class="drag-words-container" id="strike-container-t2">
+                <span class="drag-word strike-item-t2" data-word="температуру">температуру</span>
+                <span class="drag-word strike-item-t2" data-word="влажность воздуха">влажность воздуха</span>
+                <span class="drag-word strike-item-t2" data-word="кислород">кислород</span>
+                <span class="drag-word strike-item-t2" data-word="солёность воды">солёность воды</span>
+                <span class="drag-word strike-item-t2" data-word="содержание загрязняющих веществ">содержание загрязняющих веществ</span>
+                <span class="drag-word strike-item-t2" data-word="загазованность">загазованность</span>
+                <span class="drag-word strike-item-t2" data-word="солнечный свет">солнечный свет</span>
+                <span class="drag-word strike-item-t2" data-word="вода">вода</span>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Распредели факторы среды по группам (Drag-and-Drop)</h3>
+            <p class="question-text">Перетащи перечисленные факторы в соответствующие колонки:</p>
+            <div class="drag-words-container" id="words-t3">
+                <span class="drag-word" draggable="true" data-word="солнечный свет">солнечный свет</span>
+                <span class="drag-word" draggable="true" data-word="вода">вода</span>
+                <span class="drag-word" draggable="true" data-word="влажность">влажность</span>
+                <span class="drag-word" draggable="true" data-word="освещённость">освещённость</span>
+                <span class="drag-word" draggable="true" data-word="температура">температура</span>
+                <span class="drag-word" draggable="true" data-word="углекислый газ">углекислый газ</span>
+            </div>
+            <div class="two-columns">
+                <div class="group-zone" id="t3-group1" data-group="conditions">
+                    <h4>Условия среды обитания</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t3-group2" data-group="resources">
+                    <h4>Ресурсы среды обитания</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+         <!-- ЗАДАНИЕ 4 -->
+        <section class="task-card" id="task4">
+            <h3>[λ] Задание 4. Соотнеси среду обитания и её представителя (Клик слева, затем справа)</h3>
+            <p class="question-text">Свяжите биологические виды с их естественной средой обитания:</p>
+            <div class="match-container">
+                <div class="match-col" id="left-col-t4">
+                    <div class="match-item t4-left" data-id="soil">почвенная</div>
+                    <div class="match-item t4-left" data-id="air">наземно-воздушная</div>
+                    <div class="match-item t4-left" data-id="organism">организменная</div>
+                    <div class="match-item t4-left" data-id="water">водная</div>
+                </div>
+                <div class="match-col" id="right-col-t4">
+                    <div class="match-target t4-right" data-id="water">дельфин</div>
+                    <div class="match-target t4-right" data-id="organism">аскарида</div>
+                    <div class="match-target t4-right" data-id="soil">землеройка</div>
+                    <div class="match-target t4-right" data-id="air">орёл</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 5 -->
+        <section class="task-card" id="task5">
+            <h3>[λ] Задание 5. Распредели организмы по средам их обитания (Drag-and-Drop)</h3>
+            <p class="question-text">Перетащите плашки организмов в соответствующие зоны:</p>
+            <div class="drag-words-container" id="words-t5">
+                <span class="drag-word" draggable="true" data-word="щука">щука</span>
+                <span class="drag-word" draggable="true" data-word="личинка майского жука">личинка майского жука</span>
+                <span class="drag-word" draggable="true" data-word="аист">аист</span>
+                <span class="drag-word" draggable="true" data-word="бычий цепень">бычий цепень</span>
+                <span class="drag-word" draggable="true" data-word="блоха">блоха</span>
+                <span class="drag-word" draggable="true" data-word="клещ">клещ</span>
+                <span class="drag-word" draggable="true" data-word="дождевой червь">дождевой червь</span>
+                <span class="drag-word" draggable="true" data-word="медведка">медведка</span>
+                <span class="drag-word" draggable="true" data-word="бурый медведь">бурый медведь</span>
+                <span class="drag-word" draggable="true" data-word="осьминог">осьминог</span>
+                <span class="drag-word" draggable="true" data-word="морж">морж</span>
+                <span class="drag-word" draggable="true" data-word="синий кит">синий кит</span>
+                <span class="drag-word" draggable="true" data-word="крот">крот</span>
+                <span class="drag-word" draggable="true" data-word="тигр уссурийский">тигр уссурийский</span>
+                <span class="drag-word" draggable="true" data-word="кенгуру">кенгуру</span>
+                <span class="drag-word" draggable="true" data-word="вши">вши</span>
+            </div>
+            <div class="three-columns">
+                <div class="group-zone" id="t5-group1" data-group="water">
+                    <h4>Водная среда</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t5-group2" data-group="air">
+                    <h4>Наземно-воздушная</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t5-group3" data-group="soil">
+                    <h4>Почвенная</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 6 -->
+        <section class="task-card" id="task6">
+            <h3>[λ] Задание 6. Вычеркни лишние живые организмы (Кликни, чтобы вычеркнуть)</h3>
+            <p class="question-text">Вычеркните те организмы, которые НЕ обитают в наземно-воздушной среде:</p>
+            <div class="drag-words-container" id="strike-container-t6">
+                <span class="drag-word strike-item-t6" data-word="цапля">цапля</span>
+                <span class="drag-word strike-item-t6" data-word="пиявка">пиявка</span>
+                <span class="drag-word strike-item-t6" data-word="земляника">земляника</span>
+                <span class="drag-word strike-item-t6" data-word="акула">акула</span>
+                <span class="drag-word strike-item-t6" data-word="острицы">острицы</span>
+                <span class="drag-word strike-item-t6" data-word="африканский слон">африканский слон</span>
+                <span class="drag-word strike-item-t6" data-word="грибы кандида">грибы кандида</span>
+                <span class="drag-word strike-item-t6" data-word="подберёзовик">подберёзовик</span>
+                <span class="drag-word strike-item-t6" data-word="двугорбый верблюд">двугорбый верблюд</span>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 7 -->
+        <section class="task-card" id="task7">
+            <h3>[λ] Задание 7. Распредели экологические факторы по группам (Drag-and-Drop)</h3>
+            <p class="question-text">Перетащите факторы среды в нужные функциональные колонки:</p>
+            <div class="drag-words-container" id="words-t7">
+                <span class="drag-word" draggable="true" data-word="трава на лугу">трава на лугу</span>
+                <span class="drag-word" draggable="true" data-word="загрязнённость водоёма">загрязнённость водоёма</span>
+                <span class="drag-word" draggable="true" data-word="вырубка леса">вырубка леса</span>
+                <span class="drag-word" draggable="true" data-word="загазованность воздуха">загазованность воздуха</span>
+                <span class="drag-word" draggable="true" data-word="рельеф">рельеф</span>
+                <span class="drag-word" draggable="true" data-word="зайцы и лисы">зайцы и лисы</span>
+                <span class="drag-word" draggable="true" data-word="солнечный свет">солнечный свет</span>
+                <span class="drag-word" draggable="true" data-word="паук и муха">паук и муха</span>
+                <span class="drag-word" draggable="true" data-word="влажность">влажность</span>
+            </div>
+            <div class="three-columns">
+                <div class="group-zone" id="t7-group1" data-group="abiotic">
+                    <h4>Абиотические факторы</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t7-group2" data-group="biotic">
+                    <h4>Биотические факторы</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t7-group3" data-group="anthropogenic">
+                    <h4>Антропогенные факторы</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+        <!-- ЗАДАНИЕ 8 -->
+        <section class="task-card" id="task8">
+            <h3>[λ] Задание 8. Вычеркни лишние слова (Кликни, чтобы вычеркнуть)</h3>
+            <p class="question-text">Вычеркните те факторы, которые НЕ относятся к антропогенным (созданным человеком):</p>
+            <div class="drag-words-container" id="strike-container-t8">
+                <span class="drag-word strike-item-t8" data-word="химическое загрязнение воды">химическое загрязнение воды</span>
+                <span class="drag-word strike-item-t8" data-word="солёность водоёма">солёность водоёма</span>
+                <span class="drag-word strike-item-t8" data-word="загазованность воздуха и загрязнение химикатами почвы">загазованность воздуха и загрязнение химикатами почвы</span>
+                <span class="drag-word strike-item-t8" data-word="высокая влажность">высокая влажность</span>
+                <span class="drag-word strike-item-t8" data-word="вырубка леса">вырубка леса</span>
+                <span class="drag-word strike-item-t8" data-word="уменьшение популяции зайцев из-за активности популяции волков">уменьшение популяции зайцев из-за активности популяции волков</span>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 9 -->
+        <section class="task-card" id="task9">
+            <h3>[λ] Задание 9. Заполни пропуски (Без подсказок)</h3>
+            <p class="question-text">
+                Различают четыре основные среды обитания: 
+                в<input type="text" id="t9-ans1" class="hl-inline-input" style="width: 100px;" autocomplete="off">, 
+                н<input type="text" id="t9-ans2" class="hl-inline-input" style="width: 150px;" autocomplete="off">, 
+                п<input type="text" id="t9-ans3" class="hl-inline-input" style="width: 100px;" autocomplete="off"> и 
+                о<input type="text" id="t9-ans4" class="hl-inline-input" style="width: 120px;" autocomplete="off"> (среда, образуемая самими живыми организмами).
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 10 -->
+        <section class="task-card" id="task10">
+            <h3>[λ] Задание 10. Укажи верные утверждения (Множественный выбор)</h3>
+            <p class="question-text">Выберите все истинные биологические утверждения из списка:</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q10" value="1"><span></span> Всё то, что окружает живое существо, называют средой обитания.</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q10" value="2"><span></span> Солевой состав воды не имеет большого значения для водных организмов.</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q10" value="3"><span></span> Наземным обитателям сложнее поддерживать своё тело в пространстве, чем водным.</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q10" value="4"><span></span> В почве обитают бактерии, грибы, черви, насекомые и даже кроты.</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q10" value="5"><span></span> На Земле выделяют 3 основные среды обитания: водную, наземно-воздушную и почвенную.</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q10" value="6"><span></span> Тела многих животных не могут служить средой обитания для других организмов.</label>
+            </div>
+        </section>
+
+        <!-- Кнопка отправки результатов -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>МОНИТОРИНГ СРЕД ОБИТАНИЯ ЗАВЕРШЕН</h2>
+        <p class="system-msg">> Экологические показатели заархивированы в Секторе С.</p>
+        <div class="score-board">
+            <p>Участник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 10</p>
+            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
