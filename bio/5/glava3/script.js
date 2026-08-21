@@ -87,19 +87,28 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. МЕХАНИКА ВЫЧЕРКИВАНИЯ СЛОВ (Задания 2, 6, 8)
     // ==========================================
     function initStrikeMechanics() {
-        // Настройка вычеркивания для Задания 2
+        // Задание 2
         document.querySelectorAll(".strike-item-t2").forEach(item => {
-            item.addEventListener("click", () => item.classList.toggle("crossed-out"));
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+                item.classList.toggle("crossed-out");
+            });
         });
 
-        // Настройка вычеркивания для Задания 6
+        // Задание 6
         document.querySelectorAll(".strike-item-t6").forEach(item => {
-            item.addEventListener("click", () => item.classList.toggle("crossed-out"));
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+                item.classList.toggle("crossed-out");
+            });
         });
 
-        // Настройка вычеркивания для Задания 8
+        // Задание 8
         document.querySelectorAll(".strike-item-t8").forEach(item => {
-            item.addEventListener("click", () => item.classList.toggle("crossed-out"));
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+                item.classList.toggle("crossed-out");
+            });
         });
     }
    // ==========================================
@@ -187,15 +196,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         if (t4Count === 4 && t4Correct) totalScore += 1;
 
-        // --- Задание 5 (Drag-and-Drop Организмы по 3 средам) ---
+        // --- Задание 5 (ОБНОВЛЕННЫЙ Drag-and-Drop: Организмы по 4 средам) ---
         let t5Correct = true;
         const t5Water = Array.from(document.querySelectorAll("#t5-group1 .drag-word")).map(el => el.dataset.word);
         const t5Air = Array.from(document.querySelectorAll("#t5-group2 .drag-word")).map(el => el.dataset.word);
         const t5Soil = Array.from(document.querySelectorAll("#t5-group3 .drag-word")).map(el => el.dataset.word);
+        const t5Organism = Array.from(document.querySelectorAll("#t5-group4 .drag-word")).map(el => el.dataset.word);
 
         if (t5Water.length !== 4 || !t5Water.every(v => ["щука", "осьминог", "морж", "синий кит"].includes(v))) t5Correct = false;
         if (t5Air.length !== 4 || !t5Air.every(v => ["аист", "бурый медведь", "кенгуру", "тигр уссурийский"].includes(v))) t5Correct = false;
-        if (t5Soil.length !== 8 || !t5Soil.every(v => ["личинка майского жука", "бычий цепень", "блоха", "клещ", "дождевой червь", "медведка", "крот", "вши"].includes(v))) t5Correct = false;
+        if (t5Soil.length !== 5 || !t5Soil.every(v => ["личинка майского жука", "дождевой червь", "медведка", "крот", "клещ"].includes(v))) t5Correct = false;
+        if (t5Organism.length !== 3 || !t5Organism.every(v => ["бычий цепень", "блоха", "вши"].includes(v))) t5Correct = false;
         if (t5Correct) totalScore += 1;
 
         // --- Задание 6 (Вычеркивание НЕ наземных: пиявка, акула, острицы, грибы кандида) ---
