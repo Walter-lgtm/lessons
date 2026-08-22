@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§16. Водная среда обитания</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Введите ваши данные для доступа к терминалу Сектора С:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: ГЛАВА 3 (§16. ВОДНАЯ СРЕДА ОБИТАНИЯ)</p>
+            </div>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Вставь верный термин</h3>
+            <p class="question-text">
+                Водная среда занимает примерно 71% поверхности нашей планеты. Вода встречается в природе одновременно в трёх агрегатных состояниях: 
+                ж<input type="text" id="t1-ans1" class="hl-inline-input" style="width: 100px;" autocomplete="off">, 
+                т<input type="text" id="t1-ans2" class="hl-inline-input" style="width: 100px;" autocomplete="off"> и 
+                г<input type="text" id="t1-ans3" class="hl-inline-input" style="width: 140px;" autocomplete="off">.
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Вычеркни лишние слова (Кликни, чтобы вычеркнуть)</h3>
+            <p class="question-text">Вычеркни те живые организмы, которые НЕ обитают в солёных водоёмах (пресноводные):</p>
+            <div class="drag-words-container" id="strike-container-t2">
+                <span class="drag-word strike-item-t2" data-word="медуз">медуз</span>
+                <span class="drag-word strike-item-t2" data-word="кораллы">кораллы</span>
+                <span class="drag-word strike-item-t2" data-word="электрического ската">электрического ската</span>
+                <span class="drag-word strike-item-t2" data-word="ряску">ряску</span>
+                <span class="drag-word strike-item-t2" data-word="элодею">элодею</span>
+                <span class="drag-word strike-item-t2" data-word="тигровую акулу">тигровую акулу</span>
+                <span class="drag-word strike-item-t2" data-word="большого прудовика">большого прудовика</span>
+                <span class="drag-word strike-item-t2" data-word="щуку">щуку</span>
+                <span class="drag-word strike-item-t2" data-word="форель">форель</span>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Выбери верные ответы (Множественный выбор)</h3>
+            <p class="question-text">Выбери из перечисленных организмов те, которые являются обитателями водной среды:</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q3" value="Саламандра"><span></span> Саламандра</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q3" value="Антилопа гну"><span></span> Антилопа гну</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q3" value="Наутилус"><span></span> Наутилус</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q3" value="Берёза"><span></span> Берёза</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q3" value="Крот"><span></span> Крот</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q3" value="Кальмар"><span></span> Кальмар</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 4 -->
+        <section class="task-card" id="task4">
+            <h3>[λ] Задание 4. Соотнеси факторы и приспособления (Клик слева, затем справа)</h3>
+            <p class="question-text">Соотнеси факторы окружающей среды и приспособления животных к этим факторам:</p>
+            <div class="match-container">
+                <div class="match-col" id="left-col-t4">
+                    <div class="match-item t4-left" data-id="light">Слабая освещённость</div>
+                    <div class="match-item t4-left" data-id="salt">Солёность воды</div>
+                    <div class="match-item t4-left" data-id="temp">Температура воды</div>
+                    <div class="match-item t4-left" data-id="density">Плотность воды</div>
+                </div>
+                <div class="match-col" id="right-col-t4">
+                    <div class="match-target t4-right" data-id="density">Обтекаемая форма тела</div>
+                    <div class="match-target t4-right" data-id="temp">Зимовка на дне</div>
+                    <div class="match-target t4-right" data-id="light">Светящиеся органы</div>
+                    <div class="match-target t4-right" data-id="salt">Обитание в солёных и пресных водоёмах</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 5 -->
+        <section class="task-card" id="task5">
+            <h3>[λ] Задание 5. Выбери и вставь верный ответ</h3>
+            <p class="question-text">
+                Природные водоёмы можно разделить на солёные и пресные. 
+                <select class="hl-select" id="t5-select1" style="display: inline-block; width: auto; margin: 0 5px;">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="Солёные водоёмы">Солёные водоёмы</option>
+                    <option value="Пресные водоёмы">Пресные водоёмы</option>
+                    <option value="Искусственные водоёмы">Искусственные водоёмы</option>
+                </select>
+                — это океаны, моря, солёные озёра. К пресным водоёмам относят реки и озёра, а также временные, пересыхающие водоёмы — 
+                <select class="hl-select" id="t5-select2" style="display: inline-block; width: auto; margin: 0 5px;">
+                    <option value="" disabled selected>Выбери ответ</option>
+                    <option value="лужи">лужи</option>
+                    <option value="водохранилища">водохранилища</option>
+                    <option value="пруды">пруды</option>
+                </select>.
+            </p>
+        </section>
+
+        <!-- Кнопка отправки результатов -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>ГИДРОБИОЛОГИЧЕСКИЙ МОНИТОРИНГ ЗАВЕРШЕН</h2>
+        <p class="system-msg">> Данные о гидросфере успешно заархивированы в Секторе С.</p>
+        <div class="score-board">
+            <p>Участник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 5</p>
+            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
