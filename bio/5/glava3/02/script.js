@@ -176,13 +176,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function sendToGoogleForm(name, className, score, finalGrade) {
         // Замените URL на вашу новую форму для §16
-        const formURL = "https://google.com";
+        const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSfeBBqEXTT7jVz3cfuYk0W2bCV2qalS_hv6txtFOpL_oXe2AA/formResponse";
         const formData = new FormData();
         
-        formData.append("entry.426483672", name);      
-        formData.append("entry.538540870", className); 
-        formData.append("entry.815205528", score);     
-        formData.append("entry.696485465", finalGrade); 
+        formData.append("entry.108258354", name);      
+        formData.append("entry.279947541", className); 
+        formData.append("entry.392662755", score);     
+        formData.append("entry.97451768", finalGrade); 
 
         fetch(formURL, {
             method: "POST",
