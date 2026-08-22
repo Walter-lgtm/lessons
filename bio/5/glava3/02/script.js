@@ -180,10 +180,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSfeBBqEXTT7jVz3cfuYk0W2bCV2qalS_hv6txtFOpL_oXe2AA/formResponse";
         const formData = new FormData();
         
-        formData.append("entry.108258354", name);      
-        formData.append("entry.279947541", className); 
-        formData.append("entry.392662755", score);     
-        formData.append("entry.97451768", finalGrade); 
+        formData.append("entry.1814687405", name);      
+        formData.append("entry.215572114", className); 
+        formData.append("entry.1108793347", score);     
+        formData.append("entry.639226487", finalGrade); 
 
         fetch(formURL, {
             method: "POST",
