@@ -1,1 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§17. Наземно-воздушная среда обитания</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Локальное дополнение стилей под графический блок Задания 3 */
+        .image-task-container {
+            max-width: 600px;
+            margin: 20px auto;
+            position: relative;
+        }
+        .task-image-main {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 2px solid #ffb000;
+            box-shadow: 0 0 15px rgba(255, 176, 0, 0.2);
+        }
+        .image-selectors-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .image-select-block {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid #333;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .image-select-block label {
+            display: block;
+            font-size: 0.85rem;
+            color: #ffb000;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
 
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Введите ваши данные для доступа к терминалу Сектора С:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: ГЛАВА 3 (§17. НАЗЕМНО-ВОЗДУШНАЯ СРЕДА ОБИТАНИЯ)</p>
+            </div>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Вставь верный термин (Без подсказок)</h3>
+            <p class="question-text">
+                Сочетание температуры и влажности воздуха, облачность, осадки, направление ветра называют 
+                п<input type="text" id="t1-ans1" class="hl-inline-input" style="width: 110px;" autocomplete="off">.
+            </p>
+            <p class="question-text">
+                Характерные для определённой местности многолетние сезонные изменения погоды называют 
+                к<input type="text" id="t1-ans2" class="hl-inline-input" style="width: 110px;" autocomplete="off">.
+            </p>
+            <p class="question-text">
+                Быстрое перемещение воздуха по горизонтали над земной и водной поверхностью называют 
+                в<input type="text" id="t1-ans3" class="hl-inline-input" style="width: 110px;" autocomplete="off">.
+            </p>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Распредели организмы по природным зонам (Drag-and-Drop)</h3>
+            <p class="question-text">Перетащите плашки живых организмов в соответствующие зоны обитания:</p>
+            <div class="drag-words-container" id="words-t2">
+                <span class="drag-word" draggable="true" data-word="саксаул">саксаул</span>
+                <span class="drag-word" draggable="true" data-word="верблюд">верблюд</span>
+                <span class="drag-word" draggable="true" data-word="земляника">земляника</span>
+                <span class="drag-word" draggable="true" data-word="скорпион">скорпион</span>
+                <span class="drag-word" draggable="true" data-word="ель">ель</span>
+                <span class="drag-word" draggable="true" data-word="верблюжья колючка">верблюжья колючка</span>
+                <span class="drag-word" draggable="true" data-word="суслик">суслик</span>
+                <span class="drag-word" draggable="true" data-word="бурундук">бурундук</span>
+                <span class="drag-word" draggable="true" data-word="лисица">лисица</span>
+                <span class="drag-word" draggable="true" data-word="тушканчик">тушканчик</span>
+                <span class="drag-word" draggable="true" data-word="ковыль">ковыль</span>
+                <span class="drag-word" draggable="true" data-word="сайгак">сайгак</span>
+            </div>
+            <div class="three-columns">
+                <div class="group-zone" id="t2-group1" data-group="forest">
+                    <h4>Лес</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t2-group2" data-group="steppe">
+                    <h4>Степь</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t2-group3" data-group="desert">
+                    <h4>Пустыня</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Определи условия жизни растений по строению листьев</h3>
+            <p class="question-text">Рассмотрите рисунки 1, 2, 3, 4 и выберите соответствующие экологические условия для каждого из них:</p>
+            
+            <div class="image-task-container">
+                <!-- Точечный вызов файла p17.jpeg из локальной директории -->
+                <img src="p17.jpeg" alt="Приспособления листьев" class="task-image-main">
+            </div>
+
+            <div class="image-selectors-grid">
+                <div class="image-select-block">
+                    <label>Рисунок 1 (вверху-слева):</label>
+                    <select class="hl-select" id="t3-select1">
+                        <option value="" disabled selected>Выбери условия</option>
+                        <option value="Обитание в водоёме">Обитание в водоёме</option>
+                        <option value="Влажность высокая">Влажность высокая</option>
+                        <option value="Нормальная влажность">Нормальная влажность</option>
+                        <option value="Засушливость">Засушливость</option>
+                    </select>
+                </div>
+                <div class="image-select-block">
+                    <label>Рисунок 2 (вверху-справа):</label>
+                    <select class="hl-select" id="t3-select2">
+                        <option value="" disabled selected>Выбери условия</option>
+                        <option value="Обитание в водоёме">Обитание в водоёме</option>
+                        <option value="Влажность высокая">Влажность высокая</option>
+                        <option value="Нормальная влажность">Нормальная влажность</option>
+                        <option value="Засушливость">Засушливость</option>
+                    </select>
+                </div>
+                <div class="image-select-block">
+                    <label>Рисунок 3 (внизу-слева):</label>
+                    <select class="hl-select" id="t3-select3">
+                        <option value="" disabled selected>Выбери условия</option>
+                        <option value="Обитание в водоёме">Обитание в водоёме</option>
+                        <option value="Влажность высокая">Влажность высокая</option>
+                        <option value="Нормальная влажность">Нормальная влажность</option>
+                        <option value="Засушливость">Засушливость</option>
+                    </select>
+                </div>
+                <div class="image-select-block">
+                    <label>Рисунок 4 (внизу-справа):</label>
+                    <select class="hl-select" id="t3-select4">
+                        <option value="" disabled selected>Выбери условия</option>
+                        <option value="Обитание в водоёме">Обитание в водоёме</option>
+                        <option value="Влажность высокая">Влажность высокая</option>
+                        <option value="Нормальная влажность">Нормальная влажность</option>
+                        <option value="Засушливость">Засушливость</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- Кнопка отправки результатов -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>АТМОСФЕРНЫЙ И КЛИМАТИЧЕСКИЙ МОНИТОРИНГ ЗАВЕРШЕН</h2>
+        <p class="system-msg">> Данные об экосистемах суши успешно заархивированы в Секторе С.</p>
+        <div class="score-board">
+            <p>Сотрудник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 3</p>
+            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
