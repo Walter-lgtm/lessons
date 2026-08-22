@@ -334,3 +334,77 @@ h2 { font-size: 18px; border-bottom: 1px solid #46b04a; padding-bottom: 5px; }
     text-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
     margin: 10px 0;
 }
+/* ==========================================================================
+   ВСТРОЕННЫЕ НЕОНОВЫЕ ОКНА (СПРАВОЧНИКИ)
+   ========================================================================== */
+
+/* Контейнер модального окна на весь экран */
+.lab-modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #111411; /* Фирменный графит */
+    z-index: 9999; /* Поверх всех элементов теста */
+    flex-direction: column;
+}
+
+/* Окно становится видимым при добавлении класса .active */
+.lab-modal.active {
+    display: flex;
+}
+
+/* Верхняя панель управления в окне */
+.modal-header {
+    background-color: #161a16;
+    border-bottom: 2px solid #46b04a; /* Ядовито-зелёная граница */
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(57, 255, 20, 0.1);
+}
+
+.modal-title {
+    color: #39ff14; /* Неоновый зелёный */
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+/* Фирменная кнопка «Назад» hazard-оранжевого цвета */
+.modal-back-btn {
+    background-color: transparent;
+    border: 2px solid #ff9900;
+    color: #ff9900;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-back-btn:active {
+    background-color: rgba(255, 153, 0, 0.2);
+    box-shadow: 0 0 10px #ff9900;
+}
+
+/* Контейнер для iFrame */
+.modal-body {
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+/* Сам встроенный сайт */
+.modal-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #fff; /* Белый фон, так как большинство таблиц светлые */
+}
