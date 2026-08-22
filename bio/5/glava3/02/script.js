@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ==========================================
-    // 2. БЕСКОНФЛИКТНАЯ МЕХАНИКА ВЫЧЕРКИВАНИЯ (Задание 2)
+    // 2. МЕХАНИКА ВЫЧЕРКИВАНИЯ СЛОВ (Задание 2)
     // ==========================================
     function initStrikeMechanics() {
         document.querySelectorAll(".strike-item-t2").forEach(item => {
@@ -60,7 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-  // ==========================================
+
+    // ==========================================
     // 3. МЕХАНИКА СОПОСТАВЛЕНИЯ ПАР (Задание 4)
     // ==========================================
     function initMatchMechanic() {
@@ -97,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     submitBtn.addEventListener("click", () => {
         let totalScore = 0;
 
-        // --- Задание 1 (Ручной ввод без подсказок: жидкое, твёрдое, газообразное) ---
+        // --- Задание 1 (Ручной ввод без подсказок) ---
         const t1Ans1 = document.getElementById("t1-ans1").value.trim().toLowerCase();
         const t1Ans2 = document.getElementById("t1-ans2").value.trim().toLowerCase();
         const t1Ans3 = document.getElementById("t1-ans3").value.trim().toLowerCase();
@@ -175,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function sendToGoogleForm(name, className, score, finalGrade) {
-        // Замените URL на вашу новую форму для §16
+        // Пропишите сюда ваши актуальные entry-номера новой формы через экстрактор
         const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSfeBBqEXTT7jVz3cfuYk0W2bCV2qalS_hv6txtFOpL_oXe2AA/formResponse";
         const formData = new FormData();
         
@@ -190,3 +191,4 @@ document.addEventListener("DOMContentLoaded", () => {
             body: formData
         }).catch(err => console.log("Ошибка отправки данных: ", err));
     }
+});
