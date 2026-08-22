@@ -168,11 +168,12 @@ if (pvaiBtn) {
     });
 }
 
-// СБОРКА ИНТЕРФЕЙСА РУКИ С ДВИЖКОМ DRAG-AND-DROP (Touch-интерфейс)
+// НАДЕЖНЫЙ СБОР РУКИ С ПОДДЕРЖКОЙ ИСТИННОГО МОБИЛЬНОГО DRAG-AND-DROP
 function updateReactorUI() {
     document.getElementById('deck-count').textContent = gameDeck.length;
     document.getElementById('p1-status').textContent = `${studentNameInput.value.trim()} [Карт: ${userHand.length}]`;
-    const handBox = document.getElementById('player-hand'); handBox.innerHTML = '';
+    const handBox = document.getElementById('player-hand'); 
+    handBox.innerHTML = '';
     
     userHand.forEach(card => {
         const cardEl = document.createElement('div');
@@ -180,47 +181,73 @@ function updateReactorUI() {
         const chargeText = card.charge > 0 ? (card.charge === 1 ? "+" : `${card.charge}+`) : (card.charge === -1 ? "-" : `${Math.abs(card.charge)}-`);
         cardEl.innerHTML = `<div class="card-symbol">${card.id}</div><div class="card-charge">${chargeText}</div>`;
         
-        // Внедрение универсального Pointer Drag-and-Drop (Мышь + Тачпад + Экран смартфона)
+        // Мобильный Pointer-движок переноса (Идеально обрабатывает пальцы и мышь)
         cardEl.addEventListener('pointerdown', (e) => {
             if (currentTurn !== "user") return;
-            e.preventDefault(); playSound('click');
+            e.preventDefault();
+            cardEl.releasePointerCapture(e.pointerId); // Отключаем системный захват тача, чтобы работал перенос
+            playSound('click');
             
-            // Создаем клон для физического перетаскивания по экрану
-            const dragClone = cardEl.cloneNode(true);
-            dragClone.classList.add('dragging');
-            document.body.appendChild(dragClone);
-            
-            // Центрируем клон под пальцем/курсором
-            moveAt(e.clientX, e.clientY);
-            function moveAt(pageX, pageY) {
-                dragClone.style.left = pageX - 32 + 'px'; dragClone.style.top = pageY - 46 + 'px';
-            }
-            
-            // Подсветка целевых зон-реакторов при перетаскивании
+            // Определяем целевой реактор в зависимости от фазы игры
             const targetZoneId = tableAttackCards.length === 0 ? 'table-attack-zone' : 'table-defense-zone';
             const dropTargetZone = document.getElementById(targetZoneId);
-            if (dropTargetZone) dropTargetZone.classList.add('drag-hover');
 
-            function onPointerMove(ev) { moveAt(ev.clientX, ev.clientY); }
+            // Создаем летящий клон карты
+            const dragClone = cardEl.cloneNode(true);
+            dragClone.classList.add('dragging');
+            dragClone.style.width = cardEl.offsetWidth + 'px';
+            dragClone.style.height = cardEl.offsetHeight + 'px';
+            document.body.appendChild(dragClone);
+            
+            moveAt(e.clientX, e.clientY);
+
+            function moveAt(clientX, clientY) {
+                dragClone.style.left = (clientX - cardEl.offsetWidth / 2) + 'px';
+                dragClone.style.top = (clientY - cardEl.offsetHeight / 2) + 'px';
+                
+                // Проверяем наведение на лету для красивой подсветки зоны в реальном времени
+                if (dropTargetZone) {
+                    const rect = dropTargetZone.getBoundingClientRect();
+                    if (clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom) {
+                        dropTargetZone.classList.add('drag-hover');
+                    } else {
+                        dropTargetZone.classList.remove('drag-hover');
+                    }
+                }
+            }
+
+            function onPointerMove(ev) {
+                moveAt(ev.clientX, ev.clientY);
+            }
+            
             document.addEventListener('pointermove', onPointerMove);
             
             dragClone.addEventListener('pointerup', (ev) => {
                 document.removeEventListener('pointermove', onPointerMove);
                 if (dropTargetZone) dropTargetZone.classList.remove('drag-hover');
                 
-                // Проверяем, попал ли палец в границы нужного ректора
-                const rect = dropTargetZone.getBoundingClientRect();
-                const successDrop = (ev.clientX >= rect.left && ev.clientX <= rect.right && ev.clientY >= rect.top && ev.clientY <= rect.bottom);
+                // МОБИЛЬНЫЙ ФИKСАТОР: Проверяем, находится ли палец физически над зоной-реактором в момент отпускания
+                let successDrop = false;
+                if (dropTargetZone) {
+                    const rect = dropTargetZone.getBoundingClientRect();
+                    successDrop = (ev.clientX >= rect.left && ev.clientX <= rect.right && ev.clientY >= rect.top && ev.clientY <= rect.bottom);
+                }
                 
                 if (successDrop) {
-                    // Переносим карту из руки на соответствующий стол
+                    // Ионы успешно попадают в реактор!
                     userHand = userHand.filter(c => c.uid !== card.uid);
                     if (tableAttackCards.length === 0) {
                         tableAttackCards.push(card);
                     } else {
                         tableDefenseCards.push(card);
                     }
-                    updateReactorUI(); renderTableZones(); updateActionButtonsState();
+                    playSound('success');
+                    updateReactorUI(); 
+                    renderTableZones(); 
+                    updateActionButtonsState();
+                } else {
+                    // Возвращаем карту обратно, если промахнулись мимо стола
+                    playSound('error');
                 }
                 dragClone.remove();
             }, { once: true });
