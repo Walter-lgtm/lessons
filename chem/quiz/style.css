@@ -18,7 +18,9 @@
 body {
     background-color: var(--hl-bg);
     color: var(--hl-text);
-    width: 100vw; height: 100vh; height: 100dvh;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
     overflow: hidden;
     position: relative;
 }
@@ -37,13 +39,13 @@ body::after {
         position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh;
         background: var(--hl-bg); color: var(--hl-orange);
         display: flex; align-items: center; justify-content: center; text-align: center;
-        font-size: 1.3rem; font-weight: bold; z-index: 99999; padding: 20px;
+        font-size: 1.2rem; font-weight: bold; z-index: 99999; padding: 20px;
         border: 4px double var(--hl-orange);
     }
 }
 
-.screen { display: none; width: 100%; height: 100%; padding: 10px; }
-.screen.active { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.screen { display: none; width: 100%; height: 100%; padding: 5px; }
+.screen.active { display: flex; flex-direction: column; }
 
 .overlay {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -52,117 +54,125 @@ body::after {
 .overlay.active { display: flex; }
 
 .terminal-box {
-    background: var(--hl-panel); border: 2px solid var(--hl-orange); padding: 20px;
-    box-shadow: 0 0 15px rgba(245, 124, 0, 0.2); text-align: center; max-width: 550px; width: 90%;
+    background: var(--hl-panel); border: 2px solid var(--hl-orange); padding: 15px;
+    box-shadow: 0 0 15px rgba(245, 124, 0, 0.2); text-align: center; max-width: 500px; width: 95%;
     position: relative; animation: hl-flicker 0.2s infinite alternate;
 }
-.large-box { max-width: 750px; height: 85%; display: flex; flex-direction: column; justify-content: space-between; }
-.lock-box { border-style: dashed; max-width: 400px; }
-.facility-header { font-size: 0.8rem; color: #666; letter-spacing: 2px; text-align: left; margin-bottom: 5px; border-bottom: 1px dashed #333; padding-bottom: 3px; }
+.large-box { max-width: 700px; height: 90%; justify-content: space-between; }
+.lock-box { border-style: dashed; max-width: 380px; }
+.facility-header { font-size: 0.75rem; color: #666; letter-spacing: 2px; text-align: left; margin-bottom: 3px; border-bottom: 1px dashed #333; padding-bottom: 2px; }
 
-h1 { color: var(--hl-orange); font-size: 1.3rem; margin-bottom: 15px; letter-spacing: 1px; text-shadow: 0 0 5px rgba(245, 124, 0, 0.4); }
-h2 { font-size: 1rem; color: #aaa; margin-bottom: 10px; }
+h1 { color: var(--hl-orange); font-size: 1.1rem; margin-bottom: 10px; letter-spacing: 1px; }
+h2 { font-size: 0.9rem; color: #aaa; margin-bottom: 8px; }
 
-.auth-form { margin-bottom: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.auth-form { margin-bottom: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .input-group { text-align: left; }
-.input-group label { display: block; color: var(--hl-orange); margin-bottom: 4px; font-size: 0.75rem; font-weight: bold; }
-.input-group input { width: 100%; background: #050505; border: 1px solid #444; color: #fff; padding: 8px; font-size: 0.9rem; outline: none; }
-.input-group input:focus { border-color: var(--hl-orange); }
+.input-group label { display: block; color: var(--hl-orange); margin-bottom: 2px; font-size: 0.7rem; font-weight: bold; }
+.input-group input { width: 100%; background: #050505; border: 1px solid #444; color: #fff; padding: 6px; font-size: 0.85rem; outline: none; }
 
-.menu-buttons { display: flex; flex-direction: column; gap: 8px; }
-.hl-btn { background: var(--hl-orange); color: #000; border: none; padding: 10px 20px; font-weight: bold; font-size: 0.9rem; cursor: pointer; letter-spacing: 1px; transition: all 0.2s ease; border-radius: 1px; box-shadow: 0 2px 0 #b35b00; }
-.hl-btn:hover:not(:disabled) { background: #ff9100; box-shadow: 0 0 12px rgba(245, 124, 0, 0.5), 0 2px 0 #b35b00; }
-.hl-btn:active:not(:disabled) { transform: translateY(2px); box-shadow: none; }
+.menu-buttons { display: flex; flex-direction: column; gap: 6px; }
+.hl-btn { background: var(--hl-orange); color: #000; border: none; padding: 8px 15px; font-weight: bold; font-size: 0.85rem; cursor: pointer; letter-spacing: 1px; border-radius: 1px; box-shadow: 0 2px 0 #b35b00; }
+.hl-btn:hover:not(:disabled) { background: #ff9100; box-shadow: 0 0 12px rgba(245, 124, 0, 0.5); }
 .hl-btn:disabled { background: #2a2a2a; color: #555; border: 1px solid #3a3a3a; cursor: not-allowed; box-shadow: none; }
 
-.rules-content { background: #0a0a0a; border: 1px solid #333; padding: 12px; text-align: left; font-size: 0.8rem; line-height: 1.4; overflow-y: auto; flex-grow: 1; margin-bottom: 12px; box-shadow: inset 0 0 10px rgba(0,0,0,0.8); }
-.rules-content p { margin-bottom: 8px; }
-.rules-content ul { margin-left: 15px; margin-bottom: 8px; }
+.rules-content { background: #0a0a0a; border: 1px solid #333; padding: 10px; text-align: left; font-size: 0.75rem; line-height: 1.3; overflow-y: auto; flex-grow: 1; margin-bottom: 10px; }
+.rules-content p { margin-bottom: 6px; }
+.rules-content ul { margin-left: 12px; margin-bottom: 6px; }
 
 .orange-text { color: var(--hl-orange); font-weight: bold; }
 .green-text { color: var(--hl-green); font-weight: bold; }
 .text-error { color: var(--hl-error); font-weight: bold; }
 .blink { animation: hl-blink 1s infinite; }
 
-/* ИГРОВОЙ ЭКРАН */
-#game-screen { display: none; grid-template-rows: auto 1fr auto; gap: 6px; height: 100%; }
+/* АДАПТИВНАЯ СЕТКА ИГРОВОГО ЭКРАНА */
+#game-screen {
+    display: none;
+    height: 100%;
+    grid-template-rows: auto 1fr auto; /* Жестко делим экран на 3 горизонтальных полосы */
+    gap: 4px;
+}
 #game-screen.active { display: grid; }
-.top-panel { display: grid; grid-template-columns: 1.21fr 1fr 1.21fr; align-items: center; background: var(--hl-panel); padding: 4px 15px; border-bottom: 2px solid var(--hl-orange); }
-.info-block { font-size: 0.8rem; color: #aaa; text-transform: uppercase; }
+
+.top-panel { 
+    display: grid; grid-template-columns: 1.21fr 1fr 1.21fr; align-items: center; 
+    background: var(--hl-panel); padding: 3px 10px; border-bottom: 1px solid var(--hl-orange); 
+    height: 24px;
+}
+.info-block { font-size: 0.75rem; color: #aaa; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .text-right { text-align: right; }
-.sector-block { text-align: center; font-weight: bold; font-size: 0.9rem; }
+.sector-block { text-align: center; font-weight: bold; font-size: 0.8rem; white-space: nowrap; }
 
-.game-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; height: calc(100% - 10px); overflow: hidden; }
-.reactor-sector { background: #151515; border: 1px solid #333; border-radius: 2px; display: grid; grid-template-rows: auto 1fr; padding: 6px; height: 100%; box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8); position: relative;}
+.game-layout { 
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4px; 
+    height: 100%; overflow: hidden; 
+}
+.reactor-sector { 
+    background: #151515; border: 1px solid #333; border-radius: 2px; 
+    display: grid; grid-template-rows: auto 1fr; padding: 4px; height: 100%; overflow: hidden;
+}
 .defense-sector { grid-template-rows: auto 1fr auto; }
-.sector-title { font-size: 0.75rem; color: #666; letter-spacing: 1px; margin-bottom: 4px; border-bottom: 1px dashed #222; padding-bottom: 2px; text-transform: uppercase; }
+.sector-title { font-size: 0.7rem; color: #555; letter-spacing: 1px; margin-bottom: 2px; border-bottom: 1px dashed #222; text-transform: uppercase; }
 
-/* Зоны-приемники карт Drag-and-Drop */
+/* РЕЗИНОВЫЕ ЗOНЫ РЕАКТОРОВ */
 .cards-drop-zone {
     background: #140d07; border: 2px dashed #3d210b; border-radius: 2px;
-    display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; padding: 6px; overflow-y: auto; position: relative; transition: background 0.2s, border-color 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 4px; flex-wrap: wrap; 
+    padding: 4px; overflow-y: auto; position: relative; transition: background 0.15s;
 }
 .defense-sector .cards-drop-zone { background: #090e09; border-color: #1a3a1a; }
-.cards-drop-zone.drag-hover { background: #26160a; border-color: var(--hl-orange); }
-.defense-sector .cards-drop-zone.drag-hover { background: #122412; border-color: var(--hl-green); }
+.cards-drop-zone.drag-hover { background: #2a180c !important; border-color: var(--hl-orange) !important; }
+.defense-sector .cards-drop-zone.drag-hover { background: #0e240e !important; border-color: var(--hl-green) !important; }
 
-.reactor-empty-text { color: #2a2a2a; font-size: 0.85rem; font-weight: bold; letter-spacing: 2px; pointer-events: none; }
+.reactor-empty-text { color: #222; font-size: 0.75rem; font-weight: bold; letter-spacing: 1px; pointer-events: none; }
 
-.terminal-action-panel { margin-top: 6px; display: flex; flex-direction: column; gap: 4px; }
-.action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
-.action-btn { background: linear-gradient(135deg, #1c261c 0%, #0d140d 100%); border: 1px solid #1a3a1a; color: var(--hl-green); padding: 6px; font-size: 0.75rem; font-weight: bold; cursor: pointer; letter-spacing: 1px; transition: all 0.15s ease; border-radius: 2px; box-shadow: inset 0 0 5px rgba(0,0,0,0.5); }
-.action-btn:hover:not(:disabled) { background: #253a25; border-color: var(--hl-green); box-shadow: 0 0 8px rgba(57, 255, 20, 0.3); }
-.action-btn:disabled { background: #151515; border-color: #222; color: #444; cursor: not-allowed; box-shadow: none; }
-.emergency-btn { width: 100%; background: linear-gradient(135deg, #4d1414 0%, #290a0a 100%); border: 1px solid var(--hl-error); color: var(--hl-error); font-size: 0.8rem; padding: 8px; box-shadow: inset 0 0 5px rgba(0,0,0,0.8); }
-.emergency-btn:hover:not(:disabled) { background: #6e1c1c; box-shadow: 0 0 10px rgba(255, 51, 51, 0.4); }
+.terminal-action-panel { display: flex; flex-direction: column; gap: 2px; padding-top: 2px; }
+.action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.action-btn { background: linear-gradient(135deg, #1c261c 0%, #0d140d 100%); border: 1px solid #1a3a1a; color: var(--hl-green); padding: 4px; font-size: 0.7rem; font-weight: bold; cursor: pointer; border-radius: 2px; }
+.action-btn:hover:not(:disabled) { background: #253a25; border-color: var(--hl-green); }
+.action-btn:disabled { background: #151515; border-color: #222; color: #333; cursor: not-allowed; }
+.emergency-btn { width: 100%; background: linear-gradient(135deg, #4d1414 0%, #290a0a 100%); border: 1px solid var(--hl-error); color: var(--hl-error); font-size: 0.75rem; padding: 5px; }
 
-.modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 9990; display: none; align-items: center; justify-content: center; }
-.modal-overlay.active { display: flex; }
-.modal-box { max-width: 450px; border-color: #ffd600; box-shadow: 0 0 20px rgba(255, 214, 0, 0.2); }
-.color-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 15px; }
-.color-select-btn { border: none; padding: 10px 4px; font-size: 0.7rem; font-weight: bold; cursor: pointer; border-radius: 2px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-
-/* ИСПРАВЛЕННЫЙ МОБИЛЬНЫЙ СКРОЛЛ РУКИ */
+/* ПЛАНШЕТ С КОРРЕКТНЫМ МОБИЛЬНЫМ СКРОЛЛОМ */
 .player-hand-container {
-    background: linear-gradient(to bottom, #161616, #0d0d0d); border-top: 3px solid var(--hl-orange);
-    padding: 6px 10px; height: 115px; width: 100%; overflow: hidden; position: relative; box-shadow: 0 -5px 15px rgba(0,0,0,0.7);
+    background: linear-gradient(to bottom, #161616, #0d0d0d); border-top: 2px solid var(--hl-orange);
+    padding: 4px 6px; height: 95px; width: 100%; overflow: hidden; position: relative;
 }
 .hand-scroll-box {
-    display: flex; gap: 10px; height: 100%; width: 100%;
-    overflow-x: auto; overflow-y: hidden; /* Разрешаем только горизонтальный скролл */
-    -webkit-overflow-scrolling: touch; /* Идеально плавный скролл пальцем на смартфонах */
-    align-items: center; padding-bottom: 5px;
+    display: flex; gap: 8px; height: 100%; width: 100%;
+    overflow-x: auto; overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    align-items: center; padding-bottom: 2px;
 }
 
-/* ИГРАЛЬНЫЕ КАРТЫ С КОРРЕКТНЫМ РАЗМЕРОМ */
+/* ЭРГОНОМИЧНЫЕ МОБИЛЬНЫЕ КАРТЫ */
 .card {
-    flex: 0 0 65px; height: 92px; background: linear-gradient(135deg, #2a2a2a 0%, #141414 100%);
-    border: 2px solid #555; border-radius: 5px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 8px 4px; cursor: grab; position: relative; box-shadow: 0 4px 6px rgba(0,0,0,0.5), inset 0 0 6px rgba(0,0,0,0.6); touch-action: none; /* Запрещает системный экранный скролл при перетаскивании карты */
+    flex: 0 0 54px; height: 76px; background: linear-gradient(135deg, #2a2a2a 0%, #141414 100%);
+    border: 2px solid #555; border-radius: 4px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; padding: 6px 2px; cursor: grab; position: relative; box-shadow: 0 3px 5px rgba(0,0,0,0.5); touch-action: none;
 }
 .card.cation { border-color: #6e2222; background-image: radial-gradient(circle at 50% 30%, rgba(140, 40, 40, 0.15) 0%, transparent 70%); }
-.card.cation .card-charge { color: #ff5555; text-shadow: 0 0 4px rgba(255,85,85,0.4); }
+.card.cation .card-charge { color: #ff5555; }
 .card.anion { border-color: #224466; background-image: radial-gradient(circle at 50% 30%, rgba(40, 80, 140, 0.15) 0%, transparent 70%); }
-.card.anion .card-charge { color: #33bfff; text-shadow: 0 0 4px rgba(51,191,255,0.4); }
-.card-symbol { font-size: 1.25rem; font-weight: bold; color: #cca27c; text-align: center; line-height: 1; margin-top: 4px; pointer-events: none; }
-.card-charge { font-size: 0.9rem; font-weight: bold; line-height: 1; margin-bottom: 4px; pointer-events: none; }
+.card.anion .card-charge { color: #33bfff; }
+.card-symbol { font-size: 1.1rem; font-weight: bold; color: #cca27c; text-align: center; line-height: 1; margin-top: 2px; pointer-events: none; }
+.card-charge { font-size: 0.8rem; font-weight: bold; line-height: 1; margin-bottom: 2px; pointer-events: none; }
 
-/* Карта в состоянии переноса (Drag-and-Drop) */
+/* Физический клон карты в воздухе (Drag) */
 .card.dragging {
-    position: fixed; z-index: 10000; pointer-events: none; opacity: 0.85; transform: scale(1.1); border-color: var(--hl-orange); box-shadow: 0 10px 20px rgba(245,124,0,0.5); cursor: grabbing;
+    position: fixed; z-index: 10000; pointer-events: none; opacity: 0.9; transform: scale(1.1); border-color: var(--hl-orange); box-shadow: 0 8px 16px rgba(245,124,0,0.4); cursor: grabbing;
 }
 
-/* Статические отображения на столе */
-.cards-drop-zone .card { flex: 0 0 48px; height: 68px; padding: 4px 2px; border-width: 1px; cursor: default; box-shadow: 0 2px 4px rgba(0,0,0,0.4); }
-.cards-drop-zone .card .card-symbol { font-size: 0.95rem; margin-top: 2px; }
-.cards-drop-zone .card .card-charge { font-size: 0.75rem; margin-bottom: 2px; }
+/* Статические карты на столе уменьшены, чтобы всё влезло */
+.cards-drop-zone .card { flex: 0 0 42px; height: 58px; padding: 4px 2px; border-width: 1px; cursor: default; }
+.cards-drop-zone .card .card-symbol { font-size: 0.85rem; margin-top: 1px; }
+.cards-drop-zone .card .card-charge { font-size: 0.7rem; margin-bottom: 1px; }
 
-/* ОФОРМЛЕНИЕ ФОРМУЛЫ СИНТЕЗА */
+/* ШИЛЬДИК ФОРМУЛЫ */
 .formula-display-badge {
-    position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%);
-    background: #050a05; border: 1px solid var(--hl-green); padding: 3px 10px; font-size: 0.8rem; font-weight: bold; color: #555; letter-spacing: 1px; border-radius: 2px; box-shadow: 0 0 10px rgba(57, 255, 20, 0.15); z-index: 15; white-space: nowrap; pointer-events: none;
+    position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+    background: #050a05; border: 1px solid var(--hl-green); padding: 2px 8px; font-size: 0.75rem; font-weight: bold; color: #555; border-radius: 2px; z-index: 15; white-space: nowrap; pointer-events: none;
 }
-.formula-text { color: var(--hl-green) !important; font-size: 1.1rem; text-shadow: 0 0 6px rgba(57, 255, 20, 0.5); margin-left: 5px; }
-.formula-text sub { font-size: 0.75rem; bottom: -0.2em; color: var(--hl-green); }
+.formula-text { color: var(--hl-green) !important; font-size: 1rem; text-shadow: 0 0 5px rgba(57, 255, 20, 0.4); margin-left: 4px; }
+.formula-text sub { font-size: 0.7rem; bottom: -0.2em; color: var(--hl-green); }
 
 @keyframes hl-blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
 @keyframes hl-flicker { 0% { opacity: 0.98; } 100% { opacity: 1; } }
