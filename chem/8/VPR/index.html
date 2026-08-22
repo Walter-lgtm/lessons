@@ -10,13 +10,13 @@
 
 <div class="lab-container">
     
-    <!-- Фирменный Логотип [Br] [Ba] -->
+    <!-- Фирменный Логотип-Пульт [Br] [Ba] -->
     <div class="lab-logo">
-        <div class="periodic-plate">
+        <div class="periodic-plate" id="btn-open-pshe" style="cursor: pointer;" title="Открыть ПСХЭ Менделеева">
             <span class="element-number">35</span>
             <span class="element-symbol">Br</span>
         </div>
-        <div class="periodic-plate">
+        <div class="periodic-plate" id="btn-open-rastvor" style="cursor: pointer;" title="Открыть таблицу растворимости">
             <span class="element-number">56</span>
             <span class="element-symbol">Ba</span>
         </div>
@@ -511,5 +511,28 @@
 
 <!-- Подключение логики скрипта -->
 <script src="script.js"></script>
+    <!-- Встроенное неоновое окно №1: ПСХЭ Менделеева -->
+    <div id="modal-pshe" class="lab-modal">
+        <div class="modal-header">
+            <span class="modal-title">[ ПСХЭ ИМ. Д.И. МЕНДЕЛЕЕВА ]</span>
+            <button type="button" class="modal-back-btn" id="btn-close-pshe">← НАЗАД В ЛАБОРАТОРИЮ</button>
+        </div>
+        <div class="modal-body">
+            <!-- ВНИМАНИЕ: Замените ССЫЛКА_ПСХЭ_МЕНДЕЛЕЕВА на вашу реальную ссылку -->
+            <iframe src="ССЫЛКА_ПСХЭ_МЕ" class="modal-iframe"></iframe>
+        </div>
+    </div>
+
+    <!-- Встроенное неоновое окно №2: Таблица растворимости -->
+    <div id="modal-rastvor" class="lab-modal">
+        <div class="modal-header">
+            <span class="modal-title">[ ТАБЛИЦА РАСТВОРИМОСТИ И РЯД БЕКЕТОВА ]</span>
+            <button type="button" class="modal-back-btn" id="btn-close-rastvor">← НАЗАД В ЛАБОРАТОРИЮ</button>
+        </div>
+        <div class="modal-body">
+            <!-- ВНИМАНИЕ: Замените ССЫЛКА_ТАБЛИЦЫ_РАСТВОРИМОСТИ на вашу реальную ссылку -->
+            <iframe src="ССЫЛКА_ТАБЛИЦЫ_РАСТВОРИМОСТИ" class="modal-iframe"></iframe>
+        </div>
+    </div>
 </body>
 </html>
