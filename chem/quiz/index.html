@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, orientation=landscape">
+    <title>Black Mesa: Cascade Dissociation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Аудио-инжектор для трека Valve Theme (Kelly Bailey) -->
+<audio id="valve-theme" src="valve_theme.mp3"></audio>
+    <!-- Слой-предохранитель (Современные браузеры требуют клика для старта музыки) -->
+    <div id="audio-lock-overlay" class="overlay active">
+        <div class="terminal-box lock-box">
+            <h1>BLACK MESA TERMINAL ACTIVATION</h1>
+            <p class="blink">КЛИКНИТЕ ДЛЯ ПОДКЛЮЧЕНИЯ К СЕТИ...</p>
+        </div>
+    </div>
+
+    <!-- 1. Главный стартовый экран терминала -->
+    <div id="auth-screen" class="screen">
+        <div class="terminal-box">
+            <div class="facility-header">BLACK MESA RESEARCH FACILITY</div>
+            <h1>СЕКТОР КАСКАДНОЙ ДИССОЦИАЦИИ v3.0</h1>
+            
+            <!-- Форма авторизации исследователя -->
+            <div class="auth-form">
+                <div class="input-group">
+                    <label>ИДЕНТИФИКАТОР (ФИО):</label>
+                    <input type="text" id="student-name" placeholder="доктор Фримен" required autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label>ЛАБОРАТОРИЯ (КЛАСС):</label>
+                    <input type="text" id="student-class" placeholder="Аномальные материалы" required autocomplete="off">
+                </div>
+            </div>
+
+            <!-- Триада кнопок управления -->
+            <div class="menu-buttons">
+                <button id="mode-pvp-btn" class="hl-btn menu-btn" disabled>КАНАЛ СВЯЗИ: РЕЖИМ PvP</button>
+                <button id="mode-pvai-btn" class="hl-btn menu-btn" disabled>СИМУЛЯЦИЯ: РЕЖИМ PvAi</button>
+                <button id="rules-btn" class="hl-btn menu-btn">ПРАВИЛА ИГРЫ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Экран «Правила игры» (Всплывающий терминал) -->
+    <div id="rules-screen" class="screen">
+        <div class="terminal-box large-box">
+            <div class="facility-header">ПРОТОКОЛ ИОННОГО ОБМЕНА</div>
+            <h2>ИНСТРУКЦИЯ КАСКАДНОЙ ДИССОЦИАЦИИ</h2>
+            <div class="rules-content">
+                <p><span class="orange-text">[ЦЕЛЬ]</span> Быстрее соперника сбросить все карты-ионы из руки.</p>
+                <p><span class="orange-text">[СТАРТ]</span> Игру начинает тот, у кого есть ионы H<sup>+</sup> и OH<sup>-</sup>. Он выкладывает их со словами <span class="green-text">"Вода!"</span>.</p>
+                <p><span class="orange-text">[ХОД]</span> Игроки атакуют друг друга любыми ионами с рук.</p>
+                <p><span class="orange-text">[ОТВЕТ]</span> Вы обязаны нейтрализовать заряд атаки противоположным ионом и подтвердить статус раствора кнопкой терминала:</p>
+                <ul>
+                    <li><span class="green-text">"Диссоциировал!"</span> — если соль растворима.</li>
+                    <li><span class="green-text">"Осадок!"</span> — если выпал осадок (выберите его цвет).</li>
+                    <li><span class="green-text">"Дегазировался!"</span> — если выделился газ (CO₂, SO₂, H₂S, NH₃).</li>
+                    <li><span class="green-text">"Нейтрализация!"</span> — при связывании H<sup>+</sup> и OH<sup>-</sup>.</li>
+                </ul>
+                <p><span class="orange-text">[ШТРАФ]</span> Если отбиться нечем, заберите карты кнопкой <span class="text-error">"Ассоциировал!"</span>.</p>
+            </div>
+            <button id="close-rules-btn" class="hl-btn">ВЕРНУТЬСЯ В МЕНЮ</button>
+        </div>
+    </div>
+
+<!-- 3. Главный игровой экран: Пульт управления реактором каскадной диссоциации -->
+    <div id="game-screen" class="screen">
+        <!-- Верхняя панель: Телеметрия раствора и колоды -->
+        <div class="top-panel">
+            <div class="info-block">ИССЛЕДОВАТЕЛЬ: <span id="p1-status" class="orange-text">загрузка...</span></div>
+            <div class="sector-block">СТАТУС: <span id="reactor-status" class="green-text">СТАБИЛЬНО</span></div>
+            <div class="info-block text-right">РЕЗЕРВ КОЛОДЫ: <span id="deck-count" class="orange-text">180</span> КАРТ</div>
+        </div>
+
+        <!-- Центральная зона: Сектор смешивания ионных потоков -->
+        <div class="game-layout">
+            <!-- Левая половина: Вектор Атаки (Что прилетело в раствор от соперника) -->
+            <div class="reactor-sector attack-sector">
+                <div class="sector-title">ПОТОК АТАКУЮЩИХ ИОНОВ</div>
+                <div id="table-attack-zone" class="cards-drop-zone">
+                    <!-- Сюда сервер выложит ионы нападения -->
+                    <div class="reactor-empty-text">РАСТВОР ЧИСТ</div>
+                </div>
+            </div>
+
+            <!-- Правая половина: Вектор Защиты (Наш ответ и пульт химических признаков) -->
+            <div class="reactor-sector defense-sector">
+                <div class="sector-title">НЕЙТРАЛИЗАЦИЯ И СУДЬЕСТВО</div>
+                <div id="table-defense-zone" class="cards-drop-zone">
+                    <!-- Сюда игрок выкладывает карты для ответа -->
+                </div>
+                
+                <!-- Пульт интерактивных выкриков-признаков -->
+                <div class="terminal-action-panel">
+                    <div class="action-grid">
+                        <button id="btn-dissociated" class="action-btn" disabled>ДИССОЦИИРОВАЛ!</button>
+                        <button id="btn-sediment" class="action-btn" disabled>ОСАДОК!</button>
+                        <button id="btn-degassed" class="action-btn" disabled>ДЕГАЗИРОВАЛСЯ!</button>
+                        <button id="btn-neutralized" class="action-btn" disabled>НЕЙТРАЛИЗАЦИЯ!</button>
+                    </div>
+                    <button id="btn-associated" class="hl-btn emergency-btn">АССОЦИИРОВАЛ! (ВЗЯТЬ)</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Нижняя панель: Прокручиваемый планшет карт на руках исследователя -->
+        <div class="player-hand-container">
+            <div id="player-hand" class="hand-scroll-box">
+                <!-- Карты ионов генерируются кодом динамически -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Всплывающая панель: Выбор цвета осадка (для кнопки "ОСАДОК!") -->
+    <div id="color-picker-overlay" class="modal-overlay">
+        <div class="terminal-box modal-box">
+            <h2>АНАЛИЗ СПЕКТРА: ВЫБЕРИТЕ ЦВЕТ ОСАДКА</h2>
+            <div class="color-grid">
+                <button class="color-select-btn" data-color="белый" style="background:#fff; color:#000;">БЕЛЫЙ</button>
+                <button class="color-select-btn" data-color="желтый" style="background:#ffd600; color:#000;">ЖЕЛТЫЙ</button>
+                <button class="color-select-btn" data-color="голубой" style="background:#00b0ff; color:#000;">ГОЛУБОЙ</button>
+                <button class="color-select-btn" data-color="бурый" style="background:#5d4037; color:#fff;">БУРЫЙ</button>
+                <button class="color-select-btn" data-color="черный" style="background:#000; color:#fff; border:1px solid #555;">ЧЕРНЫЙ</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
