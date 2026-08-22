@@ -1,0 +1,336 @@
+/* ==========================================================================
+   КРИСТАЛЛИЧЕСКАЯ ЛАБОРАТОРИЯ // ХИМИЯ ВПР-8 // СТИЛЬ BREAKING BAD
+   ========================================================================== */
+
+/* Сброс базовых стилей и оптимизация под Redmi / Мобильные экраны */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent; /* Убирает синий блик при тапе на Android */
+}
+
+body {
+    background-color: #111411; /* Глубокий дымчато-чёрный графит */
+    color: #e0e0e0;
+    font-family: Arial, Helvetica, sans-serif; /* Строгий рубленый индастриал */
+    line-height: 1.5;
+    padding: 10px;
+    font-size: 16px;
+}
+
+/* Контейнер приложения */
+.lab-container {
+    max-width: 600px; /* Идеально для мобильных и центрирования на ПК */
+    margin: 0 auto;
+    padding-bottom: 60px;
+}
+
+/* Брендированный Логотип [Br] [Ba] */
+.lab-logo {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.periodic-plate {
+    background-color: #0b2e13;
+    border: 2px solid #46b04a; /* Ядовито-зелёный */
+    color: #39ff14; /* Неоновый зелёный */
+    width: 60px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
+}
+
+.periodic-plate .element-number {
+    font-size: 10px;
+    align-self: flex-start;
+    padding-left: 5px;
+    margin-top: -4px;
+}
+
+.periodic-plate .element-symbol {
+    font-size: 24px;
+    line-height: 1;
+}
+
+/* Окна авторизации и экраны */
+.lab-screen {
+    display: none; /* Переключение через JS */
+    background: #161a16;
+    border: 1px solid #253325;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 15px;
+}
+
+.lab-screen.active {
+    display: block;
+}
+
+/* Заголовки */
+h1, h2, h3 {
+    color: #39ff14;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+h1 { font-size: 22px; text-align: center; }
+h2 { font-size: 18px; border-bottom: 1px solid #46b04a; padding-bottom: 5px; }
+
+/* Формы ввода авторизации и инпуты */
+.lab-field {
+    margin-bottom: 15px;
+}
+
+.lab-field label {
+    display: block;
+    font-size: 12px;
+    color: #ff9900; /* Пустынный hazard-оранжевый */
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Поля ввода и выпадающие списки из директивы */
+.hl-inline-input, .lab-input, .hl-select {
+    width: 100%;
+    background-color: #050705 !important;
+    border: 2px solid #253325 !important;
+    color: #39ff14 !important;
+    font-family: monospace;
+    font-size: 16px !important;
+    padding: 6px 12px !important;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.hl-inline-input:focus, .lab-input:focus, .hl-select:focus {
+    outline: none;
+    border-color: #39ff14 !important;
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.5);
+}
+
+/* Текстовые зоны для объяснений (Задания 6, 17) */
+.lab-textarea {
+    width: 100%;
+    min-height: 80px;
+    background-color: #050705;
+    border: 2px solid #253325;
+    color: #e0e0e0;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    resize: vertical;
+}
+.lab-textarea:focus {
+    outline: none;
+    border-color: #ff9900;
+}
+
+/* Карточки заданий */
+.task-card {
+    background: #181d18;
+    border-left: 4px solid #46b04a;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 0 6px 6px 0;
+}
+
+.task-text {
+    font-size: 15px;
+    margin-bottom: 12px;
+    color: #f0f0f0;
+}
+
+/* Изображения (Задания 1, 17) с оптимизацией под Redmi */
+.task-img-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+    flex-wrap: wrap;
+}
+
+.task-img-wrapper {
+    flex: 1;
+    min-width: 120px;
+    max-width: 100%;
+    text-align: center;
+}
+
+.task-img {
+    width: 100%;
+    height: auto;
+    border: 2px solid #253325;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+/* Элемент выбранного изображения в Задании 1 */
+.task-img.selected {
+    border-color: #39ff14;
+    box-shadow: 0 0 12px #39ff14;
+    transform: scale(1.02);
+}
+
+/* Кнопки управления (Лабораторный пульт) */
+.lab-btn {
+    background-color: #46b04a;
+    color: #000;
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 4px;
+    width: 100%;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #1e5a21;
+    transition: all 0.1s ease;
+}
+
+.lab-btn:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+.lab-btn-secondary {
+    background-color: transparent;
+    border: 2px solid #ff9900;
+    color: #ff9900;
+    box-shadow: none;
+    margin-top: 10px;
+}
+.lab-btn-secondary:active {
+    background-color: rgba(255, 153, 0, 0.1);
+}
+
+/* Адаптивные плашки Квизов (Задания 3, 16, 19) */
+.lab-option {
+    background: #090c09;
+    border: 2px solid #253325;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lab-option.selected {
+    border-color: #39ff14;
+    background: #111a11;
+    color: #39ff14;
+}
+
+/* Механика Drag-and-Drop из директивы (.drag-word) */
+.drag-zone {
+    display: flex;
+    flex-wrap: wrap;
+    background: #050705;
+    border: 1px dashed #46b04a;
+    padding: 10px;
+    min-height: 50px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.drag-word {
+    border: 2px solid #46b04a;
+    padding: 10px 18px;
+    background: #000;
+    color: #39ff14;
+    margin: 6px;
+    cursor: grab;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    user-select: none;
+}
+
+.drag-word:active {
+    cursor: grabbing;
+    background: #39ff14;
+    color: #000;
+    box-shadow: 0 0 15px #39ff14;
+}
+
+/* Контейнеры для приёма перетаскиваемых элементов (Задание 18) */
+.drop-target {
+    background: #1c221c;
+    border: 2px solid #253325;
+    padding: 8px;
+    margin: 8px 0;
+    min-height: 44px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+/* Интерактивная таблица (Задание 5, 7, 8) */
+.lab-table-wrapper {
+    width: 100%;
+    overflow-x: auto; /* Горизонтальный свайп для Redmi */
+    margin: 10px 0;
+}
+
+.lab-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #0d110d;
+}
+
+.lab-table th, .lab-table td {
+    border: 1px solid #253325;
+    padding: 8px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.lab-table th {
+    background-color: #161f16;
+    color: #ff9900;
+    text-transform: uppercase;
+    font-size: 11px;
+}
+
+/* Карточка элемента для вертикального отображения на смартфонах (Задание 7) */
+.element-mobile-card {
+    background: #0d110d;
+    border: 1px solid #253325;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+.element-mobile-card h4 {
+    color: #ff9900;
+    margin-bottom: 8px;
+}
+
+/* Экран итогов */
+.result-box {
+    text-align: center;
+    padding: 20px;
+    border: 2px dashed #ff9900;
+    border-radius: 8px;
+    background: #1c1710;
+}
+
+.grade-display {
+    font-size: 64px;
+    font-weight: bold;
+    color: #39ff14;
+    text-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+    margin: 10px 0;
+}
