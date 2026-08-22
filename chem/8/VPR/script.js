@@ -295,3 +295,45 @@ document.addEventListener("DOMContentLoaded", () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     });
 });
+// 8. УПРАВЛЕНИЕ ВСТРОЕННЫМИ НЕОНОВЫМИ ОКНАМИ (ПСХЭ И ТАБЛИЦА РАСТВОРИМОСТИ)
+document.addEventListener("DOMContentLoaded", () => {
+    // Элементы кнопок-плашек логотипа
+    const btnOpenPshe = document.getElementById("btn-open-pshe");
+    const btnOpenRastvor = document.getElementById("btn-open-rastvor");
+
+    // Элементы кнопок «Назад» внутри окон
+    const btnClosePshe = document.getElementById("btn-close-pshe");
+    const btnCloseRastvor = document.getElementById("btn-close-rastvor");
+
+    // Сами окна
+    const modalPshe = document.getElementById("modal-pshe");
+    const modalRastvor = document.getElementById("modal-rastvor");
+
+    // Логика для ПСХЭ Менделеева [Br]
+    if (btnOpenPshe && modalPshe) {
+        btnOpenPshe.addEventListener("click", () => {
+            modalPshe.classList.add("active");
+            document.body.style.overflow = "hidden"; // Блокируем скролл основного теста под окном
+        });
+    }
+    if (btnClosePshe && modalPshe) {
+        btnClosePshe.addEventListener("click", () => {
+            modalPshe.classList.remove("active");
+            document.body.style.overflow = ""; // Возвращаем скролл тесту
+        });
+    }
+
+    // Логика для Таблицы растворимости [Ba]
+    if (btnOpenRastvor && modalRastvor) {
+        btnOpenRastvor.addEventListener("click", () => {
+            modalRastvor.classList.add("active");
+            document.body.style.overflow = "hidden";
+        });
+    }
+    if (btnCloseRastvor && modalRastvor) {
+        btnCloseRastvor.addEventListener("click", () => {
+            modalRastvor.classList.remove("active");
+            document.body.style.overflow = "";
+        });
+    }
+});
