@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ВПР-8 Химия // Вариант 2 // Лаборатория Хайзенберга</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lab-container">
+    
+    <!-- Фирменный Логотип-Пульт [Br] [Ba] -->
+    <div class="lab-logo">
+        <div class="periodic-plate" id="btn-open-pshe" style="cursor: pointer;" title="Открыть ПСХЭ Менделеева">
+            <span class="element-number">35</span>
+            <span class="element-symbol">Br</span>
+        </div>
+        <div class="periodic-plate" id="btn-open-rastvor" style="cursor: pointer;" title="Открыть таблицу растворимости">
+            <span class="element-number">56</span>
+            <span class="element-symbol">Ba</span>
+        </div>
+    </div>
+
+    <!-- ЭКРАН 1: АВТОРИЗАЦИЯ -->
+    <div id="screen-auth" class="lab-screen active">
+        <h1>Вход в лабораторию</h1>
+        <p style="text-align: center; color: #ff9900; font-size: 13px; margin-bottom: 20px;">[ СИНТЕЗ ВАРИАНТА №2 ]</p>
+        
+        <div class="lab-field">
+            <label>Фамилия и Имя ученика</label>
+            <input type="text" id="student-name" class="lab-input" required>
+        </div>
+        
+        <div class="lab-field">
+            <label>Класс</label>
+            <input type="text" id="student-class" class="lab-input" required>
+        </div>
+        
+        <button type="button" class="lab-btn" id="btn-start">Начать синтез варианта</button>
+    </div>
+
+    <!-- ЭКРАН 2: ТЕСТ -->
+    <div id="screen-quiz" class="lab-screen">
+        <form id="vpr-form">
+
+            <!-- Задание 1 -->
+            <div class="task-card">
+                <h2>Задание 1</h2>
+                <p class="task-text">Укажите номер рисунка, на котором изображён объект, содержащий <strong>индивидуальное химическое вещество</strong>.</p>
+                
+                <div style="text-align: center; margin: 15px 0;">
+                    <img src="2_01.jpg" alt="Объекты задания 1" style="width: 100%; max-width: 500px; border: 2px solid #253325; border-radius: 4px; box-shadow: 0 0 10px rgba(70,176,74,0.1);">
+                </div>
+
+                <div class="task-img-container">
+                    <div class="task-img-wrapper"><div class="task-img" data-img="1" style="background: #222; padding: 15px; text-align: center; border-radius: 4px; font-weight: bold; color: #39ff14;">Рис. 1</div></div>
+                    <div class="task-img-wrapper"><div class="task-img" data-img="2" style="background: #222; padding: 15px; text-align: center; border-radius: 4px; font-weight: bold;">Рис. 2</div></div>
+                    <div class="task-img-wrapper"><div class="task-img" data-img="3" style="background: #222; padding: 15px; text-align: center; border-radius: 4px; font-weight: bold;">Рис. 3</div></div>
+                </div>
+                <input type="hidden" id="ans-task-1" name="task1">
+            </div>
+
+            <!-- Задание 2 -->
+            <div class="task-card">
+                <h2>Задание 2</h2>
+                <p class="task-text">Какие вещества содержатся в объектах на остальных рисунках? Приведите по одному примеру названия и формулы.</p>
+                
+                <div class="element-mobile-card">
+                    <h4>Для Рис. 2 (Смесь)</h4>
+                    <div class="lab-field"><label>Название вещества</label><input type="text" id="ans-2-t2-n" class="hl-inline-input"></div>
+                    <div class="lab-field"><label>Химическая формула</label><input type="text" id="ans-2-t2-f" class="hl-inline-input"></div>
+                </div>
+
+                <div class="element-mobile-card">
+                    <h4>Для Рис. 3 (Смесь)</h4>
+                    <div class="lab-field"><label>Название вещества</label><input type="text" id="ans-2-t3-n" class="hl-inline-input"></div>
+                    <div class="lab-field"><label>Химическая формула</label><input type="text" id="ans-2-t3-f" class="hl-inline-input"></div>
+                </div>
+            </div>
+
+            <!-- Задание 3 -->
+            <div class="task-card">
+                <h2>Задание 3 (Тип 3.1)</h2>
+                <p class="task-text">Из представленных ниже рисунков выберите тот, на котором изображено протекание химической реакции:</p>
+                
+                <div style="text-align: center; margin: 15px 0;">
+                    <img src="3.1_01.jpg" alt="Химические и физические процессы" style="width: 100%; max-width: 500px; border: 2px solid #253325; border-radius: 4px; box-shadow: 0 0 10px rgba(70,176,74,0.1);">
+                </div>
+
+                <div class="lab-option" data-val="1">1. Рисунок 1 (Цинк + кислота)</div>
+                <div class="lab-option" data-val="2">2. Рисунок 2 (Делительная воронка)</div>
+                <div class="lab-option" data-val="3">3. Рисунок 3 (Физическое упражнение)</div>
+                <input type="hidden" id="ans-task-3" name="task3">
+            </div>
+
+            <!-- Задание 4 -->
+            <div class="task-card">
+                <h2>Задание 4 (Тип 3.2)</h2>
+                <p class="task-text">Укажите один ЛЮБОЙ признак протекания этой химической реакции.</p>
+                <input type="text" id="ans-task-4" class="hl-inline-input">
+            </div>
+            <!-- Задание 5 -->
+            <div class="task-card">
+                <h2>Задание 5</h2>
+                <p class="task-text">Вычислите молярные массы каждого из газов и запишите данные в таблицу.</p>
+                <div class="lab-table-wrapper">
+                    <table class="lab-table">
+                        <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>Название вещества</th>
+                                <th>Формула</th>
+                                <th>Молярная масса, г/моль</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Аммиак</td>
+                                <td>NH<sub>3</sub></td>
+                                <td><input type="number" id="ans-5-1" class="hl-inline-input" style="width: 70px; text-align: center; padding: 4px !important;" inputmode="numeric"></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Угарный газ</td>
+                                <td>CO</td>
+                                <td><input type="number" id="ans-5-2" class="hl-inline-input" style="width: 70px; text-align: center; padding: 4px !important;" inputmode="numeric"></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Углекислый газ</td>
+                                <td>CO<sub>2</sub></td>
+                                <td><input type="number" id="ans-5-3" class="hl-inline-input" style="width: 70px; text-align: center; padding: 4px !important;" inputmode="numeric"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Задание 6 -->
+            <div class="task-card">
+                <h2>Задание 6</h2>
+                <p class="task-text">Какой из приведённых в таблице газов имеет при заданных условиях такую же плотность, как и азот N<sub>2</sub>, молярная масса которого равна 28 г/моль? Укажите номер вещества.</p>
+                <div class="lab-field">
+                    <label>Выберите номер вещества</label>
+                    <select id="ans-6-gas" class="hl-select">
+                        <option value="">-- Выбрать номер --</option>
+                        <option value="1">1 (Аммиак)</option>
+                        <option value="2">2 (Угарный газ)</option>
+                        <option value="3">3 (Углекислый газ)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Задание 7 -->
+            <div class="task-card">
+                <h2>Задание 7</h2>
+                <p class="task-text">Заполните характеристики элементов А и В. Известно, что в атоме элемента А содержится 14 протонов, а в атоме элемента В — 20 протонов.</p>
+                
+                <!-- Карточка Элемента А -->
+                <div class="element-mobile-card">
+                    <h4>Элемент А (14 протонов)</h4>
+                    <div class="lab-field">
+                        <label>Название элемента</label>
+                        <input type="text" id="ans-7-a-name" class="hl-inline-input">
+                    </div>
+                    <div class="lab-field">
+                        <label>Номер периода</label>
+                        <input type="number" id="ans-7-a-period" class="hl-inline-input" inputmode="numeric">
+                    </div>
+                    <div class="lab-field">
+                        <label>Номер группы</label>
+                        <input type="text" id="ans-7-a-group" class="hl-inline-input">
+                    </div>
+                    <div class="lab-field">
+                        <label>Металл или неметалл</label>
+                        <select id="ans-7-a-type" class="hl-select">
+                            <option value="">-- Выбрать --</option>
+                            <option value="металл">Металл</option>
+                            <option value="неметалл">Неметалл</option>
+                        </select>
+                    </div>
+                    <div class="lab-field">
+                        <label>Формула высшего оксида</label>
+                        <input type="text" id="ans-7-a-oxide" class="hl-inline-input">
+                    </div>
+                </div>
+
+                <!-- Карточка Элемента В -->
+                <div class="element-mobile-card">
+                    <h4>Элемент В (20 протонов)</h4>
+                    <div class="lab-field">
+                        <label>Название элемента</label>
+                        <input type="text" id="ans-7-b-name" class="hl-inline-input">
+                    </div>
+                    <div class="lab-field">
+                        <label>Номер периода</label>
+                        <input type="number" id="ans-7-b-period" class="hl-inline-input" inputmode="numeric">
+                    </div>
+                    <div class="lab-field">
+                        <label>Номер группы</label>
+                        <input type="text" id="ans-7-b-group" class="hl-inline-input">
+                    </div>
+                    <div class="lab-field">
+                        <label>Металл или неметалл</label>
+                        <select id="ans-7-b-type" class="hl-select">
+                            <option value="">-- Выбрать --</option>
+                            <option value="металл">Металл</option>
+                            <option value="неметалл">Неметалл</option>
+                        </select>
+                    </div>
+                    <div class="lab-field">
+                        <label>Формула высшего оксида</label>
+                        <input type="text" id="ans-7-b-oxide" class="hl-inline-input">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Задание 8 -->
+            <div class="task-card">
+                <h2>Задание 8</h2>
+                <p class="task-text">Настя привезла домой банку с морской водой. В школьной лаборатории она налила 250 г морской воды и упарила её. Масса твёрдого остатка солей составила 2,75 г. Используя таблицу, определите, на каком море отдыхала Настя.</p>
+                <div class="lab-table-wrapper">
+                    <table class="lab-table" style="min-width: 450px;">
+                        <thead>
+                            <tr>
+                                <th>Море</th>
+                                <th>Балтийское</th>
+                                <th>Азовское</th>
+                                <th>Черное</th>
+                                <th>Средиземное</th>
+                                <th>Красное</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Массовая доля солей, %</strong></td>
+                                <td>0,7</td>
+                                <td>1,1</td>
+                                <td>1,8</td>
+                                <td>3,9</td>
+                                <td>4,1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="lab-field" style="margin-top: 10px;">
+                    <label>Название моря</label>
+                    <input type="text" id="ans-task-8" class="hl-inline-input">
+                </div>
+            </div>
+
+            <!-- Задание 9 -->
+            <div class="task-card">
+                <h2>Задание 9</h2>
+                <p class="task-text">Какую массу твёрдого остатка солей должна была бы получить Настя при упаривании пробы морской воды массой 250 г, если бы она отдыхала на Мраморном море, солёность которого составляет 2,6%? Ответ округлите до десятых.</p>
+                <input type="number" id="ans-task-9" class="hl-inline-input" step="0.1" inputmode="decimal">
+            </div>
+
+            <!-- Задание 10 -->
+            <div class="task-card">
+                <h2>Задание 10 (Тип 7.1)</h2>
+                <p class="task-text">Напишите химические формулы следующих веществ: натрий, хлор, хлорид натрия, нитрат магния, гидроксид калия, нитрат калия, гидроксид магния.</p>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div class="lab-field"><label>Натрий</label><input type="text" id="ans-10-na" class="hl-inline-input"></div>
+                    <div class="lab-field"><label>Хлор</label><input type="text" id="ans-10-cl" class="hl-inline-input"></div>
+                    <div class="lab-field"><label>Хлорид натрия</label><input type="text" id="ans-10-nacl" class="hl-inline-input"></div>
+                    <div class="lab-field"><label>Нитрат магния</label><input type="text" id="ans-10-mgno32" class="hl-inline-input"></div>
+                    <div class="lab-field"><label>Гидроксид калия</label><input type="text" id="ans-10-koh" class="hl-inline-input"></div>
+                    <div class="lab-field"><label>Нитрат калия</label><input type="text" id="ans-10-kno3" class="hl-inline-input"></div>
+                    <div class="lab-field"><label>Гидроксид магния</label><input type="text" id="ans-10-mgoh2" class="hl-inline-input"></div>
+                </div>
+            </div>
+            <!-- Задание 11 -->
+            <div class="task-card">
+                <h2>Задание 11 (Тип 9.1)</h2>
+                <p class="task-text">Какое из веществ, упоминаемых в перечне, соответствует описанию: <em>«Мягкий металл серебристо-белого цвета, легко режется ножом»</em>?</p>
+                <input type="text" id="ans-task-11" class="hl-inline-input">
+            </div>
+
+            <!-- Задание 12 -->
+            <div class="task-card">
+                <h2>Задание 12 (Тип 7.2)</h2>
+                <p class="task-text">Из данного перечня выберите ЛЮБОЕ СЛОЖНОЕ вещество, НЕ СОДЕРЖАЩЕЕ атомов щелочных металлов. Запишите название этого вещества и укажите класс неорганических соединений.</p>
+                <div class="lab-field">
+                    <label>Название сложного вещества</label>
+                    <input type="text" id="ans-12-name" class="hl-inline-input">
+                </div>
+                <div class="lab-field">
+                    <label>Класс соединения</label>
+                    <select id="ans-12-class" class="hl-select">
+                        <option value="">-- Выберите класс --</option>
+                        <option value="соль">Соль</option>
+                        <option value="основание">Основание</option>
+                        <option value="оксид">Оксид</option>
+                        <option value="кислота">Кислота</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Задание 13 -->
+            <div class="task-card">
+                <h2>Задание 13 (Тип 7.3)</h2>
+                <p class="task-text">Из приведённого перечня веществ выберите ЛЮБОЕ соединение, состоящее из атомов <strong>ТРЁХ</strong> элементов. Вычислите массовую долю кислорода в этом соединении. Ответ округлите до десятых.</p>
+                <div class="lab-field">
+                    <label>Выберите вещество</label>
+                    <select id="ans-13-select" class="hl-select">
+                        <option value="">-- Выбрать вещество --</option>
+                        <option value="Mg(NO3)2">Нитрат магния (Mg(NO3)2)</option>
+                        <option value="KOH">Гидроксид калия (KOH)</option>
+                        <option value="KNO3">Нитрат калия (KNO3)</option>
+                        <option value="Mg(OH)2">Гидроксид магния (Mg(OH)2)</option>
+                    </select>
+                </div>
+                <div class="lab-field">
+                    <label>Массовая доля кислорода w(O), %</label>
+                    <input type="number" id="ans-13-val" class="hl-inline-input" step="0.1" inputmode="decimal">
+                </div>
+            </div>
+
+            <!-- Задание 14 -->
+            <div class="task-card">
+                <h2>Задание 14 (Тип 7.4)</h2>
+                <p class="task-text">Вычислите массу 0,6 моль газообразного хлора. Ответ запишите в граммах, округлив до десятых.</p>
+                <input type="number" id="ans-task-14" class="hl-inline-input" step="0.1" inputmode="decimal">
+            </div>
+
+            <!-- Задание 15 -->
+            <div class="task-card">
+                <h2>Задание 15 (Тип 8.1)</h2>
+                <p class="task-text">Составьте уравнения указанных реакций, используя химические формулы веществ из п. 6.1 (задание 10). Используйте знак равенства (=) вместо стрелки. Вводите уравнения без пробелов.</p>
+                
+                <div class="element-mobile-card">
+                    <h4>Реакция (1)</h4>
+                    <p class="task-text" style="font-size: 13px; color: #ff9900;">железо + сера → сульфид железа(II)</p>
+                    <input type="text" id="ans-15-eq1" class="hl-inline-input">
+                </div>
+
+                <div class="element-mobile-card">
+                    <h4>Реакция (2)</h4>
+                    <p class="task-text" style="font-size: 13px; color: #ff9900;">гидроксид кальция + азотная кислота → нитрат кальция + вода</p>
+                    <input type="text" id="ans-15-eq2" class="hl-inline-input">
+                </div>
+            </div>
+
+            <!-- Задание 16 -->
+            <div class="task-card">
+                <h2>Задание 16 (Тип 8.2)</h2>
+                <p class="task-text">Определите тип химической реакции для любого (одного) из выбранных вами уравнений из задания 15.</p>
+                <div class="lab-field">
+                    <label>Выберите уравнение</label>
+                    <select id="ans-16-eq-num" class="hl-select">
+                        <option value="">-- Выберите номер реакции --</option>
+                        <option value="1">Реакция (1) [Fe + S...]</option>
+                        <option value="2">Реакция (2) [Ca(OH)2 + HNO3...]</option>
+                    </select>
+                </div>
+                <div class="lab-field">
+                    <label>Тип этой реакции</label>
+                    <select id="ans-16-type" class="hl-select">
+                        <option value="">-- Выберите тип реакции --</option>
+                        <option value="соединения">Реакция соединения</option>
+                        <option value="обмена">Реакция обмена</option>
+                        <option value="замещения">Реакция замещения</option>
+                        <option value="разложения">Реакция разложения</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Задание 17 -->
+            <div class="task-card">
+                <h2>Задание 17 (Тип 8.4)</h2>
+                <p class="task-text">Из приборов, изображённых на рисунках, выберите тот, с помощью которого можно разделить смесь железных опилок и порошка серы.</p>
+                
+                <div style="text-align: center; margin: 15px 0;">
+                    <img src="17_8.4.jpg" alt="Приборы фильтрования и разделения магнитом" style="width: 100%; max-width: 450px; border: 2px solid #253325; border-radius: 4px; box-shadow: 0 0 10px rgba(70,176,74,0.1);">
+                </div>
+
+                <div class="lab-field">
+                    <label>Номер рисунка</label>
+                    <select id="ans-17-img" class="hl-select">
+                        <option value="">-- Выберите номер прибора --</option>
+                        <option value="1">Рис. 1 (Фильтрование)</option>
+                        <option value="2">Рис. 2 (Действие магнитом)</option>
+                    </select>
+                </div>
+
+                <div class="lab-field">
+                    <label>Какой метод разделения веществ при этом используется?</label>
+                    <input type="text" id="ans-17-method" class="hl-inline-input">
+                </div>
+
+                <div class="lab-field">
+                    <label>Почему прибор, изображённый на другом рисунке, не может быть использован?</label>
+                    <textarea id="ans-17-text" class="lab-textarea"></textarea>
+                </div>
+            </div>
+            <!-- Задание 18 -->
+            <div class="task-card">
+                <h2>Задание 18</h2>
+                <p class="task-text">Установите соответствие между названием химического вещества и областью его применения. Выберите правильную цифру применения для каждого вещества.</p>
+                
+                <div class="element-mobile-card">
+                    <div style="margin-bottom: 12px;">
+                        <span style="color: #ff9900; font-weight: bold;">А) хлор</span>
+                        <select id="ans-18-a" class="hl-select" style="margin-top: 5px;">
+                            <option value="">-- Выберите область применения --</option>
+                            <option value="1">1) газ для дыхания водолазов в аквалангах</option>
+                            <option value="2">2) реагент для чистки труб («каустическая сода»)</option>
+                            <option value="3">3) жидкость для тушения пожаров</option>
+                            <option value="4">4) газ для отбеливания бумаги и картона</option>
+                            <option value="5">5) электролит в автомобильных аккумуляторах</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 12px;">
+                        <span style="color: #ff9900; font-weight: bold;">Б) серная кислота</span>
+                        <select id="ans-18-b" class="hl-select" style="margin-top: 5px;">
+                            <option value="">-- Выберите область применения --</option>
+                            <option value="1">1) газ для дыхания водолазов в аквалангах</option>
+                            <option value="2">2) реагент для чистки труб («каустическая сода»)</option>
+                            <option value="3">3) жидкость для тушения пожаров</option>
+                            <option value="4">4) газ для отбеливания бумаги и картона</option>
+                            <option value="5">5) электролит в автомобильных аккумуляторах</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 12px;">
+                        <span style="color: #ff9900; font-weight: bold;">В) гидроксид натрия</span>
+                        <select id="ans-18-v" class="hl-select" style="margin-top: 5px;">
+                            <option value="">-- Выберите область применения --</option>
+                            <option value="1">1) газ для дыхания водолазов в аквалангах</option>
+                            <option value="2">2) реагент для чистки труб («каустическая сода»)</option>
+                            <option value="3">3) жидкость для тушения пожаров</option>
+                            <option value="4">4) газ для отбеливания бумаги и картона</option>
+                            <option value="5">5) электролит в автомобильных аккумуляторах</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 12px;">
+                        <span style="color: #ff9900; font-weight: bold;">Г) вода</span>
+                        <select id="ans-18-g" class="hl-select" style="margin-top: 5px;">
+                            <option value="">-- Выберите область применения --</option>
+                            <option value="1">1) газ для дыхания водолазов в аквалангах</option>
+                            <option value="2">2) реагент для чистки труб («каустическая сода»)</option>
+                            <option value="3">3) жидкость для тушения пожаров</option>
+                            <option value="4">4) газ для отбеливания бумаги и картона</option>
+                            <option value="5">5) электролит в автомобильных аккумуляторах</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Задание 19 -->
+            <div class="task-card">
+                <h2>Задание 19 (Тип 10)</h2>
+                <p class="task-text">Выберите верные суждения о правилах поведения в химической лаборатории и обращении с химическими веществами в быту. (Выберите все подходящие варианты).</p>
+                
+                <div class="lab-option checkbox-option" data-check="1">
+                    <span>1. Для измерения температуры раствора используют мерную пипетку.</span>
+                </div>
+                <div class="lab-option checkbox-option" data-check="2">
+                    <span>2. При попадании кислоты на кожу поражённое место надо промыть большим количеством воды, а затем обработать раствором питьевой соды.</span>
+                </div>
+                <div class="lab-option checkbox-option" data-check="3">
+                    <span>3. Прежде чем поджечь водород, его необходимо проверить на чистоту.</span>
+                </div>
+                <div class="lab-option checkbox-option" data-check="4">
+                    <span>4. Работать с хлорсодержащими дезинфицирующими средствами следует при плотно закрытой двери в помещении.</span>
+                </div>
+                
+                <input type="hidden" id="ans-task-19" name="task19">
+            </div>
+
+            <!-- Лабораторная кнопка фиксации -->
+            <div style="margin-top: 30px;">
+                <button type="button" class="lab-btn" id="btn-submit">Завершить синтез и отправить данные</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- ЭКРАН 3: ФИНАЛЬНЫЙ ОТЧЁТ -->
+    <div id="screen-results" class="lab-screen">
+        <h1>Лабораторный отчёт сформирован</h1>
+        <div class="result-box" style="margin-top: 20px;">
+            <p style="color: #ff9900; text-transform: uppercase; font-size: 12px; font-weight: bold;">Ваша итоговая оценка за ВПР-8 (Вариант 2):</p>
+            <div class="grade-display" id="final-grade">0</div>
+            <p id="student-summary" style="font-size: 14px; margin-bottom: 10px;"></p>
+            <p style="color: #666; font-size: 11px;">Данные успешно отправлены профессору на сервер Google Forms.</p>
+        </div>
+        <button type="button" class="lab-btn lab-btn-secondary" onclick="location.reload()">Начать новый цикл</button>
+    </div>
+
+</div>
+
+<!-- Встроенное неоновое окно №1: ПСХЭ Менделеева -->
+<div id="modal-pshe" class="lab-modal">
+    <div class="modal-header">
+        <span class="modal-title">[ ПСХЭ ИМ. Д.И. МЕНДЕЛЕЕВА ]</span>
+        <button type="button" class="modal-back-btn" id="btn-close-pshe">← НАЗАД В ЛАБОРАТОРИЮ</button>
+    </div>
+    <div class="modal-body">
+        <iframe src="ССЫЛКА_ПСХЭ_МЕНДЕЛЕЕВА" class="modal-iframe"></iframe>
+    </div>
+</div>
+
+<!-- Встроенное неоновое окно №2: Таблица растворимости -->
+<div id="modal-rastvor" class="lab-modal">
+    <div class="modal-header">
+        <span class="modal-title">[ ТАБЛИЦА РАСТВОРИМОСТИ И РЯД БЕКЕТОВА ]</span>
+        <button type="button" class="modal-back-btn" id="btn-close-rastvor">← НАЗАД В ЛАБОРАТОРИЮ</button>
+    </div>
+    <div class="modal-body">
+        <iframe src="ССЫЛКА_ТАБЛИЦЫ_РАСТВОРИМОСТИ" class="modal-iframe"></iframe>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
