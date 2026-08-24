@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор кодов доступа // Black Mesa</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Courier New', Courier, monospace; }
+        body { background-color: #121212; color: #ffb000; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        .panel { background-color: #1a1a1a; border: 2px solid #ffb000; box-shadow: 0 0 15px rgba(255, 176, 0, 0.2); padding: 25px; max-width: 700px; width: 100%; margin-bottom: 20px; }
+        h1 { font-size: 1.5rem; margin-bottom: 10px; letter-spacing: 1px; text-align: center; }
+        p { color: #888; font-size: 0.85rem; margin-bottom: 20px; }
+        .row { display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; }
+        .field { flex: 1; min-width: 150px; }
+        label { display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; }
+        input { width: 100%; background-color: #000; border: 1px solid #ffb000; color: #ffb000; padding: 10px; font-size: 1rem; outline: none; }
+        .hl-btn { background-color: #ffb000; color: #000; border: none; padding: 12px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.2s; width: 100%; letter-spacing: 1px; margin-top: 10px; }
+        .hl-btn:hover { background-color: #ffc84d; box-shadow: 0 0 12px rgba(255, 176, 0, 0.6); }
+        .table-wrapper { width: 100%; max-width: 700px; max-height: 400px; overflow-y: auto; border: 1px solid #ffb000; background: #161616; margin-top: 10px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; }
+        th, td { padding: 10px; border-bottom: 1px solid #2a2a2a; }
+        th { background-color: #000; color: #ffb000; position: sticky; top: 0; box-shadow: 0 1px 0 #ffb000; }
+        tr:hover { background-color: #222; }
+        .copy-info { text-align: center; font-size: 0.8rem; color: #888; margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="panel">
+        <h1>КВАНТОВЫЙ КРИПТОГЕНЕРАТОР ТОКЕНОВ</h1>
+        <p style="text-align: center;">> Централизованная утилита генерации пропусков для сотрудников и стажёров</p>
+        
+        <div class="row">
+            <div class="field">
+                <label for="secret-mod">СЕКРЕТНЫЙ ОСТАТОК (ИЗ JS ТЕСТА):</label>
+                <input type="number" id="secret-mod" value="322" min="1" max="996">
+            </div>
+            <div class="field">
+                <label for="codes-count">КОЛИЧЕСТВО КОДОВ (ДО 500):</label>
+                <input type="number" id="codes-count" value="30" min="1" max="500">
+            </div>
+        </div>
+        
+        <button id="gen-btn" class="hl-btn">СФОРМИРОВАТЬ ПАКЕТ КОДОВ</button>
+    </div>
+
+    <div class="panel" id="result-panel" style="display: none; padding-top: 15px;">
+        <h1 style="font-size: 1.1rem; text-align: left; margin-bottom: 15px;">ВЕРИФИЦИРОВАННЫЕ КОДЫ ДОСТУПА</h1>
+        <div class="table-wrapper">
+            <table id="codes-table">
+                <thead>
+                    <tr>
+                        <th style="width: 80px;">№</th>
+                        <th>КОД ДОСТУПА (КЛИКНИТЕ ДЛЯ КОПИРОВАНИЯ)</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+            </table>
+        </div>
+        <p class="copy-info">> Нажмите на любой код в таблице, чтобы мгновенно скопировать его в буфер обмена.</p>
+    </div>
+
+    <script src="generator.js"></script>
+</body>
+</html>
