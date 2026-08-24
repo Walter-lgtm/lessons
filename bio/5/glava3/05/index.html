@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§19. Организмы как среда обитания</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Введите ваши данные для доступа к биологическому терминалу:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-token">КОД ДОСТУПА К ЛАБОРАТОРИИ:</label>
+            <input type="text" id="student-token" placeholder="M5-XXXX" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: ОРГАНИЗМЫ КАК СРЕДА ОБИТАНИЯ</p>
+            </div>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Вставь верный термин</h3>
+            <p class="question-text">Заполните пропуски самостоятельно, ориентируясь на начальные буквы-подсказки:</p>
+            <div class="select-text-gaps">
+                <p style="margin-bottom: 15px;">
+                    Отношения между жизненно необходимыми друг другу организмами называются 
+                    <input type="text" class="hl-inline-input" id="t1-i1" placeholder="в..." autocomplete="off">.
+                </p>
+                <p style="margin-bottom: 15px;">
+                    Отношения между двумя организмами разных видов, при которых один организм использует другого в качестве источника пищи и среды обитания, называются 
+                    <input type="text" class="hl-inline-input" id="t1-i2" placeholder="п..." autocomplete="off">.
+                </p>
+                <p style="margin-bottom: 15px;">
+                    <input type="text" class="hl-inline-input" id="t1-i3" placeholder="П..." autocomplete="off">
+                    называют организм, который питается за счёт другого организма, временно или постоянно пребывает на поверхности тела или внутри организма.
+                </p>
+                <p>
+                    <input type="text" class="hl-inline-input" id="t1-i4" placeholder="Х..." autocomplete="off">
+                    называют организм, обеспечивающий паразита питанием и постоянным или временным местом обитания.
+                </p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Выбери верные ответы</h3>
+            <p class="question-text">1. Организменная среда обитания характерна для:</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Свиного цепня"><span></span> Свиного цепня</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Гриба трутовика"><span></span> Гриба трутовика</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Лисицы Фенек"><span></span> Лисицы Фенек</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Коровы"><span></span> Коровы</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Немецкой овчарки"><span></span> Немецкой овчарки</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q2" value="Гусеницы капустной белянки"><span></span> Гусеницы капустной белянки</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Выбери и вставь верный ответ</h3>
+            <div class="select-text-gaps">
+                <p style="margin-bottom: 15px;">
+                    <select class="hl-select" id="t3-s1" data-answer="Гельминтология">
+                        <option value="" selected disabled>-- 1 --</option>
+                        <option value="Физиология">Физиология</option>
+                        <option value="Цитология">Цитология</option>
+                        <option value="Гельминтология">Гельминтология</option>
+                    </select>
+                    — наука, изучающая паразитических червей и вызываемые ими заболевания.
+                </p>
+                <p>
+                    Большая заслуга в развитии отечественной гельминтологии принадлежит академику 
+                    <select class="hl-select" id="t3-s2" data-answer="Скрябину">
+                        <option value="" selected disabled>-- 2 --</option>
+                        <option value="Докучаеву">Докучаеву</option>
+                        <option value="Вернадскому">Вернадскому</option>
+                        <option value="Ломоносову">Ломоносову</option>
+                        <option value="Скрябину">Скрябину</option>
+                    </select>.
+                </p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 4 -->
+        <section class="task-card" id="task4">
+            <h3>[λ] Задание 4. Прочитай текст и выбери заголовок</h3>
+            <p class="question-text">Запиши памятку профилактики протозойных болезней себе в рабочую тетрадь.</p>
+            
+            <div style="background-color: #1a1a1a; padding: 20px; border: 1px dashed #ffb000; margin-top: 15px;">
+                <div style="margin-bottom: 20px; text-align: center;">
+                    <select class="hl-select" id="t4-s1" data-answer="Основные мероприятия по профилактике протозойных болезней:">
+                        <option value="" selected disabled>-- Выберите заголовок (*) --</option>
+                        <option value="Основные мероприятия по профилактике протозойных болезней:">Основные мероприятия по профилактике протозойных болезней:</option>
+                        <option value="Способы борьбы с гельминтозами человека и животных:">Способы борьбы с гельминтозами человека и животных:</option>
+                        <option value="Правила гигиены при работе в школьной лаборатории:">Правила гигиены при работе в школьной лаборатории:</option>
+                    </select>
+                </div>
+                
+                <div style="background-color: #222; padding: 15px; border-left: 4px solid #4caf50; font-size: 0.9rem; color: #ccc; margin-bottom: 20px; line-height: 1.5;">
+                    Паразитами растений, различных животных и человека являются около 10 000 современных видов одноклеточных животных (простейших). Паразитические простейшие поражают домашних птиц, коров, свиней, рыб, медоносных пчёл и являются возбудителями протозойных болезней. Во многих странах, где паразитические простейшие вызывают повышенную заболеваемость людей и животных, созданы научные центры для разработки мер борьбы с протозойными болезнями.
+                </div>
+
+                <ul style="list-style-type: square; margin-left: 20px; color: #e0e0e0; font-size: 0.95rem; line-height: 1.8;">
+                    <li>соблюдение правил личной гигиены: тщательно мыть руки после прогулки и туалета, перед едой;</li>
+                    <li>ежегодное прохождение обследований на протозойные заболевания;</li>
+                    <li>тщательное мытьё продуктов питания;</li>
+                    <li>соблюдение правил приготовления пищи;</li>
+                    <li>уничтожение комнатных мух и тараканов, защита от укусов комаров, москитов, клопов, мух;</li>
+                    <li>запрет купания в загрязнённых водоёмах.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Кнопка отправки результатов -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>ТЕСТИРОВАНИЕ ЗАВЕРШЕНО</h2>
+        <p class="system-msg">> Данные успешно переданы в архив Чёрной Мезы.</p>
+        <div class="score-board">
+            <p>Участник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 4</p>
+            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
