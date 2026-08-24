@@ -9,19 +9,44 @@ document.addEventListener("DOMContentLoaded", () => {
     const startBtn = document.getElementById("start-btn");
     const inputName = document.getElementById("student-name");
     const inputClass = document.getElementById("student-class");
+    // ==========================================
+    // МАТЕМАТИЧЕСКАЯ КРИПТОЗАЩИТА (ХЭШ КНУТА)
+    // ==========================================
+    function validateToken(tokenStr) {
+        // Очищаем от случайных пробелов и переводим в верхний регистр
+        const t = tokenStr.trim().toUpperCase();
+        
+        // Математический хэш-алгоритм для строк
+        let hash = 5381;
+        for (let i = 0; i < t.length; i++) {
+            hash = ((hash << 5) + hash) + t.charCodeAt(i);
+        }
+        
+        // Секретный математический остаток (наш ключ верификации)
+        // Для каждого параграфа остаток можно менять, чтобы коды от §18 не подошли к §19!
+        const secretMod = Math.abs(hash) % 997;
+        
+        // Для §18 верным остатком будет, например, 322
+        return secretMod === 322;
+    }
 
-    // ==========================================
-    // 1. АВТОРИЗАЦИЯ И СТАРТ ТЕСТА
-    // ==========================================
     startBtn.addEventListener("click", () => {
         studentName = inputName.value.trim();
         studentClass = inputClass.value.trim();
+        const tokenVal = document.getElementById("student-token").value;
 
-        if (!studentName || !studentClass) {
-            alert("ВНИМАНИЕ! Доступ заблокирован. Введите ФИО и Класс для идентификации.");
+        if (!studentName || !studentClass || !tokenVal) {
+            alert("ВНИМАНИЕ! Доступ заблокирован. Заполните ФИО, Класс и Код доступа.");
             return;
         }
 
+        // Запуск математической проверки
+        if (!validateToken(tokenVal)) {
+            alert("КРИТИЧЕСКАЯ ОШИБКА: Неверный или просроченный код доступа к терминалу!");
+            return;
+        }
+
+        // Если математика сошлась, пускаем дальше
         authScreen.classList.add("hidden");
         quizContainer.classList.remove("hidden");
         window.scrollTo(0, 0);
