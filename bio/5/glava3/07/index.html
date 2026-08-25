@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§21. Взаимосвязи организмов в природном сообществе</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Введите ваши данные для доступа к биологическому терминалу:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-token">КОД ДОСТУПА К ЛАБОРАТОРИИ:</label>
+            <input type="text" id="student-token" placeholder="M5-XXXX" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: ВЗАИМОСВЯЗИ В ПРИРОДНОМ СООБЩЕСТВЕ</p>
+            </div>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Вставь верные термины</h3>
+            <div class="select-text-gaps">
+                <p style="margin-bottom: 15px;">
+                    <input type="text" class="hl-inline-input" id="t1-i1" placeholder="П... с..." style="width: 180px;" autocomplete="off">
+                    состоит из сообщества живых организмов и среды их обитания, живущих совместно и находящихся во взаимосвязи друг с другом.
+                </p>
+                <p>
+                    Сложившаяся совокупность животных, растений, грибов и микроорганизмов, населяющих природные сообщества, составляют их 
+                    <input type="text" class="hl-inline-input" id="t1-i2" placeholder="б..." autocomplete="off">.
+                </p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Вычеркни лишние слова</h3>
+            <p class="question-text">Рассмотри рисунок. Вычеркни из перечисленных живых организмов лишние, которые НЕ характерны для природного сообщества елового леса.</p>
+            <div class="image-host-container">
+                <img src="forest_01_21.jpeg" alt="Природное сообщество елового леса" class="task-img">
+            </div>
+            <p class="sub-text">Среди растений, животных и грибов елового леса можно встретить:</p>
+            <div class="strike-container" id="strike-t2">
+                <button class="strike-btn" data-word="подосиновики">подосиновики</button>
+                <button class="strike-btn" data-word="ромашки" data-wrong="true">ромашки</button>
+                <button class="strike-btn" data-word="папоротники">папоротники</button>
+                <button class="strike-btn" data-word="дубы" data-wrong="true">дубы</button>
+                <button class="strike-btn" data-word="ели">ели</button>
+                <button class="strike-btn" data-word="берёзы" data-wrong="true">берёзы</button>
+                <button class="strike-btn" data-word="шампиньоны">шампиньоны</button>
+                <button class="strike-btn" data-word="мухоморы">мухоморы</button>
+                <button class="strike-btn" data-word="оленя">оленя</button>
+                <button class="strike-btn" data-word="бурого медведя">бурого медведя</button>
+                <button class="strike-btn" data-word="белого медведя" data-wrong="true">белого медведя</button>
+                <button class="strike-btn" data-word="зайца-русака">зайца-русака</button>
+                <button class="strike-btn" data-word="рысь">рысь</button>
+                <button class="strike-btn" data-word="льва" data-wrong="true">льва</button>
+                <button class="strike-btn" data-word="сову">сову</button>
+                <button class="strike-btn" data-word="орла">орла</button>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Вставь верные термины</h3>
+            <div class="select-text-gaps">
+                <p style="margin-bottom: 15px;">
+                    <input type="text" class="hl-inline-input" id="t3-i1" placeholder="П..." autocomplete="off">
+                    создают органические вещества из неорганических — углекислого газа, воды, минеральных солей.
+                </p>
+                <p style="margin-bottom: 15px;">
+                    Запасённые продуцентами органические вещества потребляют организмы, которые называют 
+                    <input type="text" class="hl-inline-input" id="t3-i2" placeholder="к..." autocomplete="off">.
+                </p>
+                <p>
+                    Мёртвые растительные и животные остатки перерабатывают организмы, которые называют 
+                    <input type="text" class="hl-inline-input" id="t3-i3" placeholder="р..." autocomplete="off">.
+                </p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 4 -->
+        <section class="task-card" id="task4">
+            <h3>[λ] Задание 4. Выбери и вставь верный ответ</h3>
+            <div class="select-text-gaps">
+                <p style="margin-bottom: 15px;">
+                    Организмы-производители – организмы, которые создают органические вещества из неорганических, воды и углекислого газа при использовании энергии солнечного света, называются 
+                    <select class="hl-select" id="t4-s1" data-answer="продуценты">
+                        <option value="" selected disabled>-- 1 --</option>
+                        <option value="консументы">консументы</option>
+                        <option value="продуценты">продуценты</option>
+                        <option value="редуценты">редуценты</option>
+                    </select>.
+                </p>
+                <p style="margin-bottom: 15px;">
+                    Организмы-разрушители, или 
+                    <select class="hl-select" id="t4-s2" data-answer="редуценты">
+                        <option value="" selected disabled>-- 2 --</option>
+                        <option value="консументы">консументы</option>
+                        <option value="продуценты">продуценты</option>
+                        <option value="редуценты">редуценты</option>
+                    </select>
+                    – это организмы, которые разрушают мёртвые остатки растений и животных.
+                </p>
+                <p>
+                    Организмы-потребители, или 
+                    <select class="hl-select" id="t4-s3" data-answer="консументы">
+                        <option value="" selected disabled>-- 3 --</option>
+                        <option value="консументы">консументы</option>
+                        <option value="продуценты">продуценты</option>
+                        <option value="редуценты">редуценты</option>
+                    </select>
+                    – организмы, которые получают готовые органические вещества в виде пищи.
+                </p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 5 -->
+        <section class="task-card" id="task5">
+            <h3>[λ] Задание 5. Распредели по группам</h3>
+            <p class="question-text">Распредели живые организмы по экологическим группам:</p>
+            
+            <div class="drag-words-container" id="words-t5" style="margin-bottom: 20px;">
+                <span class="drag-word" draggable="true" data-word="малина">малина</span>
+                <span class="drag-word" draggable="true" data-word="подсолнечник">подсолнечник</span>
+                <span class="drag-word" draggable="true" data-word="ясень">ясень</span>
+                <span class="drag-word" draggable="true" data-word="белый гриб">белый гриб</span>
+                <span class="drag-word" draggable="true" data-word="сурок">сурок</span>
+                <span class="drag-word" draggable="true" data-word="томаты">томаты</span>
+                <span class="drag-word" draggable="true" data-word="бактерии почвы">бактерии почвы</span>
+                <span class="drag-word" draggable="true" data-word="кабан">кабан</span>
+                <span class="drag-word" draggable="true" data-word="акула">акула</span>
+                <span class="drag-word" draggable="true" data-word="рыжики">рыжики</span>
+                <span class="drag-word" draggable="true" data-word="ёж">ёж</span>
+                <span class="drag-word" draggable="true" data-word="опята">опята</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                <div class="group-zone" id="t5-group1" data-group="producers">
+                    <h4>Продуценты</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t5-group2" data-group="consumers">
+                    <h4>Консументы</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t5-group3" data-group="reducers">
+                    <h4>Редуценты</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Кнопка отправки результатов -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>ТЕСТИРОВАНИЕ ЗАВЕРШЕНО</h2>
+        <p class="system-msg">> Данные успешно переданы в архив Чёрной Мезы.</p>
+        <div class="score-board">
+            <p>Участник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 5</p>
+            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
