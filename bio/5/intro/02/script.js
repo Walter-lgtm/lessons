@@ -1,4 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // ==========================================
+    // МАТЕМАТИЧЕСКАЯ КРИПТОЗАЩИТА (ХЭШ КНУТА)
+    // ==========================================
+    function validateToken(tokenStr) {
+        const t = tokenStr.trim().toUpperCase();
+        let hash = 5381;
+        for (let i = 0; i < t.length; i++) {
+            hash = ((hash << 5) + hash) + t.charCodeAt(i);
+        }
+        const secretMod = Math.abs(hash) % 997;
+        
+        // Меняйте это число для каждого приложения, беря значения из таблицы выше!
+        return secretMod === 322; 
+    }
     // Глобальные переменные данных ученика
     let studentName = "";
     let studentClass = "";
@@ -16,12 +30,22 @@ document.addEventListener("DOMContentLoaded", () => {
     startBtn.addEventListener("click", () => {
         studentName = inputName.value.trim();
         studentClass = inputClass.value.trim();
+        // 1. Считываем введенный токен
+        const tokenVal = document.getElementById("student-token").value;
 
-        if (!studentName || !studentClass) {
-            alert("ВНИМАНИЕ! Доступ заблокирован. Введите ФИО и Класс для идентификации.");
+        // 2. Требуем, чтобы он был заполнен
+        if (!studentName || !studentClass || !tokenVal) {
+            alert("ВНИМАНИЕ! Доступ заблокирован. Заполните ФИО, Класс и Код доступа.");
             return;
         }
 
+        // 3. Проверяем математику хэша
+        if (!validateToken(tokenVal)) {
+            alert("КРИТИЧЕСКАЯ ОШИБКА: Неверный или просроченный код доступа к терминалу!");
+            return;
+        }
+
+        // Если всё верно, старый код работает дальше без изменений:
         authScreen.classList.add("hidden");
         quizContainer.classList.remove("hidden");
         window.scrollTo(0, 0);
