@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const secretMod = Math.abs(hash) % 997;
         
         // Меняйте это число для каждого приложения, беря значения из таблицы выше!
-        return secretMod === 322; 
+        return secretMod === 500; 
     }
     // Глобальные переменные данных ученика
     let studentName = "";
