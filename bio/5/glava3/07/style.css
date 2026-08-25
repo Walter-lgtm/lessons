@@ -506,3 +506,55 @@ body {
     color: #ff9999 !important;
     box-shadow: 0 0 8px rgba(255, 51, 51, 0.4);
 }
+/* ========================================================
+   ИСПРАВЛЕНИЕ ДЛЯ МАСШТАБИРОВАНИЯ КАРТИНКИ ПОД СМАРТФОНЫ
+   ======================================================== */
+.image-host-container {
+    width: 100%;
+    max-width: 600px;        /* Максимальная ширина картинки на ПК */
+    margin: 15px auto;       /* Центрирование контейнера */
+    overflow: hidden;
+    border-radius: 4px;      /* Легкое прямоугольное скругление */
+    border: 1px solid #333;  /* Тонкая рамка вокруг фото */
+}
+
+.task-img {
+    width: 100%;             /* Картинка занимает ровно ширину экрана */
+    height: auto;            /* Пропорции сохраняются автоматически */
+    display: block;
+    object-fit: contain;     /* Защита от деформации */
+}
+
+/* ========================================================
+   ИСПРАВЛЕНИЕ МЕХАНИКИ ВЫЧЕРКИВАНИЯ СЛОВ (ЗАДАНИЕ 2)
+   ======================================================== */
+.strike-container {
+    display: flex;
+    flex-wrap: wrap;         /* Разрешаем плашкам переноситься на новую строку */
+    gap: 8px;                /* Воздух между кнопками-словами */
+    margin-top: 15px;
+}
+
+.strike-btn {
+    background-color: #000;
+    border: 2px solid #ffb000;
+    color: #ffb000;
+    padding: 10px 16px;      /* Крупный размер для тапов пальцем */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+    text-decoration: none;   /* Изначально текст чистый */
+    opacity: 1;
+}
+
+/* Класс, который JavaScript включает при клике */
+.strike-btn.strikethrough {
+    text-decoration: line-through #ff3333 3px; /* Жирное красное перечеркивание */
+    color: #555;                               /* Приглушаем цвет вычеркнутого слова */
+    border-color: #333;                        /* Затемняем рамку */
+    background-color: #111;
+    opacity: 0.6;                              /* Визуальный эффект "удаления" */
+}
