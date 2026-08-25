@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§20. Сезонные изменения в жизни организмов</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Экран авторизации ученика -->
+    <div id="auth-screen" class="terminal-block">
+        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
+        <p class="system-msg">> Введите ваши данные для доступа к биологическому терминалу:</p>
+        <div class="input-group">
+            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">КЛАСС:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-token">КОД ДОСТУПА К ЛАБОРАТОРИИ:</label>
+            <input type="text" id="student-token" placeholder="M5-XXXX" autocomplete="off">
+        </div>
+        <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="hl-header">
+            <div class="logo">λ</div>
+            <div class="title-block">
+                <h1>BLACK MESA RESEARCH FACILITY</h1>
+                <p>БИОЛОГИЧЕСКИЙ МОДУЛЬ: СЕЗОННЫЕ ИЗМЕНЕНИЯ В ЖИЗНИ ОРГАНИЗМОВ</p>
+            </div>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card" id="task1">
+            <h3>[λ] Задание 1. Вставь верные термины</h3>
+            <div class="select-text-gaps">
+                <p style="margin-bottom: 15px;">
+                    Реакции организмов на изменение длины дня называется 
+                    <input type="text" class="hl-inline-input" id="t1-i1" placeholder="ф..." autocomplete="off">.
+                </p>
+                <p style="margin-bottom: 15px;">
+                    К сезонной смене природных условий организмам позволяют приспособляться 
+                    <input type="text" class="hl-inline-input" id="t1-i2" placeholder="г..." autocomplete="off"> циклы.
+                </p>
+                <p style="margin-bottom: 15px;">
+                    У птиц и зверей наблюдается 
+                    <input type="text" class="hl-inline-input" id="t1-i3" placeholder="л..." autocomplete="off"> — смена шерстного и перьевого покрова.
+                </p>
+                <p>
+                    <input type="text" class="hl-inline-input" id="t1-i4" placeholder="м..." autocomplete="off"> — перемещения на значительные расстояния, вызываемые сменой условий существования.
+                </p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card" id="task2">
+            <h3>[λ] Задание 2. Распредели по группам</h3>
+            <p class="question-text">Распредели животных по группам, согласно их типу спячки (летняя и зимняя):</p>
+            
+            <div class="drag-words-container" id="words-t2">
+                <span class="drag-word" draggable="true" data-word="крокодилы">крокодилы</span>
+                <span class="drag-word" draggable="true" data-word="барсуки">барсуки</span>
+                <span class="drag-word" draggable="true" data-word="сурки">сурки</span>
+                <span class="drag-word" draggable="true" data-word="ежи">ежи</span>
+                <span class="drag-word" draggable="true" data-word="хомяки">хомяки</span>
+                <span class="drag-word" draggable="true" data-word="змеи">змеи</span>
+                <span class="drag-word" draggable="true" data-word="суслики">суслики</span>
+                <span class="drag-word" draggable="true" data-word="бурые медведи">бурые медведи</span>
+            </div>
+
+            <div class="two-columns">
+                <div class="group-zone" id="t2-group1" data-group="summer">
+                    <h4>Летняя спячка</h4>
+                    <div class="zone-content"></div>
+                </div>
+                <div class="group-zone" id="t2-group2" data-group="winter">
+                    <h4>Зимняя спячка</h4>
+                    <div class="zone-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card" id="task3">
+            <h3>[λ] Задание 3. Выбери верный ответ</h3>
+            <p class="question-text">1. Что НЕ относится к сезонным явлениям в природе?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q3" value="Листопад"><span></span> Листопад</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="Спячка животных"><span></span> Спячка животных</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="Дыхание семян"><span></span> Дыхание семян</label>
+                <label class="hl-radio"><input type="radio" name="q3" value="Линька"><span></span> Линька</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 4 -->
+        <section class="task-card" id="task4">
+            <h3>[λ] Задание 4. Выбери верный ответ</h3>
+            <p class="question-text">1. Какое поведение характерно для пресмыкающихся при понижении температуры?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q4" value="Усиленное питание"><span></span> Усиленное питание</label>
+                <label class="hl-radio"><input type="radio" name="q4" value="Спячка"><span></span> Спячка</label>
+                <label class="hl-radio"><input type="radio" name="q4" value="Миграция"><span></span> Миграция</label>
+                <label class="hl-radio"><input type="radio" name="q4" value="Не меняют поведение"><span></span> Не меняют поведение</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 5 -->
+        <section class="task-card" id="task5">
+            <h3>[λ] Задание 5. Выбери верные ответы</h3>
+            <p class="question-text">1. Для каких из перечисленных птиц НЕ характерна миграция?</p>
+            <div class="checkbox-group">
+                <label class="hl-checkbox"><input type="checkbox" name="q5" value="Аисты"><span></span> Аисты</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q5" value="Лебеди"><span></span> Лебеди</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q5" value="Воробьи"><span></span> Воробьи</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q5" value="Стрижи"><span></span> Стрижи</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q5" value="Ласточки"><span></span> Ласточки</label>
+                <label class="hl-checkbox"><input type="checkbox" name="q5" value="Голуби"><span></span> Голуби</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 6 -->
+        <section class="task-card" id="task6">
+            <h3>[λ] Задание 6. Выбери верный ответ</h3>
+            <p class="question-text">1. Какая среда обитания максимально заселена живыми организмами?</p>
+            <div class="radio-group">
+                <label class="hl-radio"><input type="radio" name="q6" value="Водная"><span></span> Водная</label>
+                <label class="hl-radio"><input type="radio" name="q6" value="Почвенная"><span></span> Почвенная</label>
+                <label class="hl-radio"><input type="radio" name="q6" value="Наземно-воздушная"><span></span> Наземно-воздушная</label>
+                <label class="hl-radio"><input type="radio" name="q6" value="Организменная"><span></span> Организменная</label>
+            </div>
+        </section>
+
+        <!-- Кнопка отправки результатов -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="hl-btn final-btn">ОТПРАВИТЬ РЕЗУЛЬТАТЫ НА СЕРВЕР</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="terminal-block hidden">
+        <h2>ТЕСТИРОВАНИЕ ЗАВЕРШЕНО</h2>
+        <p class="system-msg">> Данные успешно переданы в архив Чёрной Мезы.</p>
+        <div class="score-board">
+            <p>Участник: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 6</p>
+            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
