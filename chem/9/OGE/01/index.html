@@ -1,1 +1,452 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ОГЭ-тренажер Химия // Вариант 1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="lab-container">
+    
+    <!-- Фирменный Логотип-Пульт [Br] [Ba] -->
+    <div class="lab-logo">
+        <div class="periodic-plate" id="btn-open-pshe" style="cursor: pointer;" title="Открыть ПСХЭ Менделеева">
+            <span class="element-number">35</span>
+            <span class="element-symbol">Br</span>
+        </div>
+        <div class="periodic-plate" id="btn-open-rastvor" style="cursor: pointer;" title="Открыть таблицу растворимости">
+            <span class="element-number">56</span>
+            <span class="element-symbol">Ba</span>
+        </div>
+    </div>
+
+    <!-- ЭКРАН 1: АВТОРИЗАЦИЯ -->
+    <div id="screen-auth" class="lab-screen active">
+        <h1>Вход в лабораторию</h1>
+        <p style="text-align: center; color: #ff9900; font-size: 13px; margin-bottom: 20px;">[ ПОДГОТОВКА К ОГЭ ПО ХИМИИ ]</p>
+        
+        <div class="lab-field">
+            <label>Фамилия и Имя ученика</label>
+            <input type="text" id="student-name" class="lab-input" required>
+        </div>
+        
+        <div class="lab-field">
+            <label>Класс</label>
+            <input type="text" id="student-class" class="lab-input" required>
+        </div>
+        
+        <button type="button" class="lab-btn" id="btn-start">Начать синтез варианта</button>
+    </div>
+
+    <!-- ЭКРАН 2: ТЕСТ (ПЕРВАЯ ЧАСТЬ ОГЭ) -->
+    <div id="screen-quiz" class="lab-screen">
+        <form id="vpr-form">
+
+            <!-- Задание 1 -->
+            <div class="task-card">
+                <h2>Задание 1</h2>
+                <p class="task-text">Выберите два утверждения, в которых говорится об <strong>азоте как о простом веществе</strong>.</p>
+                
+                <div class="lab-option checkbox-option" data-id="t1" data-check="1">
+                    <span>1. Содержание азота в воздухе колеблется от 0,07 до 0,5 %</span>
+                </div>
+                <div class="lab-option checkbox-option" data-id="t1" data-check="2">
+                    <span>2. Азот необходим растениям для образования хлорофилла и других органических веществ</span>
+                </div>
+                <div class="lab-option checkbox-option" data-id="t1" data-check="3">
+                    <span>3. Валентность азота в ионе аммония равна IV</span>
+                </div>
+                <div class="lab-option checkbox-option" data-id="t1" data-check="4">
+                    <span>4. В жидком состоянии азот бесцветен и подвижен, как вода</span>
+                </div>
+                <div class="lab-option checkbox-option" data-id="t1" data-check="5">
+                    <span>5. Азот в промышленности получают фракционной перегонкой жидкого воздуха</span>
+                </div>
+                <input type="hidden" id="ans-task-1" name="task1">
+            </div>
+
+            <!-- Задание 2 -->
+            <div class="task-card">
+                <h2>Задание 2</h2>
+                <p class="task-text">На рисунке изображена модель строения ядра атома некоторого химического элемента. Запишите в поля номер периода (X) и величину заряда ядра (Y).</p>
+                
+                <div style="text-align: center; margin: 15px 0;">
+                    <img src="atom_01.png" alt="Модель ядра атома" style="width: 100%; max-width: 400px; border: 2px solid #253325; border-radius: 4px; box-shadow: 0 0 10px rgba(70,176,74,0.15);">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="lab-field">
+                        <label>Номер периода (X)</label>
+                        <input type="number" id="ans-2-x" class="hl-inline-input" style="text-align: center;" inputmode="numeric">
+                    </div>
+                    <div class="lab-field">
+                        <label>Заряд ядра (Y)</label>
+                        <input type="number" id="ans-2-y" class="hl-inline-input" style="text-align: center;" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Задание 3 -->
+            <div class="task-card">
+                <h2>Задание 3</h2>
+                <p class="task-text">Расположите химические элементы: 1) Фосфор, 2) Кремний, 3) Алюминий в порядке <strong>увеличения восстановительных свойств</strong> образуемых ими простых веществ. Запишите последовательность цифр в ячейку.</p>
+                <input type="number" id="ans-task-3" class="hl-inline-input" placeholder="Например: 123" style="font-family: monospace; letter-spacing: 2px;" inputmode="numeric">
+            </div>
+
+            <!-- Задание 4 -->
+            <div class="task-card">
+                <h2>Задание 4</h2>
+                <p class="task-text">Установите соответствие между формулой вещества и степенью окисления хлора в данном веществе. Введите по одной цифре в ячейки таблицы под соответствующими буквами.</p>
+                
+                <div style="font-size: 13px; color: #ff9900; margin-bottom: 12px; background: #0c0e0c; padding: 10px; border-radius: 4px; border-left: 2px solid #ff9900;">
+                    <strong>Формулы:</strong> А) NH<sub>4</sub>Cl, Б) Ca(ClO)<sub>2</sub>, В) Ba(ClO<sub>3</sub>)<sub>2</sub> <br>
+                    <strong>Степени:</strong> 1) -1, &nbsp; 2) +1, &nbsp; 3) +3, &nbsp; 4) +7, &nbsp; 5) +5
+                </div>
+
+                <!-- Строковый блок ввода бланка ОГЭ -->
+                <div style="display: flex; justify-content: center; gap: 10px; background: #090c09; padding: 10px; border-radius: 4px; border: 1px solid #253325;">
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">А</span>
+                        <input type="number" id="ans-4-a" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">Б</span>
+                        <input type="number" id="ans-4-b" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">В</span>
+                        <input type="number" id="ans-4-v" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+            <!-- Задание 5 -->
+            <div class="task-card">
+                <h2>Задание 5</h2>
+                <p class="task-text">Из предложенного перечня выберите два вещества с <strong>ионной связью</strong>. Запишите в поле ответа номера выбранных веществ без пробелов и запятых.</p>
+                
+                <div class="lab-option checkbox-option" data-id="t5" data-check="1"><span>1. HBr</span></div>
+                <div class="lab-option checkbox-option" data-id="t5" data-check="2"><span>2. CaO</span></div>
+                <div class="lab-option checkbox-option" data-id="t5" data-check="3"><span>3. CO<sub>2</sub></span></div>
+                <div class="lab-option checkbox-option" data-id="t5" data-check="4"><span>4. NH<sub>3</sub></span></div>
+                <div class="lab-option checkbox-option" data-id="t5" data-check="5"><span>5. NaF</span></div>
+                <input type="hidden" id="ans-task-5" name="task5">
+            </div>
+
+            <!-- Задание 6 -->
+            <div class="task-card">
+                <h2>Задание 6</h2>
+                <p class="task-text">Какие два утверждения верны для характеристики как <strong>алюминия</strong>, так и <strong>кремния</strong>? Выберите два подходящих варианта.</p>
+                
+                <div class="lab-option checkbox-option" data-id="t6" data-check="1">
+                    <span>1. Элемент образует высший оксид состава Э<sub>2</sub>О<sub>3</sub></span>
+                </div>
+                <div class="lab-option checkbox-option" data-id="t6" data-check="2">
+                    <span>2. Все электроны в атоме элемента в основном состоянии расположены на трёх электронных слоях</span>
+                </div>
+                <div class="lab-option checkbox-option" data-id="t6" data-check="3">
+                    <span>3. Элемент образует амфотерные гидроксиды</span>
+                </div>
+                <div class="lab-option checkbox-option" data-id="t6" data-check="4">
+                    <span>4. Простое вещество существует в виде двухатомных молекул</span>
+                </div>
+                <div class="lab-option checkbox-option" data-id="t6" data-check="5">
+                    <span>5. Атомный радиус элемента меньше атомного радиуса натрия</span>
+                </div>
+                <input type="hidden" id="ans-task-6" name="task6">
+            </div>
+
+            <!-- Задание 7 -->
+            <div class="task-card">
+                <h2>Задание 7</h2>
+                <p class="task-text">Из предложенного перечня веществ выберите <strong>соль</strong> и <strong>амфотерный оксид</strong>. Запишите в поля сначала номер соли, затем номер амфотерного оксида.</p>
+                
+                <div style="font-size: 13px; color: #ff9900; margin-bottom: 12px; background: #0c0e0c; padding: 10px; border-radius: 4px;">
+                    1) PCl<sub>3</sub> &nbsp; 2) FeO &nbsp; 3) NH<sub>4</sub>Cl &nbsp; 4) Ca(OH)<sub>2</sub> &nbsp; 5) ZnO
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="lab-field">
+                        <label>Номер соли</label>
+                        <input type="number" id="ans-7-salt" class="hl-inline-input" style="text-align: center;" inputmode="numeric">
+                    </div>
+                    <div class="lab-field">
+                        <label>Номер амф. оксида</label>
+                        <input type="number" id="ans-7-oxide" class="hl-inline-input" style="text-align: center;" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Задание 8 -->
+            <div class="task-card">
+                <h2>Задание 8</h2>
+                <p class="task-text">Какие два из перечисленных веществ вступают в реакцию с <strong>серой</strong>? Выберите два подходящих варианта.</p>
+                
+                <div class="lab-option checkbox-option" data-id="t8" data-check="1"><span>1. HNO<sub>3</sub></span></div>
+                <div class="lab-option checkbox-option" data-id="t8" data-check="2"><span>2. SiO<sub>2</sub></span></div>
+                <div class="lab-option checkbox-option" data-id="t8" data-check="3"><span>3. Al</span></div>
+                <div class="lab-option checkbox-option" data-id="t8" data-check="4"><span>4. Na<sub>2</sub>O</span></div>
+                <div class="lab-option checkbox-option" data-id="t8" data-check="5"><span>5. CaCl<sub>2</sub></span></div>
+                <input type="hidden" id="ans-task-8" name="task8">
+            </div>
+
+            <!-- Задание 9 -->
+            <div class="task-card">
+                <h2>Задание 9</h2>
+                <p class="task-text">Установите соответствие между реагирующими веществами и возможными продуктами их взаимодействия. Введите цифры в ячейки бланка под буквами.</p>
+                
+                <div style="font-size: 13px; color: #ff9900; margin-bottom: 12px; background: #0c0e0c; padding: 10px; border-radius: 4px; border-left: 2px solid #ff9900;">
+                    <strong>РЕАГИРУЮЩИЕ ВЕЩЕСТВА:</strong><br>
+                    А) Al(OH)<sub>3</sub> и KOH<sub>(р-р)</sub><br>
+                    Б) Al<sub>2</sub>O<sub>3</sub> и KOH<sub>(тв)</sub><br>
+                    В) Al и KOH<sub>(р-р)</sub> + H<sub>2</sub>O<br><br>
+                    <strong>ПРОДУКТЫ ВЗАИМОДЕЙСТВИЯ:</strong><br>
+                    1) K<sub>2</sub>O и Al(OH)<sub>3</sub> &nbsp; 2) KAlO<sub>2</sub> и H<sub>2</sub> &nbsp; 3) K[Al(OH)<sub>4</sub>]<br>
+                    4) K[Al(OH)<sub>4</sub>] и H<sub>2</sub> &nbsp; 5) KAlO<sub>2</sub> и H<sub>2</sub>O
+                </div>
+
+                <div style="display: flex; justify-content: center; gap: 10px; background: #090c09; padding: 10px; border-radius: 4px; border: 1px solid #253325;">
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">А</span>
+                        <input type="number" id="ans-9-a" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">Б</span>
+                        <input type="number" id="ans-9-b" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">В</span>
+                        <input type="number" id="ans-9-v" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+            <!-- Задание 10 -->
+            <div class="task-card">
+                <h2>Задание 10</h2>
+                <p class="task-text">Установите соответствие между веществом и реагентами, с каждым из которых оно может вступать в реакцию. Введите по одной цифре в ячейки таблицы под буквами.</p>
+                
+                <div style="font-size: 13px; color: #ff9900; margin-bottom: 12px; background: #0c0e0c; padding: 10px; border-radius: 4px; border-left: 2px solid #ff9900;">
+                    <strong>ВЕЩЕСТВО:</strong> А) Fe<sub>2</sub>O<sub>3</sub>, Б) H<sub>2</sub>SO<sub>4(р-р)</sub>, В) P <br><br>
+                    <strong>РЕАГЕНТЫ:</strong> <br>
+                    1) HNO<sub>3</sub>, CO &nbsp; 2) Zn, Cu(OH)<sub>2</sub> &nbsp; 3) Ca, O<sub>2</sub> &nbsp; 4) Fe, BaSO<sub>4</sub>
+                </div>
+
+                <div style="display: flex; justify-content: center; gap: 10px; background: #090c09; padding: 10px; border-radius: 4px; border: 1px solid #253325;">
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">А</span>
+                        <input type="number" id="ans-10-a" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">Б</span>
+                        <input type="number" id="ans-10-b" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">В</span>
+                        <input type="number" id="ans-10-v" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Задание 11 -->
+            <div class="task-card">
+                <h2>Задание 11</h2>
+                <p class="task-text">Из предложенного перечня выберите две пары веществ, между которыми протекает <strong>реакция обмена</strong>.</p>
+                
+                <div class="lab-option checkbox-option" data-id="t11" data-check="1"><span>1. Гидроксид натрия и соляная кислота</span></div>
+                <div class="lab-option checkbox-option" data-id="t11" data-check="2"><span>2. Бром и иодид калия</span></div>
+                <div class="lab-option checkbox-option" data-id="t11" data-check="3"><span>3. Гидроксид натрия и алюминий</span></div>
+                <div class="lab-option checkbox-option" data-id="t11" data-check="4"><span>4. Серная кислота и цинк</span></div>
+                <div class="lab-option checkbox-option" data-id="t11" data-check="5"><span>5. Сульфат натрия и хлорид бария</span></div>
+                <input type="hidden" id="ans-task-11" name="task11">
+            </div>
+
+            <!-- Задание 12 -->
+            <div class="task-card">
+                <h2>Задание 12</h2>
+                <p class="task-text">Установите соответствие между реагирующими веществами и признаком протекающей между ними реакции. Введите цифры в ячейки бланка под буквами.</p>
+                
+                <div style="font-size: 13px; color: #ff9900; margin-bottom: 12px; background: #0c0e0c; padding: 10px; border-radius: 4px; border-left: 2px solid #ff9900;">
+                    <strong>РЕАГИРУЮЩИЕ ВЕЩЕСТВА:</strong><br>
+                    А) CuCl<sub>2</sub> и NaOH<br>
+                    Б) BaCl<sub>2</sub> и AgNO<sub>3</sub><br>
+                    В) FeCl<sub>3</sub> и Ba(OH)<sub>2</sub><br><br>
+                    <strong>ПРИЗНАК РЕАКЦИИ:</strong><br>
+                    1) Выпадение белого осадка &nbsp; 2) Выпадение бурого осадка<br>
+                    3) Выпадение голубого осадка &nbsp; 4) Выделение газа
+                </div>
+
+                <div style="display: flex; justify-content: center; gap: 10px; background: #090c09; padding: 10px; border-radius: 4px; border: 1px solid #253325;">
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">А</span>
+                        <input type="number" id="ans-12-a" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">Б</span>
+                        <input type="number" id="ans-12-b" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">В</span>
+                        <input type="number" id="ans-12-v" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Задание 13 -->
+            <div class="task-card">
+                <h2>Задание 13</h2>
+                <p class="task-text">Укажите, какие ионы и в каком количестве образуются в растворе при полной диссоциации 1 моль <strong>хлорида железа(III)</strong>. Выберите два верных варианта.</p>
+                
+                <div class="lab-option checkbox-option" data-id="t13" data-check="1"><span>1. 1 моль Fe<sup>3+</sup></span></div>
+                <div class="lab-option checkbox-option" data-id="t13" data-check="2"><span>2. 3 моль Cl<sup>-</sup></span></div>
+                <div class="lab-option checkbox-option" data-id="t13" data-check="3"><span>3. 3 моль Fe<sup>3+</sup></span></div>
+                <div class="lab-option checkbox-option" data-id="t13" data-check="4"><span>4. 1 моль Fe<sup>2+</sup></span></div>
+                <div class="lab-option checkbox-option" data-id="t13" data-check="5"><span>5. 1 моль Cl<sup>-</sup></span></div>
+                <input type="hidden" id="ans-task-13" name="task13">
+            </div>
+
+            <!-- Задание 14 -->
+            <div class="task-card">
+                <h2>Задание 14</h2>
+                <p class="task-text">Выберите два исходных вещества, взаимодействию которых соответствует сокращённое ионное уравнение реакции: <strong>H<sup>+</sup> + OH<sup>-</sup> = H<sub>2</sub>O</strong></p>
+                
+                <div class="lab-option checkbox-option" data-id="t14" data-check="1"><span>1. Ba(OH)<sub>2</sub></span></div>
+                <div class="lab-option checkbox-option" data-id="t14" data-check="2"><span>2. Mg(OH)<sub>2</sub></span></div>
+                <div class="lab-option checkbox-option" data-id="t14" data-check="3"><span>3. H<sub>2</sub>SO<sub>4</sub></span></div>
+                <div class="lab-option checkbox-option" data-id="t14" data-check="4"><span>4. HI</span></div>
+                <div class="lab-option checkbox-option" data-id="t14" data-check="5"><span>5. Al(OH)<sub>3</sub></span></div>
+                <div class="lab-option checkbox-option" data-id="t14" data-check="6"><span>6. H<sub>2</sub>S</span></div>
+                <input type="hidden" id="ans-task-14" name="task14">
+            </div>
+            <!-- Задание 15 -->
+            <div class="task-card">
+                <h2>Задание 15</h2>
+                <p class="task-text">Установите соответствие между схемой процесса, происходящего в окислительно-восстановительной реакции, и названием этого процесса. Введите цифры под буквами.</p>
+                
+                <div style="font-size: 13px; color: #ff9900; margin-bottom: 12px; background: #0c0e0c; padding: 10px; border-radius: 4px; border-left: 2px solid #ff9900;">
+                    <strong>СХЕМА ПРОЦЕССА:</strong> А) P<sup>-3</sup> → P<sup>+5</sup>, &nbsp; Б) Mn<sup>+7</sup> → Mn<sup>+4</sup>, &nbsp; В) Br<sub>2</sub><sup>0</sup> → 2Br<sup>-1</sup> <br><br>
+                    <strong>НАЗВАНИЕ ПРОЦЕССА:</strong> 1) Окисление, &nbsp; 2) Восстановление
+                </div>
+
+                <div style="display: flex; justify-content: center; gap: 10px; background: #090c09; padding: 10px; border-radius: 4px; border: 1px solid #253325;">
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">А</span>
+                        <input type="number" id="ans-15-a" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">Б</span>
+                        <input type="number" id="ans-15-b" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">В</span>
+                        <input type="number" id="ans-15-v" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Задание 16 -->
+            <div class="task-card">
+                <h2>Задание 16</h2>
+                <p class="task-text">Из перечисленных суждений о правилах работы с веществами в лаборатории и быту выберите верное(-ые) суждение(-я).</p>
+                
+                <div class="lab-option checkbox-option" data-id="t16" data-check="1">
+                    <span>1. Для определения наличия кислоты в растворе его следует понюхать и попробовать на вкус</span>
+                </div>
+                <div class="lab-option checkbox-option" data-id="t16" data-check="2">
+                    <span>2. Для проведения опытов в пробирку объёмом 10 мл наливают по 1–2 мл растворов реагентов</span>
+                </div>
+                <div class="lab-option checkbox-option" data-id="t16" data-check="3">
+                    <span>3. Твёрдые вещества в лаборатории можно брать руками</span>
+                </div>
+                <div class="lab-option checkbox-option" data-id="t16" data-check="4">
+                    <span>4. Для переливания жидких веществ из исходной склянки в пробирку можно использовать воронку</span>
+                </div>
+                <input type="hidden" id="ans-task-16" name="task16">
+            </div>
+
+            <!-- Задание 17 -->
+            <div class="task-card">
+                <h2>Задание 17</h2>
+                <p class="task-text">Установите соответствие между двумя веществами, взятыми в виде водных растворов, и реактивом, с помощью которого можно различить эти вещества. Введите цифры под буквами.</p>
+                
+                <div style="font-size: 13px; color: #ff9900; margin-bottom: 12px; background: #0c0e0c; padding: 10px; border-radius: 4px; border-left: 2px solid #ff9900;">
+                    <strong>ВЕЩЕСТВА:</strong> А) NaCl и HCl, &nbsp; Б) KCl и MgCl<sub>2</sub>, &nbsp; В) KF и KCl <br><br>
+                    <strong>РЕАКТИВ:</strong> 1) KOH, &nbsp; 2) BaCO<sub>3</sub>, &nbsp; 3) AgNO<sub>3</sub>, &nbsp; 4) H<sub>2</sub>SO<sub>4</sub>
+                </div>
+
+                <div style="display: flex; justify-content: center; gap: 10px; background: #090c09; padding: 10px; border-radius: 4px; border: 1px solid #253325;">
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">А</span>
+                        <input type="number" id="ans-17-a" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">Б</span>
+                        <input type="number" id="ans-17-b" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                    <div style="text-align: center;">
+                        <span style="color: #39ff14; font-weight: bold; display: block; margin-bottom: 4px;">В</span>
+                        <input type="number" id="ans-17-v" class="hl-inline-input" style="width: 50px; text-align: center; padding: 4px !important;" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Задание 18 -->
+            <div class="task-card">
+                <h2>Задание 18</h2>
+                <p class="task-text">Вычислите массовую долю (в процентах) магния в гидрофосфате магния (MgHPO<sub>4</sub>). Запишите число с точностью до целых.</p>
+                <input type="number" id="ans-task-18" class="hl-inline-input" style="text-align: center;" inputmode="numeric">
+            </div>
+
+            <!-- Задание 19 -->
+            <div class="task-card">
+                <h2>Задание 19</h2>
+                <p class="task-text">Вычислите массу гидрофосфате магния (в миллиграммах), который должна содержать одна таблетка витаминно-минерального комплекса, если рекомендован прием двух таких таблеток в сутки (норма магния — 300 мг в сутки). Запишите число с точностью до целых.</p>
+                <input type="number" id="ans-task-19" class="hl-inline-input" style="text-align: center;" inputmode="numeric">
+            </div>
+
+            <!-- Кнопка фиксации -->
+            <div style="margin-top: 30px;">
+                <button type="button" class="lab-btn" id="btn-submit">Завершить симуляцию ОГЭ</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- ЭКРАН 3: ИТОГИ -->
+    <div id="screen-results" class="lab-screen">
+        <h1>Лабораторный отчёт ОГЭ</h1>
+        <div class="result-box" style="margin-top: 20px;">
+            <p style="color: #ff9900; text-transform: uppercase; font-size: 12px; font-weight: bold;">Ваша итоговая оценка по шкале ОГЭ:</p>
+            <div class="grade-display" id="final-grade">0</div>
+            <p id="student-summary" style="font-size: 14px; margin-bottom: 10px;"></p>
+            <p style="color: #666; font-size: 11px;">Данные отправлены профессору на сервер Google Forms по защищенному протоколу.</p>
+        </div>
+        <button type="button" class="lab-btn lab-btn-secondary" onclick="location.reload()">Начать новый цикл</button>
+    </div>
+
+</div>
+
+<!-- Модальное окно №1: ПСХЭ -->
+<div id="modal-pshe" class="lab-modal">
+    <div class="modal-header">
+        <span class="modal-title">[ ПСХЭ ИМ. Д.И. МЕНДЕЛЕЕВА ]</span>
+        <button type="button" class="modal-back-btn" id="btn-close-pshe">← НАЗАД В ЛАБОРАТОРИЮ</button>
+    </div>
+    <div class="modal-body">
+        <iframe src="ССЫЛКА_ПСХЭ_МЕНДЕЛЕЕВА" class="modal-iframe"></iframe>
+    </div>
+</div>
+
+<!-- Модальное окно №2: Растворимость -->
+<div id="modal-rastvor" class="lab-modal">
+    <div class="modal-header">
+        <span class="modal-title">[ ТАБЛИЦА РАСТВОРИМОСТИ ]</span>
+        <button type="button" class="modal-back-btn" id="btn-close-rastvor">← НАЗАД В ЛАБОРАТОРИЮ</button>
+    </div>
+    <div class="modal-body">
+        <iframe src="ССЫЛКА_ТАБЛИЦЫ_РАСТВОРИМОСТИ" class="modal-iframe"></iframe>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
