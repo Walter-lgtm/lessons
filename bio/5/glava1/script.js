@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const secretMod = Math.abs(hash) % 997;
         
         // Сверяем с остатком параграфа (для §21 это число 110)
-        return (secretMod === 110) ? "VALID" : "INVALID"; 
+        return (secretMod === 140) ? "VALID" : "INVALID"; 
     }
 
     // ==========================================
