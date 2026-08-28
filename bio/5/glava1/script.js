@@ -10,45 +10,60 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputName = document.getElementById("student-name");
     const inputClass = document.getElementById("student-class");
 
-    // ==========================================
-    // МАТЕМАТИЧЕСКАЯ КРИПТОЗАЩИТА И ОДНОКРАТНОСТЬ
+        // ==========================================
+    // МАТЕМАТИЧЕСКАЯ КРИПТОЗАЩИТА (ХЭШ КНУТА)
     // ==========================================
     function validateToken(tokenStr) {
         const t = tokenStr.trim().toUpperCase();
-        
-        // Проверяем, сдавал ли уже КТО-ТО тест по этому коду на этом устройстве
-        const usedTokens = JSON.parse(localStorage.getItem("mesa_used_tokens") || "[]");
-        if (usedTokens.includes(t)) return "USED"; 
-
         let hash = 5381;
         for (let i = 0; i < t.length; i++) {
             hash = ((hash << 5) + hash) + t.charCodeAt(i);
         }
         const secretMod = Math.abs(hash) % 997;
         
-        // Сверяем с остатком параграфа (для §21 это число 110)
-        return (secretMod === 140) ? "VALID" : "INVALID"; 
+        // Меняйте это число для каждого приложения, беря значения из таблицы выше!
+        return secretMod === 140; 
     }
+    // Глобальные переменные данных ученика
+    let studentName = "";
+    let studentClass = "";
+
+    // Элементы интерфейса
+    const authScreen = document.getElementById("auth-screen");
+    const quizContainer = document.getElementById("quiz-container");
+    const startBtn = document.getElementById("start-btn");
+    const inputName = document.getElementById("student-name");
+    const inputClass = document.getElementById("student-class");
 
     // ==========================================
     // 1. АВТОРИЗАЦИЯ И СТАРТ ТЕСТА
     // ==========================================
-   startBtn.addEventListener("click", () => {
-    studentName = inputName.value.trim();
-    studentClass = inputClass.value.trim();
+    startBtn.addEventListener("click", () => {
+        studentName = inputName.value.trim();
+        studentClass = inputClass.value.trim();
+        // 1. Считываем введенный токен
+        const tokenVal = document.getElementById("student-token").value;
 
-    if (!studentName || !studentClass) {
-        alert("ВНИМАНИЕ! Доступ заблокирован. Введите ФИО и Класс для идентификации.");
-        return;
-    }
+        // 2. Требуем, чтобы он был заполнен
+        if (!studentName || !studentClass || !tokenVal) {
+            alert("ВНИМАНИЕ! Доступ заблокирован. Заполните ФИО, Класс и Код доступа.");
+            return;
+        }
 
-    authScreen.classList.add("hidden");
-    quizContainer.classList.remove("hidden");
-    window.scrollTo(0, 0);
-});
+        // 3. Проверяем математику хэша
+        if (!validateToken(tokenVal)) {
+            alert("КРИТИЧЕСКАЯ ОШИБКА: Неверный или просроченный код доступа к терминалу!");
+            return;
+        }
+
+        // Если всё верно, старый код работает дальше без изменений:
+        authScreen.classList.add("hidden");
+        quizContainer.classList.remove("hidden");
+        window.scrollTo(0, 0);
+    });
     // Глобальные переменные данных ученика
-    studentName = "";
-    studentClass = "";
+   let studentName = "";
+    let studentClass = "";
 
     // Элементы интерфейса
     const authScreen = document.getElementById("auth-screen");
@@ -269,15 +284,6 @@ document.addEventListener("DOMContentLoaded", () => {
         
         document.getElementById("res-grade").textContent = finalGrade;
         document.getElementById("result-screen").classList.remove("hidden");
-
-        // === БЛОКИРОВКА ТОКЕНА ПОСЛЕ УСПЕШНОЙ СДАЧИ ТЕСТА ===
-        const currentToken = document.getElementById("student-token").value.trim().toUpperCase();
-        const usedTokens = JSON.parse(localStorage.getItem("mesa_used_tokens") || "[]");
-        if (!usedTokens.includes(currentToken)) {
-            usedTokens.push(currentToken);
-            localStorage.setItem("mesa_used_tokens", JSON.stringify(usedTokens));
-        }
-        // ===================================================
 
         sendToGoogleForm(studentName, studentClass, totalScore, finalGrade);
     });
