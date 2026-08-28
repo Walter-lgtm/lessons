@@ -9,27 +9,39 @@ document.addEventListener("DOMContentLoaded", () => {
     const startBtn = document.getElementById("start-btn");
     const inputName = document.getElementById("student-name");
     const inputClass = document.getElementById("student-class");
-    // ==========================================
-    // МАТЕМАТИЧЕСКАЯ КРИПТОЗАЩИТА (ХЭШ КНУТА)
+        // ==========================================
+    // МАТЕМАТИЧЕСКАЯ КРИПТОЗАЩИТА И ОДНОКРАТНОСТЬ
     // ==========================================
     function validateToken(tokenStr) {
-        // Очищаем от случайных пробелов и переводим в верхний регистр
         const t = tokenStr.trim().toUpperCase();
         
-        // Математический хэш-алгоритм для строк
+        // 1. Проверяем, не использовался ли этот код ранее на этом устройстве
+        const usedTokens = JSON.parse(localStorage.getItem("mesa_used_tokens") || "[]");
+        if (usedTokens.includes(t)) {
+            return "USED"; // Код уже "сгорел"
+        }
+
+        // 2. Математический хэш-алгоритм
         let hash = 5381;
         for (let i = 0; i < t.length; i++) {
             hash = ((hash << 5) + hash) + t.charCodeAt(i);
         }
-        
-        // Секретный математический остаток (наш ключ верификации)
-        // Для каждого параграфа остаток можно менять, чтобы коды от §18 не подошли к §19!
         const secretMod = Math.abs(hash) % 997;
         
-        // Для §18 верным остатком будет, например, 322
-        return secretMod === 100;
+        // Сверяем с секретным остатком текущего параграфа (например, 777)
+        if (secretMod === 100) {
+            // 3. Если код верный, сохраняем его в список использованных
+            usedTokens.push(t);
+            localStorage.setItem("mesa_used_tokens", JSON.stringify(usedTokens));
+            return "VALID";
+        }
+        
+        return "INVALID"; // Код просто не существует в природе
     }
 
+    // ==========================================
+    // 1. АВТОРИЗАЦИЯ И СТАРТ ТЕСТА
+    // ==========================================
     startBtn.addEventListener("click", () => {
         studentName = inputName.value.trim();
         studentClass = inputClass.value.trim();
@@ -40,13 +52,20 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Запуск математической проверки
-        if (!validateToken(tokenVal)) {
+        // Проверка статуса токена
+        const tokenStatus = validateToken(tokenVal);
+
+        if (tokenStatus === "USED") {
+            alert("ДОСТУП ЗАБЛОКИРОВАН: Этот персональный код доступа уже был использован!");
+            return;
+        }
+
+        if (tokenStatus === "INVALID") {
             alert("КРИТИЧЕСКАЯ ОШИБКА: Неверный или просроченный код доступа к терминалу!");
             return;
         }
 
-        // Если математика сошлась, пускаем дальше
+        // Если статус VALID — пускаем к тесту
         authScreen.classList.add("hidden");
         quizContainer.classList.remove("hidden");
         window.scrollTo(0, 0);
