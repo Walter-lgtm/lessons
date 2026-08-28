@@ -3,14 +3,21 @@ document.addEventListener("DOMContentLoaded", () => {
     // МАТЕМАТИЧЕСКАЯ КРИПТОЗАЩИТА И ОДНОКРАТНОСТЬ
     // ==========================================
     function validateToken(tokenStr) {
-        const t = tokenStr.trim().toUpperCase();
-        
-        // 1. Проверяем, не использовался ли этот код ранее на этом устройстве
-        const usedTokens = JSON.parse(localStorage.getItem("mesa_used_tokens") || "[]");
-        if (usedTokens.includes(t)) {
-            return "USED"; // Код уже "сгорел"
-        }
+    const t = tokenStr.trim().toUpperCase();
+    
+    // Проверяем, сдавал ли уже КТО-ТО тест по этому коду на этом устройстве
+    const usedTokens = JSON.parse(localStorage.getItem("mesa_used_tokens") || "[]");
+    if (usedTokens.includes(t)) return "USED"; 
 
+    let hash = 5381;
+    for (let i = 0; i < t.length; i++) {
+        hash = ((hash << 5) + hash) + t.charCodeAt(i);
+    }
+    const secretMod = Math.abs(hash) % 997;
+    
+    // Сверяем с остатком параграфа
+    return (secretMod === 115) ? "VALID" : "INVALID"; 
+}
         // 2. Математический хэш-алгоритм
         let hash = 5381;
         for (let i = 0; i < t.length; i++) {
@@ -283,6 +290,15 @@ document.addEventListener("DOMContentLoaded", () => {
         
         document.getElementById("res-grade").textContent = finalGrade;
         document.getElementById("result-screen").classList.remove("hidden");
+
+        // === БЛОКИРОВКА ТОКЕНА ПОСЛЕ УСПЕШНОЙ СДАЧИ ТЕСТА ===
+        const currentToken = document.getElementById("student-token").value.trim().toUpperCase();
+        const usedTokens = JSON.parse(localStorage.getItem("mesa_used_tokens") || "[]");
+        if (!usedTokens.includes(currentToken)) {
+            usedTokens.push(currentToken);
+            localStorage.setItem("mesa_used_tokens", JSON.stringify(usedTokens));
+        }
+        // ===================================================
 
         sendToGoogleForm(studentName, studentClass, totalScore, finalGrade);
     });
