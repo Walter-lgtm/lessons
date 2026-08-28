@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const secretMod = Math.abs(hash) % 997;
         
         // Для §18 верным остатком будет, например, 322
-        return secretMod === 322;
+        return secretMod === 100;
     }
 
     startBtn.addEventListener("click", () => {
