@@ -33,34 +33,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // 1. АВТОРИЗАЦИЯ И СТАРТ ТЕСТА
     // ==========================================
-    startBtn.addEventListener("click", () => {
-        studentName = inputName.value.trim();
-        studentClass = inputClass.value.trim();
-        const tokenVal = document.getElementById("student-token").value;
+   startBtn.addEventListener("click", () => {
+    studentName = inputName.value.trim();
+    studentClass = inputClass.value.trim();
 
-        if (!studentName || !studentClass || !tokenVal) {
-            alert("ВНИМАНИЕ! Доступ заблокирован. Заполните ФИО, Класс и Код доступа.");
-            return;
-        }
+    if (!studentName || !studentClass) {
+        alert("ВНИМАНИЕ! Доступ заблокирован. Введите ФИО и Класс для идентификации.");
+        return;
+    }
 
-        // Проверка статуса токена
-        const tokenStatus = validateToken(tokenVal);
-
-        if (tokenStatus === "USED") {
-            alert("ДОСТУП ЗАБЛОКИРОВАН: Этот персональный код доступа уже был использован!");
-            return;
-        }
-
-        if (tokenStatus === "INVALID") {
-            alert("КРИТИЧЕСКАЯ ОШИБКА: Неверный или просроченный код доступа к терминалу!");
-            return;
-        }
-
-        // Если статус VALID — пускаем к тесту
-        authScreen.classList.add("hidden");
-        quizContainer.classList.remove("hidden");
-        window.scrollTo(0, 0);
-    });
+    authScreen.classList.add("hidden");
+    quizContainer.classList.remove("hidden");
+    window.scrollTo(0, 0);
+});
     // Глобальные переменные данных ученика
     let studentName = "";
     let studentClass = "";
