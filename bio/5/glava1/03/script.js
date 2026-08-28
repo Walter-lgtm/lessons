@@ -1,4 +1,65 @@
 document.addEventListener("DOMContentLoaded", () => {
+        // ==========================================
+    // МАТЕМАТИЧЕСКАЯ КРИПТОЗАЩИТА И ОДНОКРАТНОСТЬ
+    // ==========================================
+    function validateToken(tokenStr) {
+        const t = tokenStr.trim().toUpperCase();
+        
+        // 1. Проверяем, не использовался ли этот код ранее на этом устройстве
+        const usedTokens = JSON.parse(localStorage.getItem("mesa_used_tokens") || "[]");
+        if (usedTokens.includes(t)) {
+            return "USED"; // Код уже "сгорел"
+        }
+
+        // 2. Математический хэш-алгоритм
+        let hash = 5381;
+        for (let i = 0; i < t.length; i++) {
+            hash = ((hash << 5) + hash) + t.charCodeAt(i);
+        }
+        const secretMod = Math.abs(hash) % 997;
+        
+        // Сверяем с секретным остатком текущего параграфа (например, 777)
+        if (secretMod === 777) {
+            // 3. Если код верный, сохраняем его в список использованных
+            usedTokens.push(t);
+            localStorage.setItem("mesa_used_tokens", JSON.stringify(usedTokens));
+            return "VALID";
+        }
+        
+        return "INVALID"; // Код просто не существует в природе
+    }
+
+    // ==========================================
+    // 1. АВТОРИЗАЦИЯ И СТАРТ ТЕСТА
+    // ==========================================
+    startBtn.addEventListener("click", () => {
+        studentName = inputName.value.trim();
+        studentClass = inputClass.value.trim();
+        const tokenVal = document.getElementById("student-token").value;
+
+        if (!studentName || !studentClass || !tokenVal) {
+            alert("ВНИМАНИЕ! Доступ заблокирован. Заполните ФИО, Класс и Код доступа.");
+            return;
+        }
+
+        // Проверка статуса токена
+        const tokenStatus = validateToken(tokenVal);
+
+        if (tokenStatus === "USED") {
+            alert("ДОСТУП ЗАБЛОКИРОВАН: Этот персональный код доступа уже был использован!");
+            return;
+        }
+
+        if (tokenStatus === "INVALID") {
+            alert("КРИТИЧЕСКАЯ ОШИБКА: Неверный или просроченный код доступа к терминалу!");
+            return;
+        }
+
+        // Если статус VALID — пускаем к тесту
+        authScreen.classList.add("hidden");
+        quizContainer.classList.remove("hidden");
+        window.scrollTo(0, 0);
+    });
     // Глобальные переменные данных ученика
     let studentName = "";
     let studentClass = "";
