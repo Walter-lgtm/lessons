@@ -60,34 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         quizContainer.classList.remove("hidden");
         window.scrollTo(0, 0);
     });
-    // Глобальные переменные данных ученика
-    let studentName = "";
-    let studentClass = "";
-
-    // Элементы интерфейса
-    const authScreen = document.getElementById("auth-screen");
-    const quizContainer = document.getElementById("quiz-container");
-    const startBtn = document.getElementById("start-btn");
-    const inputName = document.getElementById("student-name");
-    const inputClass = document.getElementById("student-class");
-
-    // ==========================================
-    // 1. АВТОРИЗАЦИЯ И СТАРТ ТЕСТА
-    // ==========================================
-    startBtn.addEventListener("click", () => {
-        studentName = inputName.value.trim();
-        studentClass = inputClass.value.trim();
-
-        if (!studentName || !studentClass) {
-            alert("ВНИМАНИЕ! Доступ заблокирован. Введите ФИО и Класс для идентификации.");
-            return;
-        }
-
-        authScreen.classList.add("hidden");
-        quizContainer.classList.remove("hidden");
-        window.scrollTo(0, 0);
-    });
-
+    
     // ==========================================
     // 2. ПРОВЕРКА ОТВЕТОВ И ОТПРАВКА НА СЕРВЕР
     // ==========================================
