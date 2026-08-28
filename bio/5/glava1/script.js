@@ -1,39 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
-        // ==========================================
+    // Глобальные переменные данных ученика
+    let studentName = "";
+    let studentClass = "";
+
+    // ОБЯЗАТЕЛЬНОЕ ОБЪЯВЛЕНИЕ ВСЕХ ЭЛЕМЕНТОВ ИНТЕРФЕЙСА
+    const authScreen = document.getElementById("auth-screen");
+    const quizContainer = document.getElementById("quiz-container");
+    const startBtn = document.getElementById("start-btn");
+    const inputName = document.getElementById("student-name");
+    const inputClass = document.getElementById("student-class");
+
+    // ==========================================
     // МАТЕМАТИЧЕСКАЯ КРИПТОЗАЩИТА И ОДНОКРАТНОСТЬ
     // ==========================================
     function validateToken(tokenStr) {
-    const t = tokenStr.trim().toUpperCase();
-    
-    // Проверяем, сдавал ли уже КТО-ТО тест по этому коду на этом устройстве
-    const usedTokens = JSON.parse(localStorage.getItem("mesa_used_tokens") || "[]");
-    if (usedTokens.includes(t)) return "USED"; 
+        const t = tokenStr.trim().toUpperCase();
+        
+        // Проверяем, сдавал ли уже КТО-ТО тест по этому коду на этом устройстве
+        const usedTokens = JSON.parse(localStorage.getItem("mesa_used_tokens") || "[]");
+        if (usedTokens.includes(t)) return "USED"; 
 
-    let hash = 5381;
-    for (let i = 0; i < t.length; i++) {
-        hash = ((hash << 5) + hash) + t.charCodeAt(i);
-    }
-    const secretMod = Math.abs(hash) % 997;
-    
-    // Сверяем с остатком параграфа
-    return (secretMod === 115) ? "VALID" : "INVALID"; 
-}
-        // 2. Математический хэш-алгоритм
         let hash = 5381;
         for (let i = 0; i < t.length; i++) {
             hash = ((hash << 5) + hash) + t.charCodeAt(i);
         }
         const secretMod = Math.abs(hash) % 997;
         
-        // Сверяем с секретным остатком текущего параграфа (например, 777)
-        if (secretMod === 110) {
-            // 3. Если код верный, сохраняем его в список использованных
-            usedTokens.push(t);
-            localStorage.setItem("mesa_used_tokens", JSON.stringify(usedTokens));
-            return "VALID";
-        }
-        
-        return "INVALID"; // Код просто не существует в природе
+        // Сверяем с остатком параграфа (для §21 это число 110)
+        return (secretMod === 110) ? "VALID" : "INVALID"; 
     }
 
     // ==========================================
