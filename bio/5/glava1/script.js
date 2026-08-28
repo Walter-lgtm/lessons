@@ -47,8 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo(0, 0);
 });
     // Глобальные переменные данных ученика
-    let studentName = "";
-    let studentClass = "";
+    studentName = "";
+    studentClass = "";
 
     // Элементы интерфейса
     const authScreen = document.getElementById("auth-screen");
