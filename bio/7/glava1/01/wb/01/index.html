@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>БИОЛОГИЧЕСКИЙ МОДУЛЬ 7 КЛАСС // λ-CORE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="term-container">
+    <div class="term-header">
+        <div class="lambda-logo">λ</div>
+        <div class="system-status">§1. Классификация организмов</div>
+    </div>
+
+    <!-- Блок авторизации (UID "ФИО+Класс") -->
+    <div id="auth-block" class="auth-section">
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Инициализация данных участника (Ф И О)</span>
+            <input type="text" id="student-fio" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Сектор назначения (К л а с с)</span>
+            <input type="text" id="student-class" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <button id="auth-trigger" class="hud-btn">Открыть доступ в лабораторию</button>
+        <div id="auth-alert" class="alert-box"></div>
+    </div>
+
+    <!-- Основной контейнер заданий зоологии/систематики -->
+    <div id="biology-content" class="hidden-module">
+        
+        <!-- Задание 1 -->
+        <section class="task-card">
+            <div class="task-title">Задание 1 // Вставь верные биологические термины</div>
+            <div class="task-text">
+                <select id="task1-sel" class="hud-select" style="display: inline-block; width: auto; margin-right: 5px;">
+                    <option value="">-- выбрать --</option>
+                    <option value="Ботаника">Ботаника</option>
+                    <option value="Физиология">Физиология</option>
+                    <option value="Систематика">Систематика</option>
+                </select> — наука о многообразии и классификации организмов. Она объединяет организмы в группы по степени родства, определяет место каждого вида в системе органического мира.
+            </div>
+        </section>
+
+        <!-- Задание 2 -->
+        <section class="task-card">
+            <div class="task-title">Задание 2 // Выясни и запиши ответ</div>
+            <div class="task-text">
+                Выясни и запиши, как называется раздел биологии, который изучает растения.
+                <div style="margin-top: 10px;">
+                    Ответ: <input type="text" id="task2-ans" class="hud-input" style="display:inline-block; width:150px;" autocomplete="off">.
+                </div>
+            </div>
+        </section>
+
+        <!-- Задание 3 -->
+        <section class="task-card">
+            <div class="task-title">Задание 3 // Вставь верные биологические термины</div>
+            <div class="task-text" style="line-height: 1.8;">
+                Каждый организм принадлежит к какому-либо 
+                <span style="font-size:0.8rem; color:#ff5500;">[в...]</span> <input type="text" id="task3-in1" class="hud-input" style="display:inline-block; width:70px; padding:3px;" autocomplete="off">. 
+                Виды объединяют в более крупные систематические группы — 
+                <span style="font-size:0.8rem; color:#ff5500;">[р...]</span> <input type="text" id="task3-in2" class="hud-input" style="display:inline-block; width:70px; padding:3px;" autocomplete="off">, 
+                роды — в <span style="font-size:0.8rem; color:#ff5500;">[с...]</span> <input type="text" id="task3-in3" class="hud-input" style="display:inline-block; width:100px; padding:3px;" autocomplete="off">, 
+                семейства — в <span style="font-size:0.8rem; color:#ff5500;">[о...]</span> <input type="text" id="task3-in4" class="hud-input" style="display:inline-block; width:90px; padding:3px;" autocomplete="off"> (порядки — для растений), 
+                отряды — в <span style="font-size:0.8rem; color:#ff5500;">[к...]</span> <input type="text" id="task3-in5" class="hud-input" style="display:inline-block; width:80px; padding:3px;" autocomplete="off">, 
+                классы — в <span style="font-size:0.8rem; color:#ff5500;">[т...]</span> <input type="text" id="task3-in6" class="hud-input" style="display:inline-block; width:70px; padding:3px;" autocomplete="off"> (отделы — для растений), 
+                типы — в <span style="font-size:0.8rem; color:#ff5500;">[ц...]</span> <input type="text" id="task3-in7" class="hud-input" style="display:inline-block; width:80px; padding:3px;" autocomplete="off">. 
+                Все перечисленные выше единицы получили название 
+                <span style="font-size:0.8rem; color:#ff5500;">[с...]</span> <input type="text" id="task3-in8" class="hud-input" style="display:inline-block; width:130px; padding:3px;" autocomplete="off"> 
+                <span style="font-size:0.8rem; color:#ff5500;">[г...]</span> <input type="text" id="task3-in9" class="hud-input" style="display:inline-block; width:70px; padding:3px;" autocomplete="off">, 
+                или <span style="font-size:0.8rem; color:#ff5500;">[к...]</span> <input type="text" id="task3-in10" class="hud-input" style="display:inline-block; width:100px; padding:3px;" autocomplete="off">.
+            </div>
+        </section>
+
+        <!-- Задание 4 -->
+        <section class="task-card">
+            <div class="task-title">Задание 4 // Распредели элементы</div>
+            <div class="task-text" style="font-size: 0.85rem; color: #ff5500; margin-bottom: 10px;">[ПРОТОКОЛ]: Перетащите токены в соответствующие текстовые поля.</div>
+            <div id="t4-drag-bank" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; padding: 8px; background: rgba(0, 255, 102, 0.02); border: 1px dashed rgba(0, 255, 102, 0.3);">
+                <div class="match-element" draggable="true" data-word="Ткань">Ткань</div>
+                <div class="match-element" draggable="true" data-word="Ботаника">Ботаника</div>
+                <div class="match-element" draggable="true" data-word="Орган">Орган</div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.9rem;">
+                <div style="border: 1px dashed rgba(0,255,102,0.4); padding: 8px;">
+                    1. <div id="t4-drop1" style="display:inline-block; min-width:90px; min-height:28px; vertical-align:middle; background:rgba(0,255,102,0.05); border:1px solid rgba(0,255,102,0.2); margin:0 5px; padding:2px;"></div> — это наука, которая изучает строение, жизнедеятельность, многообразие, распространение растений...
+                </div>
+                <div style="border: 1px dashed rgba(0,255,102,0.4); padding: 8px;">
+                    2. <div id="t4-drop2" style="display:inline-block; min-width:90px; min-height:28px; vertical-align:middle; background:rgba(0,255,102,0.05); border:1px solid rgba(0,255,102,0.2); margin:0 5px; padding:2px;"></div> — это совокупность клеток и межклеточного вещества, которые имеют сходное происхождение...
+                </div>
+                <div style="border: 1px dashed rgba(0,255,102,0.4); padding: 8px;">
+                    3. <div id="t4-drop3" style="display:inline-block; min-width:90px; min-height:28px; vertical-align:middle; background:rgba(0,255,102,0.05); border:1px solid rgba(0,255,102,0.2); margin:0 5px; padding:2px;"></div> — это часть организма, образованная различными тканями, занимающая определённое положение...
+                </div>
+            </div>
+        </section>
+
+        <!-- Задание 5 -->
+        <section class="task-card">
+            <div class="task-title">Задание 5 // Соотнеси таксоны и классификацию вишни</div>
+            <div class="task-text" style="font-size: 0.85rem; color: #ff5500; margin-bottom: 10px;">[ПРОТОКОЛ]: Нажмите на ТАКСОН слева, затем на НАЗВАНИЕ справа.</div>
+            <div class="match-grid-container">
+                <div class="match-column">
+                    <div class="match-element t5-left" data-id="Кл">Класс</div>
+                    <div class="match-element t5-left" data-id="Пор">Порядок</div>
+                    <div class="match-element t5-left" data-id="Цар">Царство</div>
+                    <div class="match-element t5-left" data-id="Вид">Вид</div>
+                    <div class="match-element t5-left" data-id="Отд">Отдел</div>
+                    <div class="match-element t5-left" data-id="Сем">Семейство</div>
+                    <div class="match-element t5-left" data-id="Род">Род</div>
+                    <div class="match-element t5-left" data-id="Над">Надцарство</div>
+                </div>
+                <div style="border-top: 1px dashed rgba(0, 255, 102, 0.2); margin: 5px 0;"></div>
+                <div class="match-column">
+                    <div class="match-element t5-right" data-correct="Над">Эукариоты</div>
+                    <div class="match-element t5-right" data-correct="Род">Слива</div>
+                    <div class="match-element t5-right" data-correct="Вид">Вишня обыкновенная</div>
+                    <div class="match-element t5-right" data-correct="Цар">Растения</div>
+                    <div class="match-element t5-right" data-correct="Кл">Двудольные</div>
+                    <div class="match-element t5-right" data-correct="Сем">Розовые</div>
+                    <div class="match-element t5-right" data-correct="Пор">Розоцветные</div>
+                    <div class="match-element t5-right" data-correct="Отд">Цветковые</div>
+                </div>
+            </div>
+        </section>
+
+            <!-- Задание 6 -->
+        <section class="task-card">
+            <div class="task-title">Задание 6 // Выбери верный ответ</div>
+            <div class="task-text">1. Кто из перечисленных учёных является основоположником двойных названий в систематике?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task6" value="Дарвин"> Дарвин</label>
+                <label class="option-label"><input type="radio" name="task6" value="Шванн"> Шванн</label>
+                <label class="option-label"><input type="radio" name="task6" value="Шлейден"> Шлейден</label>
+                <label class="option-label"><input type="radio" name="task6" value="Линней"> Линней</label>
+                <label class="option-label"><input type="radio" name="task6" value="Вирхов"> Вирхов</label>
+            </div>
+        </section>
+
+        <!-- Системная кнопка отправки результатов -->
+        <button id="submit-tasks" class="hud-btn" style="background: #ff5500; border-color: #b33c00; margin-top: 25px;">Синхронизировать отчет</button>
+    
+    </div> <!-- Конец #biology-content -->
+</div> <!-- Конец .term-container -->
+
+<script src="script.js"></script>
+</body>
+</html>
