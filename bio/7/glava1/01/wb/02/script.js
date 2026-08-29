@@ -63,47 +63,43 @@ function executeBiometricAuth() {
     }
 }
 
-// Механика Заданий 1, 2 и 5: Кроссплатформенный инлайновый Drag-and-Drop
+// Кроссплатформенная механика Тап-распределения токенов в текст (Задания 1, 2 и 5)
 function initializeInlineDragAndDrop() {
-    const dragItems = document.querySelectorAll('[draggable="true"]');
+    let activeToken = null;
+    const tokens = document.querySelectorAll('#t1-drag-bank .match-element, #t2-drag-bank .match-element, #t5-drag-bank .match-element');
     const dropZones = document.querySelectorAll('.inline-drop-target');
 
-    dragItems.forEach(function(item) {
-        item.addEventListener('dragstart', function(e) {
-            e.dataTransfer.setData('text/plain', item.dataset.word);
-            // Сохраняем ID банка, чтобы токен не улетел в чужую карточку
-            e.dataTransfer.setData('source-bank', item.parentElement.id);
-            item.classList.add('selected');
-        });
-        item.addEventListener('dragend', function() {
-            item.classList.remove('selected');
+    tokens.forEach(function(token) {
+        // Убираем HTML5 drag, переводим на клики/тапы
+        token.setAttribute('draggable', 'false');
+        token.addEventListener('click', function() {
+            if (token.parentElement.classList.contains('inline-drop-target')) return; // Уже сброшен
+            
+            tokens.forEach(function(t) { t.classList.remove('selected'); });
+            activeToken = token;
+            token.classList.add('selected');
         });
     });
 
     dropZones.forEach(function(zone) {
-        zone.addEventListener('dragover', function(e) {
-            e.preventDefault();
-        });
-        zone.addEventListener('drop', function(e) {
-            e.preventDefault();
-            if (zone.children.length > 0) return; // Одна ячейка — один токен
+        zone.addEventListener('click', function() {
+            if (!activeToken || zone.children.length > 0) return; // Слот занят или токен не выбран
 
-            const wordData = e.dataTransfer.getData('text/plain');
-            const sourceBank = e.dataTransfer.getData('source-bank');
-            
             // Защитная проверка совпадения контекста задания (t1, t2 или t5)
+            const sourceBankId = activeToken.parentElement.id;
             const targetTaskId = zone.id.substring(0, 2);
-            if (!sourceBank.startsWith(targetTaskId)) return;
+            if (!sourceBankId.startsWith(targetTaskId)) return;
 
-            const draggedNode = document.querySelector('#' + sourceBank + ' [data-word="' + wordData + '"]');
-            if (draggedNode) {
-                zone.appendChild(draggedNode);
-                draggedNode.style.margin = "0";
-                draggedNode.style.border = "none";
-                draggedNode.style.display = "inline-block";
-                draggedNode.style.padding = "2px 6px";
-                draggedNode.style.fontSize = "0.85rem";
-            }
+            // Переносим элемент физически в DOM-дерево слота
+            zone.appendChild(activeToken);
+            activeToken.classList.remove('selected');
+            activeToken.style.margin = "0";
+            activeToken.style.border = "none";
+            activeToken.style.display = "inline-block";
+            activeToken.style.padding = "2px 6px";
+            activeToken.style.fontSize = "0.85rem";
+            
+            activeToken = null;
         });
     });
 }
@@ -145,37 +141,34 @@ function initMatchMechanicT8() {
     });
 }
 
-// Механика Задания 10: Вертикальная Drag-and-Drop сортировка по слотам иерархии
+// Кроссплатформенная механика вертикальной иерархической сортировки таксов (Задание 10)
 function initializeOrderDragAndDrop() {
-    const dragItems = document.querySelectorAll('#t10-drag-bank [draggable="true"]');
+    let activeSortToken = null;
+    const tokens = document.querySelectorAll('#t10-drag-bank .match-element');
     const dropZones = document.querySelectorAll('.order-drop-zone');
 
-    dragItems.forEach(function(item) {
-        item.addEventListener('dragstart', function(e) {
-            e.dataTransfer.setData('text/plain', item.dataset.word);
-            item.classList.add('selected');
-        });
-        item.addEventListener('dragend', function() {
-            item.classList.remove('selected');
+    tokens.forEach(function(token) {
+        token.setAttribute('draggable', 'false');
+        token.addEventListener('click', function() {
+            if (token.parentElement.classList.contains('order-drop-zone')) return;
+            
+            tokens.forEach(function(t) { t.classList.remove('selected'); });
+            activeSortToken = token;
+            token.classList.add('selected');
         });
     });
 
     dropZones.forEach(function(zone) {
-        zone.addEventListener('dragover', function(e) {
-            e.preventDefault();
-        });
-        zone.addEventListener('drop', function(e) {
-            e.preventDefault();
-            if (zone.children.length > 0) return; // Один слот — один таксон
+        zone.addEventListener('click', function() {
+            if (!activeSortToken || zone.children.length > 0) return;
 
-            const wordData = e.dataTransfer.getData('text/plain');
-            const draggedNode = document.querySelector('#t10-drag-bank [data-word="' + wordData + '"]');
-            if (draggedNode) {
-                zone.appendChild(draggedNode);
-                draggedNode.style.margin = "0";
-                draggedNode.style.width = "100%";
-                draggedNode.style.textAlign = "center";
-            }
+            zone.appendChild(activeSortToken);
+            activeSortToken.classList.remove('selected');
+            activeSortToken.style.margin = "0";
+            activeSortToken.style.width = "100%";
+            activeSortToken.style.textAlign = "center";
+            
+            activeSortToken = null;
         });
     });
 }
