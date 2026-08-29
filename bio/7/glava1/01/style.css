@@ -343,3 +343,111 @@ p {
 .quiz-answer.hidden {
     display: none;
 }
+/* ==========================================================================
+   7. НОВЫЕ СТИЛИ ДЛЯ ИНТЕРАКТИВНОГО ПРАКТИКУМА
+   ========================================================================== */
+.task-box {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.task-description {
+    font-size: 1rem;
+    color: #495057;
+    margin-bottom: 20px;
+}
+
+/* Сетка для 7 картинок */
+.gallery-quiz {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.gallery-quiz-item {
+    background: #ffffff;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+}
+
+/* Стили для контейнера картинки (чтобы они были одинакового размера) */
+.gallery-quiz-img {
+    width: 100%;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 10px;
+    background-color: #f1f3f5;
+    border-radius: 4px;
+}
+
+.gallery-quiz-img img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Выпадающий список */
+.kingdom-select {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: #495057;
+    outline: none;
+    cursor: pointer;
+    background-color: #fff;
+}
+
+/* Подсветка результатов проверки */
+.gallery-quiz-item.correct-answer {
+    border-color: #2b8a3e;
+    background-color: #ebfbee;
+}
+
+.gallery-quiz-item.wrong-answer {
+    border-color: #c92a2a;
+    background-color: #fff5f5;
+}
+
+/* Панель управления и кнопка */
+.quiz-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.check-btn {
+    background-color: #343a40;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.check-btn:hover {
+    background-color: #212529;
+}
+
+.result-message {
+    font-weight: bold;
+    font-size: 1rem;
+}
