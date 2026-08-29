@@ -76,4 +76,49 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+    // ==========================================================================
+    // 4. ПРОВЕРКА ИНТЕРАКТИВНОГО ПРАКТИКУМА (ЦАРСТВА)
+    // ==========================================================================
+    const checkGalleryBtn = document.getElementById('check-gallery-btn');
+    const galleryItems = document.querySelectorAll('.gallery-quiz-item');
+    const resultMessage = document.getElementById('gallery-quiz-result');
+
+    if (checkGalleryBtn) {
+        checkGalleryBtn.addEventListener('click', () => {
+            let correctCount = 0;
+            let totalCount = galleryItems.length;
+            let allAnswered = true;
+
+            galleryItems.forEach(item => {
+                const select = item.querySelector('.kingdom-select');
+                const correctAnswer = item.getAttribute('data-correct');
+                const userAnswer = select.value;
+
+                // Сбрасываем старые классы подсветки
+                item.classList.remove('correct-answer', 'wrong-answer');
+
+                if (!userAnswer) {
+                    allAnswered = false;
+                } else if (userAnswer === correctAnswer) {
+                    item.classList.add('correct-answer');
+                    correctCount++;
+                } else {
+                    item.classList.add('wrong-answer');
+                }
+            });
+
+            // Выводим итог проверки
+            if (!allAnswered) {
+                resultMessage.textContent = 'Пожалуйста, выберите царство для всех организмов!';
+                resultMessage.style.color = '#e67e22';
+            } else {
+                resultMessage.textContent = `Результат: ${correctCount} из ${totalCount} правильно!`;
+                if (correctCount === totalCount) {
+                    resultMessage.style.color = '#2b8a3e';
+                } else {
+                    resultMessage.style.color = '#c92a2a';
+                }
+            }
+        });
+    }
 });
