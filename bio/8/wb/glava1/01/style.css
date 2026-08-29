@@ -338,3 +338,46 @@ select {
 .action-btn {
     box-shadow: 0 0 15px rgba(255, 102, 0, 0.2);
 }
+/* ============================================================================
+   [λ] БИО-КОМПЛЕКСЫ 8 КЛАСС // МОБИЛЬНАЯ АДАПТАЦИЯ (ПАТЧ ПОД СМАРТФОНЫ)
+   ============================================================================ */
+
+@media (max-width: 600px) {
+    /* Оптимизация сокетов ввода в Заданиях №2 и №3 */
+    .task-grid-inputs .input-row input[type="text"] {
+        font-size: 0.8rem !important; /* Уменьшаем шрифт, чтобы текст влезал */
+        padding: 5px 6px !important;   /* Сужаем внутренние отступы */
+        letter-spacing: -0.3px;       /* Немного сжимаем межбуквенный интервал */
+    }
+    
+    .task-grid-inputs .input-row span {
+        font-size: 0.95rem !important; /* Корректируем размер опорной буквы */
+        width: 20px !important;        /* Выигрываем еще 5px для поля ввода */
+        min-width: 20px !important;
+    }
+    
+    .task-grid-inputs .input-row input[type="text"] {
+        width: calc(100% - 20px) !important;
+    }
+
+    /* Оптимизация плашек сопоставления в Задании №4 */
+    .connections-wrapper {
+        gap: 8px !important; /* Уменьшаем зазор между колонками */
+    }
+
+    .connect-item {
+        font-size: 0.75rem !important; /* Уменьшаем шрифт, чтобы «Жизнедеятельность животных» не вылезала */
+        padding: 6px 4px !important;    /* Сужаем отступы */
+        line-height: 1.2 !important;    /* Плотный межстрочный интервал */
+        hyphens: auto;                  /* Разрешаем браузеру перенос слов, если экран совсем узкий */
+        min-height: 50px !important;    /* Слегка увеличиваем высоту, давая тексту вторую строку */
+    }
+    
+    /* Дополнительно: уменьшаем заголовки заданий на мобилках для экономии места */
+    .task-card h3 {
+        font-size: 1rem !important;
+    }
+    .task-desc {
+        font-size: 0.78rem !important;
+    }
+}
