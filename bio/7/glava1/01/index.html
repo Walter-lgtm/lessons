@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МНОГООБРАЗИЕ РАСТИТЕЛЬНОГО МИРА</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Главный контейнер терминала -->
+    <div class="terminal-container">
+        
+        <!-- Левая панель: Меню управления -->
+        <aside class="terminal-sidebar">
+            <div class="sidebar-header">
+                <h3>§ 1. Многообразие организмов, их классификация</h3>
+            </div>
+            <nav class="sidebar-menu">
+                <button class="menu-btn active" data-slide="intro">1. Введение</button>
+                <button class="menu-btn" data-slide="systematics">2. Наука Систематика</button>
+                <button class="menu-btn" data-slide="hierarchy">3. Иерархия групп</button>
+                <button class="menu-btn" data-slide="classification">4. Царства живого</button>
+                <button class="menu-btn" data-slide="quiz">5. Контроль знаний</button>
+            </nav>
+            <div class="sidebar-footer">
+                <span>Урок 1</span>
+            </div>
+        </aside>
+
+        <!-- Правая панель: Контентная зона (Терминал) -->
+        <main class="terminal-content">
+            
+            <!-- СЛАЙД 1: ВВЕДЕНИЕ -->
+            <section id="intro" class="slide active">
+                <h2>Многообразие организмов</h2>
+                <div class="info-block problem">
+                    <p><strong>Вспомните:</strong> Что такое органический мир? Какие признаки живых организмов вам известны?</p>
+                </div>
+                <p>Нашу планету населяет невероятное количество живых существ. На сегодняшний день учёными описано <strong>свыше 2,5 миллионов видов</strong> организмов (из них около 100 тысяч — это грибы). Но это далеко не всё! По оценкам биологов, на Земле может существовать от 3 до 7 миллионов видов, которые ещё только предстоит открыть.</p>
+                <div class="note-block">
+                    <span class="note-badge">Запишем!</span>
+                    <p><strong>Органический мир</strong> — это совокупность всех живых организмов, населяющих Землю.</p>
+                </div>
+            </section>
+
+            <!-- СЛАЙД 2: СИСТЕМАТИКА -->
+            <section id="systematics" class="slide">
+                <h2>Наука Систематика</h2>
+                <p>Как не запутаться в огромном многообразии живых существ? На помощь приходит специальная наука.</p>
+                
+                <div class="note-block">
+                    <span class="note-badge">Запишем!</span>
+                    <p><strong>Систематика</strong> — наука о многообразии и классификации организмов. Она объединяет существ в группы на основе их родства.</p>
+                </div>
+
+                <h3>Основоположник науки</h3>
+                <p>Становление систематики связано с именем шведского учёного <strong>Карла Линнея</strong> (1707–1778). Он ввёл латинские названия для всех организмов и предложил использовать <strong>двойные (бинарные) названия</strong>.</p>
+                
+                <p>Первое слово в названии — это <em>Род</em> (существительное), а второе — <em>Вид</em> (прилагательное).</p>
+
+                <div class="image-gallery">
+                    <div class="img-container">
+                        <img src="klever_a.jpg" alt="Клевер средний">
+                        <p class="img-caption">а) Клевер средний <br><small>(Trifolium medium)</small></p>
+                    </div>
+                    <div class="img-container">
+                        <img src="klever_b.jpg" alt="Клевер ползучий">
+                        <p class="img-caption">б) Клевер ползучий <br><small>(Trifolium repens)</small></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- СЛАЙД 3: ИЕРАРХИЯ ГРУПП (Интерактивный аналог Рис. 2) -->
+            <section id="hierarchy" class="slide">
+                <h2>Соподчинение систематических групп</h2>
+                <p>Каждый организм принадлежит к определённым группам (категориям). Рассмотрите иерархию от самой крупной группы к самой мелкой на примере Растений. Нажимайте на карточки, чтобы увидеть соподчинение:</p>
+                
+                <!-- Интерактивная CSS-схема -->
+                <div class="hierarchy-tree">
+                    <div class="tree-item" data-info="Высшая категория, объединяющая организмы со сходным строением клеток.">
+                        <span class="rank">Надцарство</span> <span class="arrow">→</span> <span class="example">Ядерные</span>
+                    </div>
+                    <div class="tree-item" data-info="Объединяет организмы по типу питания и глобальным свойствам.">
+                        <span class="rank">Царство</span> <span class="arrow">→</span> <span class="example">Растения</span>
+                    </div>
+                    <div class="tree-item" data-info="Крупная группа внутри царства (у животных называется Тип).">
+                        <span class="rank">Отдел</span> <span class="arrow">→</span> <span class="example">Цветковые</span>
+                    </div>
+                    <div class="tree-item" data-info="Группа, объединяющая родственные порядки.">
+                        <span class="rank">Класс</span> <span class="arrow">→</span> <span class="example">Двудольные</span>
+                    </div>
+                    <div class="tree-item" data-info="Группа внутри класса (у животных называется Отряд).">
+                        <span class="rank">Порядок</span> <span class="arrow">→</span> <span class="example">Ивоцветные</span>
+                    </div>
+                    <div class="tree-item" data-info="Объединяет близкие по происхождению роды.">
+                        <span class="rank">Семейство</span> <span class="arrow">→</span> <span class="example">Ивовые</span>
+                    </div>
+                    <div class="tree-item" data-info="Объединяет близкородственные виды.">
+                        <span class="rank">Род</span> <span class="arrow">→</span> <span class="example">Тополь</span>
+                    </div>
+                    <div class="tree-item" data-info="Основная структурная единица систематики.">
+                        <span class="rank">Вид</span> <span class="arrow">→</span> <span class="example">Тополь белый</span>
+                    </div>
+                </div>
+                
+                <!-- Сюда JS будет выводить подсказки при клике -->
+                <div id="hierarchy-details" class="info-block hint">
+                    <p>Кликните по любой строчке схемы выше, чтобы узнать подробнее о систематической категории.</p>
+                </div>
+            </section>
+
+            <!-- СЛАЙД 4: ЦАРСТВА ЖИВОГО -->
+            <section id="classification" class="slide">
+                <h2>Современная классификация</h2>
+                <p>В XX веке учёные разделили весь органический мир на две огромные группы (Империи/Надцарства): <strong>Доядерные (Прокариоты)</strong> и <strong>Ядерные (Эукариоты)</strong>.</p>
+                
+                <div class="center-image">
+                    <img src="shem.jpg" alt="Схема классификации организмов" class="responsive-img">
+                    <p class="img-caption">Рис. 3. Схема классификации основных групп организмов</p>
+                </div>
+
+                <p>Вирусы стоят особняком — это <strong>неклеточная форма жизни</strong>, они не входят ни в одно надцарство.</p>
+            </section>
+
+            <!-- СЛАЙД 5: КОНТРОЛЬ ЗНАНИЙ -->
+            <section id="quiz" class="slide">
+                <h2>Проверим знания?</h2>
+                <p>Ответьте устно на вопросы или разберите их вместе с классом:</p>
+                
+                <div class="quiz-container">
+                    <div class="quiz-card">
+                        <h4>Вопрос 1</h4>
+                        <p>Почему необходима классификация организмов? Какой принцип лежит в основе современной классификации?</p>
+                        <button class="show-answer-btn">Показать подсказку</button>
+                        <p class="quiz-answer hidden">Классификация помогает навести порядок в миллионах видов. В её основе лежит принцип <strong>родства организмов</strong> и их общего происхождения.</p>
+                    </div>
+
+                    <div class="quiz-card">
+                        <h4>Вопрос для размышления</h4>
+                        <p>Почему К. Линней утверждал, что «без систематики мир — хаос»?</p>
+                        <button class="show-answer-btn">Показать подсказку</button>
+                        <p class="quiz-answer hidden">Без четких названий и деления на группы учёные разных стран не смогли бы понимать, о каком именно существе идёт речь, а новые открытия только увеличивали бы путаницу.</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
