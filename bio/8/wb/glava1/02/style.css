@@ -381,3 +381,42 @@ select {
         font-size: 0.78rem !important;
     }
 }
+/* ============================================================================
+   [λ] ОФОРМЛЕНИЕ ПРЯМОУГОЛЬНЫХ ПЛАШЕК ДЛЯ DRAG-AND-DROP (.DRAG-ITEM)
+   ============================================================================ */
+
+.drag-item {
+    background: rgba(0, 255, 102, 0.05); /* Прозрачно-зеленый фон */
+    border: 1px solid var(--neon-green);   /* Четкая неоновая рамка */
+    color: var(--text-color);
+    padding: 6px 12px;
+    border-radius: 4px;                  /* Аккуратное прямоугольное скругление */
+    cursor: grab;                        /* Курсор в виде руки для захвата */
+    user-select: none;                   /* Защита от выделения текста при тапе */
+    font-family: var(--font-stack);
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    display: inline-block;
+    box-shadow: 0 0 5px rgba(0, 255, 102, 0.1);
+}
+
+/* Состояние при наведении курсора */
+.drag-item:hover {
+    background: rgba(0, 255, 102, 0.15);
+    box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
+}
+
+/* Состояние активного перетаскивания (работает и на JS) */
+.drag-item.dragging {
+    opacity: 0.4;
+    cursor: grabbing;
+    border-style: dashed;
+}
+
+/* Корректировка отображения внутри принимающих сокетов */
+.drop-socket .drag-item {
+    display: block;                      /* Внутри сокета плашки встают в стопку */
+    width: 100%;
+    margin: 4px 0 !important;
+    text-align: center;
+}
