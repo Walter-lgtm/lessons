@@ -1,16 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Глобальные переменные данных ученика
-    let studentName = "";
-    let studentClass = "";
-
-    // ОБЯЗАТЕЛЬНОЕ ОБЪЯВЛЕНИЕ ВСЕХ ЭЛЕМЕНТОВ ИНТЕРФЕЙСА
-    const authScreen = document.getElementById("auth-screen");
-    const quizContainer = document.getElementById("quiz-container");
-    const startBtn = document.getElementById("start-btn");
-    const inputName = document.getElementById("student-name");
-    const inputClass = document.getElementById("student-class");
-
-        // ==========================================
+    // ==========================================
     // МАТЕМАТИЧЕСКАЯ КРИПТОЗАЩИТА (ХЭШ КНУТА)
     // ==========================================
     function validateToken(tokenStr) {
@@ -61,17 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
         quizContainer.classList.remove("hidden");
         window.scrollTo(0, 0);
     });
-    // Глобальные переменные данных ученика
-   let studentName = "";
-    let studentClass = "";
-
-    // Элементы интерфейса
-    const authScreen = document.getElementById("auth-screen");
-    const quizContainer = document.getElementById("quiz-container");
-    const startBtn = document.getElementById("start-btn");
-    const inputName = document.getElementById("student-name");
-    const inputClass = document.getElementById("student-class");
-
     // ==========================================
     // 1. АВТОРИЗАЦИЯ И СТАРТ ТЕСТА
     // ==========================================
