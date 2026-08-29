@@ -1,1 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§ 1. Зоология - наука о животных</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="hud-container">
+        <!-- Экран авторизации и валидации токена -->
+        <div id="auth-screen" class="hud-box">
+            <h2><img src="lambda_hl.jpg" alt="Λ" class="hud-lambda-icon"> Авторизация участника </h2>
+            <p class="hud-version">БИОЛАБОРАТОРИЯ</p>
+            <div class="form-group">
+                <label for="user-fio">Фамилия и Имя:</label>
+                <input type="text" id="user-fio" placeholder="Иванов Иван" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="user-class">Класс:</label>
+                <input type="text" id="user-class" placeholder="8-А" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="user-token">Индивидуальный токен доступа:</label>
+                <input type="text" id="user-token" placeholder="M5-XXXX" autocomplete="off">
+            </div>
+            <button id="start-btn" class="hud-btn">Вход в лабораторию</button>
+            <div id="auth-error" class="error-msg"></div>
+        </div>
 
+        <!-- Основной интерфейс заданий -->
+        <div id="main-interface" class="hud-box hidden">
+            <header class="hud-header">
+                <span id="hud-user-info">Пользователь: </span>
+                <span id="hud-timer">Время сессии: 00:00</span>
+            </header>
+
+            <main class="tasks-container">
+                <!-- ЗАДАНИЕ 1 -->
+                <section class="task-card" data-task="1">
+                    <h3>Задание 1. Вставьте верные биологические термины</h3>
+                    <p class="task-desc">Выберите правильные термины из выпадающих списков для заполнения пропусков.</p>
+                    <div class="task-body">
+                        <p>
+                            1. <select id="task1-1">
+                                <option value="">-- Выберите --</option>
+                                <option value="зоология">Зоология</option>
+                                <option value="цитология">Цитология</option>
+                                <option value="физиология">Физиология</option>
+                            </select> — наука, изучающая многообразие животного мира, строение тела и отдельных органов животных, жизнедеятельность животных, их распространение, поведение и связь со средой обитания, значение в природе и жизнедеятельности человека.
+                        </p>
+                        <p>
+                            2. Изучением биологических объектов с целью использования их свойств, функций и структур в технических устройствах и системах занимается наука 
+                            <select id="task1-2">
+                                <option value="">-- Выберите --</option>
+                                <option value="анатомия">анатомия</option>
+                                <option value="генетика">генетика</option>
+                                <option value="бионика">бионика</option>
+                            </select>.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ЗАДАНИЕ 2 -->
+                <section class="task-card" data-task="2">
+                    <h3>Задание 2. Разделы зоологии</h3>
+                    <p class="task-desc">Впишите термины, ориентируясь по опорным начальным буквам.</p>
+                    <div class="task-grid-inputs">
+                        <div class="input-row"><span>С</span><input type="text" id="task2-1" placeholder="... животных (многообразие, систематика)"></div>
+                        <div class="input-row"><span>М</span><input type="text" id="task2-2" placeholder="... животных (внешнее и внутреннее строение)"></div>
+                        <div class="input-row"><span>Ф</span><input type="text" id="task2-3" placeholder="... животных (процессы жизнедеятельности)"></div>
+                        <div class="input-row"><span>Э</span><input type="text" id="task2-4" placeholder="... животных (индивидуальное развитие)"></div>
+                        <div class="input-row"><span>Э</span><input type="text" id="task2-5" placeholder="... животных (взаимоотношения между собой и средой)"></div>
+                        <div class="input-row"><span>Э</span><input type="text" id="task2-6" placeholder="... (наука, изучающая поведение животных)"></div>
+                        <div class="input-row"><span>З</span><input type="text" id="task2-7" placeholder="... (распределение животных на суше и в воде)"></div>
+                        <div class="input-row"><span>П</span><input type="text" id="task2-8" placeholder="... (изучение вымерших животных)"></div>
+                    </div>
+                </section>
+
+                <!-- ЗАДАНИЕ 3 -->
+                <section class="task-card" data-task="3">
+                    <h3>Задание 3. Частные зоологические науки</h3>
+                    <p class="task-desc">Определите названия наук по объектам их изучения.</p>
+                    <div class="task-grid-inputs">
+                        <div class="input-row"><span>П</span><input type="text" id="task3-1" placeholder="... — наука об одноклеточных животных"></div>
+                        <div class="input-row"><span>Г</span><input type="text" id="task3-2" placeholder="... — наука о паразитических червях"></div>
+                        <div class="input-row"><span>М</span><input type="text" id="task3-3" placeholder="... — наука о моллюсках"></div>
+                        <div class="input-row"><span>К</span><input type="text" id="task3-4" placeholder="... — наука о ракообразных"></div>
+                        <div class="input-row"><span>А</span><input type="text" id="task3-5" placeholder="... — наука о паукообразных"></div>
+                        <div class="input-row"><span>А</span><input type="text" id="task3-6" placeholder="... — наука о клещах"></div>
+                        <div class="input-row"><span>Э</span><input type="text" id="task3-7" placeholder="... — наука о насекомых"></div>
+                        <div class="input-row"><span>И</span><input type="text" id="task3-8" placeholder="... — наука о рыбах"></div>
+                        <div class="input-row"><span>Г</span><input type="text" id="task3-9" placeholder="... — наука о земноводных и пресмыкающихся"></div>
+                        <div class="input-row"><span>О</span><input type="text" id="task3-10" placeholder="... — наука о птицах"></div>
+                        <div class="input-row"><span>Т</span><input type="text" id="task3-11" placeholder="... — наука о млекопитающих"></div>
+                    </div>
+                </section>
+
+                <!-- ЗАДАНИЕ 4 -->
+                <section class="task-card" data-task="4">
+                    <h3>Задание 4. Профессии и функционал</h3>
+                    <p class="task-desc">Свяжите профессию слева с её описанием справа (последовательно кликайте по парам).</p>
+                    <div class="connections-wrapper">
+                        <div class="connect-column" id="col-professions">
+                            <div class="connect-item" data-id="zoolog">Зоолог</div>
+                            <div class="connect-item" data-id="kinolog">Кинолог</div>
+                            <div class="connect-item" data-id="veterinar">Ветеринар</div>
+                            <div class="connect-item" data-id="ohotoved">Охотовед</div>
+                            <div class="connect-item" data-id="zootehnik">Зоотехник</div>
+                        </div>
+                        <div class="connect-column" id="col-functions">
+                            <div class="connect-item" data-match="zootehnik">Разведение животных</div>
+                            <div class="connect-item" data-match="veterinar">Лечение заболеваний</div>
+                            <div class="connect-item" data-match="kinolog">Собаководство</div>
+                            <div class="connect-item" data-match="zoolog">Жизнедеятельность животных</div>
+                            <div class="connect-item" data-match="ohotoved">Учёт промысловых животных</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ЗАДАНИЕ 5 -->
+                <section class="task-card" data-task="5">
+                    <h3>Задание 5. Выбор верного ответа</h3>
+                    <p class="task-question">Специалист, который занимается учётом промысловых животных, планирует их отлов и расселение, обследует охотничьи угодья, разводит охотничьих собак:</p>
+                    <div class="radio-group">
+                        <label class="radio-label"><input type="radio" name="task5" value="кинолог"> Кинолог</label>
+                        <label class="radio-label"><input type="radio" name="task5" value="ветеринар"> Ветеринар</label>
+                        <label class="radio-label"><input type="radio" name="task5" value="зоотехник"> Зоотехник</label>
+                        <label class="radio-label"><input type="radio" name="task5" value="биолог-охотовед"> Биолог-охотовед</label>
+                    </div>
+                </section>
+
+                <!-- ЗАДАНИЕ 6 -->
+                <section class="task-card" data-task="6">
+                    <h3>Задание 6. Архитектура и бионика</h3>
+                    <p class="task-question">Какое всемирно известное архитектурное сооружение было создано при изучении строения бедренной кости, его основание точно повторяет строение головки бедренной кости?</p>
+                    <div class="radio-group">
+                        <label class="radio-label"><input type="radio" name="task6" value="шуховская"> Башня Шуховская</label>
+                        <label class="radio-label"><input type="radio" name="task6" value="останкинская"> Останкинская башня</label>
+                        <label class="radio-label"><input type="radio" name="task6" value="эйфелева"> Эйфелева башня</label>
+                        <label class="radio-label"><input type="radio" name="task6" value="спасская"> Спасская башня</label>
+                        <label class="radio-label"><input type="radio" name="task6" value="бигбен"> Биг-Бен</label>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="hud-footer">
+                <button id="submit-btn" class="hud-btn action-btn">Сформировать и отправить отчет</button>
+            </footer>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
