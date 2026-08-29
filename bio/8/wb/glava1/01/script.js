@@ -46,8 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         const secretMod = Math.abs(hash) % 997;
         
-        // Сверяем с секретным остатком текущего параграфа (§ 1 = 100)
-        if (secretMod === 100) {
+        // Сверяем с секретным остатком текущего параграфа (§ 1 = 300)
+        if (secretMod === 300) {
             // 3. Если код верный, сохраняем его в список использованных
             usedTokens.push(t);
             localStorage.setItem(STORAGE_PREFIX + "used_tokens", JSON.stringify(usedTokens));
