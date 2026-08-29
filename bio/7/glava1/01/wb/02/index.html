@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ЛАБОРАТОРИЯ 7 КЛАСС</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="term-container">
+    <div class="term-header">
+        <div class="lambda-logo">λ</div>
+        <div class="system-status">§2. Систематика растений</div>
+    </div>
+
+    <!-- Блок авторизации (UID "ФИО+Класс") -->
+    <div id="auth-block" class="auth-section">
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Идентификация участника (Ф И О)</span>
+            <input type="text" id="student-fio" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <div class="input-group">
+            <span class="input-label" style="text-align: center;">Сектор назначения (К л а с с)</span>
+            <input type="text" id="student-class" class="hud-input" autocomplete="off" required style="text-align: center;">
+        </div>
+        <button id="auth-trigger" class="hud-btn">Открыть доступ в лабораторию</button>
+        <div id="auth-alert" class="alert-box"></div>
+    </div>
+
+    <!-- Основной контейнер заданий -->
+    <div id="biology-content" class="hidden-module">
+        
+        <!-- Задание 1 -->
+        <section class="task-card">
+            <div class="task-title">Задание 1 // Вставь верные биологические термины</div>
+            <div class="task-text" style="font-size: 0.85rem; color: #ff5500; margin-bottom: 10px;">[ПРОТОКОЛ]: Перетащите токены в текстовые поля.</div>
+            <div id="t1-drag-bank" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; padding: 8px; background: rgba(0, 255, 102, 0.02); border: 1px dashed rgba(0, 255, 102, 0.3);">
+                <div class="match-element" draggable="true" data-word="Растения">Растения</div>
+                <div class="match-element" draggable="true" data-word="Животные">Животные</div>
+                <div class="match-element" draggable="true" data-word="Грибы">Грибы</div>
+                <div class="match-element" draggable="true" data-word="Анатомия">Анатомия</div>
+                <div class="match-element" draggable="true" data-word="Физиология">Физиология</div>
+                <div class="match-element" draggable="true" data-word="Систематика">Систематика</div>
+            </div>
+            <div style="line-height: 2; font-size: 0.95rem;">
+                1. <div id="t1-drop1" class="inline-drop-target" style="display:inline-block; min-width:90px; min-height:28px; vertical-align:middle; background:rgba(0,255,102,0.05); border:1px solid rgba(0,255,102,0.2); padding:2px;"></div> — это эукариотические фотосинтезирующие автотрофные организмы.<br>
+                2. <div id="t1-drop2" class="inline-drop-target" style="display:inline-block; min-width:90px; min-height:28px; vertical-align:middle; background:rgba(0,255,102,0.05); border:1px solid rgba(0,255,102,0.2); padding:2px;"></div> растений — наука, занимающаяся описанием этих видов, установлением родства между ними, их классификацией.
+            </div>
+        </section>
+
+        <!-- Задание 2 -->
+        <section class="task-card">
+            <div class="task-title">Задание 2 // Вставь верные биологические термины</div>
+            <div id="t2-drag-bank" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; padding: 8px; background: rgba(0, 255, 102, 0.02); border: 1px dashed rgba(0, 255, 102, 0.3);">
+                <div class="match-element" draggable="true" data-word="Вид">Вид</div>
+                <div class="match-element" draggable="true" data-word="Сообщество">Сообщество</div>
+                <div class="match-element" draggable="true" data-word="Биоценоз">Биоценоз</div>
+                <div class="match-element" draggable="true" data-word="характеристикой">характеристикой</div>
+                <div class="match-element" draggable="true" data-word="критериями вида">критериями вида</div>
+                <div class="match-element" draggable="true" data-word="определителем">определителем</div>
+            </div>
+            <div style="line-height: 2; font-size: 0.95rem;">
+                1. <div id="t2-drop1" class="inline-drop-target" style="display:inline-block; min-width:90px; min-height:28px; vertical-align:middle; background:rgba(0,255,102,0.05); border:1px solid rgba(0,255,102,0.2); padding:2px;"></div> — группа особей, сходных по строению и образу жизни, дающих при скрещивании плодовитое потомство и населяющих определённую территорию.<br>
+                2. Признаки, с помощью которых можно отличить один вид от другого, называют <div id="t2-drop2" class="inline-drop-target" style="display:inline-block; min-width:130px; min-height:28px; vertical-align:middle; background:rgba(0,255,102,0.05); border:1px solid rgba(0,255,102,0.2); padding:2px;"></div>.
+            </div>
+        </section>
+
+        <!-- Задание 3 -->
+        <section class="task-card">
+            <div class="task-title">Задание 3 // Выбери верный ответ</div>
+            <div class="task-text">1. Растения по способу питания являются:</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task3" value="автотрофами"> автотрофами</label>
+                <label class="option-label"><input type="radio" name="task3" value="гетеротрофами"> гетеротрофами</label>
+                <label class="option-label"><input type="radio" name="task3" value="сапротрофами"> сапротрофами</label>
+                <label class="option-label"><input type="radio" name="task3" value="миксотрофами"> миксотрофами</label>
+            </div>
+        </section>
+        <!-- Задание 4 -->
+        <section class="task-card">
+            <div class="task-title">Задание 4 // Выбери верный ответ</div>
+            <div class="task-text">1. В какую таксономическую единицу объединяются близкие виды?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task4" value="класс"> класс</label>
+                <label class="option-label"><input type="radio" name="task4" value="род"> род</label>
+                <label class="option-label"><input type="radio" name="task4" value="отдел"> отдел</label>
+                <label class="option-label"><input type="radio" name="task4" value="семейство"> семейство</label>
+            </div>
+        </section>
+
+        <!-- Задание 5 -->
+        <section class="task-card">
+            <div class="task-title">Задание 5 // Вставь верный биологический термин</div>
+            <div id="t5-drag-bank" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; padding: 8px; background: rgba(0, 255, 102, 0.02); border: 1px dashed rgba(0, 255, 102, 0.3);">
+                <div class="match-element" draggable="true" data-word="Отряд">Отряд</div>
+                <div class="match-element" draggable="true" data-word="Отдел">Отдел</div>
+                <div class="match-element" draggable="true" data-word="Царство">Царство</div>
+            </div>
+            <div style="line-height: 2; font-size: 0.95rem;">
+                1. <div id="t5-drop1" class="inline-drop-target" style="display:inline-block; min-width:90px; min-height:28px; vertical-align:middle; background:rgba(0,255,102,0.05); border:1px solid rgba(0,255,102,0.2); padding:2px;"></div> — наиболее крупная систематическая единица в царстве растений, представители которого имеют общий план строения и общие важнейшие признаки.
+            </div>
+        </section>
+
+        <!-- Задание 6 -->
+        <section class="task-card">
+            <div class="task-title">Задание 6 // Выбери верный ответ</div>
+            <div class="task-text">1. Какая систематическая группа растений является самой многочисленной на планете Земля?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task6" value="моховидные"> моховидные</label>
+                <label class="option-label"><input type="radio" name="task6" value="папоротниковидные"> папоротниковидные</label>
+                <label class="option-label"><input type="radio" name="task6" value="цветковые"> цветковые</label>
+                <label class="option-label"><input type="radio" name="task6" value="водоросли"> водоросли</label>
+            </div>
+        </section>
+
+        <!-- Задание 7 -->
+        <section class="task-card">
+            <div class="task-title">Задание 7 // Выбери верный ответ</div>
+            <div class="task-text">1. «В последние годы в результате деятельности человека сокращается численность многих видов растений, сужается область их распространения». Как называются факторы, которые, согласно цитате, влияют на многообразие растительного мира?</div>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="task7" value="биотические"> биотические</label>
+                <label class="option-label"><input type="radio" name="task7" value="абиотические"> абиотические</label>
+                <label class="option-label"><input type="radio" name="task7" value="антропогенные"> антропогенные</label>
+                <label class="option-label"><input type="radio" name="task7" value="ограничивающие"> ограничивающие</label>
+            </div>
+        </section>
+         <!-- Задание 8 -->
+        <section class="task-card">
+            <div class="task-title">Задание 8 // Соотнеси таксоны и классификацию ромашки</div>
+            <div class="task-text" style="font-size: 0.85rem; color: #ff5500; margin-bottom: 10px;">[ПРОТОКОЛ]: Нажмите на ТАКСОН слева, затем на НАЗВАНИЕ справа.</div>
+            <div class="match-grid-container">
+                <div class="match-column">
+                    <div class="match-element t8-left" data-id="Имп">Империя</div>
+                    <div class="match-element t8-left" data-id="Род">Род</div>
+                    <div class="match-element t8-left" data-id="Цар">Царство</div>
+                    <div class="match-element t8-left" data-id="Над">Надцарство</div>
+                    <div class="match-element t8-left" data-id="Отд">Отдел</div>
+                    <div class="match-element t8-left" data-id="Сем">Семейство</div>
+                    <div class="match-element t8-left" data-id="Вид">Вид</div>
+                    <div class="match-element t8-left" data-id="Кл">Класс</div>
+                    <div class="match-element t8-left" data-id="Пор">Порядок</div>
+                </div>
+                <div style="border-top: 1px dashed rgba(0, 255, 102, 0.2); margin: 5px 0;"></div>
+                <div class="match-column">
+                    <div class="match-element t8-right" data-correct="Имп">Клеточные организмы</div>
+                    <div class="match-element t8-right" data-correct="Цар">Растения</div>
+                    <div class="match-element t8-right" data-correct="Сем">Астровые (Сложноцветные)</div>
+                    <div class="match-element t8-right" data-correct="Кл">Двудольные</div>
+                    <div class="match-element t8-right" data-correct="Род">Ромашка</div>
+                    <div class="match-element t8-right" data-correct="Вид">Ромашка аптечная</div>
+                    <div class="match-element t8-right" data-correct="Над">Эукариоты (ядерные)</div>
+                    <div class="match-element t8-right" data-correct="Отд">Цветковые (Покрытосеменные)</div>
+                    <div class="match-element t8-right" data-correct="Пор">Астроцветные</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Задание 9 -->
+        <section class="task-card">
+            <div class="task-title">Задание 9 // Выбери верные ответы</div>
+            <div class="task-text">1. Какие из перечисленных растений НЕ относятся к высшим семенным растениям? (Несколько вариантов)</div>
+            <div class="option-group">
+                <label class="option-label"><input type="checkbox" name="task9" value="Спирогира"> Спирогира</label>
+                <label class="option-label"><input type="checkbox" name="task9" value="Яблоня"> Яблоня</label>
+                <label class="option-label"><input type="checkbox" name="task9" value="Одуванчик"> Одуванчик</label>
+                <label class="option-label"><input type="checkbox" name="task9" value="Кукушкин лён"> Кукушкин лён</label>
+                <label class="option-label"><input type="checkbox" name="task9" value="Пшеница"> Пшеница</label>
+                <label class="option-label"><input type="checkbox" name="task9" value="Хвощ"> Хвощ</label>
+            </div>
+        </section>
+
+        <!-- Задание 10 -->
+        <section class="task-card">
+            <div class="task-title">Задание 10 // Расставь слова по порядку</div>
+            <div class="task-text" style="font-size: 0.85rem; color: #ff5500; margin-bottom: 12px;">
+                [ПРОТОКОЛ]: Распределите единицы систематики в вертикальные слоты от НАИМЕНЬШЕЙ (в самый верхний слот) к НАИБОЛЬШЕЙ (в самый нижний слот).
+            </div>
+            
+            <!-- Банк перетаскиваемых таксонов -->
+            <div id="t10-drag-bank" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; padding: 10px; background: rgba(0, 255, 102, 0.02); border: 1px dashed rgba(0, 255, 102, 0.3);">
+                <div class="match-element" draggable="true" data-word="Отдел">Отдел</div>
+                <div class="match-element" draggable="true" data-word="Царство">Царство</div>
+                <div class="match-element" draggable="true" data-word="Порядок">Порядок</div>
+                <div class="match-element" draggable="true" data-word="Вид">Вид</div>
+                <div class="match-element" draggable="true" data-word="Род">Род</div>
+                <div class="match-element" draggable="true" data-word="Класс">Класс</div>
+                <div class="match-element" draggable="true" data-word="Семейство">Семейство</div>
+            </div>
+
+            <!-- Иерархические слоты сброса от наименьшего к наибольшему -->
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px; border: 1px dashed rgba(0, 255, 102, 0.3); padding: 5px;">
+                    <span style="font-size: 0.8rem; color: #ff5500; min-width: 140px;">1. Наименьшая единица:</span>
+                    <div id="t10-slot1" class="order-drop-zone" data-index="0" style="flex-grow: 1; min-height: 34px; background: rgba(0, 255, 102, 0.02); display: flex; padding: 2px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; border: 1px dashed rgba(0, 255, 102, 0.3); padding: 5px;">
+                    <span style="font-size: 0.8rem; color: #666; min-width: 140px;">2. Таксон уровня 2:</span>
+                    <div id="t10-slot2" class="order-drop-zone" data-index="1" style="flex-grow: 1; min-height: 34px; background: rgba(0, 255, 102, 0.02); display: flex; padding: 2px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; border: 1px dashed rgba(0, 255, 102, 0.3); padding: 5px;">
+                    <span style="font-size: 0.8rem; color: #666; min-width: 140px;">3. Таксон уровня 3:</span>
+                    <div id="t10-slot3" class="order-drop-zone" data-index="2" style="flex-grow: 1; min-height: 34px; background: rgba(0, 255, 102, 0.02); display: flex; padding: 2px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; border: 1px dashed rgba(0, 255, 102, 0.3); padding: 5px;">
+                    <span style="font-size: 0.8rem; color: #666; min-width: 140px;">4. Таксон уровня 4:</span>
+                    <div id="t10-slot4" class="order-drop-zone" data-index="3" style="flex-grow: 1; min-height: 34px; background: rgba(0, 255, 102, 0.02); display: flex; padding: 2px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; border: 1px dashed rgba(0, 255, 102, 0.3); padding: 5px;">
+                    <span style="font-size: 0.8rem; color: #666; min-width: 140px;">5. Таксон уровня 5:</span>
+                    <div id="t10-slot5" class="order-drop-zone" data-index="4" style="flex-grow: 1; min-height: 34px; background: rgba(0, 255, 102, 0.02); display: flex; padding: 2px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; border: 1px dashed rgba(0, 255, 102, 0.3); padding: 5px;">
+                    <span style="font-size: 0.8rem; color: #666; min-width: 140px;">6. Таксон уровня 6:</span>
+                    <div id="t10-slot6" class="order-drop-zone" data-index="5" style="flex-grow: 1; min-height: 34px; background: rgba(0, 255, 102, 0.02); display: flex; padding: 2px;"></div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px; border: 1px dashed rgba(0, 255, 102, 0.3); padding: 5px;">
+                    <span style="font-size: 0.8rem; color: #ff5500; min-width: 140px;">7. Наибольшая единица:</span>
+                    <div id="t10-slot7" class="order-drop-zone" data-index="6" style="flex-grow: 1; min-height: 34px; background: rgba(0, 255, 102, 0.02); display: flex; padding: 2px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Системная кнопка отправки результатов -->
+        <button id="submit-tasks" class="hud-btn" style="background: #ff5500; border-color: #b33c00; margin-top: 25px;">Синхронизировать отчет</button>
+    
+    </div> <!-- Конец #biology-content -->
+</div> <!-- Конец .term-container -->
+
+<script src="script.js"></script>
+</body>
+</html>
