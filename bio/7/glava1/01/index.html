@@ -124,26 +124,139 @@
             </section>
 
             <!-- СЛАЙД 5: КОНТРОЛЬ ЗНАНИЙ -->
-            <section id="quiz" class="slide">
-                <h2>Проверим знания?</h2>
-                <p>Ответьте устно на вопросы или разберите их вместе с классом:</p>
-                
-                <div class="quiz-container">
-                    <div class="quiz-card">
-                        <h4>Вопрос 1</h4>
-                        <p>Почему необходима классификация организмов? Какой принцип лежит в основе современной классификации?</p>
-                        <button class="show-answer-btn">Показать подсказку</button>
-                        <p class="quiz-answer hidden">Классификация помогает навести порядок в миллионах видов. В её основе лежит принцип <strong>родства организмов</strong> и их общего происхождения.</p>
-                    </div>
-
-                    <div class="quiz-card">
-                        <h4>Вопрос для размышления</h4>
-                        <p>Почему К. Линней утверждал, что «без систематики мир — хаос»?</p>
-                        <button class="show-answer-btn">Показать подсказку</button>
-                        <p class="quiz-answer hidden">Без четких названий и деления на группы учёные разных стран не смогли бы понимать, о каком именно существе идёт речь, а новые открытия только увеличивали бы путаницу.</p>
-                    </div>
+<section id="quiz" class="slide">
+    <h2>Проверим знания?</h2>
+    
+    <!-- НОВОЕ ЗАДАНИЕ: Определение царств по изображениям -->
+    <div class="task-box">
+        <h3>Интерактивный практикум</h3>
+        <p class="task-description"><strong>Задание:</strong> Рассмотрите изображения организмов. Из выпадающего списка под каждой картинкой выберите правильное царство живой природы. В конце нажмите кнопку «Проверить ответы».</p>
+        
+        <div class="gallery-quiz">
+            <!-- 1. Гриб -->
+            <div class="gallery-quiz-item" data-correct="Грибы">
+                <div class="gallery-quiz-img">
+                    <img src="mooshrum.jpg" alt="Организм 1">
                 </div>
-            </section>
+                <select class="kingdom-select">
+                    <option value="" disabled selected>Выбрать царство...</option>
+                    <option value="Бактерии">Бактерии</option>
+                    <option value="Растения">Растения</option>
+                    <option value="Грибы">Грибы</option>
+                    <option value="Животные">Животные</option>
+                </select>
+            </div>
+
+            <!-- 2. Сосна -->
+            <div class="gallery-quiz-item" data-correct="Растения">
+                <div class="gallery-quiz-img">
+                    <img src="elm.jpg" alt="Организм 2">
+                </div>
+                <select class="kingdom-select">
+                    <option value="" disabled selected>Выбрать царство...</option>
+                    <option value="Бактерии">Бактерии</option>
+                    <option value="Растения">Растения</option>
+                    <option value="Грибы">Грибы</option>
+                    <option value="Животные">Животные</option>
+                </select>
+            </div>
+
+            <!-- 3. Лось -->
+            <div class="gallery-quiz-item" data-correct="Животные">
+                <div class="gallery-quiz-img">
+                    <img src="biest.jpg" alt="Организм 3">
+                </div>
+                <select class="kingdom-select">
+                    <option value="" disabled selected>Выбрать царство...</option>
+                    <option value="Бактерии">Бактерии</option>
+                    <option value="Растения">Растения</option>
+                    <option value="Грибы">Грибы</option>
+                    <option value="Животные">Животные</option>
+                </select>
+            </div>
+
+            <!-- 4. Ламинария -->
+            <div class="gallery-quiz-item" data-correct="Растения">
+                <div class="gallery-quiz-img">
+                    <img src="herbal.jpg" alt="Организм 4">
+                </div>
+                <select class="kingdom-select">
+                    <option value="" disabled selected>Выбрать царство...</option>
+                    <option value="Бактерии">Бактерии</option>
+                    <option value="Растения">Растения</option>
+                    <option value="Грибы">Грибы</option>
+                    <option value="Животные">Животные</option>
+                </select>
+            </div>
+
+            <!-- 5. Дождевой червь -->
+            <div class="gallery-quiz-item" data-correct="Животные">
+                <div class="gallery-quiz-img">
+                    <img src="worm.jpg" alt="Организм 5">
+                </div>
+                <select class="kingdom-select">
+                    <option value="" disabled selected>Выбрать царство...</option>
+                    <option value="Бактерии">Бактерии</option>
+                    <option value="Растения">Растения</option>
+                    <option value="Грибы">Грибы</option>
+                    <option value="Животные">Животные</option>
+                </select>
+            </div>
+
+            <!-- 6. Бактерии палочки -->
+            <div class="gallery-quiz-item" data-correct="Бактерии">
+                <div class="gallery-quiz-img">
+                    <img src="koh.jpg" alt="Организм 6">
+                </div>
+                <select class="kingdom-select">
+                    <option value="" disabled selected>Выбрать царство...</option>
+                    <option value="Бактерии">Бактерии</option>
+                    <option value="Растения">Растения</option>
+                    <option value="Грибы">Грибы</option>
+                    <option value="Животные">Животные</option>
+                </select>
+            </div>
+
+            <!-- 7. Бактерии шарик -->
+            <div class="gallery-quiz-item" data-correct="Бактерии">
+                <div class="gallery-quiz-img">
+                    <img src="kokk.jpg" alt="Организм 7">
+                </div>
+                <select class="kingdom-select">
+                    <option value="" disabled selected>Выбрать царство...</option>
+                    <option value="Бактерии">Бактерии</option>
+                    <option value="Растения">Растения</option>
+                    <option value="Грибы">Грибы</option>
+                    <option value="Животные">Животные</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Кнопка проверки практикума -->
+        <div class="quiz-controls">
+            <button id="check-gallery-btn" class="check-btn">Проверить ответы</button>
+            <p id="gallery-quiz-result" class="result-message"></p>
+        </div>
+    </div>
+
+    <!-- Текстовые вопросы (прежний блок) -->
+    <h3>Вопросы для закрепления</h3>
+    <div class="quiz-container">
+        <div class="quiz-card">
+            <h4>Вопрос 1</h4>
+            <p>Почему необходима классификация организмов? Какой принцип лежит в основе современной классификации?</p>
+            <button class="show-answer-btn">Показать подсказку</button>
+            <p class="quiz-answer hidden">Классификация помогает навести порядок в миллионах видов. В её основе лежит принцип <strong>родства организмов</strong> и их общего происхождения.</p>
+        </div>
+
+        <div class="quiz-card">
+            <h4>Вопрос для размышления</h4>
+            <p>Почему К. Линней утверждал, что «без систематики мир — хаос»?</p>
+            <button class="show-answer-btn">Показать подсказку</button>
+            <p class="quiz-answer hidden">Без четких названий и деления на группы учёные разных стран не смогли бы понимать, о каком именно существе идёт речь, а новые открытия только увеличивали бы путаницу.</p>
+        </div>
+    </div>
+</section>
 
         </main>
     </div>
