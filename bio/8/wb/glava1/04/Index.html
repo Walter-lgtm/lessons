@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§ 4. Организм многоклеточного животного</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="hud-container">
+        <!-- Экран авторизации (Анти-брутфорс v2.0) -->
+        <div id="auth-screen" class="hud-box">
+            <h2><img src="lambda_hl.jpg" alt="Λ" class="hud-lambda-icon"> Авторизация участника</h2>
+            <p class="hud-version">БИОЛАБОРАТОРИЯ</p>
+            <div class="form-group">
+                <label for="user-fio">Фамилия и Имя:</label>
+                <input type="text" id="user-fio" placeholder="Иванов Иван" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="user-class">Класс:</label>
+                <input type="text" id="user-class" placeholder="8-А" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="user-token">Индивидуальный токен доступа:</label>
+                <input type="text" id="user-token" placeholder="M5-XXXX" autocomplete="off">
+            </div>
+            <button id="start-btn" class="hud-btn">Вход в лабораторию</button>
+            <div id="auth-error" class="error-msg"></div>
+        </div>
+
+        <!-- Основной интерфейс заданий -->
+        <div id="main-interface" class="hud-box hidden">
+            <header class="hud-header">
+                <span id="hud-user-info">Участник: </span>
+                <span id="hud-timer">Время сессии: 00:00</span>
+            </header>
+
+            <main class="tasks-container">
+                <!-- ЗАДАНИЕ 1 -->
+                <section class="task-card" data-task="1">
+                    <h3>Задание 1. Иерархия многоклеточного организма</h3>
+                    <p class="task-desc">Вставьте верные биологические термины, ориентируясь по опорным начальным буквам.</p>
+                    <div class="task-grid-inputs">
+                        <div class="input-row"><span>Т</span><input type="text" id="task1-1" placeholder="... — группа клеток и межклеточного вещества..."></div>
+                        <div class="input-row"><span>Т</span><input type="text" id="task1-2" placeholder="Каждая ... формируется из особых частей зародыша"></div>
+                        <div class="input-row"><span>П</span><input type="text" id="task1-3" placeholder="Типы тканей: ..., соединительная, мышечная и нервная"></div>
+                        <div class="input-row"><span>С</span><input type="text" id="task1-4" placeholder="Типы тканей: покровная, ..., мышечная и нервная"></div>
+                        <div class="input-row"><span>М</span><input type="text" id="task1-5" placeholder="Типы тканей: покровная, соединительная, ... и нервная"></div>
+                        <div class="input-row"><span>Н</span><input type="text" id="task1-6" placeholder="Типы тканей: покровная, соединительная, мышечная и ..."></div>
+                        <div class="input-row"><span>О</span><input type="text" id="task1-7" placeholder="... — часть организма, имеющая определённую форму и функции"></div>
+                        <div class="input-row"><span>С</span><input type="text" id="task1-8" placeholder="... органов объединяет группу органов с общей функцией"></div>
+                    </div>
+                </section>
+
+                <!-- ЗАДАНИЕ 2 -->
+                <section class="task-card" data-task="2">
+                    <h3>Задание 2. Соотнеси ткани и их функции</h3>
+                    <p class="task-desc">Последовательно нажимайте на ткань слева и её функциональный пограничный маркер справа.</p>
+                    <div class="connections-wrapper">
+                        <div class="connect-column" id="col-tissues">
+                            <div class="connect-item" data-id="pokrov">Покровная</div>
+                            <div class="connect-item" data-id="smooth-muscle">Гладкая мышечная</div>
+                            <div class="connect-item" data-id="loose-connect">Рыхлая соединительная</div>
+                            <div class="connect-item" data-id="epithel">Эпителиальная</div>
+                            <div class="connect-item" data-id="cartilage">Хрящевая</div>
+                            <div class="connect-item" data-id="striated-muscle">Поперечно-полосатая</div>
+                            <div class="connect-item" data-id="nervous">Нервная</div>
+                            <div class="connect-item" data-id="bone">Костная</div>
+                            <div class="connect-item" data-id="liquid-connect">Жидкая соединительная</div>
+                        </div>
+                        <div class="connect-column" id="col-t-functions">
+                            <div class="connect-item" data-match="loose-connect">Жир (запас энергии)</div>
+                            <div class="connect-item" data-match="smooth-muscle">Движение внутр. органов</div>
+                            <div class="connect-item" data-match="pokrov">Пограничный барьер</div>
+                            <div class="connect-item" data-match="epithel">Защита</div>
+                            <div class="connect-item" data-match="striated-muscle">Движение в пространстве</div>
+                            <div class="connect-item" data-match="nervous">Раздражение</div>
+                            <div class="connect-item" data-match="bone">Скелет</div>
+                            <div class="connect-item" data-match="cartilage">Связки</div>
+                            <div class="connect-item" data-match="liquid-connect">Транспорт веществ</div>
+                        </div>
+                    </div>
+                </section>
+                <!-- ЗАДАНИЕ 3 -->
+                <section class="task-card" data-task="3">
+                    <h3>Задание 3. Системы органов и их функции</h3>
+                    <p class="task-desc">Последовательно нажимайте на систему органов слева и соответствующую ей функцию справа.</p>
+                    <div class="connections-wrapper">
+                        <div class="connect-column" id="col-systems">
+                            <div class="connect-item" data-id="nerve">Нервная</div>
+                            <div class="connect-item" data-id="breath">Дыхательная</div>
+                            <div class="connect-item" data-id="digest">Пищеварительная</div>
+                            <div class="connect-item" data-id="reprod">Половая</div>
+                            <div class="connect-item" data-id="motor">Опорно-двигательная</div>
+                            <div class="connect-item" data-id="excret">Выделительная</div>
+                            <div class="connect-item" data-id="blood">Кровеносная</div>
+                        </div>
+                        <div class="connect-column" id="col-s-functions">
+                            <div class="connect-item" data-match="breath">Газообмен</div>
+                            <div class="connect-item" data-match="blood">Транспорт веществ</div>
+                            <div class="connect-item" data-match="motor">Опора и движение</div>
+                            <div class="connect-item" data-match="nerve">Согласованность деятельности</div>
+                            <div class="connect-item" data-match="digest">Переваривание пищи</div>
+                            <div class="connect-item" data-match="reprod">Размножение</div>
+                            <div class="connect-item" data-match="excret">Вывод продуктов распада</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ЗАДАНИЕ 4 -->
+                <section class="task-card" data-task="4">
+                    <h3>Задание 4. Биологические термины организации</h3>
+                    <p class="task-desc">Выберите правильные термины из выпадающих списков для заполнения смысловых пропусков в тексте.</p>
+                    <div class="task-body" style="line-height:1.8;">
+                        Организм многоклеточного животного состоит из 
+                        <select id="task4-1">
+                            <option value="">-- выбрать --</option>
+                            <option value="клеток">клеток</option>
+                            <option value="тканей">тканей</option>
+                        </select>. Они образуют 
+                        <select id="task4-2">
+                            <option value="">-- выбрать --</option>
+                            <option value="ткани">ткани</option>
+                            <option value="органы">органы</option>
+                        </select>, которые входят в состав 
+                        <select id="task4-3">
+                            <option value="">-- выбрать --</option>
+                            <option value="органов">органов</option>
+                            <option value="систем органов">систем органов</option>
+                        </select>. Органы образуют 
+                        <select id="task4-4">
+                            <option value="">-- выбрать --</option>
+                            <option value="системы органов">системы органов</option>
+                            <option value="организм">организм</option>
+                        </select>. А системы органов в свою очередь образуют целостный 
+                        <select id="task4-5">
+                            <option value="">-- выбрать --</option>
+                            <option value="организм">организм</option>
+                            <option value="орган">орган</option>
+                        </select>. Например, головной мозг животного образован 
+                        <select id="task4-6">
+                            <option value="">-- выбрать --</option>
+                            <option value="нервной">нервной</option>
+                            <option value="эпителиальной">эпителиальной</option>
+                        </select> тканью и входит в состав 
+                        <select id="task4-7">
+                            <option value="">-- выбрать --</option>
+                            <option value="нервной системы">нервной системы</option>
+                            <option value="кровеносной системы">кровеносной системы</option>
+                        </select>.
+                    </div>
+                </section>
+
+                <!-- ЗАДАНИЕ 5 -->
+                <section class="task-card" data-task="5">
+                    <h3>Задание 5. Свойства тканей</h3>
+                    <p class="task-question">Какая ткань обладает способностью возбуждаться и проводить возбуждение в организме животного?</p>
+                    <div class="radio-group">
+                        <label><input type="radio" name="task5" value="покровная"> покровная</label>
+                        <label><input type="radio" name="task5" value="эпителиальная"> эпителиальная</label>
+                        <label><input type="radio" name="task5" value="нервная"> нервная</label>
+                        <label><input type="radio" name="task5" value="гладкая"> гладкая мышечная</label>
+                        <label><input type="radio" name="task5" value="поперечно"> поперечно-полосатая мышечная</label>
+                        <label><input type="radio" name="task5" value="хрящевая"> хрящевая</label>
+                    </div>
+                </section>
+
+                <!-- ЗАДАНИЕ 6 -->
+                <section class="task-card" data-task="6">
+                    <h3>Задание 6. Анатомический анализ</h3>
+                    <p class="task-question">Какая система органов изображена на рисунке?</p>
+                    <div style="text-align:center; margin:15px 0;">
+                        <img src="dog.png" alt="Анатомия собаки" style="max-width:100%; height:auto; max-height:260px; border:1px solid var(--border-color);">
+                    </div>
+                    <div class="radio-group">
+                        <label><input type="radio" name="task6" value="пищеварительная"> пищеварительная</label>
+                        <label><input type="radio" name="task6" value="кровеносная"> кровеносная</label>
+                        <label><input type="radio" name="task6" value="выделительная"> выделительная</label>
+                        <label><input type="radio" name="task6" value="дыхательная"> дыхательная</label>
+                    </div>
+                </section>
+
+                <!-- ЗАДАНИЕ 7 -->
+                <section class="task-card" data-task="7">
+                    <h3>Задание 7. Уровни организации</h3>
+                    <p class="task-question">Какой цифрой в рисунке отмечена целостная система органов животного организма?</p>
+                    <div style="text-align:center; margin:15px 0;">
+                        <img src="system_zoo.png" alt="Уровни организации" style="max-width:100%; height:auto; max-height:280px; border:1px solid var(--border-color);">
+                    </div>
+                    <div class="radio-group">
+                        <label><input type="radio" name="task7" value="5"> Цифра 5</label>
+                        <label><input type="radio" name="task7" value="4"> Цифра 4</label>
+                        <label><input type="radio" name="task7" value="2"> Цифра 2</label>
+                        <label><input type="radio" name="task7" value="1"> Цифра 1</label>
+                        <label><input type="radio" name="task7" value="3"> Цифра 3</label>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="hud-footer">
+                <button id="submit-btn" class="hud-btn action-btn">Сформировать и отправить отчет</button>
+            </footer>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
