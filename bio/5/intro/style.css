@@ -432,3 +432,23 @@ body {
         margin-bottom: 10px;
     }
 }
+/* Стилизация заголовков и иконки Лямбды */
+.hud-box h2 {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    color: var(--neon-green);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+/* Аппаратная фиксация иконки 1х1 см на любых смартфонах */
+.hud-lambda-icon {
+    width: 1cm;
+    height: 1cm;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 12px;
+    display: inline-block;
+}
