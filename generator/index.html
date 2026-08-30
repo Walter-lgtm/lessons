@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Λ] Терминал управления доступом</title>
+    <!-- Внедряем универсальные стили нашего шаблона напрямую для автономности -->
+    <style>
+        :root {
+            --bg-color: #020604;
+            --panel-bg: rgba(4, 14, 8, 0.9);
+            --neon-green: #00ff66;
+            --neon-amber: #ff6600;
+            --neon-red: #ff0033;
+            --text-color: #e0faec;
+            --border-color: rgba(0, 255, 102, 0.3);
+            --font-stack: 'Courier New', Courier, monospace;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-stack);
+            background-image: 
+                linear-gradient(rgba(0, 255, 102, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 102, 0.02) 1px, transparent 1px);
+            background-size: 20px 20px;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .hud-container { width: 100%; max-width: 900px; margin: 0 auto; }
+        .hud-box {
+            background: var(--panel-bg);
+            border: 2px solid var(--neon-green);
+            box-shadow: 0 0 15px rgba(0, 255, 102, 0.15);
+            padding: 25px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+        }
+        h2 {
+            display: flex;
+            align-items: center;
+            font-size: 1.6rem;
+            color: var(--neon-green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        .hud-lambda-icon {
+            width: 1cm; height: 1cm;
+            object-fit: contain;
+            margin-right: 12px;
+        }
+        .hud-version {
+            color: var(--neon-green);
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        label { color: var(--neon-green); font-weight: bold; font-size: 0.95rem; }
+        input[type="text"], input[type="number"], textarea {
+            background: #000000;
+            color: var(--text-color);
+            border: 1px solid var(--neon-green);
+            padding: 8px 12px;
+            font-family: var(--font-stack);
+            font-size: 1rem;
+            border-radius: 2px;
+            outline: none;
+            width: 100%;
+        }
+        textarea { resize: vertical; min-height: 120px; }
+        input:focus, textarea:focus { box-shadow: 0 0 8px var(--neon-green); }
+        .hud-btn {
+            width: 100%;
+            background: var(--neon-amber);
+            color: #000000;
+            font-family: var(--font-stack);
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 12px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+        .hud-btn:hover { background: #ff8833; box-shadow: 0 0 12px rgba(255, 102, 0, 0.4); }
+        
+        /* Стили генерируемых карточек пропуска */
+        .cards-list {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .ticket-card {
+            border: 2px dashed var(--neon-green);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 4px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        .ticket-info { flex-grow: 1; line-height: 1.5; }
+        .ticket-title { color: var(--neon-amber); font-weight: bold; margin-bottom: 8px; font-size: 1.1rem; }
+        .ticket-qr {
+            width: 100px; height: 100px;
+            background: #fff;
+            padding: 5px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+        .copy-btn {
+            background: transparent;
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 8px;
+            font-family: var(--font-stack);
+        }
+        .copy-btn:hover { background: rgba(0, 255, 102, 0.1); }
+
+        /* НАСТРОЙКИ СТЕРИЛЬНОЙ ПЕЧАТИ (Ctrl + P) */
+        @media print {
+            body { background: #fff; color: #000; background-image: none; padding: 0; }
+            .hud-box, #print-control-btn { display: none !important; }
+            .ticket-card {
+                border: 1px solid #000 !important;
+                background: #fff !important;
+                color: #000 !important;
+                page-break-inside: avoid;
+                margin-bottom: 15px;
+            }
+            .ticket-title, .copy-btn { color: #000 !important; border-color: #000 !important; }
+            .copy-btn { display: none !important; }
+        }
+    </style>
+    <!-- Автономный скрипт генерации QR-кодов. Браузер сохранит его в кэш. -->
+    <script src="https://cloudflare.com"></script>
+</head>
+<body>
+    <div class="hud-container">
+        <!-- Панель управления генератора -->
+        <div id="control-panel" class="hud-box">
+            <h2><img src="lambda_hl.jpg" alt="Λ" class="hud-lambda-icon"> Терминал эмиссии токенов</h2>
+            <p class="hud-version">ГЕНЕРАТОР ДОСТУПА // Квантовая криптография</p>
+            
+            <div class="form-group">
+                <label for="app-url">Базовый URL-адрес интерактивного теста:</label>
+                <input type="text" id="app-url" value="https://bme-biology.ru" placeholder="https://bme-biology.ru">
+            </div>
+            
+            <div class="form-group">
+                <label for="secret-mod">Секретный остаток текущего параграфа (крипто-ключ):</label>
+                <input type="number" id="secret-mod" value="300" placeholder="Например: 300, 310, 320, 330...">
+            </div>
+            
+            <div class="form-group">
+                <label for="students-list">Список участников (Каждое ФИО + Класс с новой строки):</label>
+                <textarea id="students-list" placeholder="Фримен Гордон 8-А&#10;Кросс Джина 8-А&#10;Иванов Иван 8-Б"></textarea>
+            </div>
+            
+            <button id="generate-btn" class="hud-btn">Инициализировать генерацию карточек</button>
+        </div>
+
+        <!-- Контейнер вывода готовых карточек -->
+        <div id="output-panel" class="cards-list"></div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const generateBtn = document.getElementById("generate-btn");
+            const appUrlInput = document.getElementById("app-url");
+            const secretModInput = document.getElementById("secret-mod");
+            const studentsListInput = document.getElementById("students-list");
+            const outputPanel = document.getElementById("output-panel");
+
+            // ============================================================================
+            // МАТЕМАТИЧЕСКИЙ РЕВЕРС-ХЭШ ДВИЖОК DJB2
+            // ============================================================================
+            function generateValidToken(targetMod) {
+                const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // Исключены похожие O, I, 0, 1
+                let attempts = 0;
+                const maxAttempts = 100000; // Защитный лимит итераций
+
+                while (attempts < maxAttempts) {
+                    attempts++;
+                    // Генерируем случайную 4-значную комбинацию для суффикса M5-XXXX
+                    let suffix = "";
+                    for (let i = 0; i < 4; i++) {
+                        suffix += chars.charAt(Math.floor(Math.random() * chars.length));
+                    }
+                    const fullToken = `M5-${suffix}`;
+
+                    // Вычисляем хэш DJB2
+                    let hash = 5381;
+                    for (let i = 0; i < fullToken.length; i++) {
+                        hash = ((hash << 5) + hash) + fullToken.charCodeAt(i);
+                    }
+                    const currentMod = Math.abs(hash) % 997;
+
+                    // Если математический остаток совпал с ключом параграфа — токен валиден!
+                    if (currentMod === targetMod) {
+                        return fullToken;
+                    }
+                }
+                // Резервный дефолтный генератор на случай математической аномалии
+                return "M5-ERR" + Math.floor(100 + Math.random() * 900);
+            }
+generateBtn.addEventListener("click", () => {
+                const baseUrl = appUrlInput.value.trim();
+                const targetMod = parseInt(secretModInput.value.trim(), 10);
+                const rawText = studentsListInput.value.trim();
+
+                if (!rawText) {
+                    alert("ОШИБКА: Список участников пуст. Введите хотя бы одно имя.");
+                    return;
+                }
+
+                if (isNaN(targetMod)) {
+                    alert("ОШИБКА: Укажите корректный числовой секретный остаток параграфа.");
+                    return;
+                }
+
+                const students = rawText.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+                outputPanel.innerHTML = "";
+
+                // Кнопка быстрой печати для учителя
+                const printBar = document.createElement("div");
+                printBar.id = "print-control-btn";
+                printBar.innerHTML = `<button class="hud-btn" style="background:var(--neon-green); color:#000;" onclick="window.print()">[ ПЕЧАТЬ И ФОРМАТИРОВАНИЕ КАРТОЧЕК ]</button>`;
+                outputPanel.appendChild(printBar);
+
+                students.forEach((studentStr, index) => {
+                    const uniqueToken = generateValidToken(targetMod);
+                    const targetLink = `${baseUrl}?token=${uniqueToken}`;
+
+                    const cardId = `ticket-${index}`;
+                    const card = document.createElement("div");
+                    card.className = "ticket-card";
+                    card.innerHTML = `
+                        <div class="ticket-info">
+                            <div class="ticket-title">[Λ] КАРТОЧКА ДОСТУПА №${index + 1}</div>
+                            <div>Участник: <strong>${studentStr}</strong></div>
+                            <div>Токен: <code>${uniqueToken}</code></div>
+                            <div style="font-size: 0.85rem; opacity: 0.8; word-break: break-all; margin-top:4px;">Ссылка: ${targetLink}</div>
+                            <button class="copy-btn" data-clipboard="Здравствуйте! Ссылка для прохождения био-комплекса: ${targetLink} Персональный токен: ${uniqueToken}">Копировать для MAX</button>
+                        </div>
+                        <div class="ticket-qr" id="qr-${index}"></div>
+                    `;
+                    outputPanel.appendChild(card);
+
+                    // Рендеринг QR-кода на лету
+                    new QRCode(document.getElementById(`qr-${index}`), {
+                        text: targetLink,
+                        width: 90,
+                        height: 90,
+                        colorDark: "#000000",
+                        colorLight: "#ffffff",
+                        correctLevel: QRCode.CorrectLevel.M
+                    });
+                });
+
+                // Обработчик быстрого копирования текста сообщения
+                document.querySelectorAll(".copy-btn").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const textToCopy = btn.getAttribute("data-clipboard");
+                        navigator.clipboard.writeText(textToCopy).then(() => {
+                            const oldText = btn.innerText;
+                            btn.innerText = "[ СКОПИРОВАНО ]";
+                            btn.style.borderColor = "var(--neon-amber)";
+                            setTimeout(() => {
+                                btn.innerText = oldText;
+                                btn.style.borderColor = "";
+                            }, 1500);
+                        });
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
