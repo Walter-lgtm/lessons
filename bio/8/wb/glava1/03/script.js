@@ -253,13 +253,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const { score, grade } = calculateBiologyScores();
 
         // ИДЕНТИФИКАТОРЫ ПОЛЕЙ ВАШЕЙ GOOGLE ФОРМЫ (Замените на ваши entry.XXXXX из экстрактора)
-        const GOOGLE_FORM_URL = "https://google.com";
+        const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfwv_RC4XiHuZCbtPDqHyoHT2Vuq-URF5Ao3LBux74Kis3QYg/formResponse";
         
         const formData = new FormData();
-        formData.append("entry.1000001", studentName);   // Поле ФИО
-        formData.append("entry.1000002", studentClass);  // Поле Класса
-        formData.append("entry.1000003", score);         // Поле Баллов (макс. 7)
-        formData.append("entry.1000004", grade);         // Поле Оценки (2, 3, 4, 5)
+        formData.append("entry.185514306", studentName);   // Поле ФИО
+        formData.append("entry.514439607", studentClass);  // Поле Класса
+        formData.append("entry.672849251", score);         // Поле Баллов (макс. 7)
+        formData.append("entry.1733743299", grade);         // Поле Оценки (2, 3, 4, 5)
 
         // Асинхронный передатчик без перезагрузки страницы и без поля токена
         fetch(GOOGLE_FORM_URL, {
