@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§ 3. Животная клетка</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="hud-container">
+        <!-- Экран авторизации (Анти-брутфорс v2.0) -->
+        <div id="auth-screen" class="hud-box">
+            <h2><img src="lambda_hl.jpg" alt="Λ" class="hud-lambda-icon"> Авторизация участника</h2>
+            <p class="hud-version">БИОЛАБОРАТОРИЯ</p>
+            <div class="form-group">
+                <label for="user-fio">Фамилия и Имя:</label>
+                <input type="text" id="user-fio" placeholder="Иванов Иван" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="user-class">Класс:</label>
+                <input type="text" id="user-class" placeholder="8-А" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="user-token">Индивидуальный токен доступа:</label>
+                <input type="text" id="user-token" placeholder="M5-XXXX" autocomplete="off">
+            </div>
+            <button id="start-btn" class="hud-btn">Вход в лабораторию</button>
+            <div id="auth-error" class="error-msg"></div>
+        </div>
+
+        <!-- Основной интерфейс заданий -->
+        <div id="main-interface" class="hud-box hidden">
+            <header class="hud-header">
+                <span id="hud-user-info">Пользователь: </span>
+                <span id="hud-timer">Время сессии: 00:00</span>
+            </header>
+
+            <main class="tasks-container">
+                <!-- ЗАДАНИЕ 1 -->
+                <section class="task-card" data-task="1">
+                    <h3>Задание 1. Первооткрыватель микромира</h3>
+                    <p class="task-question">Учёный, впервые обнаруживший одноклеточные организмы в воде:</p>
+                    <div class="radio-group">
+                        <label><input type="radio" name="task1" value="гук"> Р. Гук</label>
+                        <label><input type="radio" name="task1" value="левенгук"> А. Левенгук</label>
+                        <label><input type="radio" name="task1" value="шлейден"> М. Шлейден</label>
+                        <label><input type="radio" name="task1" value="шванн"> Т. Шванн</label>
+                    </div>
+                </section>
+
+                <!-- ЗАДАНИЕ 2 -->
+                <section class="task-card" data-task="2">
+                    <h3>Задание 2. Терминология цитологии</h3>
+                    <p class="task-desc">Вставьте верные биологические термины, ориентируясь по опорным начальным буквам.</p>
+                    <div class="task-grid-inputs">
+                        <div class="input-row">
+                            <span style="width:50px;">К М</span>
+                            <input type="text" id="task2-1" placeholder="Животная клетка покрыта тонкой...">
+                        </div>
+                        <div class="input-row">
+                            <span style="width:50px;">К М</span>
+                            <input type="text" id="task2-2" placeholder="Она образует поверхность клетки... На ней появляются выросты...">
+                        </div>
+                        <div class="input-row">
+                            <span style="width:50px;">П</span>
+                            <input type="text" id="task2-3" placeholder="... — мельчайшие отверстия, которые содержит мембрана">
+                        </div>
+                        <div class="input-row">
+                            <span style="width:50px;">О</span>
+                            <input type="text" id="task2-4" placeholder="... — постоянные, жизненно важные части клетки">
+                        </div>
+                        <div class="input-row">
+                            <span style="width:50px;">Ц</span>
+                            <input type="text" id="task2-5" placeholder="Органоиды расположены в...">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ЗАДАНИЕ 3 -->
+                <section class="task-card" data-task="3">
+                    <h3>Задание 3. Отличия от растительной клетки</h3>
+                    <p class="task-question">Отсутствие каких органоидов в животной клетке является существенным отличием её от растительной?</p>
+                    <div class="radio-group">
+                        <label><input type="radio" name="task3" value="митохондрий"> митохондрий</label>
+                        <label><input type="radio" name="task3" value="лизосом"> лизосом</label>
+                        <label><input type="radio" name="task3" value="рибосом"> рибосом</label>
+                        <label><input type="radio" name="task3" value="гольджи"> комплекса Гольджи</label>
+                        <label><input type="radio" name="task3" value="пластид"> пластид</label>
+                    </div>
+                </section>
+                <!-- ЗАДАНИЕ 4 (Работа со схемой cell.png) -->
+                <section class="task-card" data-task="4">
+                    <h3>Задание 4. Хранение наследственной информации</h3>
+                    <p class="task-question">Какой цифрой обозначен органоид клетки, который несёт в себе всю наследственную информацию?</p>
+                    <div style="text-align:center; margin:15px 0;">
+                        <img src="cell.png" alt="Строение клетки" style="max-width:100%; height:auto; max-height:320px; border:1px solid var(--border-color);">
+                    </div>
+                    <div class="radio-group">
+                        <label><input type="radio" name="task4" value="2"> Цифра 2</label>
+                        <label><input type="radio" name="task4" value="6"> Цифра 6</label>
+                        <label><input type="radio" name="task4" value="7"> Цифра 7</label>
+                        <label><input type="radio" name="task4" value="8"> Цифра 8</label>
+                        <label><input type="radio" name="task4" value="5"> Цифра 5</label>
+                    </div>
+                </section>
+
+                <!-- ЗАДАНИЕ 5 -->
+                <section class="task-card" data-task="5">
+                    <h3>Задание 5. Энергетические станции клетки</h3>
+                    <p class="task-question">Органоиды клетки, которые преобразуют и запасают энергию для жизненных процессов клетки, называются:</p>
+                    <div class="radio-group">
+                        <label><input type="radio" name="task5" value="рибосомами"> рибосомами</label>
+                        <label><input type="radio" name="task5" value="лизосомами"> лизосомами</label>
+                        <label><input type="radio" name="task5" value="митохондриями"> митохондриями</label>
+                        <label><input type="radio" name="task5" value="ядром"> ядром и ядрышком</label>
+                        <label><input type="radio" name="task5" value="гольджи"> комплексом Гольджи</label>
+                        <label><input type="radio" name="task5" value="эпс"> эндоплазматической сетью</label>
+                    </div>
+                </section>
+
+                <!-- ЗАДАНИЕ 6 (Сенсорное сопоставление) -->
+                <section class="task-card" data-task="6">
+                    <h3>Задание 6. Названия органоидов и их функции</h3>
+                    <p class="task-desc">Последовательно нажимайте на плашку с органоидом слева и соответствующую ему функцию справа.</p>
+                    <div class="connections-wrapper">
+                        <div class="connect-column" id="col-organoids">
+                            <div class="connect-item" data-id="nucleus">Ядро</div>
+                            <div class="connect-item" data-id="goldgi">Аппарат Гольджи</div>
+                            <div class="connect-item" data-id="vacuole">Вакуоль</div>
+                            <div class="connect-item" data-id="membrane">Клеточная мембрана</div>
+                            <div class="connect-item" data-id="center">Клеточный центр</div>
+                            <div class="connect-item" data-id="ribosomes">Рибосомы</div>
+                            <div class="connect-item" data-id="lysosomes">Лизосомы</div>
+                            <div class="connect-item" data-id="eps">Эндоплазматическая сеть</div>
+                            <div class="connect-item" data-id="mitochondria">Митохондрии</div>
+                        </div>
+                        <div class="connect-column" id="col-functions">
+                            <div class="connect-item" data-match="nucleus">Наследственная информация</div>
+                            <div class="connect-item" data-match="vacuole">Клеточный сок</div>
+                            <div class="connect-item" data-match="ribosomes">Синтез белка</div>
+                            <div class="connect-item" data-match="eps">Перемещение веществ</div>
+                            <div class="connect-item" data-match="goldgi">Синтез жиров и липидов</div>
+                            <div class="connect-item" data-match="lysosomes">Расщепление веществ</div>
+                            <div class="connect-item" data-match="membrane">Отделяет внутреннее от наружного</div>
+                            <div class="connect-item" data-match="center">Деление клетки</div>
+                            <div class="connect-item" data-match="mitochondria">Запас энергии</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ЗАДАНИЕ 7 -->
+                <section class="task-card" data-task="7">
+                    <h3>Задание 7. Регуляция и размножение</h3>
+                    <p class="task-question">Органоиды, которые регулируют обмен веществ, обеспечивают хранение и передачу наследственных признаков при размножении, называются:</p>
+                    <div class="radio-group">
+                        <label><input type="radio" name="task7" value="хлоропластами"> хлоропластами</label>
+                        <label><input type="radio" name="task7" value="лейкопластами"> лейкопластами</label>
+                        <label><input type="radio" name="task7" value="хромосомами"> хромосомами</label>
+                        <label><input type="radio" name="task7" value="хромопластами"> хромопластами</label>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="hud-footer">
+                <button id="submit-btn" class="hud-btn action-btn">Сформировать и отправить отчет</button>
+            </footer>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
