@@ -125,37 +125,49 @@ function setupControlListeners() {
     });
 }
 
-// --- ГЕНЕРАЦИЯ И ДВИЖЕНИЕ ИОНОВ ---
 function initGame() {
+    // ПРИНУДИТЕЛЬНЫЙ ПЕРЕСЧЕТ: холст открылся, теперь мы берем его реальные размеры
+    if (canvas) {
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+    }
+
+    // Инициализация сетки и сброс параметров
     grid = Array.from({ length: ROWS }, () => Array(COLS).fill(null));
     score = 0;
     isGameOver = false;
     flyingGases = [];
+    
     document.getElementById("score-val").innerText = "0000";
     document.getElementById("current-formula").innerText = "-";
+    
+    // Спавним первый ион и запускаем таймер
     spawnIon();
     lastTime = performance.now();
     requestAnimationFrame(gameLoop);
 }
 
 function spawnIon() {
-    // Рандомно выбираем: катион или анион
+    // Случайный выбор: катионы или анионы
     const pool = Math.random() < 0.5 ? CATIONS : ANIONS;
     const template = pool[Math.floor(Math.random() * pool.length)];
     
+    // Создаем глубокую копию, чтобы не сломать базу данных
     currentIon = {
-        ...template,
-        x: Math.floor(COLS / 2) - 1,
-        y: 0
+        id: template.id,
+        name: template.name,
+        charge: template.charge,
+        type: template.type,
+        x: 4, // Ровно по центру стакана (столбец №5)
+        y: 0  // На самой верхней строчке
     };
 
-    // Если на стартовой позиции уже есть ион — геймовер
+    // Если место занято — конец игры
     if (grid[currentIon.y][currentIon.x] !== null) {
         isGameOver = true;
         alert(`Лаборатория закрыта! Игра окончена. Очки: ${score}`);
     }
 }
-
 function moveIon(dir) {
     if (!currentIon) return;
     const newX = currentIon.x + dir;
