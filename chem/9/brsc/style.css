@@ -258,37 +258,36 @@ body, html {
 #main-game-layout {
     display: flex;
     width: 100%;
-    flex: 1;
+    height: calc(100vh - 80px); /* Вычитаем высоту шапки HUD */
     justify-content: space-between;
     align-items: center;
     position: relative;
+    padding: 10px 0;
 }
 
 /* Зоны управления под пальцы по краям экрана */
 .control-zone {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 22%;
+    width: 20%;
     height: 100%;
     justify-content: center;
     align-items: center;
     z-index: 10;
 }
 
+/* Разносим левые кнопки по бокам для удобства тапа */
 .left-controls {
-    flex-direction: row;
-    justify-content: space-around;
+    gap: 15px;
 }
 
 /* Большие наэкранные кнопки */
 .ctrl-btn {
-    width: 75px;
-    height: 75px;
-    background: rgba(20, 30, 40, 0.6);
+    width: 70px;
+    height: 70px;
+    background: rgba(20, 30, 40, 0.8);
     border: 2px solid #3a4a5a;
     color: #fff;
-    font-size: 2rem;
+    font-size: 1.8rem;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -296,12 +295,13 @@ body, html {
     outline: none;
     transition: background 0.1s, transform 0.1s;
     -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
 }
 
 .ctrl-btn:active {
     background: rgba(0, 255, 136, 0.3);
     border-color: var(--br-green);
-    transform: scale(0.92);
+    transform: scale(0.9);
 }
 
 .right-controls .ctrl-btn:active {
@@ -316,16 +316,17 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
     border-radius: 8px;
     border: 1px solid #1a2530;
-    padding: 5px;
+    position: relative;
 }
 
-/* Холст игрового поля */
+/* Холст игрового поля: жесткие пропорции тетриса 1:2 */
 #game-canvas {
-    height: 100%;
-    aspect-ratio: 1 / 2; /* Пропорции стакана тетриса 10x20 */
+    max-height: 100%;
+    width: auto;
+    aspect-ratio: 1 / 2; 
     background: #05080b;
     border: 2px solid #223344;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
