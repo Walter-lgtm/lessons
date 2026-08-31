@@ -222,7 +222,6 @@ function checkChemicalReaction(colIndex) {
         }
     }
 }
-
 function executeReaction(colIndex, participants, catId, anId) {
     const reactionKey = `${catId}_${anId}`;
     const reactionResult = SOLUBILITY_TABLE[reactionKey] || { state: "R" };
@@ -239,18 +238,12 @@ function executeReaction(colIndex, participants, catId, anId) {
         participants.forEach(p => {
             if (grid[p.row][colIndex]) grid[p.row][colIndex].flashColor = reactionResult.color || "#FFFFFF";
         });
-        
-        // Замораживаем стакан на 250мс, чтобы ученик увидел цветной осадок, затем удаляем его
-        setTimeout(() => { 
-            removeIonsFromGrid(participants, colIndex); 
-        }, 250);
-
+        setTimeout(() => { removeIonsFromGrid(participants, colIndex); }, 250);
     } else {
-        // СЛУЧАЙ РАСТВОРЕНИЯ (Растворимые соли/кислоты)
-        // Ионы исчезают мгновенно, как стандартные линии в тетрисе
         removeIonsFromGrid(participants, colIndex);
     }
 }
+
 function removeIonsFromGrid(participants, colIndex) {
     participants.forEach(p => { grid[p.row][colIndex] = null; });
     let tempCol = [];
@@ -263,4 +256,57 @@ function removeIonsFromGrid(participants, colIndex) {
         grid[targetRow][colIndex] = tempCol[i];
         targetRow--;
     }
+}
+
+function updateFormulaHUD(catId, anId, gasName) {
+    const formulaDisplay = document.getElementById("current-formula");
+    if (gasName) {
+        formulaDisplay.innerHTML = gasName === "CO2" ? "CO₂↑ (Газ!)" : "NH₃↑ (Газ!)";
+        return;
+    }
+    const cationObj = CATIONS.find(c => c.id === catId);
+    const anionObj = ANIONS.find(a => a.id === anId);
+    if (!cationObj || !anionObj) return;
+
+    const lcm = findLCM(cationObj.charge, anionObj.charge);
+    const indexCat = lcm / Math.abs(cationObj.charge);
+    const indexAn = lcm / Math.abs(anionObj.charge);
+
+    let cleanCat = cationObj.name.replace(/[⁺²³\s]/g, '').replace(/\d/g, '');
+    let cleanAn = anionObj.name.replace(/[⁻²³\s]/g, '').replace(/\d/g, '');
+
+    if (cleanCat === "NH") cleanCat = "NH₄";
+    if (cleanAn === "NO") cleanAn = "NO₃";
+    if (cleanAn === "SO") cleanAn = "SO₄";
+    if (cleanAn === "PO") cleanAn = "PO₄";
+    if (cleanAn === "CO") cleanAn = "CO₃";
+
+    if (indexAn > 1 && ["NO₃", "SO₄", "PO₄", "CO₃"].includes(cleanAn)) cleanAn = `(${cleanAn})`;
+    if (indexCat > 1 && cleanCat === "NH₄") cleanCat = `(NH₄)`;
+
+    formulaDisplay.innerText = `${cleanCat}${SUBSCRIPT_NUMBERS[String(indexCat)] || ''}${cleanAn}${SUBSCRIPT_NUMBERS[String(indexAn)] || ''}`;
+}
+
+function gameLoop(timestamp) {
+    if (isGameOver) return;
+    let deltaTime = timestamp - lastTime;
+    lastTime = timestamp;
+    dropCounter += deltaTime;
+
+    let currentSpeed = baseSpeed * Math.pow(0.80, level - 1);
+
+    if (dropCounter > currentSpeed) {
+        dropIon();
+        dropCounter = 0;
+    }
+
+    // Обновление анимации газов
+    for (let i = flyingGases.length - 1; i >= 0; i--) {
+        flyingGases[i].y -= 0.15;
+        flyingGases[i].alpha -= 0.02;
+        if (flyingGases[i].alpha <= 0) flyingGases.splice(i, 1);
+    }
+
+    draw();
+    requestAnimationFrame(gameLoop);
 }
