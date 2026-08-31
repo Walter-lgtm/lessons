@@ -1,37 +1,39 @@
 /* Переменные проекта */
 :root {
-    --bg-color: #0b0f12;          /* Глубокий химический черный */
-    --br-green: #00ff88;          /* Изумрудный неон (Breaking) */
-    --sc-pink: #ff2a85;           /* Розовый неон (Science) */
-    --terminal-green: #39ff14;    /* Зеленый цвет текста терминала */
-    --hud-blue: #00d2ff;          /* Синий цвет для кристаллов и очков */
-    --panel-bg: rgba(16, 23, 30, 0.85);
+    --bg-color: #0b0f12;          
+    --br-green: #00ff88;          
+    --sc-pink: #ff2a85;           
+    --terminal-green: #39ff14;    
+    --hud-blue: #00d2ff;          
+    --panel-bg: rgba(16, 23, 30, 0.9);
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    -webkit-user-select: none;    /* Блокировка выделения текста на смартфонах */
+    -webkit-user-select: none;    
     user-select: none;
-    font-family: 'Courier New', Courier, monospace; /* Стиль терминала */
+    font-family: 'Courier New', Courier, monospace; 
 }
 
 body, html {
     width: 100%;
-    height: 100%;
+    /* dvh — динамически подстраивается под появление/исчезновение панелей браузера */
+    height: 100dvh; 
     overflow: hidden;
     background-color: var(--bg-color);
     color: #fff;
+    position: relative;
 }
 
-/* Принудительный альбомный режим через CSS */
+/* Предупреждение о повороте экрана */
 #rotate-warning {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     background: var(--bg-color);
     z-index: 9999;
     display: flex;
@@ -39,7 +41,6 @@ body, html {
     align-items: center;
 }
 
-/* Если экран в портретном режиме — показываем плашку */
 @media (orientation: landscape) {
     #rotate-warning {
         display: none;
@@ -48,29 +49,23 @@ body, html {
 
 .warning-box {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: var(--br-green);
     padding: 20px;
     border: 2px dashed var(--br-green);
-    animation: blink 1.5s infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
 }
 
 /* Главный контейнер */
 #game-container {
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     position: relative;
     background: radial-gradient(circle, #15222e 0%, #0b0f12 100%);
 }
 
 .screen {
     width: 100%;
-    height: 100%;
+    height: 100dvh;
     position: absolute;
     top: 0;
     left: 0;
@@ -78,153 +73,91 @@ body, html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
 }
 
 .hidden {
     display: none !important;
 }
-/* Дизайн логотипа Breaking Science */
+
+/* Логотип */
 .logo {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     font-weight: bold;
-    letter-spacing: 2px;
-    margin-bottom: 40px;
-    text-transform: uppercase;
+    margin-bottom: 25px;
     color: #ffffff;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-/* Квадратные ячейки таблицы Менделеева */
 .element-box {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 75px;
-    height: 75px;
-    border-width: 3px;
-    border-style: solid;
-    font-size: 2.8rem;
-    position: relative;
-    font-weight: 900;
+    width: 55px;
+    height: 55px;
+    border: 3px solid;
+    font-size: 2rem;
 }
 
-/* Атомные номера в углах плашек */
-.element-box::before {
-    position: absolute;
-    top: 2px;
-    left: 4px;
-    font-size: 0.7rem;
-    font-weight: normal;
-}
+.br { border-color: var(--br-green); color: var(--br-green); background: rgba(0, 255, 136, 0.1); }
+.sc { border-color: var(--sc-pink); color: var(--sc-pink); background: rgba(255, 42, 133, 0.1); }
 
-.br {
-    border-color: var(--br-green);
-    color: var(--br-green);
-    background: rgba(0, 255, 136, 0.1);
-    box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
-}
-.br::before {
-    content: "35";
-    color: var(--br-green);
-}
-
-.sc {
-    border-color: var(--sc-pink);
-    color: var(--sc-pink);
-    background: rgba(255, 42, 133, 0.1);
-    box-shadow: 0 0 20px rgba(255, 42, 133, 0.4);
-}
-.sc::before {
-    content: "21";
-    color: var(--sc-pink);
-}
-
-/* Стилизация интерактивных кнопок меню */
 .menu-buttons {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    width: 320px;
+    gap: 10px;
+    width: 280px;
 }
 
 .btn {
     background: var(--panel-bg);
     border: 2px solid #4a5a6a;
     color: #e0e0e0;
-    padding: 12px 20px;
-    font-size: 1.1rem;
+    padding: 10px;
+    font-size: 1rem;
     cursor: pointer;
     border-radius: 4px;
-    transition: all 0.2s ease;
     text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
-.btn:active, .btn:hover {
+.btn:active {
     border-color: var(--br-green);
     color: var(--br-green);
-    box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
-    background: rgba(0, 255, 136, 0.05);
 }
 
-.btn.active {
-    border-color: var(--sc-pink);
-    color: var(--sc-pink);
-    box-shadow: 0 0 15px rgba(255, 42, 133, 0.3);
-    background: rgba(255, 42, 133, 0.05);
-}
-
-.back-btn {
-    margin-top: 20px;
-    width: 150px;
-}
-
-/* Окно правил */
 .rules-text {
     background: var(--panel-bg);
     border: 1px solid #334455;
-    padding: 20px;
-    max-width: 600px;
-    max-height: 50vh;
+    padding: 15px;
+    max-width: 500px;
+    max-height: 60vh;
     overflow-y: auto;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    line-height: 1.5;
+    font-size: 0.85rem;
 }
 
-.rules-text p {
-    margin-bottom: 12px;
-}
-/* Игровой экран матча */
+/* ИГРОВОЙ ЭКРАН (HUD Матча) */
 #play-screen {
     justify-content: flex-start;
-    padding: 10px;
+    padding: 5px;
 }
 
-/* Верхнее табло (HUD) */
 #game-header {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
-    height: 50px;
+    height: 40px;
+    margin-bottom: 5px;
 }
 
 .hud-box {
     background: var(--panel-bg);
     border: 1px solid #2a3a4a;
-    padding: 8px 15px;
+    padding: 5px 10px;
     border-radius: 4px;
-    font-size: 1.1rem;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    font-size: 0.9rem;
 }
 
 #formula-display {
@@ -237,71 +170,56 @@ body, html {
     border-right: 4px solid var(--hud-blue);
     color: var(--hud-blue);
     font-weight: bold;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-    font-size: 1rem;
+    text-align: right;
 }
 
 #level-display {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #8a9aaa;
-    margin-top: 2px;
 }
 
-.crystal {
-    font-size: 1.2rem;
-    text-shadow: 0 0 10px var(--hud-blue);
-}
-
-/* Игровая раскладка для альбомного режима */
+/* Игровая зона под мобильные панели */
 #main-game-layout {
     display: flex;
     width: 100%;
-    height: calc(100vh - 80px); /* Вычитаем высоту шапки HUD */
+    height: calc(100dvh - 55px); /* Идеальное вычитание под мобильную шапку */
     justify-content: space-between;
     align-items: center;
     position: relative;
-    padding: 10px 0;
 }
 
-/* Зоны управления под пальцы по краям экрана */
 .control-zone {
     display: flex;
-    width: 20%;
+    width: 22%;
     height: 100%;
     justify-content: center;
     align-items: center;
     z-index: 10;
 }
 
-/* Разносим левые кнопки по бокам для удобства тапа */
 .left-controls {
-    gap: 15px;
+    gap: 10px;
 }
 
-/* Большие наэкранные кнопки */
+/* Адаптивные сенсорные кнопки */
 .ctrl-btn {
-    width: 70px;
-    height: 70px;
-    background: rgba(20, 30, 40, 0.8);
+    width: 60px;
+    height: 60px;
+    background: rgba(20, 30, 40, 0.85);
     border: 2px solid #3a4a5a;
     color: #fff;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     outline: none;
-    transition: background 0.1s, transform 0.1s;
     -webkit-tap-highlight-color: transparent;
-    cursor: pointer;
 }
 
 .ctrl-btn:active {
     background: rgba(0, 255, 136, 0.3);
     border-color: var(--br-green);
-    transform: scale(0.9);
 }
 
 .right-controls .ctrl-btn:active {
@@ -309,26 +227,34 @@ body, html {
     border-color: var(--sc-pink);
 }
 
-/* Контейнер для стакана тетриса */
+/* Монолитный контейнер стакана */
 #canvas-container {
     flex: 1;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 8px;
-    border: 1px solid #1a2530;
     position: relative;
+    padding: 2px;
 }
 
-/* Холст игрового поля: жесткие пропорции тетриса 1:2 */
+/* Автомасштабируемый холст: сжимается, но держит пропорции 1:2 */
 #game-canvas {
     max-height: 100%;
-    width: auto;
+    max-width: 100%;
     aspect-ratio: 1 / 2; 
     background: #05080b;
     border: 2px solid #223344;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
     display: block;
+}
+
+/* Специфичные исправления для совсем узких смартфонов */
+@media (max-height: 400px) {
+    .ctrl-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    .logo { font-size: 1.8rem; }
+    .element-box { width: 40px; height: 40px; font-size: 1.4rem; }
 }
