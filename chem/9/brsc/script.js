@@ -361,16 +361,93 @@ function removeIonsFromGrid(participants, colIndex) {
     }
 }
 
+// Функция для поиска Наименьшего Общего Кратного (НОК) для расчета индексов
+function findLCM(a, b) {
+    const absA = Math.abs(a);
+    const absB = Math.abs(b);
+    
+    // Сначала ищем Наибольший Общий Делитель (НОД) алгоритмом Евклида
+    let gcd = absA;
+    let tempB = absB;
+    while (tempB) {
+        let t = tempB;
+        tempB = gcd % tempB;
+        gcd = t;
+    }
+    // Вычисляем НОК
+    return (absA * absB) / gcd;
+}
+
+// Карта перевода обычных цифр в химические нижние индексы (Subscript)
+const SUBSCRIPT_NUMBERS = {
+    '0': '₀', '1': '',  // Если индекс 1, в химии он не пишется (пустая строка)
+    '2': '₂', '3': '₃', '4': '₄', '5': '₅', '6': '₆', '7': '₇', '8': '₈', '9': '₉'
+};
+
 function updateFormulaHUD(catIds, anIds, gasName) {
+    const formulaDisplay = document.getElementById("current-formula");
+    
+    // Если выделился газ, выводим его красивую заготовку
     if (gasName) {
-        document.getElementById("current-formula").innerText = `${gasName}↑ (Газ!)`;
+        if (gasName === "CO2") formulaDisplay.innerHTML = "CO₂↑ <span style='color:#ff2a85; font-size:0.8rem;'>(Газ!)</span>";
+        if (gasName === "NH3") formulaDisplay.innerHTML = "NH₃↑ <span style='color:#ff2a85; font-size:0.8rem;'>(Газ!)</span>";
         return;
     }
     
-    // Простейшая сборка текстовой формулы на основе уникальных ионов
-    const catName = catIds[0].replace('+', '');
-    const anName = anIds[0].replace('-', '');
-    document.getElementById("current-formula").innerText = catName + anName;
+    // 1. Получаем чистые объекты ионов из базы, чтобы узнать их точные заряды
+    const cationObj = CATIONS.find(c => c.id === catIds[0]); // Берем первый катион из массива
+    const anionObj = ANIONS.find(a => a.id === anIds[0]);   // Берем первый анион из массива
+    
+    if (!cationObj || !anionObj) {
+        formulaDisplay.innerText = "-";
+        return;
+    }
+
+    // 2. Считаем индексы через НОК зарядов
+    const chargeCat = Math.abs(cationObj.charge);
+    const chargeAn = Math.abs(anionObj.charge);
+    const lcm = findLCM(chargeCat, chargeAn);
+    
+    const indexCat = lcm / chargeCat; // Индекс для катиона
+    const indexAn = lcm / chargeAn;   // Индекс для аниона
+
+    // 3. Очищаем имена от знаков зарядов для сборки формулы (например, "Na+" -> "Na")
+    let cleanCatName = cationObj.name.replace(/[⁺⁺²³\s]/g, '').replace(/\d/g, '');
+    let cleanAnName = anionObj.name.replace(/[⁻⁻²³\s]/g, '').replace(/\d/g, '');
+    
+    // Специфический фикс для сложных ионов (NH4, NO3, SO4, PO4, CO3)
+    // Если у сложного аниона индекс больше 1, его нужно взять в скобки, например: Ca(NO₃)₂
+    if (indexCat > 1 && cleanCatName === "NH") cleanCatName = "NH₄"; // Для аммония индекс 4 всегда на месте
+    if (cleanCatName === "NH") cleanCatName = "NH₄";
+    
+    // Восстанавливаем внутренние индексы сложных анионов (кислотных остатков)
+    if (cleanAnName === "NO") cleanAnName = "NO₃";
+    if (cleanAnName === "SO") cleanAnName = "SO₄";
+    if (cleanAnName === "PO") cleanAnName = "PO₄";
+    if (cleanAnName === "CO") cleanAnName = "CO₃";
+
+    // Если индекс сложного аниона > 1, оборачиваем его в скобки. Пример: Ba(NO₃)₂
+    const polyatomicAnions = ["NO₃", "SO₄", "PO₄", "CO₃"];
+    let finalAnPart = cleanAnName;
+    if (indexAn > 1 && polyatomicAnions.includes(cleanAnName)) {
+        finalAnPart = `(${cleanAnName})`;
+    }
+    
+    // Если индекс катиона NH4 > 1, тоже берем в скобки. Пример: (NH₄)₂SO₄
+    let finalCatPart = cleanCatName;
+    if (indexCat > 1 && cleanCatName === "NH₄") {
+        finalCatPart = `(NH₄)`;
+    }
+
+    // 4. Переводим рассчитанные индексы в красивые подстрочные знаки
+    const subCat = SUBSCRIPT_NUMBERS[String(indexCat)] || '';
+    const subAn = SUBSCRIPT_NUMBERS[String(indexAn)] || '';
+
+    // Склеиваем финальную формулу
+    const finalFormula = `${finalCatPart}${subCat}${finalAnPart}${subAn}`;
+    
+    // Выводим в интерфейс терминала
+    formulaDisplay.innerText = finalFormula;
 }
 // --- ИГРОВОЙ ЦИКЛ (ОБНОВЛЕНИЕ ФИЗИКИ) ---
 function gameLoop(timestamp) {
