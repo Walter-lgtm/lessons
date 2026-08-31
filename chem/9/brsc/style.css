@@ -1,0 +1,333 @@
+/* Переменные проекта */
+:root {
+    --bg-color: #0b0f12;          /* Глубокий химический черный */
+    --br-green: #00ff88;          /* Изумрудный неон (Breaking) */
+    --sc-pink: #ff2a85;           /* Розовый неон (Science) */
+    --terminal-green: #39ff14;    /* Зеленый цвет текста терминала */
+    --hud-blue: #00d2ff;          /* Синий цвет для кристаллов и очков */
+    --panel-bg: rgba(16, 23, 30, 0.85);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-user-select: none;    /* Блокировка выделения текста на смартфонах */
+    user-select: none;
+    font-family: 'Courier New', Courier, monospace; /* Стиль терминала */
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--bg-color);
+    color: #fff;
+}
+
+/* Принудительный альбомный режим через CSS */
+#rotate-warning {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Если экран в портретном режиме — показываем плашку */
+@media (orientation: landscape) {
+    #rotate-warning {
+        display: none;
+    }
+}
+
+.warning-box {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--br-green);
+    padding: 20px;
+    border: 2px dashed var(--br-green);
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* Главный контейнер */
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background: radial-gradient(circle, #15222e 0%, #0b0f12 100%);
+}
+
+.screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+/* Дизайн логотипа Breaking Science */
+.logo {
+    font-size: 3.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Квадратные ячейки таблицы Менделеева */
+.element-box {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 75px;
+    height: 75px;
+    border-width: 3px;
+    border-style: solid;
+    font-size: 2.8rem;
+    position: relative;
+    font-weight: 900;
+}
+
+/* Атомные номера в углах плашек */
+.element-box::before {
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    font-size: 0.7rem;
+    font-weight: normal;
+}
+
+.br {
+    border-color: var(--br-green);
+    color: var(--br-green);
+    background: rgba(0, 255, 136, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+}
+.br::before {
+    content: "35";
+    color: var(--br-green);
+}
+
+.sc {
+    border-color: var(--sc-pink);
+    color: var(--sc-pink);
+    background: rgba(255, 42, 133, 0.1);
+    box-shadow: 0 0 20px rgba(255, 42, 133, 0.4);
+}
+.sc::before {
+    content: "21";
+    color: var(--sc-pink);
+}
+
+/* Стилизация интерактивных кнопок меню */
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 320px;
+}
+
+.btn {
+    background: var(--panel-bg);
+    border: 2px solid #4a5a6a;
+    color: #e0e0e0;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn:active, .btn:hover {
+    border-color: var(--br-green);
+    color: var(--br-green);
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+    background: rgba(0, 255, 136, 0.05);
+}
+
+.btn.active {
+    border-color: var(--sc-pink);
+    color: var(--sc-pink);
+    box-shadow: 0 0 15px rgba(255, 42, 133, 0.3);
+    background: rgba(255, 42, 133, 0.05);
+}
+
+.back-btn {
+    margin-top: 20px;
+    width: 150px;
+}
+
+/* Окно правил */
+.rules-text {
+    background: var(--panel-bg);
+    border: 1px solid #334455;
+    padding: 20px;
+    max-width: 600px;
+    max-height: 50vh;
+    overflow-y: auto;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.rules-text p {
+    margin-bottom: 12px;
+}
+/* Игровой экран матча */
+#play-screen {
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+/* Верхнее табло (HUD) */
+#game-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    height: 50px;
+}
+
+.hud-box {
+    background: var(--panel-bg);
+    border: 1px solid #2a3a4a;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#formula-display {
+    border-left: 4px solid var(--br-green);
+    color: var(--terminal-green);
+    font-weight: bold;
+}
+
+#score-display {
+    border-right: 4px solid var(--hud-blue);
+    color: var(--hud-blue);
+    font-weight: bold;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+#level-display {
+    font-size: 0.75rem;
+    color: #8a9aaa;
+    margin-top: 2px;
+}
+
+.crystal {
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px var(--hud-blue);
+}
+
+/* Игровая раскладка для альбомного режима */
+#main-game-layout {
+    display: flex;
+    width: 100%;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+/* Зоны управления под пальцы по краям экрана */
+.control-zone {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 22%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.left-controls {
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+/* Большие наэкранные кнопки */
+.ctrl-btn {
+    width: 75px;
+    height: 75px;
+    background: rgba(20, 30, 40, 0.6);
+    border: 2px solid #3a4a5a;
+    color: #fff;
+    font-size: 2rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    transition: background 0.1s, transform 0.1s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.ctrl-btn:active {
+    background: rgba(0, 255, 136, 0.3);
+    border-color: var(--br-green);
+    transform: scale(0.92);
+}
+
+.right-controls .ctrl-btn:active {
+    background: rgba(255, 42, 133, 0.3);
+    border-color: var(--sc-pink);
+}
+
+/* Контейнер для стакана тетриса */
+#canvas-container {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    border: 1px solid #1a2530;
+    padding: 5px;
+}
+
+/* Холст игрового поля */
+#game-canvas {
+    height: 100%;
+    aspect-ratio: 1 / 2; /* Пропорции стакана тетриса 10x20 */
+    background: #05080b;
+    border: 2px solid #223344;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+    display: block;
+}
