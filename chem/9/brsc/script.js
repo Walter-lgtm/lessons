@@ -310,3 +310,78 @@ function gameLoop(timestamp) {
     draw();
     requestAnimationFrame(gameLoop);
 }
+function draw() {
+    if (!canvas || !ctx) return;
+    
+    // Динамическая калибровка разрешения прямо во время цикла
+    if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+    }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const w = canvas.width / COLS;
+    const h = canvas.height / ROWS;
+
+    // Сетка стакана
+    ctx.strokeStyle = "rgba(57, 255, 20, 0.15)";
+    ctx.lineWidth = 1;
+    for (let c = 1; c < COLS; c++) { ctx.beginPath(); ctx.moveTo(c * w, 0); ctx.lineTo(c * w, canvas.height); ctx.stroke(); }
+    for (let r = 1; r < ROWS; r++) { ctx.beginPath(); ctx.moveTo(0, r * h); ctx.lineTo(canvas.width, r * h); ctx.stroke(); }
+
+    // Отрисовка зафиксированных ионов
+    for (let r = 0; r < ROWS; r++) {
+        for (let c = 0; c < COLS; c++) {
+            if (grid[r][c]) drawBlock(grid[r][c], c, r, w, h);
+        }
+    }
+
+    // Отрисовка летящего иона
+    if (currentIon) drawBlock(currentIon, currentIon.x, currentIon.y, w, h);
+
+    // Отрисовка газов
+    flyingGases.forEach(g => {
+        ctx.save();
+        ctx.globalAlpha = g.alpha;
+        ctx.strokeStyle = "#ffffff";
+        ctx.strokeRect(g.x * w + 2, g.y * h + 2, w - 4, h - 4);
+        ctx.fillStyle = "#ffffff";
+        ctx.font = `bold ${h * 0.4}px 'Courier New'`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(g.name + "↑", g.x * w + w / 2, g.y * h + h / 2);
+        ctx.restore();
+    });
+}
+
+function drawBlock(ion, x, y, w, h) {
+    ctx.save();
+    const px = x * w;
+    const py = y * h;
+
+    if (ion.flashColor) {
+        ctx.fillStyle = ion.flashColor;
+        ctx.strokeStyle = "#ffffff";
+    } else {
+        if (ion.type === "cation") {
+            ctx.fillStyle = "rgba(0, 255, 136, 0.2)";
+            ctx.strokeStyle = "#00ff88";
+        } else {
+            ctx.fillStyle = "rgba(255, 42, 133, 0.2)";
+            ctx.strokeStyle = "#ff2a85";
+        }
+    }
+
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.roundRect(px + 2, py + 2, w - 4, h - 4, 4);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = `bold ${h * 0.38}px 'Courier New'`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(ion.name, px + w / 2, py + h / 2);
+    ctx.restore();
+}
