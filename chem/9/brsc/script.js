@@ -378,9 +378,10 @@ function drawBlock(ion, x, y, w, h) {
     ctx.fill();
     ctx.stroke();
 
+    // ЖЕСТКИЙ АДАПТИВ ШРИФТА: берем 60% от текущей ширины ячейки
     ctx.fillStyle = "#ffffff";
-// Используем 55% от ширины ячейки, чтобы буквы занимали максимум места
-ctx.font = `900 ${w * 0.55}px 'Courier New', monospace`;
+    const fontSize = Math.floor(w * 0.60); 
+    ctx.font = `900 ${fontSize}px 'Courier New', monospace`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(ion.name, px + w / 2, py + h / 2);
