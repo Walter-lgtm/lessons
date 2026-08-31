@@ -21,78 +21,19 @@ const ANIONS = [
     { id: "PO43-",name: "PO₄³⁻",charge: -3, type: "anion" }
 ];
 
-// Карта реакций ионного обмена (Таблица растворимости)
-// Ключ: "катион_анион". Результат: 'R' (растворимо), 'M' (малорастворимо), или цвет осадка.
 const SOLUBILITY_TABLE = {
-    // Водород H+
-    "H+_OH-":  { state: "R" },
-    "H+_Cl-":  { state: "R" },
-    "H+_I-":   { state: "R" },
-    "H+_NO3-": { state: "R" },
-    "H+_CO32-":{ state: "G", gas: "CO2" }, // Особый случай: Газ CO2
-    "H+_SO42-":{ state: "R" },
-    "H+_PO43-":{ state: "R" },
-    
-    // Аммоний NH4+
-    "NH4+_OH-":  { state: "G", gas: "NH3" }, // Особый случай: Газ NH3
-    "NH4+_Cl-":  { state: "R" },
-    "NH4+_I-":   { state: "R" },
-    "NH4+_NO3-": { state: "R" },
-    "NH4+_CO32-":{ state: "R" },
-    "NH4+_SO42-":{ state: "R" },
-    "NH4+_PO43-":{ state: "R" },
-
-    // Серебро Ag+
-    "Ag+_OH-":  { state: "I", color: "#8B4513" }, // Бурый осадок Ag2O
-    "Ag+_Cl-":  { state: "I", color: "#FFFFFF" }, // Белый творожистый осадок
-    "Ag+_I-":   { state: "I", color: "#FFFF00" }, // Желтый осадок
-    "Ag+_NO3-": { state: "R" },
-    "Ag+_CO32-":{ state: "I", color: "#FFFFE0" }, // Желтоватый осадок
-    "Ag+_SO42-":{ state: "M", color: "#FFFFFF" }, // Малорастворимый (белый)
-    "Ag+_PO43-":{ state: "I", color: "#FFD700" }, // Желтый осадок Ag3PO4
-
-    // Барий Ba2+
-    "Ba2+_OH-":  { state: "R" },
-    "Ba2+_Cl-":  { state: "R" },
-    "Ba2+_I-":   { state: "R" },
-    "Ba2+_NO3-": { state: "R" },
-    "Ba2+_CO32-":{ state: "I", color: "#FFFFFF" }, // Белый осадок
-    "Ba2+_SO42-":{ state: "I", color: "#FFFFFF" }, // Белый осадок BaSO4
-    "Ba2+_PO43-":{ state: "I", color: "#FFFFFF" }, // Белый осадок
-
-    // Кальций Ca2+
-    "Ca2+_OH-":  { state: "M", color: "#FFFFFF" },
-    "Ca2+_Cl-":  { state: "R" },
-    "Ca2+_I-":   { state: "R" },
-    "Ca2+_NO3-": { state: "R" },
-    "Ca2+_CO32-":{ state: "I", color: "#FFFFFF" }, // Белый осадок
-    "Ca2+_SO42-":{ state: "M", color: "#FFFFFF" },
-    "Ca2+_PO43-":{ state: "I", color: "#FFFFFF" },
-
-    // Медь Cu2+
-    "Cu2+_OH-":  { state: "I", color: "#0000FF" }, // Голубой осадок
-    "Cu2+_Cl-":  { state: "R" },
-    "Cu2+_I-":   { state: "R" },
-    "Cu2+_NO3-": { state: "R" },
-    "Cu2+_CO32-":{ state: "I", color: "#008080" }, // Сине-зеленый осадок
-    "Cu2+_SO42-":{ state: "R" },
-    "Cu2+_PO43-":{ state: "I", color: "#00008B" }, // Синий
-
-    // Железо Fe3+
-    "Fe3+_OH-":  { state: "I", color: "#A52A2A" }, // Бурый осадок Fe(OH)3
-    "Fe3+_Cl-":  { state: "R" },
-    "Fe3+_I-":   { state: "R" },
-    "Fe3+_NO3-": { state: "R" },
-    "Fe3+_CO32-":{ state: "I", color: "#A52A2A" }, // Гидролиз, бурый
-    "Fe3+_SO42-":{ state: "R" },
-    "Fe3+_PO43-":{ state: "I", color: "#FFFFE0" }, // Желто-белый
-
-    // Натрий и Калий (Все растворимы)
+    "H+_OH-": { state: "R" }, "H+_Cl-": { state: "R" }, "H+_I-": { state: "R" }, "H+_NO3-": { state: "R" }, "H+_SO42-": { state: "R" }, "H+_PO43-": { state: "R" },
+    "H+_CO32-": { state: "G", gas: "CO2" }, "NH4+_OH-": { state: "G", gas: "NH3" },
+    "NH4+_Cl-": { state: "R" }, "NH4+_I-": { state: "R" }, "NH4+_NO3-": { state: "R" }, "NH4+_CO32-": { state: "R" }, "NH4+_SO42-": { state: "R" }, "NH4+_PO43-": { state: "R" },
+    "Ag+_OH-": { state: "I", color: "#8B4513" }, "Ag+_Cl-": { state: "I", color: "#FFFFFF" }, "Ag+_I-": { state: "I", color: "#FFFF00" }, "Ag+_NO3-": { state: "R" }, "Ag+_CO32-": { state: "I", color: "#FFFFE0" }, "Ag+_SO42-": { state: "M", color: "#FFFFFF" }, "Ag+_PO43-": { state: "I", color: "#FFD700" },
+    "Ba2+_OH-": { state: "R" }, "Ba2+_Cl-": { state: "R" }, "Ba2+_I-": { state: "R" }, "Ba2+_NO3-": { state: "R" }, "Ba2+_CO32-": { state: "I", color: "#FFFFFF" }, "Ba2+_SO42-": { state: "I", color: "#FFFFFF" }, "Ba2+_PO43-": { state: "I", color: "#FFFFFF" },
+    "Ca2+_OH-": { state: "M", color: "#FFFFFF" }, "Ca2+_Cl-": { state: "R" }, "Ca2+_I-": { state: "R" }, "Ca2+_NO3-": { state: "R" }, "Ca2+_CO32-": { state: "I", color: "#FFFFFF" }, "Ca2+_SO42-": { state: "M", color: "#FFFFFF" }, "Ca2+_PO43-": { state: "I", color: "#FFFFFF" },
+    "Cu2+_OH-": { state: "I", color: "#0000FF" }, "Cu2+_Cl-": { state: "R" }, "Cu2+_I-": { state: "R" }, "Cu2+_NO3-": { state: "R" }, "Cu2+_CO32-": { state: "I", color: "#008080" }, "Cu2+_SO42-": { state: "R" }, "Cu2+_PO43-": { state: "I", color: "#00008B" },
+    "Fe3+_OH-": { state: "I", color: "#A52A2A" }, "Fe3+_Cl-": { state: "R" }, "Fe3+_I-": { state: "R" }, "Fe3+_NO3-": { state: "R" }, "Fe3+_CO32-": { state: "I", color: "#A52A2A" }, "Fe3+_SO42-": { state: "R" }, "Fe3+_PO43-": { state: "I", color: "#FFFFE0" },
     "Na+_OH-":{state:"R"}, "Na+_Cl-":{state:"R"}, "Na+_I-":{state:"R"}, "Na+_NO3-":{state:"R"}, "Na+_CO32-":{state:"R"}, "Na+_SO42-":{state:"R"}, "Na+_PO43-":{state:"R"},
     "K+_OH-":{state:"R"},  "K+_Cl-":{state:"R"},  "K+_I-":{state:"R"},  "K+_NO3-":{state:"R"},  "K+_CO32-":{state:"R"},  "K+_SO42-":{state:"R"},  "K+_PO43-":{state:"R"}
 };
 
-// Переменные игрового движка
 const COLS = 10;
 const ROWS = 20;
 let canvas, ctx;
@@ -100,20 +41,26 @@ let grid = [];
 let currentIon = null;
 let score = 0;
 let level = 1;
-let baseSpeed = 1000; // Стартовое время падения в мс
+let baseSpeed = 1000; 
 let dropCounter = 0;
 let lastTime = 0;
 let isGameOver = false;
-let flyingGases = []; // Массив для анимации улетающих газов
-// --- ИНИЦИАЛИЗАЦИЯ И МЕНЮ ---
+let flyingGases = []; 
+
+// --- ИНИЦИАЛИЗАЦИЯ С РАСЧЕТОМ ЭКРАНА ---
 document.addEventListener("DOMContentLoaded", () => {
     canvas = document.getElementById("game-canvas");
     ctx = canvas.getContext("2d");
     
-    // Адаптивное разрешение Canvas под размеры CSS-контейнера
-    const rect = canvas.getBoundingClientRect();
-    canvas.width = rect.width;
-    canvas.height = rect.height;
+    // Функция фиксации пропорций холста
+    function resizeCanvas() {
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientHeight;
+    }
+    
+    // Считаем размер при запуске и при перевороте смартфона
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
     setupMenuListeners();
     setupControlListeners();
