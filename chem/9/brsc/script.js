@@ -346,7 +346,7 @@ function draw() {
         ctx.strokeStyle = "#ffffff";
         ctx.strokeRect(g.x * w + 2, g.y * h + 2, w - 4, h - 4);
         ctx.fillStyle = "#ffffff";
-        ctx.font = `bold ${h * 0.4}px 'Courier New'`;
+        ctx.font = `900 ${w * 0.55}px 'Courier New', monospace`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(g.name + "↑", g.x * w + w / 2, g.y * h + h / 2);
@@ -379,7 +379,8 @@ function drawBlock(ion, x, y, w, h) {
     ctx.stroke();
 
     ctx.fillStyle = "#ffffff";
-    ctx.font = `bold ${h * 0.38}px 'Courier New'`;
+// Используем 55% от ширины ячейки, чтобы буквы занимали максимум места
+ctx.font = `900 ${w * 0.55}px 'Courier New', monospace`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(ion.name, px + w / 2, py + h / 2);
