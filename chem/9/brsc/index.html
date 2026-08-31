@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, orientation=landscape">
+    <title>Breaking Science</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Предупреждение о повороте экрана -->
+    <div id="rotate-warning">
+        <div class="warning-box">
+            <p>Пожалуйста, переверните устройство в альбомный режим 🔄</p>
+        </div>
+    </div>
+
+    <!-- Главный контейнер игры -->
+    <div id="game-container">
+      <!-- Стартовый экран -->
+        <div id="start-screen" class="screen">
+            <div class="logo">
+                <span class="element-box br">Br</span>eaking 
+                <span class="element-box sc">Sc</span>ience
+            </div>
+            <div class="menu-buttons">
+                <button id="btn-start" class="btn">Начать игру</button>
+                <button id="btn-difficulty" class="btn">Выбор сложности</button>
+                <button id="btn-rules" class="btn">Правила игры</button>
+            </div>
+        </div>
+
+        <!-- Экран выбора сложности -->
+        <div id="difficulty-screen" class="screen hidden">
+            <h2>Сложность</h2>
+            <div class="menu-buttons">
+                <button class="btn btn-diff" data-level="1">Абитуриент (Легко)</button>
+                <button class="btn btn-diff active" data-level="3">Лаборант (Нормально)</button>
+                <button class="btn btn-diff" data-level="5">Профессор (Сложно)</button>
+                <button id="btn-back-diff" class="btn back-btn">Назад</button>
+            </div>
+        </div>
+
+        <!-- Экран правил игры -->
+        <div id="rules-screen" class="screen hidden">
+            <h2>Правила лаборатории</h2>
+            <div class="rules-text">
+                <p>1. Сверху падают одиночные катионы (+) и анионы (-).</p>
+                <p>2. Управляйте кнопками по бокам экрана.</p>
+                <p>3. Соединяйте противоположные заряды, пока они не **уравновесятся** (заряд = 0).</p>
+                <p>4. **Растворимые** вещества исчезают сразу.</p>
+                <p>5. **Нерастворимые** превращаются в цветной осадок и исчезают через мгновение.</p>
+                <p>6. Пары ионов, образующие **газы** (CO₂ и NH₃), улетают вверх экрана.</p>
+            </div>
+            <button id="btn-back-rules" class="btn back-btn">Назад</button>
+        </div>
+
+        <!-- Игровой экран -->
+        <div id="play-screen" class="screen hidden">
+            <!-- Верхняя информационная панель -->
+            <div id="game-header">
+                <div id="formula-display" class="hud-box">Реакция: <span id="current-formula">-</span></div>
+                <div id="score-display" class="hud-box">
+                    <span class="crystal">💎</span> <span id="score-val">0000</span>
+                    <div id="level-display">Level: <span id="level-val">1</span></div>
+                </div>
+            </div>
+
+            <!-- Игровое поле и кнопки управления -->
+            <div id="main-game-layout">
+              <!-- Левая зона управления -->
+                <div class="control-zone left-controls">
+                    <button id="btn-left" class="ctrl-btn">◀</button>
+                    <button id="btn-right" class="ctrl-btn">▶</button>
+                </div>
+
+                <!-- Контейнер для стакана тетриса -->
+                <div id="canvas-container">
+                    <canvas id="game-canvas"></canvas>
+                </div>
+
+                <!-- Правая зона управления -->
+                <div class="control-zone right-controls">
+                    <button id="btn-down" class="ctrl-btn down-btn">▼</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключаем логику игры -->
+    <script src="script.js"></script>
+</body>
+</html>
