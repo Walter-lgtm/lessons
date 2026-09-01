@@ -8,8 +8,8 @@ const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSf0iU44KoembNp
 const FORM_ENTRIES = {
     studentName: "entry.2100222455", 
     studentClass: "entry.2025383242", 
-    finalGrade: "entry.932465497",   
-    rawScore: "entry.2080833289"     
+    finalGrade: "entry.2080833289",   
+    rawScore: "entry.932465497"     
 };
 
 // Переменная, где будут храниться 10 выбранных для текущего ученика вопросов
