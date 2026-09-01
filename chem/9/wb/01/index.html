@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Периодический закон. Периодическая система химических элементов Д. И. Менделеева</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="lab-container">
+    
+    <!-- Фирменный Логотип-Пульт [Br] [Ba] -->
+    <div class="lab-logo">
+        <div class="periodic-plate" id="btn-open-pshe" style="cursor: pointer;" title="Открыть ПСХЭ Менделеева">
+            <span class="element-number">35</span>
+            <span class="element-symbol">Br</span>
+        </div>
+        <div class="periodic-plate" id="btn-open-rastvor" style="cursor: pointer;" title="Открыть таблицу растворимости">
+            <span class="element-number">56</span>
+            <span class="element-symbol">Ba</span>
+        </div>
+    </div>
+
+    <!-- ЭКРАН 1: АВТОРИЗАЦИЯ И ЗАПУСК ГЕНЕРАТОРА -->
+    <div id="screen-auth" class="lab-screen active">
+        <h1>Вход в лабораторию</h1>
+        <p style="text-align: center; color: #ff9900; font-size: 13px; margin-bottom: 20px;">[ ТЕМАТИЧЕСКИЙ ТЕСТ: ПЕРИОДИЧЕСКИЙ ЗАКОН ]</p>
+        
+        <div class="lab-field">
+            <label>Фамилия и Имя ученика</label>
+            <input type="text" id="student-name" class="lab-input" required>
+        </div>
+        
+        <div class="lab-field">
+            <label>Класс</label>
+            <input type="text" id="student-class" class="lab-input" required>
+        </div>
+        
+        <button type="button" class="lab-btn" id="btn-start">Сгенерировать случайный вариант</button>
+    </div>
+
+    <!-- ЭКРАН 2: ТЕСТ С АВТОМАТИЧЕСКОЙ ВЫДАЧЕЙ ЗАДАНИЙ -->
+    <div id="screen-quiz" class="lab-screen">
+        <form id="vpr-form">
+            
+            <!-- Сюда скрипт script.js встроит 10 случайных заданий из базы данных -->
+            <div id="dynamic-tasks-container"></div>
+
+            <!-- Лабораторная кнопка фиксации -->
+            <div style="margin-top: 30px;">
+                <button type="button" class="lab-btn" id="btn-submit">Завершить синтез и отправить отчет</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- ЭКРАН 3: ИТОГИ КОНТРОЛЬНОЙ РАБОТЫ -->
+    <div id="screen-results" class="lab-screen">
+        <h1>Лабораторный отчёт сформирован</h1>
+        <div class="result-box" style="margin-top: 20px;">
+            <p style="color: #ff9900; text-transform: uppercase; font-size: 12px; font-weight: bold;">Ваша итоговая оценка за тему ПСХЭ:</p>
+            <div class="grade-display" id="final-grade">0</div>
+            <p id="student-summary" style="font-size: 14px; margin-bottom: 10px;"></p>
+            <p style="color: #666; font-size: 11px;">Результаты вашего уникального варианта зашифрованы и переданы профессору.</p>
+        </div>
+        <button type="button" class="lab-btn lab-btn-secondary" onclick="location.reload()">Начать новый цикл</button>
+    </div>
+
+</div>
+
+<!-- Модальное окно №1: ПСХЭ Менделеева -->
+<div id="modal-pshe" class="lab-modal">
+    <div class="modal-header">
+        <span class="modal-title">[ ПСХЭ ИМ. Д.И. МЕНДЕЛЕЕВА ]</span>
+        <button type="button" class="modal-back-btn" id="btn-close-pshe">← НАЗАД В ЛАБОРАТОРИЮ</button>
+    </div>
+    <div class="modal-body">
+        <iframe src="ССЫЛКА_ПСХЭ_МЕНДЕЛЕЕВА" class="modal-iframe"></iframe>
+    </div>
+</div>
+
+<!-- Модальное окно №2: Таблица растворимости -->
+<div id="modal-rastvor" class="lab-modal">
+    <div class="modal-header">
+        <span class="modal-title">[ ТАБЛИЦА РАСТВОРИМОСТИ ]</span>
+        <button type="button" class="modal-back-btn" id="btn-close-rastvor">← НАЗАД В ЛАБОРАТОРИЮ</button>
+    </div>
+    <div class="modal-body">
+        <iframe src="ССЫЛКА_ТАБЛИЦЫ_РАСТВОРИМОСТИ" class="modal-iframe"></iframe>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
