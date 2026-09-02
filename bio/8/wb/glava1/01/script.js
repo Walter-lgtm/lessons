@@ -217,7 +217,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="hud-final-report" style="text-align: center; padding: 40px 20px;">
                 <h2 style="color: var(--neon-green, #00ff66); margin-bottom: 20px; justify-content: center;">[Λ] СИНХРОНИЗАЦИЯ УСПЕШНА</h2>
                 <p style="font-size: 1.1em; margin-bottom: 30px; opacity: 0.8;">
-                    Протокол завершен. Данные участника <strong>${studentName}</strong> (${studentClass}) успешно переданы в архив Black Mesa East.
+                    Протокол завершен. Данные участника <strong>${studentName}</strong> (${studentClass}) успешно переданы в архив
                 </p>
                 <div class="score-hud-box" style="border: 2px dashed #00ff66; padding: 20px; display: inline-block; margin-bottom: 30px; background: rgba(0,255,102,0.05);">
                     <div style="font-size: 1.2em; margin-bottom: 10px;">Набрано баллов: <strong>${score} из 6</strong></div>
