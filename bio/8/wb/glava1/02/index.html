@@ -8,21 +8,17 @@
 </head>
 <body>
     <div class="hud-container">
-        <!-- Экран авторизации (Анти-брутфорс v2.0) -->
+        <!-- ЭКРАН АВТОРИЗАЦИИ (БЕЗ ПОЛЯ ТОКЕНА) -->
         <div id="auth-screen" class="hud-box">
             <h2><img src="lambda_hl.jpg" alt="Λ" class="hud-lambda-icon"> Авторизация участника</h2>
             <p class="hud-version">БИОЛАБОРАТОРИЯ</p>
             <div class="form-group">
                 <label for="user-fio">Фамилия и Имя:</label>
-                <input type="text" id="user-fio" placeholder="Иванов Иван" autocomplete="off">
+                <input type="text" id="user-fio" autocomplete="off">
             </div>
             <div class="form-group">
                 <label for="user-class">Класс:</label>
-                <input type="text" id="user-class" placeholder="8-А" autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label for="user-token">Индивидуальный токен доступа:</label>
-                <input type="text" id="user-token" placeholder="M5-XXXX" autocomplete="off">
+                <input type="text" id="user-class" autocomplete="off">
             </div>
             <button id="start-btn" class="hud-btn">Вход в лабораторию</button>
             <div id="auth-error" class="error-msg"></div>
