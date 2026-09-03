@@ -3,7 +3,7 @@
 // ============================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Селекторы интерфейса
+    // Элементы интерфейса терминала
     const authScreen = document.getElementById("auth-screen");
     const mainInterface = document.getElementById("main-interface");
     const startBtn = document.getElementById("start-btn");
@@ -12,120 +12,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const inputName = document.getElementById("user-fio");
     const inputClass = document.getElementById("user-class");
-    const inputToken = document.getElementById("user-token");
 
     const hudUserInfo = document.getElementById("hud-user-info");
     const hudTimer = document.getElementById("hud-timer");
 
-    // Глобальные переменные сессии
+    // Параметры текущей сессии участника
     let studentName = "";
     let studentClass = "";
-    let activeToken = "";
     let sessionSeconds = 0;
     let timerInterval = null;
 
-    // Уникальный префикс темы для изоляции localStorage параграфа №2
-    const STORAGE_PREFIX = "bme_zool_p2_";
+    // Уникальный префикс темы для изоляции результатов Параграфа №1
+    const STORAGE_PREFIX = "bme_zool_p1_v3_";
 
-    // ==========================================
-    // МАТЕМАТИЧЕСКАЯ КРИПТОЗАЩИТА И ОДНОКРАТНОСТЬ
-    // ==========================================
-    function validateToken(tokenStr) {
-        const t = tokenStr.trim().toUpperCase();
-        
-        // 1. Проверяем, не использовался ли этот код ранее на этом устройстве
-        const usedTokens = JSON.parse(localStorage.getItem(STORAGE_PREFIX + "used_tokens") || "[]");
-        if (usedTokens.includes(t)) {
-            return "USED";
-        }
-
-        // 2. Математический хэш-алгоритм DJB2
-        let hash = 5381;
-        for (let i = 0; i < t.length; i++) {
-            hash = ((hash << 5) + hash) + t.charCodeAt(i);
-        }
-        const secretMod = Math.abs(hash) % 997;
-        
-        // Сверяем с секретным остатком текущего параграфа (§ 2 = 100)
-        if (secretMod === 100) {
-            usedTokens.push(t);
-            localStorage.setItem(STORAGE_PREFIX + "used_tokens", JSON.stringify(usedTokens));
-            return "VALID";
-        }
-        
-        return "INVALID";
-    }
-
-    // ==========================================
-    // АНТИ-БРУТФОРС МОДУЛЬ v2.0
-    // ==========================================
-    function checkBruteForceLock() {
-        const lockTime = localStorage.getItem(STORAGE_PREFIX + "bf_lock");
-        if (lockTime && Date.now() < parseInt(lockTime)) {
-            const timeLeft = Math.ceil((parseInt(lockTime) - Date.now()) / 1000);
-            authError.innerHTML = `КРИТИЧЕСКАЯ БЛОКИРОВКА! Доступ ограничен на ${timeLeft} сек. за подбор токенов.`;
-            startBtn.disabled = true;
-            return true;
-        }
-        startBtn.disabled = false;
-        return false;
-    }
-
-    function registerFailedAttempt() {
-        let attempts = parseInt(localStorage.getItem(STORAGE_PREFIX + "failed_attempts") || "0");
-        attempts++;
-        localStorage.setItem(STORAGE_PREFIX + "failed_attempts", attempts);
-
-        if (attempts >= 3) {
-            const penaltyMultiplier = attempts - 2; 
-            const lockDuration = 60 * 1000 * penaltyMultiplier;
-            localStorage.setItem(STORAGE_PREFIX + "bf_lock", (Date.now() + lockDuration).toString());
-            checkBruteForceLock();
-        } else {
-            authError.innerHTML = `ВНИМАНИЕ: Неверный токен! Осталось попыток до блокировки терминала: ${3 - attempts}`;
-        }
-    }
-
-    checkBruteForceLock();
-    if (startBtn.disabled) {
-        const checkInterval = setInterval(() => {
-            if (!checkBruteForceLock()) clearInterval(checkInterval);
-        }, 1000);
-    }
-
-    // Вход в лабораторию
+    // ============================================================================
+    // ИНИЦИАЛИЗАЦИЯ И КОНТРОЛЬ ЕДИНСТВЕННОГО ВХОДА
+    // ============================================================================
     startBtn.addEventListener("click", () => {
-        if (checkBruteForceLock()) return;
-
         studentName = inputName.value.trim();
         studentClass = inputClass.value.trim();
-        activeToken = inputToken.value.trim();
 
-        if (!studentName || !studentClass || !activeToken) {
-            authError.innerHTML = "ОШИБКА: Заполните ФИО, Класс и Код доступа.";
+        // Базовая валидация заполнения полей
+        if (!studentName || !studentClass) {
+            authError.innerHTML = "ОШИБКА: Доступ ограничен. Пожалуйста, введите Фамилию, Имя и Класс.";
             return;
         }
 
-        const tokenStatus = validateToken(activeToken);
-
-        if (tokenStatus === "USED") {
-            authError.innerHTML = "ДОСТУП ЗАБЛОКИРОВАН: Данный код доступа уже использован!";
+        // Проверка локального клейма повторного прохождения
+        const sessionCompleted = localStorage.getItem(STORAGE_PREFIX + "completed_" + studentName.toLowerCase());
+        if (sessionCompleted === "true") {
+            authError.innerHTML = `ДОСТУП ЗАБЛОКИРОВАН: Участник ${studentName} уже выполнял этот тест на данном устройстве!`;
             return;
         }
 
-        if (tokenStatus === "INVALID") {
-            registerFailedAttempt();
-            return;
-        }
-
-        localStorage.removeItem(STORAGE_PREFIX + "failed_attempts");
         authError.innerHTML = "";
 
+        // Настройка HUD-панели и переключение экранов
         hudUserInfo.innerHTML = `Участник: <strong>${studentName}</strong> [Класс: ${studentClass}]`;
         authScreen.classList.add("hidden");
         mainInterface.classList.remove("hidden");
         window.scrollTo(0, 0);
 
+        // Старт системного таймера сессии
         timerInterval = setInterval(() => {
             sessionSeconds++;
             const mins = String(Math.floor(sessionSeconds / 60)).padStart(2, '0');
