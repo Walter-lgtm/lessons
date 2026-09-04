@@ -32,7 +32,7 @@ function calculateHomeworkScore() {
     if (checkExactAnswer("ans-2-x", 7) && checkExactAnswer("ans-2-y", 20)) score += 1;
 
     // Задание 3: Углерод (X=2, Y=12)
-    if (checkExactAnswer("ans-3-x", 2) && checkExactAnswer("ans-3-y", 12)) score += 1;
+    if (checkExactAnswer("ans-3-x", 2) && checkExactAnswer("ans-3-y", 10)) score += 1;
 
     // Задание 4: Возрастание кислотных свойств (Al -> Si -> S) -> "132"
     if (checkExactAnswer("ans-task-4", 132)) score += 1;
