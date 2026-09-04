@@ -1,1 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Строение атома // Домашнее Задание 9 // Лаборатория Хайзенберга</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div class="lab-container">
+    
+    <!-- Фирменный Логотип-Пульт [Br] [Sc] -->
+    <div class="lab-logo">
+        <div class="periodic-plate" id="btn-open-pshe" style="cursor: pointer;" title="Открыть ПСХЭ Менделеева">
+            <span class="element-number">35</span>
+            <span class="element-symbol">Br</span>
+        </div>
+        <div class="periodic-plate" id="btn-open-rastvor" style="cursor: pointer;" title="Открыть таблицу растворимости">
+            <span class="element-number">21</span>
+            <span class="element-symbol">Sc</span>
+        </div>
+    </div>
+
+    <!-- ЭКРАН 1: АВТОРИЗАЦИЯ -->
+    <div id="screen-auth" class="lab-screen active">
+        <h1>Вход в лабораторию</h1>
+        <p style="text-align: center; color: var(--hazard-orange); font-size: 13px; margin-bottom: 20px;">[ ДОМАШНЕЕ ЗАДАНИЕ: СТРОЕНИЕ АТОМА ]</p>
+        
+        <div class="lab-field">
+            <label>Фамилия и Имя ученика</label>
+            <input type="text" id="student-name" class="lab-input" required>
+        </div>
+        
+        <div class="lab-field">
+            <label>Класс</label>
+            <input type="text" id="student-class" class="lab-input" required>
+        </div>
+        
+        <button type="button" class="lab-btn" id="btn-start">Начать выполнение работы</button>
+    </div>
+
+    <!-- ЭКРАН 2: ТЕСТ (6 ЗАДАНИЙ) -->
+    <div id="screen-quiz" class="lab-screen">
+        <form id="vpr-form">
+
+            <!-- Задание 1 -->
+            <div class="task-card">
+                <h2>Задание 1</h2>
+                <p class="task-text">На рисунке изображена модель строения атома некоторого химического элемента. Запишите в поля номер периода (X), в котором расположен данный элемент в ПСХЭ, и сумму чисел протонов и электронов (Y) в его атоме.</p>
+                
+                <div class="task-img-container">
+                    <img src="atom_01.jpg" alt="Схема строения атома" class="task-img">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="lab-field">
+                        <label>Номер периода (X)</label>
+                        <input type="number" id="ans-1-x" class="hl-inline-input" style="text-align: center;" inputmode="numeric">
+                    </div>
+                    <div class="lab-field">
+                        <label>Сумма протонов и электронов (Y)</label>
+                        <input type="number" id="ans-1-y" class="hl-inline-input" style="text-align: center;" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Задание 2 -->
+            <div class="task-card">
+                <h2>Задание 2</h2>
+                <p class="task-text">На рисунке изображена ячейка периодической системы Д. И. Менделеева с данными о химическом элементе. Запишите в таблицу номер группы (X) и число нейтронов (Y), которое содержит изотоп данного элемента с массовым числом 37.</p>
+                
+                <div class="task-img-container">
+                    <img src="atom_02.jpg" alt="Ячейка элемента" class="task-img">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="lab-field">
+                        <label>Номер группы (X)</label>
+                        <input type="number" id="ans-2-x" class="hl-inline-input" style="text-align: center;" inputmode="numeric">
+                    </div>
+                    <div class="lab-field">
+                        <label>Число нейтронов (Y)</label>
+                        <input type="number" id="ans-2-y" class="hl-inline-input" style="text-align: center;" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Задание 3 -->
+            <div class="task-card">
+                <h2>Задание 3</h2>
+                <p class="task-text">На рисунке изображена модель строения ядра атома некоторого химического элемента. Запишите в таблицу номер периода (X), в котором расположен данный химический элемент, и суммарное количество отрицательно заряженных и нейтральных частиц (Y), содержащихся в данном атоме.</p>
+                
+                <div class="task-img-container">
+                    <img src="atom_03.jpg" alt="Модель ядра атома" class="task-img">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="lab-field">
+                        <label>Номер периода (X)</label>
+                        <input type="number" id="ans-3-x" class="hl-inline-input" style="text-align: center;" inputmode="numeric">
+                    </div>
+                    <div class="lab-field">
+                        <label>Сумма электронов и нейтронов (Y)</label>
+                        <input type="number" id="ans-3-y" class="hl-inline-input" style="text-align: center;" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+            <!-- Задание 4 -->
+            <div class="task-card">
+                <h2>Задание 4</h2>
+                <p class="task-text">Расположите химические элементы: 1) Алюминий, 2) Сера, 3) Кремний в порядке <strong>возрастания кислотных свойств</strong> их высших оксидов. Запишите последовательность цифр в ячейку.</p>
+                <input type="number" id="ans-task-4" class="hl-inline-input" style="text-align: center; font-family: monospace; letter-spacing: 2px;" inputmode="numeric">
+            </div>
+
+            <!-- Задание 5 -->
+            <div class="task-card">
+                <h2>Задание 5</h2>
+                <p class="task-text">Расположите химические элементы: 1) C, 2) Na, 3) Li в порядке <strong>увеличения радиусов</strong> их атомов. Запишите последовательность цифр в ячейку.</p>
+                <input type="number" id="ans-task-5" class="hl-inline-input" style="text-align: center; font-family: monospace; letter-spacing: 2px;" inputmode="numeric">
+            </div>
+
+            <!-- Задание 6 -->
+            <div class="task-card">
+                <h2>Задание 6</h2>
+                <p class="task-text">Расположите химические элементы: 1) Кремний, 2) Фтор, 3) Фосфор в порядке <strong>уменьшения радиусов</strong> их атомов. Запишите последовательность цифр в ячейку.</p>
+                <input type="number" id="ans-task-6" class="hl-inline-input" style="text-align: center; font-family: monospace; letter-spacing: 2px;" inputmode="numeric">
+            </div>
+
+            <!-- Кнопка фиксации результатов -->
+            <div style="margin-top: 30px;">
+                <button type="button" class="lab-btn" id="btn-submit">Отправить домашнее задание</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- ЭКРАН 3: ФИНАЛЬНЫЙ ОТЧЁТ И ОЦЕНКА -->
+    <div id="screen-results" class="lab-screen">
+        <h1>Лабораторный отчёт сформирован</h1>
+        <div class="result-box" style="margin-top: 20px;">
+            <p style="color: var(--hazard-orange); text-transform: uppercase; font-size: 12px; font-weight: bold;">Ваша итоговая оценка:</p>
+            <div class="grade-display" id="final-grade">0</div>
+            <p id="student-summary" style="font-size: 14px; margin-bottom: 10px;"></p>
+            <p style="color: #666; font-size: 11px;">Данные успешно отправлены профессору на сервер Google Forms.</p>
+        </div>
+        <button type="button" class="lab-btn lab-btn-secondary" onclick="location.reload()">Начать новый цикл</button>
+    </div>
+
+</div>
+
+<!-- Встроенное неоновое окно №1: ПСХЭ Менделеева -->
+<div id="modal-pshe" class="lab-modal">
+    <div class="modal-header">
+        <span class="modal-title">[ ПСХЭ ИМ. Д.И. МЕНДЕЛЕЕВА ]</span>
+        <button type="button" class="modal-back-btn" id="btn-close-pshe">← НАЗАД В ЛАБОРАТОРИЮ</button>
+    </div>
+    <div class="modal-body">
+        <iframe src="ССЫЛКА_ПСХЭ_МЕНДЕЛЕЕВА" class="modal-iframe"></iframe>
+    </div>
+</div>
+
+<!-- Встроенное неоновое окно №2: Таблица растворимости -->
+<div id="modal-rastvor" class="lab-modal">
+    <div class="modal-header">
+        <span class="modal-title">[ ТАБЛИЦА РАСТВОРИМОСТИ ]</span>
+        <button type="button" class="modal-back-btn" id="btn-close-rastvor">← НАЗАД В ЛАБОРАТОРИЮ</button>
+    </div>
+    <div class="modal-body">
+        <iframe src="ССЫЛКА_ТАБЛИЦЫ_РАСТВОРИМОСТИ" class="modal-iframe"></iframe>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
