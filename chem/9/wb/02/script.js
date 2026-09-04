@@ -8,8 +8,8 @@ const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeDmWVI4s0D_Dj
 const FORM_ENTRIES = {
     studentName: "entry.995210903", 
     studentClass: "entry.710469293", 
-    finalGrade: "entry.923911174",   
-    rawScore: "entry.1379428636"     
+    finalGrade: "entry.1379428636",   
+    rawScore: "entry.923911174"     
 };
 
 // 2. ВСПОМОГАТЕЛЬНАЯ ФУНКЦИЯ ДЛЯ ТОЧНОЙ ВЕРИФИКАЦИИ ЧИСЕЛ И СТРОК
