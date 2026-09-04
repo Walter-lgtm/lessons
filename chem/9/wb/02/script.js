@@ -91,7 +91,10 @@ document.addEventListener("DOMContentLoaded", () => {
         formData.append(FORM_ENTRIES.finalGrade, results.grade);
         formData.append(FORM_ENTRIES.rawScore, results.score);
 
-        // Скрытая отправка запроса
+       localStorage.setItem("chemistry_hw_9_submitted", "true");
+       localStorage.setItem("chemistry_hw_9_score", results.score);
+       localStorage.setItem("chemistry_hw_9_grade", results.grade); 
+       // Скрытая отправка запроса
         fetch(GOOGLE_FORM_URL, {
             method: "POST",
             mode: "no-cors",
@@ -118,4 +121,28 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnClosePshe) btnClosePshe.addEventListener("click", () => { modalPshe.classList.remove("active"); document.body.style.overflow = ""; });
     if (btnOpenRastvor) btnOpenRastvor.addEventListener("click", () => { modalRastvor.classList.add("active"); document.body.style.overflow = "hidden"; });
     if (btnCloseRastvor) btnCloseRastvor.addEventListener("click", () => { modalRastvor.classList.remove("active"); document.body.style.overflow = ""; });
+});
+// 5. ПРОВЕРКА ПОВТОРНОГО ВХОДА (АНТИ-СПАМ СИСТЕМА)
+document.addEventListener("DOMContentLoaded", () => {
+    const hasSubmitted = localStorage.getItem("chemistry_hw_9_submitted");
+    
+    if (hasSubmitted) {
+        // Если флаг в памяти смартфона найден — мгновенно блокируем тест
+        const screenAuth = document.getElementById("screen-auth");
+        const screenQuiz = document.getElementById("screen-quiz");
+        const screenResults = document.getElementById("screen-results");
+        const finalGradeDisplay = document.getElementById("final-grade");
+        const studentSummaryDisplay = document.getElementById("student-summary");
+
+        const savedScore = localStorage.getItem("chemistry_hw_9_score") || "0";
+        const savedGrade = localStorage.getItem("chemistry_hw_9_grade") || "2";
+
+        if (screenAuth) screenAuth.classList.remove("active");
+        if (screenQuiz) screenQuiz.classList.remove("active");
+        if (screenResults) {
+            screenResults.classList.add("active");
+            finalGradeDisplay.textContent = savedGrade;
+            studentSummaryDisplay.innerHTML = `<span style="color: var(--hazard-orange);">[ ДОСТУП ПРЕКРАЩЕН ]</span><br>Вы уже отправляли лабораторный отчёт ранее. Набрано баллов: <strong>${savedScore}</strong> из 6.`;
+        }
+    }
 });
