@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Систематика растений — Биология 7 класс</title>
+    <!-- Подключаем красивый и читаемый шрифт для школьного приложения -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Шапка приложения с кнопками переключения вкладок -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">🌿</span>
+                <h1>БиоКласс: Растения</h1>
+            </div>
+            <nav class="app-nav">
+                <button class="nav-btn active" data-target="learning-section">📖 Обучение</button>
+                <button class="nav-btn" data-target="quiz-section">🎮 Тренажер</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="app-content">
+      <!-- РАЗДЕЛ 1: ОБУЧЕНИЕ -->
+        <section id="learning-section" class="content-section active">
+            <div class="section-card intro-card">
+                <h2>Что такое систематика?</h2>
+                <p><strong>Систематика растений</strong> — это наука, которая разделяет все растения на группы (категории) на основе их сходства и родства. Это помогает ученым навести порядок в огромном растительном мире!</p>
+            </div>
+
+            <!-- Интерактивная схема иерархии -->
+            <div class="section-card hierarchy-card">
+                <h2>Основные таксоны (категории) систематики</h2>
+                <p class="subtitle">Нажмите на карточку, чтобы узнать подробнее или посмотреть пример:</p>
+                
+                <div class="taxonomy-tree">
+                    <!-- Царство -->
+                    <div class="taxonomy-item" data-info="Самая крупная группа. Включает все многоклеточные растения, способные к фотосинтезу.">
+                        <div class="rank">Царство</div>
+                        <div class="example-name">Растения</div>
+                    </div>
+                    
+                    <!-- Отдел -->
+                    <div class="taxonomy-item" data-info="Крупная группа внутри царства. Например, Покрытосеменные (Цветковые) имеют цветок и плод.">
+                        <div class="rank">Отдел</div>
+                        <div class="example-name">Покрытосеменные</div>
+                    </div>
+                    
+                    <!-- Класс -->
+                    <div class="taxonomy-item" data-info="Делит отделы по строению семени и листьев. У Двудольных в семени две семядоли.">
+                        <div class="rank">Класс</div>
+                        <div class="example-name">Двудольные</div>
+                    </div>
+                    
+                    <!-- Порядок -->
+                    <div class="taxonomy-item" data-info="Объединяет близкие семейства. Класс Двудольные делится на множество порядков.">
+                        <div class="rank">Порядок</div>
+                        <div class="example-name">Розоцветные</div>
+                    </div>
+                    
+                    <!-- Семейство -->
+                    <div class="taxonomy-item" data-info="Важная группа. Растения одного семейства имеют схожее строение цветка и плода.">
+                        <div class="rank">Семейство</div>
+                        <div class="example-name">Розовые</div>
+                    </div>
+                    
+                    <!-- Род -->
+                    <div class="taxonomy-item" data-info="Объединяет близкородственные виды. Первое слово в двойном названии растения.">
+                        <div class="rank">Род</div>
+                        <div class="example-name">Шиповник (Роза)</div>
+                    </div>
+                    
+                    <!-- Вид -->
+                    <div class="taxonomy-item" data-info="Основная единица систематики. Название всегда двойное (бинарное): Существительное + Прилагательное.">
+                        <div class="rank">Вид</div>
+                        <div class="example-name">Шиповник коричный</div>
+                    </div>
+                </div>
+
+                <!-- Всплывающее окно с подсказкой при клике (будет управляться через JS) -->
+                <div id="info-box" class="info-box hidden">
+                    <p id="info-text">Нажмите на любой уровень, чтобы прочитать подсказку.</p>
+                </div>
+            </div>
+
+            <!-- Шпаргалка-запоминалка -->
+            <div class="section-card mnemonic-card">
+                <h3>💡 Фраза для быстрого запоминания порядка (от крупного к мелкому):</h3>
+                <blockquote class="mnemonic-phrase">
+                    «<strong>Ц</strong>арский <strong>О</strong>фицер <strong>К</strong>омандовал <strong>П</strong>олком, <strong>С</strong>треляя <strong>Р</strong>езвыми <strong>В</strong>оробьями»
+                </blockquote>
+                <p class="mnemonic-hint">(Первые буквы соответствуют: Царство, Отдел, Класс, Порядок, Семейство, Род, Вид)</p>
+            </div>
+        </section>
+<!-- РАЗДЕЛ 2: ТРЕНАЖЕР -->
+        <section id="quiz-section" class="content-section hidden">
+            <div class="section-card intro-card">
+                <h2>🎮 Интерактивный тренажер</h2>
+                <p>Проверь свои знания! Твоя задача — собрать правильную цепочку систематики для случайного растения <strong>от самого высшего таксона (Царство) к низшему (Вид)</strong>. Перетаскивай карточки или просто кликай по ним по порядку.</p>
+            </div>
+
+            <div class="quiz-container">
+                <!-- Панель с информацией о текущем задании -->
+                <div class="quiz-header">
+                    <div class="target-plant-box">
+                        <span>Задание для растения:</span>
+                        <h3 id="target-plant-name">Загрузка...</h3>
+                    </div>
+                    <div class="score-box">
+                        <span>Правильно: <strong id="score-counter">0</strong></span>
+                    </div>
+                </div>
+
+                <!-- Зона, куда нужно собирать цепочку -->
+                <div class="quiz-workspace">
+                    <h3>Ваша цепочка (от Царства до Вида):</h3>
+                    <div id="slots-container" class="slots-container">
+                        <!-- Сюда JS добавит пустые ячейки с названиями рангов -->
+                    </div>
+                </div>
+
+                <!-- Зона с перемешанными карточками вариантов -->
+                <div class="quiz-options">
+                    <h3>Доступные карточки:</h3>
+                    <div id="options-container" class="options-container">
+                        <!-- Сюда JS добавит перемешанные карточки ответов -->
+                    </div>
+                </div>
+
+                <!-- Кнопки управления тренажером -->
+                <div class="quiz-controls">
+                    <button id="check-btn" class="action-btn check-btn">Проверить ответ</button>
+                    <button id="reset-btn" class="action-btn reset-btn">Сбросить</button>
+                    <button id="next-btn" class="action-btn next-btn hidden">Следующее растение ➔</button>
+                </div>
+
+                <!-- Блок фидбека (успех / ошибка) -->
+                <div id="feedback-message" class="feedback-message hidden"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подключаем логику приложения -->
+    <script src="script.js"></script>
+</body>
+</html>
