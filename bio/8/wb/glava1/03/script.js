@@ -1,9 +1,10 @@
 // ============================================================================
-// [λ] БИО-КОМПЛЕКСЫ 8 КЛАСС // СЦЕНАРИЙ СИНХРОНИЗАЦИИ №3 // SCRIPT.JS (Часть 1)
+// [λ] БИО-КОМПЛЕКСЫ 8 КЛАСС // ТЕМА: § 3. ЖИВОТНАЯ КЛЕТКА
+// МОДЕРНИЗИРОВАННЫЙ СЦЕНАРИЙ С СИСТЕМОЙ АНТИБРУТФОРСА (-1 БАЛЛ) // ЧАСТЬ 1
 // ============================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Ссылки на элементы UI терминала
+    // Селекторы элементов UI терминала
     const authScreen = document.getElementById("auth-screen");
     const mainInterface = document.getElementById("main-interface");
     const startBtn = document.getElementById("start-btn");
@@ -12,124 +13,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const inputName = document.getElementById("user-fio");
     const inputClass = document.getElementById("user-class");
-    const inputToken = document.getElementById("user-token");
 
     const hudUserInfo = document.getElementById("hud-user-info");
     const hudTimer = document.getElementById("hud-timer");
 
-    // Параметры текущей сессии
+    // Глобальные параметры текущей сессии
     let studentName = "";
     let studentClass = "";
-    let activeToken = "";
     let sessionSeconds = 0;
     let timerInterval = null;
+    let hasPenalty = false; // Флаг штрафа за повторное прохождение
 
-    // Уникальный префикс для изоляции сессий параграфа №3 (§ 3. Животная клетка)
-    const STORAGE_PREFIX = "bme_zool_p3_";
+    // Уникальный префикс темы для изоляции localStorage параграфа №3
+    const STORAGE_PREFIX = "bme_zool_p3_v3_";
 
-    // ==========================================
-    // МАТЕМАТИЧЕСКАЯ КРИПТОЗАЩИТА И ОДНОКРАТНОСТЬ
-    // ==========================================
-    function validateToken(tokenStr) {
-        const t = tokenStr.trim().toUpperCase();
-        
-        // 1. Проверяем локальный реестр сгоревших кодов на устройстве
-        const usedTokens = JSON.parse(localStorage.getItem(STORAGE_PREFIX + "used_tokens") || "[]");
-        if (usedTokens.includes(t)) {
-            return "USED";
-        }
-
-        // 2. Криптографический хэш-алгоритм DJB2
-        let hash = 5381;
-        for (let i = 0; i < t.length; i++) {
-            hash = ((hash << 5) + hash) + t.charCodeAt(i);
-        }
-        const secretMod = Math.abs(hash) % 997;
-        
-        // Сверяем с секретным остатком параграфа (§ 3 = 330)
-        if (secretMod === 330) {
-            usedTokens.push(t);
-            localStorage.setItem(STORAGE_PREFIX + "used_tokens", JSON.stringify(usedTokens));
-            return "VALID";
-        }
-        
-        return "INVALID";
-    }
-
-    // ==========================================
-    // АНТИ-БРУТФОРС МОДУЛЬ v2.0
-    // ==========================================
-    function checkBruteForceLock() {
-        const lockTime = localStorage.getItem(STORAGE_PREFIX + "bf_lock");
-        if (lockTime && Date.now() < parseInt(lockTime)) {
-            const timeLeft = Math.ceil((parseInt(lockTime) - Date.now()) / 1000);
-            authError.innerHTML = `КРИТИЧЕСКАЯ БЛОКИРОВКА! Доступ терминала ограничен на ${timeLeft} сек. за попытку взлома токенов.`;
-            startBtn.disabled = true;
-            return true;
-        }
-        startBtn.disabled = false;
-        return false;
-    }
-
-    function registerFailedAttempt() {
-        let attempts = parseInt(localStorage.getItem(STORAGE_PREFIX + "failed_attempts") || "0");
-        attempts++;
-        localStorage.setItem(STORAGE_PREFIX + "failed_attempts", attempts);
-
-        if (attempts >= 3) {
-            const penaltyMultiplier = attempts - 2; 
-            const lockDuration = 60 * 1000 * penaltyMultiplier; // Накопительный штраф в минутах
-            localStorage.setItem(STORAGE_PREFIX + "bf_lock", (Date.now() + lockDuration).toString());
-            checkBruteForceLock();
-        } else {
-            authError.innerHTML = `ВНИМАНИЕ: Неверный токен доступа! Осталось попыток до блокировки: ${3 - attempts}`;
-        }
-    }
-
-    // Первичный и регулярный аудит безопасности
-    checkBruteForceLock();
-    if (startBtn.disabled) {
-        const checkInterval = setInterval(() => {
-            if (!checkBruteForceLock()) clearInterval(checkInterval);
-        }, 1000);
-    }
-
-    // Активация рабочей среды лаборанта
+    // ============================================================================
+    // ИНИЦИАЛИЗАЦИЯ И СИСТЕМА АНТИБРУТФОРСА
+    // ============================================================================
     startBtn.addEventListener("click", () => {
-        if (checkBruteForceLock()) return;
-
         studentName = inputName.value.trim();
         studentClass = inputClass.value.trim();
-        activeToken = inputToken.value.trim();
 
-        if (!studentName || !studentClass || !activeToken) {
-            authError.innerHTML = "ОШИБКА: Доступ заблокирован. Заполните ФИО, Класс и Код доступа.";
+        if (!studentName || !studentClass) {
+            authError.innerHTML = "ОШИБКА: Доступ ограничен. Пожалуйста, введите Фамилию, Имя и Класс.";
             return;
         }
 
-        const tokenStatus = validateToken(activeToken);
-
-        if (tokenStatus === "USED") {
-            authError.innerHTML = "ДОСТУП ЗАБЛОКИРОВАН: Данный персональный код доступа уже был использован!";
-            return;
-        }
-
-        if (tokenStatus === "INVALID") {
-            registerFailedAttempt();
-            return;
-        }
-
-        // Сброс логов брутфорса при валидном входе
-        localStorage.removeItem(STORAGE_PREFIX + "failed_attempts");
         authError.innerHTML = "";
 
-        // Отрисовка HUD-панели и переключение экранов
-        hudUserInfo.innerHTML = `Лаборант: <strong>${studentName}</strong> [Класс: ${studentClass}]`;
+        // Аудит повторного входа на устройство под этим же ФИО
+        const userKey = STORAGE_PREFIX + "completed_" + studentName.toLowerCase();
+        if (localStorage.getItem(userKey) === "true") {
+            hasPenalty = true; // Активируем скрытое снятие 1 балла в финале
+        }
+
+        // Переключение экранов
+        hudUserInfo.innerHTML = `Участник: <strong>${studentName}</strong> [Класс: ${studentClass}] ${hasPenalty ? '<span style="color:var(--neon-red); font-size:0.8em;">[ПОВТОРНЫЙ СЕАНС]</span>' : ''}`;
         authScreen.classList.add("hidden");
         mainInterface.classList.remove("hidden");
         window.scrollTo(0, 0);
 
-        // Старт системного таймера сессии
+        // Запуск таймера сессии
         timerInterval = setInterval(() => {
             sessionSeconds++;
             const mins = String(Math.floor(sessionSeconds / 60)).padStart(2, '0');
@@ -137,7 +61,8 @@ document.addEventListener("DOMContentLoaded", () => {
             hudTimer.innerText = `Время сессии: ${mins}:${secs}`;
         }, 1000);
     });
-  // ============================================================================
+
+    // ============================================================================
     // МЕХАНИКА ЗАДАНИЯ 6: СЕНСОРНОЕ СВЯЗЫВАНИЕ ПАР ОРГАН ОИДОВ (ТАП СЛЕВА -> СПРАВА)
     // ============================================================================
     let selectedLeft = null;
