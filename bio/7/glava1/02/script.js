@@ -1,8 +1,8 @@
 // ==========================================================================
-// 1. БАЗА ДАННЫХ И СОСТОЯНИЕ ПРИЛОЖЕНИЯ
+// 1. БАЗА ДАННЫХ И ГЛОБАЛЬНОЕ СОСТОЯНИЕ
 // ==========================================================================
 
-// Список растений для тренажера. У каждого строго определены 7 таксонов
+// Список растений для интерактивного тренажера
 const plantsData = [
     {
         id: "rosehip",
@@ -58,38 +58,39 @@ const plantsData = [
     }
 ];
 
-// Список названий рангов по порядку
+// Строгий иерархический порядок рангов
 const ranksOrder = ["Царство", "Отдел", "Класс", "Порядок", "Семейство", "Род", "Вид"];
 
-// Глобальное состояние игры
-let gameState = {
+// Состояние приложения (активный слайд, счет игры и ответы)
+let appState = {
+    currentSlide: 1,
+    totalSlides: 4,
     currentPlant: null,
     score: 0,
-    userAnswers: {}, // Структура: { "Царство": "Растения", "Отдел": null, ... }
-    isChecked: false
+    userAnswers: {},
+    isQuizChecked: false
 };
 
 // ==========================================================================
-// 2. ИНИЦИАЛИЗАЦИЯ И ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+// 2. ИНИЦИАЛИЗАЦИЯ И КОРНЕВАЯ НАВИГАЦИЯ
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
-    initNavigation();
-    initLearningSection();
-    initQuiz();
+    initMainNavigation();
+    initSliderSystem();
+    initAccordion();
+    initQuizEngine();
 });
 
-// Навигация между Обучением и Тренажером
-function initNavigation() {
+// Переключение между вкладками: "Уроки-Слайды" и "Тренажер"
+function initMainNavigation() {
     const navButtons = document.querySelectorAll(".nav-btn");
     const sections = document.querySelectorAll(".content-section");
 
     navButtons.forEach(button => {
         button.addEventListener("click", () => {
-            // Убираем активный класс у всех кнопок и разделов
             navButtons.forEach(btn => btn.classList.remove("active"));
             sections.forEach(sec => sec.classList.add("hidden"));
 
-            // Добавляем активный класс нажатой кнопке и нужному разделу
             button.classList.add("active");
             const targetId = button.getAttribute("data-target");
             document.getElementById(targetId).classList.remove("hidden");
@@ -97,67 +98,125 @@ function initNavigation() {
     });
 }
 // ==========================================================================
-// 3. ИНТЕРАКТИВ ДЛЯ РАЗДЕЛА «ОБУЧЕНИЕ»
+// 3. УПРАВЛЕНИЕ СЛАЙДОВОЙ СИСТЕМОЙ (ТЕОРИЯ)
 // ==========================================================================
-function initLearningSection() {
-    const taxonomyItems = document.querySelectorAll(".taxonomy-item");
-    const infoBox = document.getElementById("info-box");
-    const infoText = document.getElementById("info-text");
+function initSliderSystem() {
+    const prevBtn = document.getElementById("prev-slide-btn");
+    const nextBtn = document.getElementById("next-slide-btn");
+    const dotsContainer = document.getElementById("slide-dots");
 
-    taxonomyItems.forEach(item => {
-        item.addEventListener("click", () => {
-            const info = item.getAttribute("data-info");
-            const rank = item.querySelector(".rank").textContent;
-            
-            // Выводим текст в блок подсказок
-            infoText.innerHTML = `<strong>${rank}:</strong> ${info}`;
-            infoBox.classList.remove("hidden");
-            
-            // Легкий визуальный эффект выделения
-            taxonomyItems.forEach(el => el.style.borderColor = "#c8e6c9");
-            item.style.borderColor = "var(--accent-color)";
+    // Автоматически создаем круглые индикаторы-точки по числу слайдов
+    dotsContainer.innerHTML = "";
+    for (let i = 1; i <= appState.totalSlides; i++) {
+        const dot = document.createElement("div");
+        dot.className = i === 1 ? "dot active" : "dot";
+        dot.addEventListener("click", () => {
+            goToSlide(i);
         });
+        dotsContainer.appendChild(dot);
+    }
+
+    // Обработчики для кнопок "Назад" и "Вперед"
+    prevBtn.addEventListener("click", () => {
+        if (appState.currentSlide > 1) {
+            goToSlide(appState.currentSlide - 1);
+        }
+    });
+
+    nextBtn.addEventListener("click", () => {
+        if (appState.currentSlide < appState.totalSlides) {
+            goToSlide(appState.currentSlide + 1);
+        }
     });
 }
 
-// ==========================================================================
-// 4. ЛОГИКА ТРЕНАЖЕРА: ЗАПУСК И ГЕНЕРАЦИЯ ИГРЫ
-// ==========================================================================
-function initQuiz() {
-    // Подвешиваем обработчики на кнопки управления
-    document.getElementById("check-btn").addEventListener("click", checkAnswers);
-    document.getElementById("reset-btn").addEventListener("click", resetQuiz);
-    document.getElementById("next-btn").addEventListener("click", loadNewPlant);
+// Функция переключения на конкретный слайд по номеру
+function goToSlide(slideNumber) {
+    // Скрываем текущий активный слайд
+    document.querySelector(".theory-slide.active").classList.remove("active");
+    
+    // Активируем нужный слайд
+    const targetSlide = document.querySelector(`.theory-slide[data-slide="${slideNumber}"]`);
+    targetSlide.classList.add("active");
 
-    // Запускаем первое задание
-    loadNewPlant();
+    // Обновляем состояние
+    appState.currentSlide = slideNumber;
+
+    // Обновляем состояние кнопок управления
+    document.getElementById("prev-slide-btn").disabled = (slideNumber === 1);
+    document.getElementById("next-slide-btn").disabled = (slideNumber === appState.totalSlides);
+
+    // Обновляем активную точку-индикатор
+    document.querySelectorAll(".slide-dots .dot").forEach((dot, index) => {
+        if (index + 1 === slideNumber) {
+            dot.classList.add("active");
+        } else {
+            dot.classList.remove("active");
+        }
+    });
 }
 
-// Загрузка нового растения в тренажер
-function loadNewPlant() {
-    // Выбираем случайное растение из базы данных
-    const randomIndex = Math.floor(Math.random() * plantsData.length);
-    gameState.currentPlant = plantsData[randomIndex];
-    
-    // Сбрасываем промежуточные состояния
-    gameState.userAnswers = {};
-    gameState.isChecked = false;
-    ranksOrder.forEach(rank => gameState.userAnswers[rank] = null);
+// Интерактивный аккордеон (Слайд 3)
+function initAccordion() {
+    const accItems = document.querySelectorAll(".acc-item");
+    const infoBox = document.getElementById("slide-info-box");
+    const infoText = document.getElementById("slide-info-text");
 
-    // Обновляем интерфейс
-    document.getElementById("target-plant-name").textContent = gameState.currentPlant.name;
+    accItems.forEach(item => {
+        item.addEventListener("click", () => {
+            const info = item.getAttribute("data-info");
+            
+            // Если этот элемент уже открыт — закрываем подсказку
+            if (item.classList.contains("selected-item")) {
+                item.classList.remove("selected-item");
+                infoBox.classList.add("hidden-box");
+            } else {
+                // Иначе закрываем другие, открываем этот и выводим текст
+                accItems.forEach(el => el.classList.remove("selected-item"));
+                item.classList.add("selected-item");
+                
+                infoText.textContent = info;
+                infoBox.classList.remove("hidden-box");
+            }
+        });
+    });
+}
+// ==========================================================================
+// 4. УПРАВЛЕНИЕ ИГРОВЫМ ТРЕНАЖЕРОМ
+// ==========================================================================
+function initQuizEngine() {
+    document.getElementById("check-btn").addEventListener("click", checkQuizAnswers);
+    document.getElementById("reset-btn").addEventListener("click", resetQuizField);
+    document.getElementById("next-btn").addEventListener("click", loadQuizPlant);
+
+    // Загружаем первое растение для тренировки
+    loadQuizPlant();
+}
+
+// Выбор нового случайного растения из базы данных
+function loadQuizPlant() {
+    const randomIndex = Math.floor(Math.random() * plantsData.length);
+    appState.currentPlant = plantsData[randomIndex];
+    
+    // Сбрасываем промежуточные данные
+    appState.isQuizChecked = false;
+    appState.userAnswers = {};
+    ranksOrder.forEach(rank => appState.userAnswers[rank] = null);
+
+    // Обновляем визуальный интерфейс кнопок и уведомлений
+    document.getElementById("target-plant-name").textContent = appState.currentPlant.name;
     document.getElementById("feedback-message").className = "feedback-message hidden";
     document.getElementById("next-btn").classList.add("hidden");
     document.getElementById("check-btn").classList.remove("hidden");
 
-    renderSlots();
-    renderOptions();
+    renderQuizSlots();
+    renderQuizOptions();
 }
 
-// Создание пустых слотов для сборки
-function renderSlots() {
+// Отрисовка пустых ячеек-рангов в зоне сборки
+function renderQuizSlots() {
     const container = document.getElementById("slots-container");
-    container.innerHTML = ""; // Очищаем старые
+    container.innerHTML = "";
 
     ranksOrder.forEach(rank => {
         const slot = document.createElement("div");
@@ -169,11 +228,11 @@ function renderSlots() {
             <div class="slot-card-holder"></div>
         `;
 
-        // Клик по слоту возвращает карточку обратно, если она там есть
+        // Клик по заполненному слоту убирает из него карточку обратно в варианты
         slot.addEventListener("click", () => {
-            if (gameState.isChecked) return; // Запрет после проверки
-            if (gameState.userAnswers[rank]) {
-                removeCardFromSlot(rank);
+            if (appState.isQuizChecked) return;
+            if (appState.userAnswers[rank]) {
+                removeCardFromQuizSlot(rank);
             }
         });
 
@@ -181,63 +240,55 @@ function renderSlots() {
     });
 }
 
-// Создание и перемешивание карточек вариантов
-function renderOptions() {
+// Генерация и перемешивание карточек с вариантами ответов
+function renderQuizOptions() {
     const container = document.getElementById("options-container");
     container.innerHTML = "";
 
-    // Берем правильные ответы для текущего растения
-    const taxonomy = gameState.currentPlant.taxonomy;
+    const taxonomy = appState.currentPlant.taxonomy;
     
-    // Создаем массив объектов для карточек
+    // Формируем плоский массив карточек на основе таксономии текущего растения
     let cards = ranksOrder.map(rank => ({
         rank: rank,
         text: taxonomy[rank]
     }));
 
-    // Алгоритм случайного перемешивания (Тасование Фишера-Йетса)
+    // Перемешиваем карточки (Алгоритм Фишера-Йетса)
     for (let i = cards.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [cards[i], cards[j]] = [cards[j], cards[i]];
     }
 
-    // Выводим перемешанные карточки на экран
+    // Выводим карточки на экран
     cards.forEach(card => {
         const cardElement = document.createElement("div");
         cardElement.className = "quiz-card";
         cardElement.textContent = card.text;
-        cardElement.setAttribute("data-rank", card.rank);
         cardElement.setAttribute("data-text", card.text);
 
-        // Клик по карточке отправляет её в первый свободный слот
+        // По клику отправляем карточку в первый пустой слот
         cardElement.addEventListener("click", () => {
-            if (gameState.isChecked) return;
+            if (appState.isQuizChecked) return;
             if (!cardElement.classList.contains("hidden-card")) {
-                autoPlaceCard(card);
+                placeCardInFirstFreeSlot(card);
             }
         });
 
         container.appendChild(cardElement);
     });
 }
-// ==========================================================================
-// 5. УПРАВЛЕНИЕ КАРТОЧКАМИ (РАСПРЕДЕЛЕНИЕ И УДАЛЕНИЕ)
-// ==========================================================================
 
-// Автоматическое размещение карточки в первый подходящий или свободный слот
-function autoPlaceCard(cardData) {
-    // Ищем первый пустой ранг в ответах пользователя
-    const freeRank = ranksOrder.find(rank => !gameState.userAnswers[rank]);
+// Автоматический перенос карточки в первый свободный слот сверху вниз
+function placeCardInFirstFreeSlot(cardData) {
+    const freeRank = ranksOrder.find(rank => !appState.userAnswers[rank]);
     
     if (!freeRank) {
-        alert("Все ячейки уже заполнены! Чтобы освободить место, нажмите на карточку в цепочке.");
+        alert("Все ячейки уже заполнены! Кликните по карточке в цепочке, чтобы убрать её.");
         return;
     }
 
-    // Записываем выбор в состояние игры
-    gameState.userAnswers[freeRank] = cardData.text;
+    appState.userAnswers[freeRank] = cardData.text;
 
-    // Находим визуальный слот и добавляем в него текст карточки
     const slot = document.querySelector(`.quiz-slot[data-rank="${freeRank}"]`);
     const holder = slot.querySelector(".slot-card-holder");
     
@@ -246,43 +297,34 @@ function autoPlaceCard(cardData) {
     cardInSlot.textContent = cardData.text;
     holder.appendChild(cardInSlot);
 
-    // Скрываем (делаем полупрозрачной) исходную карточку в нижнем блоке вариантов
+    // Делаем исходную карточку в пуле вариантов полупрозрачной
     const optionCard = document.querySelector(`.options-container .quiz-card[data-text="${cardData.text}"]`);
     if (optionCard) {
         optionCard.classList.add("hidden-card");
     }
 }
 
-// Удаление карточки из слота обратно в список вариантов
-function removeCardFromSlot(rank) {
-    const textToRemove = gameState.userAnswers[rank];
+// Удаление карточки из слота
+function removeCardFromQuizSlot(rank) {
+    const textToRemove = appState.userAnswers[rank];
     if (!textToRemove) return;
 
-    // Очищаем состояние для этого ранга
-    gameState.userAnswers[rank] = null;
+    appState.userAnswers[rank] = null;
 
-    // Очищаем визуальный слот
     const slot = document.querySelector(`.quiz-slot[data-rank="${rank}"]`);
-    const holder = slot.querySelector(".slot-card-holder");
-    holder.innerHTML = "";
+    slot.querySelector(".slot-card-holder").innerHTML = "";
 
-    // Возвращаем активность карточке в списке доступных вариантов
     const optionCard = document.querySelector(`.options-container .quiz-card[data-text="${textToRemove}"]`);
     if (optionCard) {
         optionCard.classList.remove("hidden-card");
     }
 }
 
-// ==========================================================================
-// 6. ПРОВЕРКА ОТВЕТОВ, СЧЕТ И СБРОС ИГРЫ
-// ==========================================================================
-
-// Проверка собранной цепочки
-function checkAnswers() {
-    // Проверяем, заполнил ли пользователь все 7 слотов
-    const isEverythingFilled = ranksOrder.every(rank => gameState.userAnswers[rank] !== null);
+// Проверка результатов сборки
+function checkQuizAnswers() {
+    const isAllFilled = ranksOrder.every(rank => appState.userAnswers[rank] !== null);
     
-    if (!isEverythingFilled) {
+    if (!isAllFilled) {
         const feedback = document.getElementById("feedback-message");
         feedback.textContent = "⚠️ Сначала заполните все 7 ячеек систематики!";
         feedback.className = "feedback-message error";
@@ -290,60 +332,50 @@ function checkAnswers() {
         return;
     }
 
-    gameState.isChecked = true;
-    const correctTaxonomy = gameState.currentPlant.taxonomy;
-    let errorsCount = 0;
+    appState.isQuizChecked = true;
+    const correctTaxonomy = appState.currentPlant.taxonomy;
+    let errors = 0;
 
-    // Поочередно проверяем каждый слот
     ranksOrder.forEach(rank => {
         const slot = document.querySelector(`.quiz-slot[data-rank="${rank}"]`);
-        
-        if (gameState.userAnswers[rank] === correctTaxonomy[rank]) {
+        if (appState.userAnswers[rank] === correctTaxonomy[rank]) {
             slot.classList.add("correct-slot");
         } else {
             slot.classList.add("wrong-slot");
-            errorsCount++;
+            errors++;
         }
     });
 
-    // Выводим вердикт пользователю
     const feedback = document.getElementById("feedback-message");
-    if (errorsCount === 0) {
-        gameState.score++;
-        document.getElementById("score-counter").textContent = gameState.score;
+    if (errors === 0) {
+        appState.score++;
+        document.getElementById("score-counter").textContent = appState.score;
         feedback.textContent = "🎉 Великолепно! Цепочка систематики составлена абсолютно верно!";
         feedback.className = "feedback-message success";
     } else {
-        feedback.textContent = `❌ Ошибка! Не все таксоны на своих местах. Ошибок: ${errorsCount}. Изучи подсказки и попробуй снова или перейди к новому растению.`;
+        feedback.textContent = `❌ Ошибка! Не все таксоны на своих местах. Ошибок: ${errors}. Попробуй сбросить поле или перейди к новому растению.`;
         feedback.className = "feedback-message error";
     }
 
     feedback.classList.remove("hidden");
-    
-    // Меняем видимость кнопок управления
     document.getElementById("check-btn").classList.add("hidden");
     document.getElementById("next-btn").classList.remove("hidden");
 }
 
-// Кнопка «Сбросить» — возвращает карточки на место в рамках текущего задания
-function resetQuiz() {
-    // Очищаем результаты проверки
+// Сброс текущего игрового раунда
+function resetQuizField() {
     const slots = document.querySelectorAll(".quiz-slot");
     slots.forEach(slot => {
         slot.classList.remove("correct-slot", "wrong-slot");
         slot.querySelector(".slot-card-holder").innerHTML = "";
     });
 
-    // Возвращаем все карточки вариантов в активное состояние
-    const optionCards = document.querySelectorAll(".options-container .quiz-card");
-    optionCards.forEach(card => card.classList.remove("hidden-card"));
+    document.querySelectorAll(".options-container .quiz-card").forEach(card => card.classList.remove("hidden-card"));
 
-    // Сбрасываем ответы в состоянии игры
-    gameState.userAnswers = {};
-    ranksOrder.forEach(rank => gameState.userAnswers[rank] = null);
-    gameState.isChecked = false;
+    appState.userAnswers = {};
+    ranksOrder.forEach(rank => appState.userAnswers[rank] = null);
+    appState.isQuizChecked = false;
 
-    // Скрываем сообщение
     document.getElementById("feedback-message").className = "feedback-message hidden";
     document.getElementById("next-btn").classList.add("hidden");
     document.getElementById("check-btn").classList.remove("hidden");
