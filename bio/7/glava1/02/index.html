@@ -3,106 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Систематика растений — Биология 7 класс</title>
-    <!-- Подключаем красивый и читаемый шрифт для школьного приложения -->
+    <title>Интерактивная систематика растений — 7 класс</title>
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Шапка приложения с кнопками переключения вкладок -->
+    <!-- Шапка приложения -->
     <header class="app-header">
         <div class="header-container">
             <div class="logo">
-                <span class="logo-icon">🌿</span>
-                <h1>БиоКласс: Растения</h1>
+                <span class="logo-icon">🌱</span>
+                <h1>БиоКласс: Систематика</h1>
             </div>
             <nav class="app-nav">
-                <button class="nav-btn active" data-target="learning-section">📖 Обучение</button>
+                <button class="nav-btn active" data-target="learning-section">📖 Уроки-Слайды</button>
                 <button class="nav-btn" data-target="quiz-section">🎮 Тренажер</button>
             </nav>
         </div>
     </header>
 
     <main class="app-content">
-      <!-- РАЗДЕЛ 1: ОБУЧЕНИЕ -->
+        <!-- РАЗДЕЛ 1: ОБУЧЕНИЕ (СЛАЙДОВАЯ СИСТЕМА) -->
         <section id="learning-section" class="content-section active">
-            <div class="section-card intro-card">
-                <h2>Что такое систематика?</h2>
-                <p><strong>Систематика растений</strong> — это наука, которая разделяет все растения на группы (категории) на основе их сходства и родства. Это помогает ученым навести порядок в огромном растительном мире!</p>
-            </div>
-
-            <!-- Интерактивная схема иерархии -->
-            <div class="section-card hierarchy-card">
-                <h2>Основные таксоны (категории) систематики</h2>
-                <p class="subtitle">Нажмите на карточку, чтобы узнать подробнее или посмотреть пример:</p>
+            
+            <!-- Контейнер для слайдов -->
+            <div class="slider-wrapper">
                 
-                <div class="taxonomy-tree">
-                    <!-- Царство -->
-                    <div class="taxonomy-item" data-info="Самая крупная группа. Включает все многоклеточные растения, способные к фотосинтезу.">
-                        <div class="rank">Царство</div>
-                        <div class="example-name">Растения</div>
+                <!-- Слайд 1: Введение -->
+                <div class="theory-slide active" data-slide="1">
+                    <div class="slide-header">
+                        <span class="slide-number">Слайд 1 из 4</span>
+                        <h2>Что такое систематика растений?</h2>
                     </div>
-                    
-                    <!-- Отдел -->
-                    <div class="taxonomy-item" data-info="Крупная группа внутри царства. Например, Покрытосеменные (Цветковые) имеют цветок и плод.">
-                        <div class="rank">Отдел</div>
-                        <div class="example-name">Покрытосеменные</div>
+                    <div class="slide-body">
+                        <p class="highlight-text">Представь, что ты зашел в огромную библиотеку, где миллионы книг просто свалены в кучу. Найти нужную невозможно!</p>
+                        <p>То же самое и в природе. На Земле живет более <b>350 000 видов растений</b>. Чтобы не запутаться, ученые создали <strong>систематику</strong> — науку о распределении организмов по группам на основе их сходства и родства.</p>
+                        <p>Сами группы называют <b>таксонами</b>.</p>
                     </div>
-                    
-                    <!-- Класс -->
-                    <div class="taxonomy-item" data-info="Делит отделы по строению семени и листьев. У Двудольных в семени две семядоли.">
-                        <div class="rank">Класс</div>
-                        <div class="example-name">Двудольные</div>
+                </div>
+                <!-- Слайд 2: Пирамида таксонов -->
+                <div class="theory-slide" data-slide="2">
+                    <div class="slide-header">
+                        <span class="slide-number">Слайд 2 из 4</span>
+                        <h2>Иерархия живого мира</h2>
                     </div>
-                    
-                    <!-- Порядок -->
-                    <div class="taxonomy-item" data-info="Объединяет близкие семейства. Класс Двудольные делится на множество порядков.">
-                        <div class="rank">Порядок</div>
-                        <div class="example-name">Розоцветные</div>
-                    </div>
-                    
-                    <!-- Семейство -->
-                    <div class="taxonomy-item" data-info="Важная группа. Растения одного семейства имеют схожее строение цветка и плода.">
-                        <div class="rank">Семейство</div>
-                        <div class="example-name">Розовые</div>
-                    </div>
-                    
-                    <!-- Род -->
-                    <div class="taxonomy-item" data-info="Объединяет близкородственные виды. Первое слово в двойном названии растения.">
-                        <div class="rank">Род</div>
-                        <div class="example-name">Шиповник (Роза)</div>
-                    </div>
-                    
-                    <!-- Вид -->
-                    <div class="taxonomy-item" data-info="Основная единица систематики. Название всегда двойное (бинарное): Существительное + Прилагательное.">
-                        <div class="rank">Вид</div>
-                        <div class="example-name">Шиповник коричный</div>
+                    <div class="slide-body">
+                        <p>В систематике действует правило соподчинения: мелкие группы объединяются в более крупные. Посмотри, как выглядит эта лестница (от самой большой группы к самой маленькой):</p>
+                        
+                        <div class="mini-pyramid">
+                            <div class="p-layer">Царство</div>
+                            <div class="p-layer">Отдел</div>
+                            <div class="p-layer">Класс</div>
+                            <div class="p-layer">Порядок</div>
+                            <div class="p-layer">Семейство</div>
+                            <div class="p-layer">Род</div>
+                            <div class="p-layer">Вид</div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Всплывающее окно с подсказкой при клике (будет управляться через JS) -->
-                <div id="info-box" class="info-box hidden">
-                    <p id="info-text">Нажмите на любой уровень, чтобы прочитать подсказку.</p>
+                <!-- Слайд 3: Подробный разбор (интерактивный) -->
+                <div class="theory-slide" data-slide="3">
+                    <div class="slide-header">
+                        <span class="slide-number">Слайд 3 из 4</span>
+                        <h2>Пример систематики растений</h2>
+                    </div>
+                    <div class="slide-body">
+                        <p class="instruction">Нажимай на уровни ниже, чтобы увидеть, к каким группам относится <strong>Шиповник коричный</strong>, и получить подсказку:</p>
+                        
+                        <div class="interactive-accordion">
+                            <div class="acc-item" data-info="Все многоклеточные организмы, создающие органические вещества с помощью солнца (фотосинтез).">
+                                <div class="acc-trigger">👑 Царство: Растения</div>
+                            </div>
+                            <div class="acc-item" data-info="Растения, которые имеют цветы и прячут свои семена внутри плода.">
+                                <div class="acc-trigger">🌸 Отдел: Покрытосеменные (Цветковые)</div>
+                            </div>
+                            <div class="acc-item" data-info="Зародыш имеет 2 семядоли, а листья обычно с сетчатым жилкованием.">
+                                <div class="acc-trigger">🍃 Класс: Двудольные</div>
+                            </div>
+                            <div class="acc-item" data-info="Крупный порядок цветковых растений, куда входят розы, яблоки и земляника.">
+                                <div class="acc-trigger">🌿 Порядок: Розоцветные</div>
+                            </div>
+                            <div class="acc-item" data-info="Объединяет растения со схожим строением цветка (много тычинок и пестиков).">
+                                <div class="acc-trigger">🌹 Семейство: Розовые</div>
+                            </div>
+                            <div class="acc-item" data-info="Близкие родственники. Первое слово в научном названии растения.">
+                                <div class="acc-trigger">🪵 Род: Шиповник</div>
+                            </div>
+                            <div class="acc-item" data-info="Основная единица классификации. Название всегда двойное: Существительное + Прилагательное.">
+                                <div class="acc-trigger">🎯 Вид: Шиповник коричный</div>
+                            </div>
+                        </div>
+                        
+                        <div id="slide-info-box" class="slide-info-box hidden-box">
+                            <p id="slide-info-text"></p>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Шпаргалка-запоминалка -->
-            <div class="section-card mnemonic-card">
-                <h3>💡 Фраза для быстрого запоминания порядка (от крупного к мелкому):</h3>
-                <blockquote class="mnemonic-phrase">
-                    «<strong>Ц</strong>арский <strong>О</strong>фицер <strong>К</strong>омандовал <strong>П</strong>олком, <strong>С</strong>треляя <strong>Р</strong>езвыми <strong>В</strong>оробьями»
-                </blockquote>
-                <p class="mnemonic-hint">(Первые буквы соответствуют: Царство, Отдел, Класс, Порядок, Семейство, Род, Вид)</p>
+                <!-- Слайд 4: Лайфхак для запоминания -->
+                <div class="theory-slide" data-slide="4">
+                    <div class="slide-header">
+                        <span class="slide-number">Слайд 4 из 4</span>
+                        <h2>Как всё это запомнить?</h2>
+                    </div>
+                    <div class="slide-body text-center">
+                        <p>Учить порядок категорий бывает сложно. На помощь приходит простая и забавная фраза-подсказка!</p>
+                        <p>Запомни её, и ты никогда не перепутаешь порядок от самого крупного таксона к мелкому:</p>
+                        
+                        <div class="mnemonic-bubble">
+                            «<strong>Ц</strong>арский <strong>О</strong>фицер <strong>К</strong>омандовал <strong>П</strong>олком, <br>
+                            <strong>С</strong>треляя <strong>Р</strong>езвыми <strong>В</strong>оробьями»
+                        </div>
+                        
+                        <div class="mnemonic-decode">
+                            <span><b>Ц</b>арство</span> → <span><b>О</b>тдел</span> → <span><b>К</b>ласс</span> → <span><b>П</b>орядок</span> → <span><b>С</b>емейство</span> → <span><b>Р</b>од</span> → <span><b>В</b>ид</span>
+                        </div>
+                        <p class="final-call">Теперь ты готов! Переходи в верхнем меню на вкладку <b>«Тренажер»</b> и проверь свои силы!</p>
+                    </div>
+                </div>
+
+                <!-- Панель управления слайдами -->
+                <div class="slider-controls">
+                    <button id="prev-slide-btn" class="slide-ctrl-btn" disabled>← Назад</button>
+                    <div class="slide-dots" id="slide-dots">
+                        <!-- Точки-индикаторы сгенерируются автоматически -->
+                    </div>
+                    <button id="next-slide-btn" class="slide-ctrl-btn">Вперед →</button>
+                </div>
+
             </div>
         </section>
-<!-- РАЗДЕЛ 2: ТРЕНАЖЕР -->
+        <!-- РАЗДЕЛ 2: ТРЕНАЖЕР -->
         <section id="quiz-section" class="content-section hidden">
-            <div class="section-card intro-card">
+            <div class="quiz-info-card">
                 <h2>🎮 Интерактивный тренажер</h2>
-                <p>Проверь свои знания! Твоя задача — собрать правильную цепочку систематики для случайного растения <strong>от самого высшего таксона (Царство) к низшему (Вид)</strong>. Перетаскивай карточки или просто кликай по ним по порядку.</p>
+                <p>Проверь свои знания! Твоя задача — собрать правильную цепочку систематики для случайного растения <strong>от самого высшего таксона (Царство) к низшему (Вид)</strong>. Кликай по карточкам вариантов по порядку, чтобы заполнить слоты.</p>
             </div>
 
             <div class="quiz-container">
