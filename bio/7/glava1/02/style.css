@@ -2,18 +2,19 @@
    1. ПЕРЕМЕННЫЕ И БАЗОВЫЕ НАСТРОЙКИ
    ========================================================================== */
 :root {
-    --primary-color: #2e7d32;       /* Насыщенный зеленый (биология) */
-    --primary-light: #e8f5e9;     /* Светло-зеленый фон */
-    --accent-color: #ff9800;      /* Оранжевый акцент для кнопок */
+    --primary-color: #2e7d32;       /* Биологический зеленый */
+    --primary-light: #e8f5e9;     /* Светло-зеленый фон элементов */
+    --accent-color: #ff9800;      /* Оранжевый для кнопок */
     --accent-hover: #f57c00;      /* Темно-оранжевый */
-    --text-main: #2c3e50;         /* Темный цвет текста */
-    --text-muted: #7f8c8d;        /* Серый цвет для подписей */
-    --bg-app: #f4f7f6;            /* Мягкий фон страницы */
+    --text-main: #2c3e50;         /* Основной текст */
+    --text-muted: #7f8c8d;        /* Серый текст для подписей */
+    --bg-app: #f0f4f2;            /* Мягкий фон страницы */
     --white: #ffffff;
-    --success-color: #4caf50;     /* Зеленый для правильных ответов */
-    --error-color: #f44336;       /* Красный для ошибок */
-    --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    --border-radius: 12px;
+    --success-color: #4caf50;     /* Цвет правильного ответа */
+    --error-color: #f44336;       /* Цвет ошибки */
+    --shadow-main: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --border-radius-lg: 16px;
+    --border-radius-sm: 8px;
 }
 
 * {
@@ -27,16 +28,16 @@ body {
     background-color: var(--bg-app);
     color: var(--text-main);
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
 }
 
-/* Контейнер для выравнивания контента по центру */
 .header-container, .app-content {
-    max-width: 1000px;
+    max-width: 850px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -46,7 +47,7 @@ h1, h2, h3, h4 {
    ========================================================================== */
 .app-header {
     background-color: var(--white);
-    box-shadow: var(--shadow);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -67,12 +68,8 @@ h1, h2, h3, h4 {
     gap: 10px;
 }
 
-.logo-icon {
-    font-size: 1.8rem;
-}
-
 .logo h1 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     color: var(--primary-color);
 }
 
@@ -81,186 +78,346 @@ h1, h2, h3, h4 {
     gap: 10px;
 }
 
-/* Кнопки переключения режимов */
 .nav-btn {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
-    font-size: 1rem;
-    padding: 10px 20px;
-    border: 2px solid transparent;
-    border-radius: 30px;
+    font-size: 0.95rem;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 20px;
     background-color: var(--primary-light);
     color: var(--primary-color);
     cursor: pointer;
     transition: all 0.3s ease;
-}
-
-.nav-btn:hover {
-    background-color: #c8e6c9;
 }
 
 .nav-btn.active {
     background-color: var(--primary-color);
     color: var(--white);
-    box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
+    box-shadow: 0 4px 12px rgba(46, 125, 50, 0.2);
 }
 
-/* Управление видимостью вкладок */
 .app-content {
-    padding-top: 30px;
-    padding-bottom: 50px;
-}
-
-.content-section {
-    display: block;
+    padding-top: 25px;
+    padding-bottom: 40px;
 }
 
 .content-section.hidden {
-    display: none;
+    display: none !important;
 }
+
 /* ==========================================================================
-   3. СТИЛИ КАРТОЧЕК И РАЗДЕЛА «ОБУЧЕНИЕ»
+   3. СТРУКТУРА СЛАЙДЕРА ТЕОРИИ
    ========================================================================== */
-.section-card {
+.slider-wrapper {
     background-color: var(--white);
-    border-radius: var(--border-radius);
-    padding: 25px;
-    margin-bottom: 25px;
-    box-shadow: var(--shadow);
-    border-left: 5px solid var(--primary-color);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-main);
+    padding: 30px;
+    position: relative;
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.intro-card {
-    border-left-color: var(--accent-color);
+/* Базовый слайд (по умолчанию скрыт) */
+.theory-slide {
+    display: none;
+    opacity: 0;
+    transform: translateX(15px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.section-card h2 {
-    color: var(--primary-color);
-    margin-bottom: 15px;
-    font-size: 1.5rem;
+/* Активный слайд с анимацией плавного появления */
+.theory-slide.active {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    opacity: 1;
+    transform: translateX(0);
 }
 
-.subtitle {
-    color: var(--text-muted);
-    font-style: italic;
+.slide-header {
+    border-bottom: 2px solid var(--bg-app);
+    padding-bottom: 12px;
     margin-bottom: 20px;
 }
 
-/* Интерактивная иерархическая пирамида/дерево */
-.taxonomy-tree {
+.slide-number {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.slide-header h2 {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+}
+
+.slide-body {
+    flex-grow: 1;
+    font-size: 1.05rem;
+}
+
+.highlight-text {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #1b5e20;
+    background-color: var(--primary-light);
+    padding: 12px 15px;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 15px;
+}
+
+.slide-body p {
+    margin-bottom: 12px;
+}
+/* ==========================================================================
+   4. СТИЛИЗАЦИЯ СОДЕРЖИМОГО СЛАЙДОВ (ТЕОРИЯ)
+   ========================================================================== */
+
+/* Компактная визуальная пирамида (Слайд 2) */
+.mini-pyramid {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    margin: 30px 0;
+    gap: 6px;
+    margin: 20px auto;
+    max-width: 450px;
 }
 
-/* Элемент дерева. Каждый следующий уровень становится чуть уже */
-.taxonomy-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--primary-light);
-    border: 2px solid #c8e6c9;
-    border-radius: 8px;
-    padding: 12px 20px;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-    user-select: none;
-}
-
-.taxonomy-item:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 12px rgba(46, 125, 50, 0.15);
-    background-color: #c8e6c9;
-}
-
-/* Каскадное сужение элементов для визуализации вложенности (от Царства до Вида) */
-.taxonomy-item:nth-child(1) { width: 100%; }
-.taxonomy-item:nth-child(2) { width: 95%; }
-.taxonomy-item:nth-child(3) { width: 90%; }
-.taxonomy-item:nth-child(4) { width: 85%; }
-.taxonomy-item:nth-child(5) { width: 80%; }
-.taxonomy-item:nth-child(6) { width: 75%; }
-.taxonomy-item:nth-child(7) { width: 70%; }
-
-.rank {
-    font-weight: 800;
-    color: var(--primary-color);
-    text-transform: uppercase;
-    font-size: 0.85rem;
+.p-layer {
+    background: linear-gradient(135deg, #4caf50 0%, var(--primary-color) 100%);
+    color: var(--white);
+    font-weight: 700;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: var(--border-radius-sm);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    font-size: 0.95rem;
     letter-spacing: 0.5px;
 }
 
-.example-name {
+/* Каскадное уменьшение ширины для создания эффекта пирамиды */
+.p-layer:nth-child(1) { width: 100%; background: #2e7d32; }
+.p-layer:nth-child(2) { width: 92%;  background: #388e3c; }
+.p-layer:nth-child(3) { width: 84%;  background: #43a047; }
+.p-layer:nth-child(4) { width: 76%;  background: #4caf50; }
+.p-layer:nth-child(5) { width: 68%;  background: #66bb6a; }
+.p-layer:nth-child(6) { width: 60%;  background: #81c784; }
+.p-layer:nth-child(7) { width: 52%;  background: #a5d6a7; color: #1b5e20; }
+
+/* Интерактивный аккордеон (Слайд 3) */
+.instruction {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.interactive-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.acc-item {
+    border: 1px solid #c8e6c9;
+    border-radius: var(--border-radius-sm);
+    background-color: var(--primary-light);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.acc-item:hover {
+    background-color: #c8e6c9;
+    transform: translateX(3px);
+}
+
+.acc-item.selected-item {
+    border-color: var(--accent-color);
+    background-color: #fff3e0;
+}
+
+.acc-trigger {
+    padding: 10px 15px;
     font-weight: 600;
+    font-size: 0.95rem;
     color: var(--text-main);
 }
 
-/* Информационное окошко для подсказок */
-.info-box {
-    background-color: #fff3e0;
-    border: 1px dashed var(--accent-color);
-    border-radius: 8px;
-    padding: 15px;
-    margin-top: 20px;
-    text-align: center;
-    min-height: 55px;
-    transition: all 0.3s ease;
+.acc-item.selected-item .acc-trigger {
+    color: #e65100;
+    font-weight: 700;
 }
 
-.info-box p {
+/* Информационный бокс для вывода описания таксонов на слайде */
+.slide-info-box {
+    background-color: #fff3e0;
+    border-left: 4px solid var(--accent-color);
+    padding: 12px 15px;
+    border-radius: var(--border-radius-sm);
+    margin-top: 15px;
+    animation: slideIn 0.3s ease-out;
+}
+
+.slide-info-box p {
+    margin-bottom: 0;
     color: #e65100;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.hidden-box {
+    display: none !important;
+}
+/* ==========================================================================
+   5. МНЕМОНИКА И ПАНЕЛЬ УПРАВЛЕНИЯ СЛАЙДЕРАМИ
+   ========================================================================== */
+.text-center {
+    text-align: center;
+}
+
+/* Красивое облако с фразой для запоминания */
+.mnemonic-bubble {
+    background: linear-gradient(135deg, #fffde7 0%, #fff9c4 100%);
+    border: 2px dashed var(--accent-color);
+    border-radius: var(--border-radius-lg);
+    padding: 20px;
+    font-size: 1.15rem;
+    color: #e65100;
+    font-weight: 700;
+    font-style: italic;
+    margin: 20px auto;
+    max-width: 500px;
+    box-shadow: 0 4px 10px rgba(255, 152, 0, 0.1);
+}
+
+/* Декодирование букв фразы ниже */
+.mnemonic-decode {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
     font-weight: 600;
 }
 
-.info-box.hidden {
-    opacity: 0;
-    visibility: hidden;
+.mnemonic-decode span {
+    background-color: var(--bg-app);
+    padding: 4px 10px;
+    border-radius: 15px;
+    color: var(--text-main);
 }
 
-/* Блок с мнемонической фразой */
-.mnemonic-card {
-    border-left-color: var(--accent-color);
-    background: linear-gradient(135deg, var(--white) 0%, #fffde7 100%);
+.mnemonic-decode b {
+    color: var(--error-color);
 }
 
-.mnemonic-phrase {
-    font-size: 1.2rem;
-    color: #e65100;
-    margin: 15px 0;
-    padding-left: 15px;
-    border-left: 3px solid var(--accent-color);
-    font-style: italic;
+.final-call {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-top: 15px;
 }
 
-.mnemonic-hint {
-    font-size: 0.9rem;
-    color: var(--text-muted);
+/* Нижняя панель навигации по слайдам */
+.slider-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 2px solid var(--bg-app);
+    padding-top: 20px;
+    margin-top: 25px;
 }
+
+.slide-ctrl-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 10px 22px;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    background-color: var(--primary-color);
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.slide-ctrl-btn:hover:not(:disabled) {
+    background-color: #1b5e20;
+    transform: translateY(-1px);
+}
+
+.slide-ctrl-btn:disabled {
+    background-color: #cfd8dc;
+    color: #90a4ae;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Точки индикаторы слайдов */
+.slide-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #cfd8dc;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dot.active {
+    background-color: var(--primary-color);
+    transform: scale(1.2);
+}
+
 /* ==========================================================================
-   4. ИНТЕРФЕЙС ИГРОВОГО ТРЕНАЖЕРА (QUIZ)
+   6. ИНТЕРФЕЙС ТРЕНАЖЕРА (QUIZ)
    ========================================================================== */
+.quiz-info-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius-lg);
+    padding: 20px 25px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-main);
+    border-left: 5px solid var(--accent-color);
+}
+
+.quiz-info-card h2 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
 .quiz-container {
     background-color: var(--white);
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius-lg);
     padding: 25px;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-main);
 }
 
-/* Шапка тренажера с названием растения и счетом */
 .quiz-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid var(--bg-app);
-    padding-bottom: 15px;
-    margin-bottom: 25px;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
     gap: 15px;
 }
 
 .target-plant-box span, .score-box span {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
     text-transform: uppercase;
     font-weight: 700;
@@ -268,29 +425,30 @@ h1, h2, h3, h4 {
 
 #target-plant-name {
     color: var(--primary-color);
-    font-size: 1.4rem;
+    font-size: 1.3rem;
 }
 
 .score-box {
     background-color: var(--primary-light);
-    padding: 8px 15px;
+    padding: 6px 14px;
     border-radius: 20px;
     border: 1px solid #c8e6c9;
 }
 
 #score-counter {
     color: var(--primary-color);
-    font-size: 1.2rem;
+    font-size: 1.15rem;
 }
-
-/* Рабочая область сборки цепочки (Слоты) */
+/* ==========================================================================
+   7. СЛОТЫ, ВАРИАНТЫ ОТВЕТОВ И КНОПКИ ТРЕНАЖЕРА
+   ========================================================================== */
 .quiz-workspace, .quiz-options {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .quiz-workspace h3, .quiz-options h3 {
-    font-size: 1.1rem;
-    margin-bottom: 15px;
+    font-size: 1rem;
+    margin-bottom: 12px;
     color: var(--text-main);
 }
 
@@ -299,228 +457,154 @@ h1, h2, h3, h4 {
     flex-direction: column;
     gap: 8px;
     background-color: var(--bg-app);
-    padding: 15px;
-    border-radius: var(--border-radius);
-    min-height: 200px;
+    padding: 12px;
+    border-radius: var(--border-radius-lg);
 }
 
-/* Пустая ячейка-ранг ожидания */
+/* Пустая ячейка ранга */
 .quiz-slot {
     display: flex;
     align-items: center;
     background-color: var(--white);
     border: 2px dashed #b0bec5;
-    border-radius: 8px;
-    padding: 10px 15px;
-    min-height: 52px;
+    border-radius: var(--border-radius-sm);
+    padding: 8px 15px;
+    min-height: 50px;
+    cursor: pointer;
     transition: all 0.2s ease;
 }
 
-.quiz-slot.drag-over {
-    border-color: var(--primary-color);
-    background-color: var(--primary-light);
-}
-
-/* Метка ранга внутри слота (ЦАРСТВО, ОТДЕЛ...) */
+/* Название фиксированного ранга слева в ячейке */
 .slot-rank-label {
     font-weight: 800;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--text-muted);
-    width: 120px;
+    width: 110px;
     flex-shrink: 0;
     border-right: 2px solid var(--bg-app);
     margin-right: 15px;
+    text-transform: uppercase;
 }
 
-/* Контейнер для карточек-вариантов */
+.slot-card-holder {
+    flex-grow: 1;
+}
+
+/* Блок с доступными карточками */
 .options-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
     background-color: #eceff1;
-    padding: 15px;
-    border-radius: var(--border-radius);
-    min-height: 80px;
+    padding: 12px;
+    border-radius: var(--border-radius-lg);
+    min-height: 70px;
 }
 
-/* Интерактивная карточка ответа */
+/* Карточка ответа */
 .quiz-card {
     background-color: var(--white);
     border: 2px solid #cfd8dc;
-    border-radius: 8px;
-    padding: 8px 16px;
+    border-radius: var(--border-radius-sm);
+    padding: 6px 14px;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
     user-select: none;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    font-size: 0.95rem;
+    transition: all 0.15s ease;
 }
 
 .quiz-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
     border-color: var(--primary-color);
 }
 
-/* Состояние, когда карточка уже заняла свое место в слоте */
+/* Карточка внутри заполненного слота */
 .quiz-slot .quiz-card {
     border-color: var(--primary-color);
     box-shadow: none;
     transform: none;
-    cursor: pointer;
     width: 100%;
 }
 
-/* Состояние, когда карточка скрывается из общего списка */
+/* Состояние использованной карточки в списке вариантов */
 .quiz-card.hidden-card {
-    opacity: 0.3;
+    opacity: 0.25;
     pointer-events: none;
     background-color: #e0e0e0;
 }
-/* ==========================================================================
-   5. КНОПКИ УПРАВЛЕНИЯ, СТАТУСЫ И АНИМАЦИИ
-   ========================================================================== */
+
+/* Кнопки управления и результаты */
 .quiz-controls {
     display: flex;
-    gap: 15px;
-    margin-top: 25px;
+    gap: 12px;
+    margin-top: 20px;
     flex-wrap: wrap;
 }
 
 .action-btn {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
-    font-size: 1rem;
-    padding: 12px 25px;
+    font-size: 0.95rem;
+    padding: 12px 20px;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--border-radius-sm);
     cursor: pointer;
     transition: all 0.2s ease;
     flex: 1;
-    min-width: 150px;
+    min-width: 140px;
 }
 
-.check-btn {
-    background-color: var(--accent-color);
-    color: var(--white);
-}
+.check-btn { background-color: var(--accent-color); color: var(--white); }
+.check-btn:hover { background-color: var(--accent-hover); }
+.reset-btn { background-color: #cfd8dc; color: var(--text-main); }
+.reset-btn:hover { background-color: #b0bec5; }
+.next-btn { background-color: var(--primary-color); color: var(--white); animation: pulse 2s infinite; }
+.next-btn:hover { background-color: #1b5e20; }
 
-.check-btn:hover {
-    background-color: var(--accent-hover);
-}
-
-.reset-btn {
-    background-color: #cfd8dc;
-    color: var(--text-main);
-}
-
-.reset-btn:hover {
-    background-color: #b0bec5;
-}
-
-.next-btn {
-    background-color: var(--primary-color);
-    color: var(--white);
-    animation: pulse 2s infinite;
-}
-
-.next-btn:hover {
-    background-color: #1b5e20;
-}
-
-/* Окно фидбека по результатам проверки */
 .feedback-message {
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 8px;
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: var(--border-radius-sm);
     text-align: center;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem;
     animation: slideIn 0.3s ease-out;
 }
 
-.feedback-message.success {
-    background-color: #e8f5e9;
-    color: #2e7d32;
-    border: 1px solid #a5d6a7;
-}
+.feedback-message.success { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+.feedback-message.error { background-color: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
 
-.feedback-message.error {
-    background-color: #ffebee;
-    color: #c62828;
-    border: 1px solid #ef9a9a;
-}
+.quiz-slot.correct-slot { border-color: var(--success-color); background-color: #e8f5e9; }
+.quiz-slot.wrong-slot { border-color: var(--error-color); background-color: #ffebee; }
 
-/* Стили подсветки слотов при проверке */
-.quiz-slot.correct-slot {
-    border-color: var(--success-color);
-    background-color: #e8f5e9;
-}
-
-.quiz-slot.wrong-slot {
-    border-color: var(--error-color);
-    background-color: #ffebee;
-}
-
-/* Вспомогательные классы скрытия */
-.hidden {
-    display: none !important;
-}
-
-/* Ключевые кадры анимаций */
+/* Анимации */
 @keyframes pulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.03); box-shadow: 0 0 15px rgba(46,125,50,0.4); }
+    50% { transform: scale(1.02); box-shadow: 0 0 12px rgba(46,125,50,0.3); }
     100% { transform: scale(1); }
 }
 
 @keyframes slideIn {
-    from { transform: translateY(10px); opacity: 0; }
+    from { transform: translateY(8px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
 
 /* ==========================================================================
-   6. АДАПТИВНЫЙ ДИЗАЙН (MEDIA QUERIES)
+   8. АДАПТИВНЫЙ ДИЗАЙН (MEDIA QUERIES)
    ========================================================================== */
 @media (max-width: 768px) {
-    .header-container {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .slot-rank-label {
-        width: 90px;
-        font-size: 0.7rem;
-        margin-right: 10px;
-    }
-    
-    .taxonomy-item {
-        font-size: 0.9rem;
-        padding: 10px 15px;
-    }
+    .slider-wrapper { padding: 20px; min-height: 520px; }
+    .slide-header h2 { font-size: 1.25rem; }
+    .slot-rank-label { width: 95px; font-size: 0.7rem; margin-right: 10px; }
 }
 
 @media (max-width: 480px) {
-    .app-nav {
-        width: 100%;
-    }
-    
-    .nav-btn {
-        flex: 1;
-        font-size: 0.9rem;
-        padding: 8px 12px;
-    }
-    
-    .quiz-slot {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-    }
-    
-    .slot-rank-label {
-        border-right: none;
-        border-bottom: 2px solid var(--bg-app);
-        width: 100%;
-        padding-bottom: 3px;
-    }
+    .header-container { flex-direction: column; text-align: center; }
+    .app-nav { width: 100%; }
+    .nav-btn { flex: 1; font-size: 0.85rem; padding: 6px 10px; }
+    .quiz-slot { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .slot-rank-label { border-right: none; border-bottom: 2px solid var(--bg-app); width: 100%; padding-bottom: 2px; }
 }
