@@ -623,3 +623,23 @@ h1, h2, h3, h4 {
     from { transform: translateY(10px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
 }
+/* Стили для встроенного таймера */
+.game-timer-box {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--text-main);
+    background-color: #fff3e0;
+    padding: 6px 18px;
+    border-radius: 20px;
+    border: 2px solid var(--accent-color);
+    transition: all 0.3s ease;
+}
+
+/* Эффект тревоги, когда время на исходе */
+.game-timer-box.timer-urgent {
+    background-color: #ffebee;
+    border-color: var(--error-color);
+    color: var(--error-color);
+    animation: pulse 1s infinite;
+}
