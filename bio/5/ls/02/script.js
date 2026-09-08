@@ -194,26 +194,75 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==========================================================================
-// 5. ИГРОВОЙ ДВИЖОК «БИО-ЗНАТОКИ» (ДЛЯ РАБОТЫ С КЛАССОМ)
+// 5. ИГРОВОЙ ДВИЖОК «БИО-ЗНАТОКИ» С ВСТРОЕННЫМ ТАЙМЕРОМ
 // ==========================================================================
+let timerInterval = null; // Переменная для хранения счетчика времени
+
 function initClassGame() {
     document.getElementById("btn-generate-question").addEventListener("click", generateNewQuestion);
     document.getElementById("btn-reset-game").addEventListener("click", resetFullGame);
 }
 
-// Генерация нового случайного вопроса из базы данных
+// Запуск и управление таймером обратного отсчета
+function startQuizTimer() {
+    clearInterval(timerInterval); // Сбрасываем прошлый таймер, если он работал
+    
+    let timeLeft = 30; // Задаем 30 секунд на размышление
+    const timerBox = document.getElementById("game-timer-box");
+    const timerCounter = document.getElementById("timer-counter");
+    
+    timerBox.classList.remove("hidden-element", "timer-urgent");
+    timerCounter.textContent = timeLeft;
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        timerCounter.textContent = timeLeft;
+
+        // Если осталось 10 секунд или меньше — включаем красную подсветку
+        if (timeLeft <= 10) {
+            timerBox.classList.add("timer-urgent");
+        }
+
+        // Если время полностью вышло
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            handleTimeOut(); // Вызываем автоматическое поражение в раунде
+        }
+    }, 1000);
+}
+
+// Обработка ситуации, когда класс не успел ответить за 30 секунд
+function handleTimeOut() {
+    const feedbackEl = document.getElementById("game-feedback");
+    const correctOptionText = lessonState.currentQuestion.correct;
+
+    // Блокируем кнопки
+    const allOptions = document.querySelectorAll(".btn-game-option");
+    allOptions.forEach(btn => {
+        btn.disabled = true;
+        if (btn.textContent === correctOptionText) {
+            btn.classList.add("correct-choice"); // Показываем правильный ответ
+        }
+    });
+
+    feedbackEl.textContent = `⏰ Время вышло! Класс не успел дать ответ. Правильный вариант: ${correctOptionText}. ${lessonState.currentQuestion.hint}`;
+    feedbackEl.className = "game-feedback error";
+    feedbackEl.classList.remove("hidden-element");
+
+    lessonState.round++;
+    document.getElementById("game-round-counter").textContent = lessonState.round;
+}
+
+// Генерация нового случайного вопроса
 function generateNewQuestion() {
     const feedbackEl = document.getElementById("game-feedback");
     feedbackEl.className = "game-feedback hidden-element";
     
-    // Выбираем случайную ситуацию из массива
     const randomIndex = Math.floor(Math.random() * gameQuestions.length);
     lessonState.currentQuestion = gameQuestions[randomIndex];
 
-    // Выводим текст вопроса на экран
     document.getElementById("game-question-text").textContent = lessonState.currentQuestion.question;
 
-    // Генерируем крупные кнопки вариантов ответов
     const gridContainer = document.getElementById("game-options-grid");
     gridContainer.innerHTML = "";
     gridContainer.classList.remove("hidden-element");
@@ -223,16 +272,19 @@ function generateNewQuestion() {
         optionButton.className = "btn-game-option";
         optionButton.textContent = optionText;
 
-        // По клику на вариант ответа запускаем проверку
         optionButton.addEventListener("click", () => {
+            // При клике останавливаем таймер и проверяем ответ
+            clearInterval(timerInterval);
             handleClassAnswer(optionButton, optionText);
         });
 
         gridContainer.appendChild(optionButton);
     });
 
-    // Изменяем текст кнопки генерации на «Следующий вопрос»
     document.getElementById("btn-generate-question").textContent = "⏭ Следующий вопрос";
+    
+    // Включаем таймер для нового вопроса!
+    startQuizTimer();
 }
 
 // Обработка ответа, выбранного классом
@@ -240,25 +292,18 @@ function handleClassAnswer(clickedButton, selectedText) {
     const feedbackEl = document.getElementById("game-feedback");
     const correctOptionText = lessonState.currentQuestion.correct;
 
-    // Блокируем все кнопки в сетке, чтобы нельзя было кликнуть дважды в одном раунде
     const allOptions = document.querySelectorAll(".btn-game-option");
     allOptions.forEach(btn => btn.disabled = true);
 
     if (selectedText === correctOptionText) {
-        // Подсвечиваем кнопку зеленым при успехе
         clickedButton.classList.add("correct-choice");
-        
-        // Начисляем очки классу
         lessonState.score += 10;
         document.getElementById("class-score").textContent = lessonState.score;
 
         feedbackEl.textContent = `🎉 Верно! Молодец! ${lessonState.currentQuestion.hint}`;
         feedbackEl.className = "game-feedback success";
     } else {
-        // Подсвечиваем кнопку красным при ошибке
         clickedButton.classList.add("wrong-choice");
-
-        // Находим правильную кнопку и подсвечиваем её зеленым, чтобы показать верный ответ
         allOptions.forEach(btn => {
             if (btn.textContent === correctOptionText) {
                 btn.classList.add("correct-choice");
@@ -269,14 +314,14 @@ function handleClassAnswer(clickedButton, selectedText) {
         feedbackEl.className = "game-feedback error";
     }
 
-    // Показываем блок обратной связи и увеличиваем счетчик раундов
     feedbackEl.classList.remove("hidden-element");
     lessonState.round++;
     document.getElementById("game-round-counter").textContent = lessonState.round;
 }
 
-// Полный сброс игры к первоначальному состоянию
+// Полный сброс игры
 function resetFullGame() {
+    clearInterval(timerInterval); // Тушим таймер
     lessonState.score = 0;
     lessonState.round = 1;
     lessonState.currentQuestion = null;
@@ -291,6 +336,9 @@ function resetFullGame() {
 
     const feedbackEl = document.getElementById("game-feedback");
     feedbackEl.className = "game-feedback hidden-element";
+
+    const timerBox = document.getElementById("game-timer-box");
+    timerBox.className = "game-timer-box hidden-element";
 
     document.getElementById("btn-generate-question").textContent = "🎲 Сгенерировать вопрос";
 }
