@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок биологии 5 класс: Система наук о живой природе</title>
+    <!-- Подключаем контрастные шрифты для отображения на школьной доске/экране -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Montserrat:wght@600;800&family=Nunito:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Главный контейнер автоматического масштабирования под разрешение экрана ПК -->
+    <div id="presentation-scaler" class="presentation-scaler">
+        
+        <!-- Шапка управления (видна учителю для переключения режимов) -->
+        <header class="lesson-header">
+            <div class="header-brand">
+                <span class="brand-icon">🔬</span>
+                <div class="brand-text">
+                    <h1>Биология. 5 класс</h1>
+                    <p>Тема: Система наук о живой природе</p>
+                </div>
+            </div>
+            <nav class="lesson-nav">
+                <button class="nav-btn active" data-target="presentation-section">📺 Презентация урока</button>
+                <button class="nav-btn" data-target="game-section">🎮 Игра для класса</button>
+            </nav>
+        </header>
+
+        <!-- Основное поле контента -->
+        <main class="lesson-content">
+          <!-- РАЗДЕЛ 1: ПРЕЗЕНТАЦИЯ УРОКА -->
+        <section id="presentation-section" class="content-section active">
+            <div class="slider-container">
+                
+                <!-- Слайд 1: Титульный / Введение -->
+                <div class="lesson-slide active" data-slide="1">
+                    <div class="slide-layout-center">
+                        <div class="badge">Введение в науку</div>
+                        <h2 class="slide-main-title">Что такое биология?</h2>
+                        <div class="definition-block">
+                            <p><strong>Биология</strong> — это наука о <strong>живой природе</strong>.</p>
+                            <p class="etymology">Происходит от греческих слов: <br> <span>«биос» — жизнь</span> и <span>«логос» — учение</span>.</p>
+                        </div>
+                        <p class="slide-hint-text">Сегодня на уроке мы узнаем, из каких важных кирпичиков-наук строится вся биология!</p>
+                    </div>
+                </div>
+
+                <!-- Слайд 2: Живые царства -->
+                <div class="lesson-slide" data-slide="2">
+                    <div class="slide-header">
+                        <span class="slide-step">Шаг 2 из 4</span>
+                        <h2>Кого изучает биология?</h2>
+                    </div>
+                    <div class="slide-body">
+                        <p class="lead-text">Живая природа невероятно разнообразна. Ученые разделили все живые организмы на огромные группы — <strong>Царства живой природы</strong>:</p>
+                        <div class="kingdoms-grid">
+                            <div class="kingdom-card">
+                                <span class="k-emoji">🌱</span>
+                                <h3>Растения</h3>
+                            </div>
+                            <div class="kingdom-card">
+                                <span class="k-emoji">🦁</span>
+                                <h3>Животные</h3>
+                            </div>
+                            <div class="kingdom-card">
+                                <span class="k-emoji">🍄</span>
+                                <h3>Грибы</h3>
+                            </div>
+                            <div class="kingdom-card">
+                                <span class="k-emoji">🦠</span>
+                                <h3>Бактерии</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Слайд 3: Система биологических наук -->
+                <div class="lesson-slide" data-slide="3">
+                    <div class="slide-header">
+                        <span class="slide-step">Шаг 3 из 4</span>
+                        <h2>Биология — это целая система наук!</h2>
+                    </div>
+                    <div class="slide-body">
+                        <p class="lead-text">Каждое царство живой природы изучает своя отдельная, специализированная наука. <em>(Нажмите на карточку, чтобы открыть название)</em>:</p>
+                        
+                        <div class="sciences-accordion">
+                            <div class="sci-item" data-secret="БОТАНИКА">
+                                <div class="sci-question">🌿 Какая наука изучает Растения?</div>
+                                <div class="sci-answer hidden-answer">Это наука — <strong class="highlight-green">БОТАНИКА</strong></div>
+                            </div>
+                            <div class="sci-item" data-secret="ЗООЛОГИЯ">
+                                <div class="sci-question">🐾 Какая наука изучает Животных?</div>
+                                <div class="sci-answer hidden-answer">Это наука — <strong class="highlight-green">ЗООЛОГИЯ</strong></div>
+                            </div>
+                            <div class="sci-item" data-secret="МИКОЛОГИЯ">
+                                <div class="sci-question">🍄 Какая наука изучает Грибы?</div>
+                                <div class="sci-answer hidden-answer">Это наука — <strong class="highlight-green">МИКОЛОГИЯ</strong></div>
+                            </div>
+                            <div class="sci-item" data-secret="МИКРОБИОЛОГИЯ">
+                                <div class="sci-question">🦠 Какая наука изучает Бактерии и микроорганизмы?</div>
+                                <div class="sci-answer hidden-answer">Это наука — <strong class="highlight-green">МИКРОБИОЛОГИЯ</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Слайд 4: Другие важные науки -->
+                <div class="lesson-slide" data-slide="4">
+                    <div class="slide-header">
+                        <span class="slide-step">Шаг 4 из 4</span>
+                        <h2>Общие биологические науки</h2>
+                    </div>
+                    <div class="slide-body">
+                        <p class="lead-text">Помимо изучения конкретных царств, есть науки, которые изучают общие правила жизни всех существ:</p>
+                        <div class="general-sciences-box">
+                            <div class="gen-sci-card">
+                                <h4>🏡 Экология</h4>
+                                <p>Изучает связи живых организмов между собой и с окружающей средой.</p>
+                            </div>
+                            <div class="gen-sci-card">
+                                <h4>🔬 Цитология</h4>
+                                <p>Изучает строение и работу клеток, из которых состоят все живые тела.</p>
+                            </div>
+                            <div class="gen-sci-card">
+                                <h4>🦴 Анатомия</h4>
+                                <p>Изучает внутреннее строение живых организмов и их органов.</p>
+                            </div>
+                        </div>
+                        <p class="ready-text">Материал изучен! Время запустить большую игру и проверить внимательность класса!</p>
+                    </div>
+                </div>
+
+                <!-- Нижняя панель управления презентацией -->
+                <div class="slide-navigation-bar">
+                    <button id="btn-prev-slide" class="ctrl-slide-btn" disabled>⏮ Назад</button>
+                    <div id="presentation-dots" class="presentation-dots">
+                        <!-- Сюда JS добавит точки -->
+                    </div>
+                    <button id="btn-next-slide" class="ctrl-slide-btn">Вперед ⏭</button>
+                </div>
+
+            </div>
+        </section>
+        <!-- РАЗДЕЛ 2: ИГРА ДЛЯ КЛАССА -->
+        <section id="game-section" class="content-section hidden">
+            
+            <!-- Блок с правилами игры на экране -->
+            <div class="game-rules-card">
+                <div class="rules-header">🎮 ПРАВИЛА БОЛЬШОЙ ИГРЫ «БИО-ЗНАТОКИ»</div>
+                <div class="rules-body">
+                    <ol>
+                        <li>Класс делится на команды или отвечает фронтально (по цепочке / поднятой руке).</li>
+                        <li>Учитель выводит на экран случайный вопрос, нажав кнопку <b>«Сгенерировать вопрос»</b>.</li>
+                        <li>Один из учеников называет науку, которая изучает описанный объект.</li>
+                        <li>Учитель нажимает на один из вариантов ответа на доске по выбору класса. Приложение покажет, верна ли догадка ребят!</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Игровой интерфейс -->
+            <div class="game-main-box">
+                <div class="game-top-stats">
+                    <div class="game-status-label">Текущий раунд: <strong id="game-round-counter">1</strong></div>
+                    <div class="class-score-box">🏆 СЧЕТ КЛАССА: <span id="class-score">0</span></div>
+                </div>
+
+                <!-- Карточка с вопросом-ситуацией -->
+                <div class="game-question-zone">
+                    <div class="question-decor-icon">❓</div>
+                    <p id="game-question-text">Нажмите на кнопку ниже, чтобы начать игру и получить первый вопрос для класса!</p>
+                </div>
+
+                <!-- Сетка вариантов ответов (Крупные кнопки для интерактивной доски) -->
+                <div id="game-options-grid" class="game-options-grid hidden-element">
+                    <!-- Сюда JS сгенерирует крупные интерактивные кнопки ответов -->
+                </div>
+
+                <!-- Панель управления игрой -->
+                <div class="game-controls-bar">
+                    <button id="btn-generate-question" class="game-action-btn primary-game-btn">🎲 Сгенерировать вопрос</button>
+                    <button id="btn-reset-game" class="game-action-btn secondary-game-btn">🔄 Сбросить игру</button>
+                </div>
+
+                <!-- Всплывающий фидбек (верно/неверно) -->
+                <div id="game-feedback" class="game-feedback hidden-element"></div>
+            </div>
+
+        </section>
+    </main>
+
+    </div> <!-- Конец #presentation-scaler -->
+
+    <!-- Подключаем скрипт адаптации и игровой логики -->
+    <script src="script.js"></script>
+</body>
+</html>
