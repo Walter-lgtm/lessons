@@ -1,0 +1,625 @@
+/* ==========================================================================
+   1. ПЕРЕМЕННЫЕ, КОНТРАСТНОСТЬ И СБРОС СТИЛЕЙ
+   ========================================================================== */
+:root {
+    /* Высококонтрастные цвета для хорошей видимости на школьном проекторе */
+    --primary-color: #1b5e20;       /* Глубокий темно-зеленый текст и элементы */
+    --primary-light: #e8f5e9;     /* Светлая подложка для карточек */
+    --accent-color: #e65100;      /* Яркий оранжевый для акцентов и кнопок */
+    --accent-hover: #bf360c;      /* Темно-оранжевый при наведении */
+    --bg-dark: #121e15;           /* Очень темный зеленый для фона всей страницы */
+    --bg-card: #ffffff;           /* Белоснежный фон для максимального контраста */
+    --text-main: #212121;         /* Почти черный для идеальной читаемости текста */
+    --text-muted: #555555;        /* Насыщенный серый для второстепенных подписей */
+    --success-color: #2e7d32;     /* Зеленый для правильных ответов */
+    --error-color: #c62828;       /* Красный для ошибок */
+    --shadow-heavy: 0 15px 35px rgba(0, 0, 0, 0.4);
+    --border-radius: 14px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Ограничиваем прокрутку на основном экране, так как приложение масштабируется */
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+}
+
+/* ==========================================================================
+   2. КЛЮЧЕВОЙ КЛАСС АВТОМАТИЧЕСКОГО МАСШТАБИРОВАНИЯ ПОД ПК
+   ========================================================================== */
+.presentation-scaler {
+    /* Фиксированное базовое разрешение презентации (стандарт 16:9) */
+    width: 1280px;
+    height: 720px;
+    background-color: #f4f6f4;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-heavy);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    
+    /* Точка трансформации — строго из центра для красивого вписывания в экран */
+    transform-origin: center center;
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   3. ШАПКА ПРЕЗЕНТАЦИИ (HEADER) И НАВИГАЦИЯ УЧИТЕЛЯ
+   ========================================================================== */
+.lesson-header {
+    background-color: var(--bg-card);
+    padding: 15px 30px;
+    border-bottom: 3px solid var(--primary-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.brand-icon {
+    font-size: 2.2rem;
+}
+
+.brand-text h1 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    line-height: 1.2;
+}
+
+.brand-text p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.lesson-nav {
+    display: flex;
+    gap: 15px;
+}
+
+/* Крупные кнопки переключения режимов для учителя */
+.nav-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.nav-btn:hover {
+    background-color: #c8e6c9;
+}
+
+.nav-btn.active {
+    background-color: var(--primary-color);
+    color: var(--bg-card);
+    box-shadow: 0 5px 15px rgba(27, 94, 32, 0.3);
+}
+
+.lesson-content {
+    flex-grow: 1;
+    padding: 25px 40px;
+    position: relative;
+}
+
+.content-section.hidden {
+    display: none !important;
+}
+/* ==========================================================================
+   4. СТИЛИЗАЦИЯ СЛАЙДОВ ТЕОРИИ И КОНТЕЙНЕРА СЛАЙДЕРА
+   ========================================================================== */
+.slider-container {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+}
+
+/* Базовый слайд (скрыт по умолчанию) */
+.lesson-slide {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* Состояние активного слайда */
+.lesson-slide.active {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Слайд 1: Центрированный макет заголовка */
+.slide-layout-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-grow: 1;
+    gap: 20px;
+}
+
+.badge {
+    background-color: var(--accent-color);
+    color: var(--bg-card);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.slide-main-title {
+    font-size: 3rem;
+    color: var(--primary-color);
+}
+
+.definition-block {
+    background-color: var(--primary-light);
+    border-left: 6px solid var(--primary-color);
+    padding: 20px 40px;
+    border-radius: var(--border-radius);
+    max-width: 700px;
+    font-size: 1.4rem;
+}
+
+.etymology {
+    margin-top: 15px;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+}
+
+.etymology span {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+.slide-hint-text {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Слайды 2-4: Стандартная шапка слайда */
+.slide-header {
+    border-bottom: 3px solid var(--primary-light);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.slide-step {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.slide-header h2 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+.slide-body {
+    flex-grow: 1;
+}
+
+.lead-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+/* Слайд 2: Сетка царств живой природы */
+.kingdoms-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.kingdom-card {
+    background-color: var(--primary-light);
+    border: 3px solid #c8e6c9;
+    border-radius: var(--border-radius);
+    padding: 25px 15px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+
+.k-emoji {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.kingdom-card h3 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+}
+
+/* Слайд 3: Интерактивный аккордеон наук */
+.sciences-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sci-item {
+    background-color: #f5f5f5;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    padding: 15px 25px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.sci-item:hover {
+    border-color: var(--primary-color);
+    background-color: var(--primary-light);
+}
+
+.sci-question {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.sci-answer {
+    font-size: 1.15rem;
+    font-weight: 800;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.highlight-green {
+    color: var(--success-color);
+    background-color: #c8e6c9;
+    padding: 4px 12px;
+    border-radius: var(--border-radius);
+}
+
+.hidden-answer {
+    opacity: 0;
+    visibility: hidden;
+}
+/* ==========================================================================
+   5. ФИНАЛЬНЫЙ СЛАЙД ТЕОРИИ И УПРАВЛЕНИЕ СЛАЙДЕРАМИ
+   ========================================================================== */
+
+/* Слайд 4: Карточки общих наук */
+.general-sciences-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.gen-sci-card {
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--primary-light) 100%);
+    border: 2px solid #c8e6c9;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+}
+
+.gen-sci-card h4 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    border-bottom: 2px solid #c8e6c9;
+    padding-bottom: 4px;
+}
+
+.gen-sci-card p {
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+.ready-text {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--accent-color);
+    margin-top: 15px;
+}
+
+/* Нижняя панель управления презентацией */
+.slide-navigation-bar {
+    border-top: 3px solid var(--primary-light);
+    padding-top: 15px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ctrl-slide-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    padding: 10px 24px;
+    border: none;
+    border-radius: var(--border-radius);
+    background-color: var(--primary-color);
+    color: var(--bg-card);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ctrl-slide-btn:hover:not(:disabled) {
+    background-color: #0d3c0a;
+    transform: translateY(-2px);
+}
+
+.ctrl-slide-btn:disabled {
+    background-color: #cfd8dc;
+    color: #90a4ae;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Индикаторы-точки */
+.presentation-dots {
+    display: flex;
+    gap: 12px;
+}
+
+.dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #cfd8dc;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.dot.active {
+    background-color: var(--primary-color);
+    transform: scale(1.3);
+}
+
+/* ==========================================================================
+   6. ИНТЕРФЕЙС ИГРЫ ДЛЯ КЛАССА: БЛОК ПРАВИЛ
+   ========================================================================== */
+.game-rules-card {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: 2px solid var(--accent-color);
+}
+
+.rules-header {
+    background-color: var(--accent-color);
+    color: var(--bg-card);
+    padding: 10px 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
+}
+
+.rules-body {
+    padding: 15px 25px;
+    background-color: #fff3e0;
+}
+
+.rules-body ol {
+    padding-left: 20px;
+}
+
+.rules-body li {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #5c2500;
+}
+/* ==========================================================================
+   7. ИГРОВОЙ ИНТЕРФЕЙС И КРУПНЫЕ КНОПКИ ДЛЯ ИНТЕРАКТИВНОЙ ДОСКИ
+   ========================================================================== */
+.game-main-box {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Статистика: счет и раунды */
+.game-top-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-status-label {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.class-score-box {
+    background-color: var(--primary-light);
+    border: 2px solid #c8e6c9;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+/* Крупная зона отображения вопроса */
+.game-question-zone {
+    background-color: #f1f8e9;
+    border-left: 6px solid var(--primary-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.question-decor-icon {
+    font-size: 2.5rem;
+    background-color: var(--bg-card);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+#game-question-text {
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--text-main);
+}
+
+/* Сетка ответов для всего класса */
+.game-options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Крупная интерактивная кнопка ответа */
+.btn-game-option {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+    padding: 16px 20px;
+    background-color: var(--bg-card);
+    border: 3px solid #cfd8dc;
+    border-radius: var(--border-radius);
+    color: var(--text-main);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.btn-game-option:hover:not(:disabled) {
+    border-color: var(--primary-color);
+    background-color: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+}
+
+/* Цветовая индикация правильности при клике */
+.btn-game-option.correct-choice {
+    background-color: #e8f5e9 !important;
+    border-color: var(--success-color) !important;
+    color: var(--success-color) !important;
+}
+
+.btn-game-option.wrong-choice {
+    background-color: #ffebee !important;
+    border-color: var(--error-color) !important;
+    color: var(--error-color) !important;
+}
+
+/* Панель кнопок генерации */
+.game-controls-bar {
+    display: flex;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.game-action-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    padding: 14px 25px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.primary-game-btn {
+    background-color: var(--accent-color);
+    color: var(--bg-card);
+    flex-grow: 2;
+    box-shadow: 0 4px 10px rgba(230, 81, 0, 0.2);
+}
+
+.primary-game-btn:hover { background-color: var(--accent-hover); }
+
+.secondary-game-btn {
+    background-color: #cfd8dc;
+    color: var(--text-main);
+    flex-grow: 1;
+}
+
+.secondary-game-btn:hover { background-color: #b0bec5; }
+
+/* Уведомление по итогу раунда */
+.game-feedback {
+    padding: 12px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-weight: 800;
+    font-size: 1.15rem;
+    animation: slideUp 0.3s ease-out;
+}
+
+.game-feedback.success { background-color: #e8f5e9; color: var(--success-color); border: 2px solid #a5d6a7; }
+.game-feedback.error { background-color: #ffebee; color: var(--error-color); border: 2px solid #ef9a9a; }
+
+/* Служебные классы и анимации */
+.hidden-element { display: none !important; }
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
