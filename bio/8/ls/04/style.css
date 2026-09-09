@@ -1,0 +1,587 @@
+/* ==========================================================================
+   1. ПЕРЕМЕННЫЕ, КОНТРАСТНОСТЬ И СБРОС СТИЛЕЙ
+   ========================================================================== */
+:root {
+    /* Контрастные цвета для отличной читаемости на школьном проекторе */
+    --primary-color: #2e7d32;       /* Биологический темно-зеленый */
+    --primary-light: #e8f5e9;     /* Светлая подложка для карточек и акцентов */
+    --accent-color: #e65100;      /* Яркий оранжевый для важной информации */
+    --bg-dark: #1a251e;           /* Темный фон за пределами презентации */
+    --bg-card: #ffffff;           /* Чистый белый фон карточек для контраста */
+    --text-main: #212121;         /* Насыщенный черный цвет текста */
+    --text-muted: #555555;        /* Серый цвет для подписей */
+    --border-radius-lg: 16px;
+    --border-radius-sm: 8px;
+    --shadow-heavy: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Блокируем скролл на ПК, так как экран масштабируется */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+}
+
+/* ==========================================================================
+   2. КОНТЕНТНЫЙ КОНТЕЙНЕР АВТОМАТИЧЕСКОГО МАСШТАБИРОВАНИЯ ПОД ПК
+   ========================================================================== */
+.presentation-scaler {
+    /* Фиксированное базовое разрешение (стандарт 16:9) */
+    width: 1280px;
+    height: 720px;
+    background-color: #f4f6f4;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-heavy);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    
+    /* Точка трансформации из центра для адаптации под любые мониторы */
+    transform-origin: center center;
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   3. ШАПКА ПРЕЗЕНТАЦИИ (HEADER) И НАВИГАЦИЯ УРОКА
+   ========================================================================== */
+.lesson-header {
+    background-color: var(--bg-card);
+    padding: 12px 30px;
+    border-bottom: 3px solid var(--primary-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    font-size: 2rem;
+}
+
+.brand-text h1 {
+    font-size: 1.25rem;
+    color: var(--primary-color);
+    line-height: 1.2;
+}
+
+.brand-text p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.lesson-nav {
+    display: flex;
+    gap: 12px;
+}
+
+/* Крупные кнопки переключения разделов */
+.nav-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 30px;
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+    background-color: #c8e6c9;
+}
+
+.nav-btn.active {
+    background-color: var(--primary-color);
+    color: var(--bg-card);
+    box-shadow: 0 4px 12px rgba(46, 125, 50, 0.25);
+}
+
+.lesson-content {
+    flex-grow: 1;
+    padding: 20px 35px;
+    position: relative;
+}
+
+.content-section.hidden {
+    display: none !important;
+}
+/* ==========================================================================
+   4. СТИЛИЗАЦИЯ СЛАЙДОВ ТЕОРИИ И КОНТЕЙНЕРА СЛАЙДЕРА
+   ========================================================================== */
+.slider-container {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius-lg);
+    padding: 25px 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
+.lesson-slide {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.lesson-slide.active {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.slide-layout-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-grow: 1;
+    gap: 20px;
+}
+
+.badge {
+    background-color: var(--accent-color);
+    color: var(--bg-card);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.slide-main-title {
+    font-size: 2.8rem;
+    color: var(--primary-color);
+}
+
+.definition-block {
+    background-color: var(--primary-light);
+    border-left: 6px solid var(--primary-color);
+    padding: 20px 35px;
+    border-radius: var(--border-radius-lg);
+    max-width: 750px;
+    font-size: 1.3rem;
+}
+
+.slide-hint-text {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.slide-header {
+    border-bottom: 3px solid var(--primary-light);
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+.slide-step {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.slide-header h2 {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+}
+
+/* Двухколоночный макет для Тканей */
+.grid-2-columns {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 30px;
+    align-items: start;
+    flex-grow: 1;
+}
+
+.text-block h3 {
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+}
+
+.text-block p {
+    font-size: 1.05rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.margin-top-sm {
+    margin-top: 15px;
+}
+
+/* Стили для размещения картинок (рис 12-15) */
+.images-block {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.img-wrapper {
+    background-color: #f9f9f9;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius-sm);
+    padding: 8px;
+    text-align: center;
+}
+
+.img-wrapper img {
+    max-width: 100%;
+    max-height: 140px;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.img-caption {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+/* ==========================================================================
+   5. СЕТКА СИСТЕМ ОРГАНОВ И НАВИГАЦИЯ СЛАЙДЕРА
+   ========================================================================== */
+.lead-text {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+/* Сетка мини-карточек систем органов */
+.systems-container-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.system-mini-card {
+    background-color: var(--primary-light);
+    border: 2px solid #c8e6c9;
+    border-radius: var(--border-radius-sm);
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.system-mini-card:hover {
+    transform: translateY(-2px);
+    background-color: #c8e6c9;
+    border-color: var(--primary-color);
+}
+
+.system-mini-card.selected-card {
+    background-color: #fff3e0;
+    border-color: var(--accent-color);
+}
+
+.system-mini-card h4 {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+
+.system-mini-card.selected-card h4 {
+    color: #e65100;
+}
+
+/* Всплывающее информационное окно для систем органов */
+.system-info-popup {
+    background-color: #fff3e0;
+    border-left: 5px solid var(--accent-color);
+    padding: 12px 20px;
+    border-radius: var(--border-radius-sm);
+    margin-top: 15px;
+    animation: slideUp 0.3s ease-out;
+}
+
+.system-info-popup p {
+    margin-bottom: 0;
+    color: #e65100;
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+/* Нижняя панель управления презентацией */
+.slide-navigation-bar {
+    border-top: 3px solid var(--primary-light);
+    padding-top: 12px;
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ctrl-slide-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    padding: 8px 20px;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    background-color: var(--primary-color);
+    color: var(--bg-card);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ctrl-slide-btn:hover:not(:disabled) {
+    background-color: #1b5e20;
+    transform: translateY(-1px);
+}
+
+.ctrl-slide-btn:disabled {
+    background-color: #cfd8dc;
+    color: #90a4ae;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Индикаторы-точки */
+.presentation-dots {
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #cfd8dc;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dot.active {
+    background-color: var(--primary-color);
+    transform: scale(1.2);
+}
+
+@keyframes slideUp {
+    from { transform: translateY(8px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+/* ==========================================================================
+   6. СТИЛИЗАЦИЯ ИНТЕРФЕЙСА ЛАБОРАТОРНОЙ РАБОТЫ
+   ========================================================================== */
+.lab-container {
+    background-color: var(--bg-card);
+    border-radius: var(--border-radius-lg);
+    padding: 25px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
+.lab-card-header h2 {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.lab-badge {
+    background-color: #0288d1;
+    color: var(--bg-card);
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.lab-meta {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    border-bottom: 2px solid var(--primary-light);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+/* Сетка рабочего пространства практикума */
+.lab-workspace-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 35px;
+    flex-grow: 1;
+    align-items: start;
+}
+
+/* Левая панель с шагами */
+.lab-steps-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.lab-steps-panel h3 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.lab-steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 330px;
+    overflow-y: auto; /* Прокрутка, если шагов много */
+    padding-right: 5px;
+}
+
+/* Интерактивная плашка шага/препарата */
+.lab-step-item {
+    background-color: #f5f5f5;
+    border: 2px solid #e0e0e0;
+    border-radius: var(--border-radius-sm);
+    padding: 10px 15px;
+    display: flex;
+    align-items: start;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.lab-step-item:hover {
+    border-color: #0288d1;
+    background-color: #e1f5fe;
+}
+
+.lab-step-item.active {
+    border-color: #0288d1;
+    background-color: #e1f5fe;
+    box-shadow: 0 2px 8px rgba(2, 136, 209, 0.15);
+}
+
+.step-num {
+    background-color: #0288d1;
+    color: var(--bg-card);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+}
+
+.lab-step-item p {
+    font-size: 0.9rem;
+    line-height: 1.3;
+    color: var(--text-main);
+    margin-bottom: 0;
+}
+
+.lab-final-task {
+    background-color: #fff3e0;
+    border: 2px dashed var(--accent-color);
+    padding: 10px 15px;
+    border-radius: var(--border-radius-sm);
+    margin-top: 10px;
+    font-size: 0.95rem;
+    color: #e65100;
+}
+
+/* Правая панель: Виртуальный микроскоп */
+.lab-microscope-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Круглый корпус окуляра микроскопа */
+.microscope-lens-frame {
+    background-color: #212121;
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 8px 25px rgba(0,0,0,0.15);
+    border: 8px solid #424242;
+}
+
+/* Световое поле внутри окуляра */
+.lens-circle {
+    width: 235px;
+    height: 235px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 2px solid #000;
+}
+
+/* Картинка препарата внутри круглого окуляра */
+#microscope-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Заполняем круг картинкой препарата */
+    transition: opacity 0.25s ease-in-out;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.lens-caption-box {
+    text-align: center;
+    width: 100%;
+}
+
+.microscope-title {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+}
+
+#microscope-prep-title {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+
+/* Вспомогательный класс анимации */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
