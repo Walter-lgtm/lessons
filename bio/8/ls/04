@@ -149,3 +149,67 @@
                     <button id="btn-next-slide" class="ctrl-slide-btn">Вперед ⏭</button>
                 </div>
             </section>
+<!-- РАЗДЕЛ 2: ЛАБОРАТОРНАЯ РАБОТА -->
+        <section id="lab-section" class="content-section hidden">
+            <div class="lab-container">
+                <div class="lab-card-header">
+                    <span class="lab-badge">Практикум</span>
+                    <h2>Лабораторная работа: Исследование микропрепаратов клеток и тканей животных</h2>
+                    <p class="lab-meta"><b>Цель работы:</b> ознакомиться с клетками и тканями животных. <b>Материалы:</b> микроскоп, микропрепараты.</p>
+                </div>
+
+                <div class="lab-workspace-grid">
+                    <!-- Левая колонка: шаги лабораторной работы -->
+                    <div class="lab-steps-panel">
+                        <h3>📋 Ход работы (выберите препарат):</h3>
+                        <div class="lab-steps-list">
+                            <div class="lab-step-item active" data-prep="epithel" data-step="1">
+                                <span class="step-num">1</span>
+                                <p><strong>Многослойный плоский эпителий.</strong> Рассмотрите при малом увеличении. Обратите внимание на многослойное расположение клеток и отсутствие межклеточного вещества.</p>
+                            </div>
+                            <div class="lab-step-item" data-prep="bone" data-step="2">
+                                <span class="step-num">2</span>
+                                <p><strong>Плотная костная ткань.</strong> Рассмотрите препарат кости лягушки. Обратите внимание на упорядоченно расположенные костные пластинки.</p>
+                            </div>
+                            <div class="lab-step-item" data-prep="blood" data-step="3">
+                                <span class="step-num">3</span>
+                                <p><strong>Кровь лягушки.</strong> Рассмотрите препарат крови. Обратите внимание на окраску, размеры и овальную форму эритроцитов с ядрами.</p>
+                            </div>
+                            <div class="lab-step-item" data-prep="muscle" data-step="4">
+                                <span class="step-num">4</span>
+                                <p><strong>Поперечнополосатая мышечная ткань.</strong> Исследуйте структуру волокон под микроскопом, найдите характерную исчерченность.</p>
+                            </div>
+                            <div class="lab-step-item" data-prep="nerve" data-step="5">
+                                <span class="step-num">5</span>
+                                <p><strong>Нервная ткань сетчатки глаза.</strong> Найдите скопление нервных клеток с синей окраской и хорошо заметными отростками (нейронов).</p>
+                            </div>
+                        </div>
+                        <div class="lab-final-task">
+                            📌 <strong>Задание:</strong> Зарисуйте увиденное в рабочей тетради и сделайте необходимые подписи к тканям.
+                        </div>
+                    </div>
+
+                    <!-- Правая колонка: интерактивный виртуальный «экран микроскопа» -->
+                    <div class="lab-microscope-view">
+                        <div class="microscope-lens-frame">
+                            <div class="lens-circle">
+                                <!-- Сюда JS будет подставлять картинку выбранного препарата -->
+                                <img id="microscope-image" src="ris_12.jpg" alt="Микропрепарат">
+                            </div>
+                        </div>
+                        <div class="lens-caption-box">
+                            <span class="microscope-title">🔬 Окуляр микроскопа (Увеличение 400х)</span>
+                            <h4 id="microscope-prep-title">Препарат №1: Многослойный плоский эпителий</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    </div> <!-- Конец #presentation-scaler -->
+
+    <!-- Подключаем логику переключения слайдов, систем органов и микропрепаратов -->
+    <script src="script.js"></script>
+</body>
+</html>
