@@ -272,7 +272,7 @@ function sendResultsToGoogle(grade) {
         body: formData
     })
     .then(() => {
-        document.getElementById('sync-status').textContent = "ДАННЫЕ СИНХРОНИЗИРОВАНЫ С СЕРВЕРОМ BLACK MESA.";
+        document.getElementById('sync-status').textContent = "ДАННЫЕ СИНХРОНИЗИРОВАНЫ С СЕРВЕРОМ УЧИТЕЛЯ ХИМИИ.";
         document.getElementById('restart-btn').classList.remove('hidden');
     })
     .catch((error) => {
