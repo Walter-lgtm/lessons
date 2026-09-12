@@ -235,3 +235,81 @@ body, html {
 .back-to-menu-btn:active {
     transform: scale(0.98);
 }
+/* ==========================================
+   6. МОБИЛЬНЫЙ АВТОМАСШТАБ (АДАПТИВ ДЛЯ СМАРТФОНОВ)
+   ========================================== */
+
+/* Этот блок сработает автоматически, если экран устройства узкий или низкий (смартфоны) */
+@media screen and (max-width: 768px), screen and (max-height: 700px) {
+    
+    /* Уменьшаем отступы контейнера, чтобы освободить место */
+    .menu-container {
+        padding: 20px 15px;
+    }
+
+    /* Автомасштаб величественного заголовка, чтобы он не переносился уродливо */
+    .game-title {
+        font-size: 1.8rem; /* Уменьшаем размер букв для мобильного */
+        letter-spacing: 2px;
+        line-height: 1.2;
+        margin-bottom: 5px;
+    }
+
+    /* Чуть компактнее делаем подзаголовок (или фразы Локи) */
+    .game-subtitle {
+        font-size: 0.9.rem;
+        padding: 0 10px;
+    }
+
+    /* Навигация сжимается под ширину экрана телефона */
+    .menu-navigation {
+        width: 100%;
+        max-width: 310px; /* Идеальная ширина кнопок для удобного нажатия пальцем */
+        gap: 12px; /* Меньше расстояние между кнопками, чтобы влезло по высоте */
+    }
+
+    /* Компактные кнопки для смартфона */
+    .menu-btn {
+        padding: 14px 20px;
+        border-radius: 10px;
+    }
+
+    .btn-text {
+        font-size: 1rem; /* Чуть меньше шрифт на кнопках */
+    }
+    
+    /* Кнопка возврата в меню внутри других приложений тоже адаптируется */
+    .back-to-menu-btn {
+        top: 10px;
+        left: 10px;
+        padding: 8px 14px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Экстремальный случай: если телефон повернули горизонтально (альбомная ориентация) */
+@media screen and (max-height: 450px) and (orientation: landscape) {
+    .menu-container {
+        flex-direction: row; /* Заголовок встанет слева, кнопки справа */
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px;
+    }
+    .menu-header {
+        text-align: left;
+        max-width: 40%;
+    }
+    .game-title {
+        font-size: 1.4rem;
+    }
+    .menu-navigation {
+        max-width: 250px;
+        gap: 8px;
+    }
+    .menu-btn {
+        padding: 8px 15px;
+    }
+    .menu-footer {
+        display: none; /* Прячем футер в горизонтальном режиме телефона, чтобы не мешал */
+    }
+}
