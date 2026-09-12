@@ -1,1 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учим уроки вместе с Локи</title>
+    <!-- Подключаем атмосферный скандинавский шрифт для заголовков -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Comfortaa:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Подключаем наш файл стилей -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <!-- Главный контейнер игры с нашей сгенерированной картинкой на фоне -->
+    <div class="menu-container">
+        
+        <!-- Верхняя панель с приветствием -->
+        <header class="menu-header">
+            <h1 class="game-title">УЧИМ УРОКИ ВМЕСТЕ С ЛОКИ</h1>
+            <p class="game-subtitle">Интерактивный кабинет химии и биологии</p>
+        </header>
+         <!-- Блок с кнопками меню (навигация по вашим JS-приложениям) -->
+        <main class="menu-navigation">
+            <!-- Кнопка 1: Химия -->
+            <button class="menu-btn" data-url="chemistry/index.html">
+                <span class="btn-text">Лаборатория Химии</span>
+                <span class="btn-glow"></span>
+            </button>
+
+            <!-- Кнопка 2: Биология -->
+            <button class="menu-btn" data-url="biology/index.html">
+                <span class="btn-text">Тайны Биологии</span>
+                <span class="btn-glow"></span>
+            </button>
+
+            <!-- Кнопка 3: Игры/Квесты -->
+            <button class="menu-btn" data-url="quests/index.html">
+                <span class="btn-text">Испытания Трикстера</span>
+                <span class="btn-glow"></span>
+            </button>
+        </main>
+
+        <!-- Подвал с копирайтом (по желанию можно убрать) -->
+        <footer class="menu-footer">
+            <p>© Магия Асгарда в действии, 5 класс</p>
+        </footer>
+
+    </div> <!-- Конец menu-container -->
+
+    <!-- Подключаем наш скрипт управления -->
+    <script src="script.js"></script>
+</body>
+</html>
