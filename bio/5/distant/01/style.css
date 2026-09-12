@@ -173,3 +173,65 @@ body, html {
         transform: translateY(0);
     }
 }
+/* ==========================================
+   4. ПОДВАЛ (ФУТЕР)
+   ========================================== */
+
+.menu-footer {
+    z-index: 2;
+    text-align: center;
+    animation: fadeIn 2s ease-out;
+}
+
+.menu-footer p {
+    font-size: 0.85rem;
+    color: rgba(163, 194, 178, 0.6); /* Полупрозрачный мятный цвет */
+    letter-spacing: 1px;
+}
+
+/* Общая анимация простого проявления */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+
+/* ==========================================
+   5. СТИЛЬ ДЛЯ ДРУГИХ ПРИЛОЖЕНИЙ (КНОПКА НАЗАД)
+   ========================================== */
+
+/* 
+   Уважаемый учитель! Скопируйте этот класс `.back-to-menu-btn` 
+   в CSS-файлы ваших приложений по химии и биологии. 
+   Он создаст аккуратную, стильную кнопку возврата в левом или правом углу экрана.
+*/
+.back-to-menu-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px; /* Закрепляем в левом верхнем углу приложения */
+    z-index: 9999;
+    padding: 12px 20px;
+    background: #05140d;
+    border: 2px solid #e6c687;
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: 'Comfortaa', cursive, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Эффект наведения для кнопки «На главное меню» */
+.back-to-menu-btn:hover {
+    background: #092015;
+    border-color: #00ff88;
+    color: #e6c687;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+    transform: scale(1.05);
+}
+
+.back-to-menu-btn:active {
+    transform: scale(0.98);
+}
