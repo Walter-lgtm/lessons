@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Домашнее задание от Локи</title>
+    <!-- Подключаем асгардские шрифты -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Cinzel:wght@700;900&family=Comfortaa:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Кнопка возврата в левом верхнем углу -->
+    <button class="back-to-menu-btn" onclick="window.location.href='../index.html'">← На главное меню</button>
+
+    <div class="homework-wrapper">
+        
+        <!-- Панель управления Локи-мыслителя (Левая колонка) -->
+        <aside class="loki-sidebar">
+            <div class="loki-avatar-box">
+                <!-- Сюда подтягиваем нашего Локи-мыслителя на белом фоне -->
+                <img src="loki_thinker.png" alt="Локи Мыслитель" class="loki-avatar">
+            </div>
+            <div class="loki-bubble">
+                <p id="loki-text">«Хм, биологические дисциплины... Смертные पांच-классники, справитесь ли вы с моим кроссвордом? Нажмите на любой вопрос, чтобы вписать ответ!»</p>
+            </div>
+            
+            <!-- Кнопка финальной проверки -->
+            <button id="check-all-btn" class="verify-btn">Проверить биомагию</button>
+        </aside>
+        <!-- Основная интерактивная зона (Правая колонка) -->
+        <main class="crossword-area">
+            <h2 class="section-title">Биологические дисциплины</h2>
+            
+            <div class="questions-container">
+                <!-- ВОПРОСЫ ПО ГОРИЗОНТАЛИ -->
+                <div class="questions-block">
+                    <h3>По горизонтали:</h3>
+                    <ul class="q-list">
+                        <li class="q-item" data-id="h1"><strong>1.</strong> Ученый, изучающий законы наследственности.</li>
+                        <li class="q-item" data-id="h2"><strong>2.</strong> Наука о воздействии на организм окружающей среды.</li>
+                        <li class="q-item" data-id="h3"><strong>3.</strong> Специалист по растениям.</li>
+                        <li class="q-item" data-id="h4"><strong>4.</strong> Наука о внешнем строении организмов.</li>
+                        <li class="q-item" data-id="h5"><strong>5.</strong> Наука, изучающая внутреннее строение организмов.</li>
+                    </ul>
+                </div>
+
+                <!-- ВОПРОСЫ ПО ВЕРТИКАЛИ -->
+                <div class="questions-block">
+                    <h3>По вертикали:</h3>
+                    <ul class="q-list">
+                        <li class="q-item" data-id="v6"><strong>6.</strong> Название этой науки переводится как наука о жизни.</li>
+                        <li class="q-item" data-id="v7"><strong>7.</strong> Предмет этой науки — бактерии и микроорганизмы.</li>
+                        <li class="q-item" data-id="v8"><strong>8.</strong> Наука о выведении новых пород и сортов растений.</li>
+                        <li class="q-item" data-id="v9"><strong>9.</strong> Наука о животных.</li>
+                        <li class="q-item" data-id="v10"><strong>10.</strong> Предмет (объект) изучения микологии.</li>
+                        <li class="q-item" data-id="v11"><strong>11.</strong> Наука о процессах, протекающих в организме.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Скрытое модальное окно для ввода ответа на смартфонах -->
+            <div id="input-modal" class="modal hidden">
+                <div class="modal-content">
+                    <h4 id="modal-question-text">Вопрос</h4>
+                    <input type="text" id="user-answer-input" placeholder="Введите ответ..." autocomplete="off">
+                    <div class="modal-buttons">
+                        <button id="modal-cancel-btn">Отмена</button>
+                        <button id="modal-save-btn">Записать</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div> <!-- Конец homework-wrapper -->
+
+    <script src="script.js"></script>
+</body>
+</html>
