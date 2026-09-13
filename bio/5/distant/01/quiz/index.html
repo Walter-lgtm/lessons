@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Асгардская Академия Наук</title>
+    
+    <!-- Google Fonts: Шрифт для магии и футуризма -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Подключение стилей -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Фоновый оверлей для создания неоновой атмосферы Асгарда -->
+    <div class="asgard-bg-overlay"></div>
+
+    <div class="app-container">
+        <!-- Навигационная панель -->
+        <header class="quiz-header">
+            <a href="../index.html" class="back-to-menu-btn">
+                <span class="btn-icon">⚡</span> Назад в главное меню
+            </a>
+            <div class="score-badge">Очки магии: <span id="current-score">0</span></div>
+        </header>
+
+        <!-- Главный интерактивный блок в стиле Pixar 3D -->
+        <main class="quiz-card">
+            <!-- Прогресс-бар прохождения теста -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar" style="width: 0%;"></div>
+            </div>
+
+            <!-- Зона реплик Локи -->
+            <div class="loki-character-zone">
+                <div class="loki-avatar">🟢</div>
+                <div class="loki-bubble">
+                    <p id="loki-speech">Приветствую, юнный исследователь! Готов доказать, что твоя биологическая магия достаточно сильная? Начнем наше испытание!</p>
+                </div>
+            </div>
+
+            <!-- Динамический контент теста (управляется переключением шагов в JS) -->
+            <div id="quiz-content">
+                
+                <!-- ЭКРАН СТАРТА -->
+                <div class="quiz-step active" id="step-start">
+                    <div class="welcome-screen">
+                        <h1 class="neon-title">Биомагические навыки</h1>
+                        <p class="quiz-description">Пройди 5 испытаний учёного-биолога и докажи, что достоин знаний Асгарда!</p>
+                        <button class="magic-btn" id="start-btn">Пробудить магию</button>
+                    </div>
+                </div>
+
+                <!-- ЗАДАНИЕ 1: Выпадающие списки (Науки и объекты) -->
+                <div class="quiz-step" id="step-task1">
+                    <h2 class="task-instruction">🦉 Испытание I: Разоблачи шпионов! Распредели объекты по их тайным научным орденам.</h2>
+                    <div class="cards-grid">
+                        <div class="bio-card" data-correct="botany">
+                            <div class="card-image-box"><img src="o_flower.png" alt="Одуванчик" class="bio-img"></div>
+                            <div class="card-info">
+                                <h3 class="card-title">Одуванчик лекарственный</h3>
+                                <select class="magic-select">
+                                    <option value="" disabled selected>Кто изучает?</option>
+                                    <option value="zoology">Зоология</option>
+                                    <option value="botany">Ботаника</option>
+                                    <option value="anatomy">Анатомия человека</option>
+                                    <option value="mycology">Микология</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="bio-card" data-correct="zoology">
+                            <div class="card-image-box"><img src="rain_worm.png" alt="Червь" class="bio-img"></div>
+                            <div class="card-info">
+                                <h3 class="card-title">Дождевой червь</h3>
+                                <select class="magic-select">
+                                    <option value="" disabled selected>Кто изучает?</option>
+                                    <option value="zoology">Зоология</option>
+                                    <option value="botany">Ботаника</option>
+                                    <option value="anatomy">Анатомия человека</option>
+                                    <option value="mycology">Микология</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="bio-card" data-correct="mycology">
+                            <div class="card-image-box"><img src="red_mooshrum.png" alt="Мухомор" class="bio-img"></div>
+                            <div class="card-info">
+                                <h3 class="card-title">Мухомор красный</h3>
+                                <select class="magic-select">
+                                    <option value="" disabled selected>Кто изучает?</option>
+                                    <option value="zoology">Зоология</option>
+                                    <option value="botany">Ботаника</option>
+                                    <option value="anatomy">Анатомия человека</option>
+                                    <option value="mycology">Микология</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="bio-card" data-correct="anatomy">
+                            <div class="card-image-box"><img src="heart.png" alt="Сердце" class="bio-img"></div>
+                            <div class="card-info">
+                                <h3 class="card-title">Сердце человека</h3>
+                                <select class="magic-select">
+                                    <option value="" disabled selected>Кто изучает?</option>
+                                    <option value="zoology">Зоология</option>
+                                    <option value="botany">Ботаника</option>
+                                    <option value="anatomy">Анатомия человека</option>
+                                    <option value="mycology">Микология</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="magic-btn next-step-btn" data-type="select">Проверить</button>
+                </div>
+
+                <!-- ЗАЗАНИЕ 2: Выбор ответа (Николай Николаевич на Баренцевом море) -->
+                <div class="quiz-step" id="step-task2">
+                    <h2 class="task-instruction">🌊 Испытание II: Наш агент Николай Николаевич уплыл на Баренцево море шпионить за местной фауной. Каков его магический профиль?</h2>
+                    <div class="options-vertical">
+                        <label class="option-tile"><input type="radio" name="q2" value="botanist"><span>Ботаник (ищет подводные одуванчики?)</span></label>
+                        <label class="option-tile"><input type="radio" name="q2" value="microbiologist"><span>Микробиолог (считает бактерии в воде)</span></label>
+                        <label class="option-tile correct"><input type="radio" name="q2" value="zoologist"><span>Зоолог (изучает морских чудовищ и животных)</span></label>
+                        <label class="option-tile"><input type="radio" name="q2" value="tourist"><span>Турист (просто отдыхает на курорте)</span></label>
+                    </div>
+                    <button class="magic-btn next-step-btn" data-type="radio" data-name="q2">Ответить Локи</button>
+                </div>
+
+                <!-- ЗАДАНИЕ 3: Выбор ответа (Гербарий) -->
+                <div class="quiz-step" id="step-task3">
+                    <h2 class="task-instruction">🌿 Испытание III: Юные чародеи собирают высушенные травы и закладывают гербарий. Кто руководит этим таинством?</h2>
+                    <div class="options-vertical">
+                        <label class="option-tile correct"><input type="radio" name="q3" value="botanist"><span>Ботаник (повелитель зеленых листьев)</span></label>
+                        <label class="option-tile"><input type="radio" name="q3" value="physiologist"><span>Физиолог (изучает, как все работает)</span></label>
+                        <label class="option-tile"><input type="radio" name="q3" value="mycologist"><span>Миколог (собиратель грибных спор)</span></label>
+                        <label class="option-tile"><input type="radio" name="q3" value="herbalist"><span>Травник (варит подозрительные зелья)</span></label>
+                    </div>
+                    <button class="magic-btn next-step-btn" data-type="radio" data-name="q3">Ответить Локи</button>
+                </div>
+              
+                <!-- ЗАДАНИЕ 4: Выбор ответа (Морские свинки) -->
+                <div class="quiz-step" id="step-task4">
+                    <h2 class="task-instruction">🐹 Испытание IV: Экспериментатор разводит пушистых свинок и взламывает код наследования их шерсти. Кто он?</h2>
+                    <div class="options-vertical">
+                        <label class="option-tile"><input type="radio" name="q4" value="ecologist"><span>Эколог (защищает их среду обитания)</span></label>
+                        <label class="option-tile"><input type="radio" name="q4" value="microbiologist"><span>Микробиолог (ищет вирусы под микроскопом)</span></label>
+                        <label class="option-tile correct"><input type="radio" name="q4" value="genetic"><span>Генетик (скрещивает ДНК-заклинания)</span></label>
+                        <label class="option-tile"><input type="radio" name="q4" value="botanist"><span>Ботаник (думает, что свинки — это овощи)</span></label>
+                    </div>
+                    <button class="magic-btn next-step-btn" data-type="radio" data-name="q4">Ответить Локи</button>
+                </div>
+
+                <!-- ЗАДАНИЕ 5: Интерактивное соответствие (Организмы и Царства) -->
+                <div class="quiz-step" id="step-task5">
+                    <h2 class="task-instruction">👑 Испытание V: Великое расселение! Кликни сначала на живой организм, а затем на его законное Царство.</h2>
+                    
+                    <div class="matching-game-container">
+                        <div class="matching-column" id="organisms-pool">
+                            <div class="match-item" data-kingdom="plants">Хвощ лесной</div>
+                            <div class="match-item" data-kingdom="plants">Стрелолист широколистный</div>
+                            <div class="match-item" data-kingdom="fungi">Дождевик грушевидный</div>
+                            <div class="match-item" data-kingdom="bacteria">Кишечная палочка</div>
+                            <div class="match-item" data-kingdom="animals">Муравей-листорез</div>
+                            <div class="match-item" data-kingdom="fungi">Сыроежка фиолетовая</div>
+                            <div class="match-item" data-kingdom="animals">Травяная лягушка</div>
+                            <div class="match-item" data-kingdom="bacteria">Молочнокислая палочка</div>
+                        </div>
+
+                        <div class="matching-column" id="kingdoms-pool">
+                            <button class="kingdom-btn btn-plants" data-id="plants">Царство Растения</button>
+                            <button class="kingdom-btn btn-animals" data-id="animals">Царство Животные</button>
+                            <button class="kingdom-btn btn-fungi" data-id="fungi">Царство Грибы</button>
+                            <button class="kingdom-btn btn-bacteria" data-id="bacteria">Царство Бактерии</button>
+                        </div>
+                    </div>
+                    <button class="magic-btn" id="finish-btn">Завершить ритуал</button>
+                </div>
+
+                <!-- ФИНАЛЬНЫЙ ЭКРАН РЕЗУЛЬТАТОВ -->
+                <div class="quiz-step" id="step-result">
+                    <div class="welcome-screen">
+                        <h1 class="neon-title" id="final-title">Ритуал Завершен!</h1>
+                        <p class="quiz-description" id="final-msg">Подсчитываем крупицы твоей магии...</p>
+                        <button class="magic-btn" onclick="location.reload()">Пройти снова</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Подключение логики -->
+    <script src="script.js"></script>
+</body>
+</html>
