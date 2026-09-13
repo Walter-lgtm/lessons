@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuNavigation = document.getElementById('menu-navigation');
     const menuButtons = document.querySelectorAll('.menu-btn');
 
-    // 1. НАЧАЛО УРОКА: Клик по стартовой кнопке
+    // 1. НАЧАЛО УРОКА: Клик по стартовой кнопке (ОБНОВЛЕННЫЙ БЛОК СО СТРАХОВКОЙ)
     startOverlay.addEventListener('click', () => {
         // Плавно прячем темный оверлей-заглушку
         startOverlay.style.opacity = '0';
@@ -19,24 +19,35 @@ document.addEventListener('DOMContentLoaded', () => {
             startOverlay.style.display = 'none';
         }, 500);
 
-        // Включаем звук, запускаем видео с Локи на весь экран
+        // КИБЕР-СТРАХОВКА: Если видео-файла еще нет в папке, или он выдал ошибку загрузки
+        lokiVideo.addEventListener('error', () => {
+            console.warn("⚠️ Видео интро не найдено. Включаем меню без анимации.");
+            showMenuImmediately(); // Мгновенно открываем кнопки
+        });
+
+        // Пытаемся запустить видео со звуком
         lokiVideo.muted = false;
         lokiVideo.play().catch(error => {
-            console.error("Ошибка автозапуска видео. Браузер заблокировал звук:", error);
+            console.error("Браузер заблокировал автозапуск:", error);
+            // Если мобильный браузер наглухо заблокировал плеер, всё равно спасаем меню через 2 секунды
+            setTimeout(showMenuImmediately, 2000);
         });
     });
 
-    // 2. ФИНАЛ РЕЧИ ЛОКИ: Видео закончилось -> Сжатие и появление меню
+    // ФУНКЦИЯ-СПАСАТЕЛЬ: мгновенно сворачивает пустое видео и выводит кнопки на экран
+    function showMenuImmediately() {
+        videoWrapper.classList.remove('full-screen');
+        videoWrapper.classList.add('widget-screen');
+        menuNavigation.classList.remove('hidden');
+    }
+
+    // 2. ФИНАЛ РЕЧИ ЛОКИ: Видео закончилось (штатный режим)
     lokiVideo.addEventListener('ended', () => {
         console.log("📜 Локи закончил приветствие. Минимизируем видеоролик...");
-
-        // Переключаем CSS-классы: убираем полный экран, включаем режим виджета
         videoWrapper.classList.remove('full-screen');
         videoWrapper.classList.add('widget-screen');
 
-        // Ждем 1 секунду (пока завершится плавная CSS-анимация сжатия видео)
         setTimeout(() => {
-            // Убираем у кнопок меню класс .hidden — они плавно выплывают снизу
             menuNavigation.classList.remove('hidden');
         }, 1000);
     });
@@ -45,17 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
     menuButtons.forEach(button => {
         button.addEventListener('click', (event) => {
             event.preventDefault();
-
             const targetUrl = button.getAttribute('data-url');
 
-            // Эффект магической вспышки при нажатии на кнопку
             button.style.boxShadow = '0 0 40px #00ff88, inset 0 0 20px #e6c687';
             button.style.transform = 'scale(0.96)';
 
-            // Блокируем повторные нажатия, пока идет анимация перехода
             menuButtons.forEach(btn => btn.style.pointerEvents = 'none');
 
-            // Делаем паузу в 400мс для визуального эффекта и перенаправляем на урок
             setTimeout(() => {
                 if (targetUrl) {
                     window.location.href = targetUrl;
