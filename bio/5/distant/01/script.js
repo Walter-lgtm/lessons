@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuNavigation = document.getElementById('menu-navigation');
     const menuButtons = document.querySelectorAll('.menu-btn');
 
-    // 1. НАЧАЛО УРОКА: Клик по стартовой кнопке (ОБНОВЛЕННЫЙ БЛОК СО СТРАХОВКОЙ)
+    // 1. НАЧАЛО УРОКА: Клик по стартовой кнопке (БРОНЕБОЙНАЯ СТРАХОВКА)
     startOverlay.addEventListener('click', () => {
         // Плавно прячем темный оверлей-заглушку
         startOverlay.style.opacity = '0';
@@ -19,26 +19,40 @@ document.addEventListener('DOMContentLoaded', () => {
             startOverlay.style.display = 'none';
         }, 500);
 
-        // КИБЕР-СТРАХОВКА: Если видео-файла еще нет в папке, или он выдал ошибку загрузки
-        lokiVideo.addEventListener('error', () => {
-            console.warn("⚠️ Видео интро не найдено. Включаем меню без анимации.");
-            showMenuImmediately(); // Мгновенно открываем кнопки
-        });
+        // Проверяем, загрузилось ли видео вообще (networkState 3 означает "нет источника")
+        // Либо проверяем на базовую ошибку до запуска плеера
+        if (!lokiVideo || lokiVideo.networkState === 3 || lokiVideo.error) {
+            console.warn("⚠️ Видеофайл не найден на сервере. Мгновенно активируем меню.");
+            showMenuImmediately();
+            return; // Выходим из функции, не мучая браузер попытками запуска
+        }
 
-        // Пытаемся запустить видео со звуком
+        // Если файл вроде бы на месте, пробуем запустить
         lokiVideo.muted = false;
         lokiVideo.play().catch(error => {
-            console.error("Браузер заблокировал автозапуск:", error);
-            // Если мобильный браузер наглухо заблокировал плеер, всё равно спасаем меню через 2 секунды
-            setTimeout(showMenuImmediately, 2000);
+            console.error("Браузер заблокировал плеер или файл поврежден:", error);
+            // Спасаем интерфейс в любом случае, если что-то пошло не так
+            showMenuImmediately();
         });
+
+        // На случай, если видео просто зависло при загрузке — тайм-аут безопасности на 3 секунды
+        setTimeout(() => {
+            if (menuNavigation.classList.contains('hidden')) {
+                console.log("Страховочный таймер сработал: принудительно открываем меню.");
+                showMenuImmediately();
+            }
+        }, 3000);
     });
 
-    // ФУНКЦИЯ-СПАСАТЕЛЬ: мгновенно сворачивает пустое видео и выводит кнопки на экран
+    // ФУНКЦИЯ-СПАСАТЕЛЬ: мгновенно сворачивает видео-блок и выводит кнопки
     function showMenuImmediately() {
+        if (lokiVideo) {
+            lokiVideo.pause(); // На всякий случай останавливаем плеер
+        }
         videoWrapper.classList.remove('full-screen');
         videoWrapper.classList.add('widget-screen');
         menuNavigation.classList.remove('hidden');
+        console.log("✅ Кнопки меню успешно выведены на экран!");
     }
 
     // 2. ФИНАЛ РЕЧИ ЛОКИ: Видео закончилось (штатный режим)
