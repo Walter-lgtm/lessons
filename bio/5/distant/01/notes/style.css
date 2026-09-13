@@ -1,0 +1,177 @@
+/* ==========================================
+   1. БАЗОВАЯ РАЗМЕТКА И АТМОСФЕРА КЛАССА
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: 'Comfortaa', cursive, sans-serif;
+    background-color: #050e0a;
+    color: #2b1f11; /* Благородный темно-коричневый цвет чернил для свитка */
+}
+
+/* Контейнер библиотеки с размытым фоном нашего урока */
+.library-container {
+    width: 100%;
+    min-height: 100vh;
+    /* ПОПРАВКА: Подтягиваем правильный файл фонового изображения */
+    background-image: url('Thor_&_Loki_lesson.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Фон зафиксирован при скролле свитка */
+    display: flex;
+    justify-content: center;
+    padding: 80px 20px 40px 20px; /* Отступ сверху, чтобы не перекрыть кнопку Назад */
+    position: relative;
+}
+
+/* Оверлей для сильного размытия и затемнения картинки класса */
+.library-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 16, 11, 0.75);
+    backdrop-filter: blur(8px); /* Размываем класс, чтобы сфокусировать внимание на тексте */
+    z-index: 1;
+}
+
+/* ==========================================
+   2. СТАРИННЫЙ СВИТОК АСГАРДА
+   ========================================== */
+.ancient-scroll {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 750px; /* Идеальная ширина для чтения текста */
+    background-image: url('scroll_bg.jpeg'); /* Подтягиваем картинку-пергамент из Шедеврума */
+    background-size: 100% 100%; /* Картинка пергамента идеально натягивается на весь блок */
+    background-repeat: no-repeat;
+    border-radius: 4px;
+    padding: 60px 50px; /* Большие внутренние отступы, имитирующие поля свитка */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 
+                0 0 30px rgba(230, 198, 135, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Стилизация заголовков свитка */
+.scroll-header {
+    text-align: center;
+    border-bottom: 2px dashed rgba(43, 31, 17, 0.2);
+    padding-bottom: 15px;
+}
+
+.scroll-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #4a3319; /* Темный золотисто-коричневый */
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.scroll-subtitle {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #614629;
+}
+/* ==========================================
+   3. ПОЧЕРК ЛОКИ И СТИЛИЗАЦИЯ ТЕКСТА
+   ========================================== */
+
+.scroll-body {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    /* Переключаем текст на живой рукописный шрифт Caveat */
+    font-family: 'Caveat', cursive, sans-serif;
+    font-size: 1.45rem; /* Рукописные шрифты мельче обычных, поэтому увеличиваем размер */
+    line-height: 1.3;
+}
+
+.scroll-section h2 {
+    font-family: 'Comfortaa', cursive, sans-serif;
+    font-size: 1.1rem; /* Заголовки разделов делаем аккуратными и современными */
+    font-weight: 700;
+    color: #164027; /* Изумрудно-чернильный оттенок */
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+/* Выделение главных определений (Пасечник 5 класс) */
+.main-def {
+    font-weight: 700;
+    border-bottom: 1px dashed rgba(22, 64, 39, 0.4);
+    padding-bottom: 2px;
+}
+
+/* Магическая золотая подсветка ключевых терминов */
+.term {
+    font-weight: 700;
+    background-color: rgba(230, 198, 135, 0.25); /* Легкий золотистый маркер */
+    padding: 0 4px;
+    border-radius: 4px;
+    color: #4a3319;
+}
+
+/* Красивые списки царств и значений биологии */
+.scroll-list {
+    list-style: none;
+    padding-left: 15px;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.list-title {
+    font-weight: 700;
+    color: #164027;
+}
+
+/* Финальная цитата-напутствие Трикстера */
+.scroll-footer-quote {
+    text-align: center;
+    font-style: italic;
+    font-weight: 700;
+    color: #614629;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed rgba(43, 31, 17, 0.15);
+}
+
+/* ==========================================
+   4. МОБИЛЬНЫЙ АВТОМАСШТАБ СВИТКА
+   ========================================== */
+@media screen and (max-width: 768px) {
+    .library-container {
+        padding: 70px 10px 20px 10px; /* Уменьшаем внешние отступы */
+    }
+
+    .ancient-scroll {
+        padding: 40px 20px; /* Сужаем поля пергамента, чтобы текст на смартфонах не сжался в узкую полоску */
+        gap: 20px;
+    }
+
+    .scroll-title {
+        font-size: 1.6rem;
+    }
+
+    .scroll-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .scroll-body {
+        font-size: 1.3rem; /* Чуть-чуть уменьшаем почерк для идеального чтения на экранах телефонов */
+    }
+}
