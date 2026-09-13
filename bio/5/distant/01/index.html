@@ -20,17 +20,24 @@
             <h1 class="game-title">УЧИМ УРОКИ ВМЕСТЕ С ЛОКИ</h1>
         </header>
 
-        <!-- Блок с интерактивным видео (оживший Локи) -->
-        <!-- По умолчанию имеет класс полноэкранного режима full-screen -->
+        <!-- Блок с интерактивным Локи (видео-интро) -->
         <div id="video-wrapper" class="video-box full-screen">
-            <!-- Кнопка-заглушка для обхода защиты звука в браузерах -->
+            <!-- Кнопка-запуск интерактива -->
             <div id="start-overlay" class="overlay-trigger">
                 <button class="start-play-btn">НАЧАТЬ УРОК С ЛОКИ</button>
             </div>
-            <video id="loki-video" playsinline>
-                <source src="videos/loki_welcome.mp4" type="video/mp4">
+            
+            <!-- Короткое живое видео Локи (крутится бесконечно благодаря loop и без звука muted) -->
+            <video id="loki-video" loop muted playsinline>
+                <source src="videos/loki_idle.mp4" type="video/mp4">
                 Ваш браузер не поддерживает видео.
             </video>
+            
+            <!-- ВОТ ЭТА СТРОКА: Магическая аудиодорожка приветствия -->
+            <audio id="loki-audio">
+                <source src="videos/loki_welcome.mp3" type="audio/mpeg">
+                Ваш браузер не поддерживает аудио.
+            </audio>
         </div>
 
         <!-- Навигация: Кнопки меню (появляются ПОСЛЕ завершения видео) -->
