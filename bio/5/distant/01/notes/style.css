@@ -52,7 +52,7 @@ body, html {
     z-index: 2;
     width: 100%;
     max-width: 950px; /* Увеличиваем ширину: теперь это монументальный манускрипт, а не записка! */
-    background-image: url('scroll_bg.jpg'); 
+    background-image: url('scroll_bg.jpeg'); 
     background-size: 100% 100%; /* Картинка пергамента растягивается под новую величественную ширину */
     background-repeat: no-repeat;
     
