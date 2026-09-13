@@ -1,0 +1,293 @@
+/* ==========================================
+   1. БАЗОВАЯ РАЗМЕТКА И ФОН ДОМАШКИ
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: 'Comfortaa', cursive, sans-serif;
+    background-color: #0b1510;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* Главная обертка для разделения экрана на Колонку Локи и Колонку Вопросов */
+.homework-wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    padding: 80px 40px 40px 40px; /* Сверху отступ больше, чтобы не перекрыть кнопку Назад */
+    gap: 40px;
+}
+
+/* ==========================================
+   2. КОЛОНКА ЛОКИ-МЫСЛИТЕЛЯ (SIDEBAR)
+   ========================================== */
+.loki-sidebar {
+    flex: 1;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Круглый аватар Локи вместо старого мальчика */
+.loki-avatar-box {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 3px solid #e6c687; /* Золотая рамка Асгарда */
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+    background-color: #ffffff; /* Белый фон под вырезанного Локи */
+}
+
+.loki-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Облако комикса (бабл), где Локи говорит с учеником */
+.loki-bubble {
+    background: linear-gradient(135deg, #11261a 0%, #06140d 100%);
+    border: 2px solid #e6c687;
+    border-radius: 16px;
+    padding: 15px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.loki-bubble p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #a3c2b2;
+}
+
+/* Кнопка итоговой проверки */
+.verify-btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #092015 0%, #05140d 100%);
+    border: 2px solid #e6c687;
+    border-radius: 12px;
+    color: #ffffff;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.verify-btn:hover {
+    border-color: #00ff88;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+    transform: translateY(-2px);
+}
+/* ==========================================
+   3. ИНТЕРАКТИВНАЯ ЗОНА С ВОПРОСАМИ
+   ========================================== */
+.crossword-area {
+    flex: 2;
+    background: rgba(11, 38, 24, 0.4);
+    border: 2px solid rgba(230, 198, 135, 0.3);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: inset 0 0 20px rgba(0, 255, 136, 0.05);
+}
+
+.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: #e6c687;
+    margin-bottom: 25px;
+    text-shadow: 0 0 10px rgba(230, 198, 135, 0.4);
+    text-align: center;
+}
+
+.questions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.questions-block h3 {
+    font-size: 1.1rem;
+    color: #e6c687;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(230, 198, 135, 0.2);
+    padding-bottom: 5px;
+}
+
+.q-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Интерактивная строка вопроса */
+.q-item {
+    padding: 12px 15px;
+    background: rgba(5, 20, 13, 0.6);
+    border: 1px solid rgba(230, 198, 135, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.q-item:hover {
+    border-color: #00ff88;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+    transform: translateX(4px);
+}
+
+/* Класс успешного ответа: вопрос загорается изумрудным светом */
+.q-item.solved {
+    border-color: #00ff88;
+    background: rgba(0, 255, 136, 0.15);
+    color: #00ff88;
+    text-shadow: 0 0 5px rgba(0, 255, 136, 0.3);
+}
+
+/* ==========================================
+   4. СТИЛИ МОДАЛЬНОГО ОКНА (ВВОД ДЛЯ СМАРТФОНОВ)
+   ========================================== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 10, 7, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal.hidden {
+    display: none;
+    opacity: 0;
+}
+
+.modal-content {
+    background: #091f14;
+    border: 2px solid #e6c687;
+    border-radius: 16px;
+    padding: 25px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+    text-align: center;
+    animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-content h4 {
+    font-size: 1rem;
+    color: #e6c687;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+/* Кастомное поле ввода */
+#user-answer-input {
+    width: 100%;
+    padding: 12px;
+    background: #05140d;
+    border: 2px solid rgba(230, 198, 135, 0.4);
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 1.1rem;
+    text-align: center;
+    text-transform: uppercase; /* Текст автоматически становится капсом */
+    margin-bottom: 20px;
+    outline: none;
+}
+
+#user-answer-input:focus {
+    border-color: #00ff88;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.modal-buttons button {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+}
+
+#modal-cancel-btn {
+    background: #263c30;
+    color: #ffffff;
+}
+
+#modal-cancel-btn:hover { background: #345242; }
+
+#modal-save-btn {
+    background: #e6c687;
+    color: #05140d;
+}
+
+#modal-save-btn:hover { background: #f0daae; }
+
+/* ==========================================
+   5. АДАПТИВНОСТЬ ПОД СМАРТФОНЫ (MEDIA)
+   ========================================== */
+@media screen and (max-width: 850px) {
+    .homework-wrapper {
+        flex-direction: column; /* Элементы выстраиваются вертикально */
+        padding: 70px 15px 20px 15px;
+        gap: 25px;
+    }
+
+    .loki-sidebar {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .loki-avatar-box {
+        width: 120px;
+        height: 120px;
+    }
+
+    .crossword-area {
+        padding: 20px 15px;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .q-item {
+        font-size: 0.85rem;
+        padding: 10px;
+    }
+}
