@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     nextButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
-            const btnType = b.target.getAttribute('data-type');
+            const btnType = e.target.getAttribute('data-type');
             let isCorrect = false;
 
             // Обработка Задания 1 (Выпадающие списки / Select)
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Обработка Заданий 2, 3, 4 (Радио-кнопки / Radio плитки)
             if (btnType === 'radio') {
-                const radioName = b.target.getAttribute('data-name');
+                const radioName = e.target.getAttribute('data-name');
                 const selectedRadio = document.querySelector(`input[name="${radioName}"]:checked`);
 
                 if (!selectedRadio) {
