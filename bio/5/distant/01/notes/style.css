@@ -1,5 +1,5 @@
 /* ==========================================
-   1. БАЗОВАЯ РАЗМЕТКА И АТМОСФЕРА КЛАССА
+   1. БАЗОВАЯ РАЗМЕТКА И НЕЖНЫЙ ФОН СТРАНИЦЫ
    ========================================== */
 * {
     margin: 0;
@@ -11,169 +11,136 @@ body, html {
     width: 100%;
     height: 100%;
     font-family: 'Comfortaa', cursive, sans-serif;
-    background-color: #050e0a;
-    color: #2b1f11; /* Благородный темно-коричневый цвет чернил для свитка */
+    /* Нежный, пастельный кремово-оливковый фон для снятия напряжения с глаз */
+    background-color: #f2f5f1; 
+    color: #2c3e35; /* Умеренно-тёмный цвет текста, комфортный для чтения */
 }
 
-/* Контейнер библиотеки с размытым фоном нашего урока */
+/* Главный контейнер конспекта */
 .library-container {
     width: 100%;
     min-height: 100vh;
-    /* ПОПРАВКА: Подтягиваем правильный файл фонового изображения */
-    background-image: url('Thor_&_Loki_lesson.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Фон зафиксирован при скролле свитка */
     display: flex;
     justify-content: center;
-    padding: 80px 20px 40px 20px; /* Отступ сверху, чтобы не перекрыть кнопку Назад */
-    position: relative;
-}
-
-/* Оверлей для сильного размытия и затемнения картинки класса */
-.library-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(5, 16, 11, 0.75);
-    backdrop-filter: blur(8px); /* Размываем класс, чтобы сфокусировать внимание на тексте */
-    z-index: 1;
+    padding: 90px 20px 40px 20px; /* Отступ сверху, чтобы не перекрыть кнопку "Назад" */
 }
 
 /* ==========================================
-   2. СТАРИННЫЙ СВИТОК АСГАРДА (РАСШИРЕННЫЙ)
+   2. БЛОК ЭЛЕКТРОННОГО КОНСПЕКТА
    ========================================== */
 .ancient-scroll {
     position: relative;
-    z-index: 2;
     width: 100%;
-    max-width: 950px; /* Увеличиваем ширину: теперь это монументальный манускрипт, а не записка! */
-    background-image: url('scroll_bg.jpeg'); 
-    background-size: 100% 100%; /* Картинка пергамента растягивается под новую величественную ширину */
-    background-repeat: no-repeat;
-    
-    /* Настраиваем идеальные королевские отступы: сверху и снизу побольше, по бокам — чтобы войти в чистую зону */
-    padding: 110px 140px; 
-    
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8),
-                0 0 40px rgba(230, 198, 135, 0.2);
+    max-width: 800px; /* Оптимальная ширина для удобного переписывания */
+    background-color: #ffffff; /* Белоснежный блок конспекта, как чистая тетрадь */
+    border: 2px solid #d3decb; /* Мягкая пастельная рамка */
+    border-radius: 16px;
+    padding: 50px 40px; 
+    box-shadow: 0 10px 30px rgba(44, 62, 53, 0.05); /* Очень легкая, нежная тень */
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
-/* Стилизация заголовков свитка */
+/* Стилизация заголовков конспекта */
 .scroll-header {
     text-align: center;
-    border-bottom: 2px dashed rgba(43, 31, 17, 0.2);
-    padding-bottom: 15px;
-    margin-bottom: 5px;
+    border-bottom: 2px dashed #d3decb;
+    padding-bottom: 20px;
 }
 
 .scroll-title {
     font-family: 'Cinzel', serif;
-    font-size: 2.8rem; /* Делаем заголовок еще крупнее и презентабельно */
+    font-size: 2.2rem;
     font-weight: 900;
-    color: #36220f; 
-    letter-spacing: 4px;
+    color: #3b5949; /* Красивый изумрудно-хвойный оттенок */
+    letter-spacing: 2px;
     margin-bottom: 5px;
 }
 
 .scroll-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
     font-weight: 700;
-    color: #523a21;
+    color: #5c7566;
 }
-/* ==========================================
-   3. ПОЧЕРК ЛОКИ И СТИЛИЗАЦИЯ ТЕКСТА
-   ========================================== */
 
+/* ==========================================
+   3. ШРИФТ И ЧИТАЕМОСТЬ МАТЕРИАЛА
+   ========================================== */
 .scroll-body {
     display: flex;
     flex-direction: column;
     gap: 25px;
-    /* Переключаем текст на живой рукописный шрифт Caveat */
+    /* Убираем сложный почерк, ставим максимально чёткий и крупный Caveat */
     font-family: 'Caveat', cursive, sans-serif;
-    font-size: 1.45rem; /* Рукописные шрифты мельче обычных, поэтому увеличиваем размер */
-    line-height: 1.3;
+    font-size: 1.7rem; /* Делаем буквы крупными, чтобы было удобно списывать в тетрадь */
+    line-height: 1.4;
 }
 
 .scroll-section h2 {
     font-family: 'Comfortaa', cursive, sans-serif;
-    font-size: 1.1rem; /* Заголовки разделов делаем аккуратными и современными */
+    font-size: 1.2rem; 
     font-weight: 700;
-    color: #164027; /* Изумрудно-чернильный оттенок */
+    color: #234733; 
     margin-bottom: 8px;
-    letter-spacing: 0.5px;
 }
 
-/* Выделение главных определений (Пасечник 5 класс) */
+/* Выделение главных определений (УМК Пасечник) */
 .main-def {
     font-weight: 700;
-    border-bottom: 1px dashed rgba(22, 64, 39, 0.4);
-    padding-bottom: 2px;
+    border-bottom: 2px solid #84ab94; /* Надежное зеленое подчеркивание правила */
+    color: #1b3827;
 }
 
-/* Магическая золотая подсветка ключевых терминов */
+/* Пастельно-зеленый маркер для ключевых терминов */
 .term {
     font-weight: 700;
-    background-color: rgba(230, 198, 135, 0.25); /* Легкий золотистый маркер */
-    padding: 0 4px;
-    border-radius: 4px;
-    color: #4a3319;
+    background-color: #e2ebd9; /* Очень мягкий салатово-кремовый выделитель */
+    padding: 2px 6px;
+    border-radius: 6px;
+    color: #234733;
 }
 
-/* Красивые списки царств и значений биологии */
+/* Красивые и понятные списки */
 .scroll-list {
     list-style: none;
     padding-left: 15px;
-    margin-top: 5px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
 }
 
 .list-title {
     font-weight: 700;
-    color: #164027;
+    color: #234733;
 }
 
-/* Финальная цитата-напутствие Трикстера */
+/* Финальное напутствие Локи */
 .scroll-footer-quote {
     text-align: center;
     font-style: italic;
     font-weight: 700;
-    color: #614629;
+    color: #5c7566;
     margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px dashed rgba(43, 31, 17, 0.15);
+    padding-top: 20px;
+    border-top: 2px dashed #d3decb;
 }
 
 /* ==========================================
-   4. МОБИЛЬНЫЙ АВТОМАСШТАБ (БРОНЕБОЙНЫЙ АДАПТИВ)
+   4. СУПЕР-АДАПТИВ ПОД СМАРТФОНЫ (MEDIA)
    ========================================== */
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 768px) {
     .library-container {
         padding: 80px 10px 20px 10px; 
     }
 
     .ancient-scroll {
-        /* На смартфонах и планшетах переключаемся в режим чистого пергамента,
-           чтобы у детей ничего не сжималось в узкую полоску */
-        background-image: none;
-        background-color: #f4ebd4; 
-        border: 2px solid #e6c687;
-        border-radius: 16px;
-        padding: 40px 25px; /* Компактные поля для смартфонов */
-        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        padding: 30px 20px; /* На телефонах уменьшаем поля, чтобы текст не зажимался */
+        border-radius: 12px;
     }
 
     .scroll-title {
-        font-size: 1.8rem;
+        font-size: 1.7rem;
     }
 
     .scroll-subtitle {
@@ -181,7 +148,6 @@ body, html {
     }
 
     .scroll-body {
-        font-size: 1.4rem; 
-        text-shadow: none;
+        font-size: 1.5rem; /* Идеальный размер букв для экрана смартфона */
     }
 }
