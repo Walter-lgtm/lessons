@@ -1,8 +1,6 @@
 /* ==========================================
-   1. БАЗОВЫЕ НАСТРОЙКИ И ФОН АСГАРДА
+   1. ОБЩИЕ НАСТРОЙКИ ЭКРАНА И АСФАЛЬТ АСГАРДА
    ========================================== */
-
-/* Сброс стандартных отступов */
 * {
     margin: 0;
     padding: 0;
@@ -12,12 +10,11 @@
 body, html {
     width: 100%;
     height: 100%;
-    overflow: hidden; /* Прячем полосы прокрутки, меню всегда на весь экран */
+    overflow: hidden; /* Прячем прокрутку, всё меню строго в один экран */
     font-family: 'Comfortaa', cursive, sans-serif;
-    background-color: #0b1510; /* Темный изумрудный цвет на случай долгой загрузки фото */
+    background-color: #0b1510;
 }
 
-/* Главный контейнер с картинкой Шедеврума */
 .menu-container {
     width: 100%;
     height: 100%;
@@ -27,13 +24,13 @@ body, html {
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Распределяем заголовок сверху, кнопки по центру, футер снизу */
     align-items: center;
-    padding: 40px 20px;
+    justify-content: space-between;
+    padding: 30px 20px;
     position: relative;
 }
 
-/* Затемняющий оверлей, чтобы картинка не сливалась с кнопками и текстом */
+/* Затемнение фона, чтобы UI (кнопки и текст) легко читались */
 .menu-container::before {
     content: '';
     position: absolute;
@@ -41,98 +38,149 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(11,26,16,0.3) 0%, rgba(5,10,7,0.7) 100%);
+    background: radial-gradient(circle, rgba(11,26,16,0.2) 0%, rgba(5,10,7,0.75) 100%);
     z-index: 1;
 }
 
-/* ==========================================
-   2. СТИЛИЗАЦИЯ ШАПКИ И ЗАГОЛОВКОВ
-   ========================================== */
-
 .menu-header {
+    z-index: 2;
     text-align: center;
-    z-index: 2; /* Поднимаем над темным оверлеем */
-    animation: fadeInDown 1.2s ease-out;
-}
-
-/* Величественный асгардский заголовок */
-.game-title {
-    font-family: 'Cinzel', serif;
-    font-size: 3.5rem;
-    font-weight: 900;
-    color: #e6c687; /* Благородное золото */
-    text-shadow: 0 0 15px rgba(230, 198, 135, 0.6), 
-                 0 0 30px rgba(0, 255, 136, 0.4); /* Золотисто-изумрудное свечение магии Локи */
-    letter-spacing: 4px;
     margin-bottom: 10px;
 }
 
-.game-subtitle {
-    font-size: 1.2rem;
-    color: #a3c2b2; /* Мягкий мятный цвет */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-    letter-spacing: 1px;
+.game-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #e6c687; /* Благородное золото */
+    text-shadow: 0 0 15px rgba(230, 198, 135, 0.6), 0 0 30px rgba(0, 255, 136, 0.4);
+    letter-spacing: 3px;
+    line-height: 1.2;
 }
 
-/* Анимация плавного появления заголовка сверху */
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* ==========================================
+   2. МАГИЯ ВИДЕОПЛЕЕРА (ОЖИВШИЙ ЛОКИ)
+   ========================================== */
+.video-box {
+    position: relative;
+    z-index: 5;
+    border: 3px solid #e6c687;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+    background-color: #000;
+    /* Плавный переход при изменении размеров (трансформация в виджет) */
+    transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Состояние №1: Видео на весь экран при старте */
+.video-box.full-screen {
+    width: 80vw;
+    height: 50vh;
+    max-width: 800px;
+    max-height: 450px;
+    margin: auto;
+}
+
+/* Состояние №2: Сжатый виджет над кнопками (включается через JS) */
+.video-box.widget-screen {
+    width: 280px;
+    height: 160px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Чтобы Pixar-Локи не растягивался уродливо */
+}
+
+/* Кнопка-заставка для принудительного старта звука */
+.overlay-trigger {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 16, 11, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transition: opacity 0.5s ease;
+}
+
+.start-play-btn {
+    font-family: 'Comfortaa', cursive, sans-serif;
+    padding: 16px 32px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #05140d;
+    background: #e6c687;
+    border: 2px solid #00ff88;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.start-play-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px #00ff88;
 }
 /* ==========================================
-   3. МАГИЧЕСКИЕ КНОПКИ МЕНЮ (СТИЛЬ ЛОКИ)
+   3. ВЕРТИКАЛЬНЫЕ КНОПКИ МЕНЮ (СТИЛЬ ЛОКИ)
    ========================================== */
 
 .menu-navigation {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Отступы между кнопками */
+    gap: 14px; /* Компактное расстояние между кнопками */
     width: 100%;
-    max-width: 400px; /* Ограничиваем ширину, чтобы кнопки не растягивались на весь экран */
+    max-width: 420px; /* Кнопки будут одинаковой аккуратной ширины */
     z-index: 2;
-    animation: fadeInUp 1.5s ease-out;
+    transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-/* Базовый стиль кнопки */
+/* Класс для скрытия элементов управления, пока Локи говорит на весь экран */
+.menu-navigation.hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    pointer-events: none; /* Чтобы дети случайно не нажали невидимые кнопки */
+}
+
+/* Базовый стиль интерактивной кнопки */
 .menu-btn {
     position: relative;
-    padding: 18px 30px;
+    padding: 16px 24px;
     background: linear-gradient(135deg, #092015 0%, #05140d 100%);
     border: 2px solid #e6c687; /* Золотая рамка Асгарда */
     border-radius: 12px;
     cursor: pointer;
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5),
-                inset 0 0 10px rgba(0, 255, 136, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* Текст внутри кнопки */
 .btn-text {
     font-family: 'Comfortaa', cursive, sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: #ffffff;
-    letter-spacing: 1px;
     position: relative;
     z-index: 3;
     transition: color 0.3s ease;
 }
 
-/* Внутреннее изумрудное свечение (активируется при наведении) */
+/* Внутреннее изумрудное свечение магии */
 .btn-glow {
     position: absolute;
     top: 50%;
     left: 50%;
     width: 0;
     height: 0;
-    background: radial-gradient(circle, rgba(0, 255, 136, 0.6) 0%, rgba(11, 38, 24, 0) 70%);
+    background: radial-gradient(circle, rgba(0, 255, 136, 0.5) 0%, rgba(11, 38, 24, 0) 70%);
     transform: translate(-50%, -50%);
     transition: width 0.5s ease, height 0.5s ease;
     z-index: 1;
@@ -140,10 +188,9 @@ body, html {
 
 /* ЭФФЕКТЫ ПРИ НАВЕДЕНИИ КУРСОРA (HOVER) */
 .menu-btn:hover {
-    transform: translateY(-4px) scale(1.02); /* Кнопка слегка приподнимается */
-    border-color: #00ff88; /* Рамка загорается зеленым */
-    box-shadow: 0 0 25px rgba(0, 255, 136, 0.6), 
-                0 0 10px rgba(230, 198, 135, 0.4); /* Мощное неоновое свечение снаружи */
+    transform: translateY(-3px) scale(1.02);
+    border-color: #00ff88; /* Рамка вспыхивает зеленым */
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
 }
 
 .menu-btn:hover .btn-text {
@@ -152,164 +199,65 @@ body, html {
 }
 
 .menu-btn:hover .btn-glow {
-    width: 300px;
-    height: 300px; /* Магическое пятно света разрастается внутри кнопки */
+    width: 350px;
+    height: 350px;
 }
 
-/* Эффект при клике (нажатии) */
 .menu-btn:active {
     transform: translateY(-1px) scale(0.98);
-    box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
 }
 
-/* Анимация плавного появления кнопок снизу */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 /* ==========================================
    4. ПОДВАЛ (ФУТЕР)
    ========================================== */
-
 .menu-footer {
     z-index: 2;
     text-align: center;
-    animation: fadeIn 2s ease-out;
+    margin-top: 10px;
 }
 
 .menu-footer p {
-    font-size: 0.85rem;
-    color: rgba(163, 194, 178, 0.6); /* Полупрозрачный мятный цвет */
+    font-size: 0.8rem;
+    color: rgba(163, 194, 178, 0.5);
     letter-spacing: 1px;
 }
 
-/* Общая анимация простого проявления */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-
 /* ==========================================
-   5. СТИЛЬ ДЛЯ ДРУГИХ ПРИЛОЖЕНИЙ (КНОПКА НАЗАД)
+   5. МОБИЛЬНЫЙ АВТОМАСШТАБ (АДАПТИВ)
    ========================================== */
-
-/* 
-   Уважаемый учитель! Скопируйте этот класс `.back-to-menu-btn` 
-   в CSS-файлы ваших приложений по химии и биологии. 
-   Он создаст аккуратную, стильную кнопку возврата в левом или правом углу экрана.
-*/
-.back-to-menu-btn {
-    position: fixed;
-    top: 20px;
-    left: 20px; /* Закрепляем в левом верхнем углу приложения */
-    z-index: 9999;
-    padding: 12px 20px;
-    background: #05140d;
-    border: 2px solid #e6c687;
-    border-radius: 8px;
-    color: #ffffff;
-    font-family: 'Comfortaa', cursive, sans-serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
-
-/* Эффект наведения для кнопки «На главное меню» */
-.back-to-menu-btn:hover {
-    background: #092015;
-    border-color: #00ff88;
-    color: #e6c687;
-    box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
-    transform: scale(1.05);
-}
-
-.back-to-menu-btn:active {
-    transform: scale(0.98);
-}
-/* ==========================================
-   6. МОБИЛЬНЫЙ АВТОМАСШТАБ (АДАПТИВ ДЛЯ СМАРТФОНОВ)
-   ========================================== */
-
-/* Этот блок сработает автоматически, если экран устройства узкий или низкий (смартфоны) */
-@media screen and (max-width: 768px), screen and (max-height: 700px) {
-    
-    /* Уменьшаем отступы контейнера, чтобы освободить место */
+@media screen and (max-width: 768px), screen and (max-height: 750px) {
     .menu-container {
-        padding: 20px 15px;
+        padding: 15px 10px;
     }
 
-    /* Автомасштаб величественного заголовка, чтобы он не переносился уродливо */
     .game-title {
-        font-size: 1.8rem; /* Уменьшаем размер букв для мобильного */
-        letter-spacing: 2px;
-        line-height: 1.2;
-        margin-bottom: 5px;
+        font-size: 1.6rem;
+        letter-spacing: 1px;
     }
 
-    /* Чуть компактнее делаем подзаголовок (или фразы Локи) */
-    .game-subtitle {
-        font-size: 0.9.rem;
-        padding: 0 10px;
+    /* Видео на смартфонах при старте занимает оптимальный размер */
+    .video-box.full-screen {
+        width: 90vw;
+        height: 40vh;
     }
 
-    /* Навигация сжимается под ширину экрана телефона */
+    /* Виджет над кнопками на телефоне становится еще компактнее */
+    .video-box.widget-screen {
+        width: 200px;
+        height: 115px;
+        margin-bottom: 10px;
+    }
+
     .menu-navigation {
-        width: 100%;
-        max-width: 310px; /* Идеальная ширина кнопок для удобного нажатия пальцем */
-        gap: 12px; /* Меньше расстояние между кнопками, чтобы влезло по высоте */
+        max-width: 320px;
+        gap: 10px;
     }
 
-    /* Компактные кнопки для смартфона */
     .menu-btn {
-        padding: 14px 20px;
-        border-radius: 10px;
+        padding: 12px 15px;
     }
 
     .btn-text {
-        font-size: 1rem; /* Чуть меньше шрифт на кнопках */
-    }
-    
-    /* Кнопка возврата в меню внутри других приложений тоже адаптируется */
-    .back-to-menu-btn {
-        top: 10px;
-        left: 10px;
-        padding: 8px 14px;
-        font-size: 0.8rem;
-    }
-}
-
-/* Экстремальный случай: если телефон повернули горизонтально (альбомная ориентация) */
-@media screen and (max-height: 450px) and (orientation: landscape) {
-    .menu-container {
-        flex-direction: row; /* Заголовок встанет слева, кнопки справа */
-        justify-content: space-around;
-        align-items: center;
-        padding: 10px;
-    }
-    .menu-header {
-        text-align: left;
-        max-width: 40%;
-    }
-    .game-title {
-        font-size: 1.4rem;
-    }
-    .menu-navigation {
-        max-width: 250px;
-        gap: 8px;
-    }
-    .menu-btn {
-        padding: 8px 15px;
-    }
-    .menu-footer {
-        display: none; /* Прячем футер в горизонтальном режиме телефона, чтобы не мешал */
+        font-size: 0.95rem; /* Текст кнопок аккуратно уменьшается, чтобы влезть в экран */
     }
 }
