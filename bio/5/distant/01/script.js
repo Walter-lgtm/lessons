@@ -40,11 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const classValue = studentClassSelect.value;
 
         // 1. ВСТАВЬТЕ СЮДА ВАШИ ИСТИННЫЕ ENTRY-ID ИЗ КОНСОЛИ F12:
-        const entryID_FIO = "entry.1900111823";   // Замените на ваш номер для ФИО
-        const entryID_Class = "entry.584658132"; // Замените на ваш номер для Класса
+        const entryID_FIO = "entry.1357017451";   // Замените на ваш номер для ФИО
+        const entryID_Class = "entry.781367227"; // Замените на ваш номер для Класса
 
         // 2. ПРОСТО ВСТАВЬТЕ СЮДА ВАШУ ПОЛНУЮ ССЫЛКУ С formResponse НА КОНЦЕ:
-        const googleFormBaseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSefmTw1h-4SDfm8IQFnrhYJh-vC2TyYE8pZVArQGyHtNNyjHQ/formResponse";
+        const googleFormBaseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfwWWLMQQTNJcAKhLs7lufQo4YfRHy4GcJdexsH3GkGZ64clw/formResponse";
 
         // Скрипт сам аккуратно прикрепит ответы ученика к вашей ссылке
         const googleFormFullUrl = `${googleFormBaseUrl}?submit=Submit&${entryID_FIO}=${encodeURIComponent(fioValue)}&${entryID_Class}=${encodeURIComponent(classValue)}`;
