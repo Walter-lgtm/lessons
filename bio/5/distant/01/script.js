@@ -34,13 +34,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- ЛОГИКА ДЛЯ ПЕРВОГО ЗАХОДА НА САЙТ ---
 
-    // 1. НАЧАЛО УРОКА: Клик по стартовой кнопке
+    // 1. НАЧАЛО УРОКА: Клик по стартовой кнопке (ФИКС ДЛЯ СМАРТФОНОВ)
     startOverlay.addEventListener('click', () => {
+        // МОБИЛЬНЫЙ ХАК: Принудительно "активируем" аудио для Safari/Chrome на смартфонах
+        if (lokiAudio) {
+            lokiAudio.load(); // Перезагружаем аудио в контексте клика
+            lokiAudio.muted = false; // Гарантируем, что звук включен
+        }
+
+        // Плавно скрываем темную заставку
         startOverlay.style.opacity = '0';
         setTimeout(() => {
             startOverlay.style.display = 'none';
         }, 500);
 
+        // КИБЕР-СТРАХОВКА: Если файлы потерялись, сразу выводим меню
         const handleError = () => {
             console.warn("⚠️ Медиафайлы интро не найдены. Включаем меню напрямую.");
             showMenuImmediately();
@@ -48,17 +56,23 @@ document.addEventListener('DOMContentLoaded', () => {
         lokiAudio.addEventListener('error', handleError);
         lokiVideo.addEventListener('error', handleError);
 
+        // Запускаем бесконечное фоновое видео Локи
         if (lokiVideo) {
             lokiVideo.play().catch(err => console.error("Блокировка видео:", err));
         }
 
-        if (lokiAudio) {
-            lokiAudio.muted = false;
-            lokiAudio.play().catch(error => {
-                console.error("Браузер заблокировал звук речи:", error);
-                showMenuImmediately();
-            });
-        }
+        // Запускаем аудиодорожку речи Локи с задержкой в 50мс, чтобы браузер успел обработать активацию
+        setTimeout(() => {
+            if (lokiAudio) {
+                lokiAudio.play().then(() => {
+                    console.log("🔊 Речь Локи успешно запущена на смартфоне!");
+                }).catch(error => {
+                    console.error("⚠️ Смартфон всё-таки заблокировал звук:", error);
+                    // Спасаем приложение: если звук заблокирован, сразу открываем меню через 1.5 секунды
+                    setTimeout(showMenuImmediately, 1500);
+                });
+            }
+        }, 50);
     });
 
     // 2. ФИНАЛ РЕЧИ: Аудио закончилось -> Минимизация и сохранение метки памяти
