@@ -45,20 +45,22 @@ body, html {
 }
 
 /* ==========================================
-   2. СТАРИННЫЙ СВИТОК АСГАРДА
+   2. СТАРИННЫЙ СВИТОК АСГАРДА (РАСШИРЕННЫЙ)
    ========================================== */
 .ancient-scroll {
     position: relative;
     z-index: 2;
     width: 100%;
-    max-width: 750px; /* Идеальная ширина для чтения текста */
-    background-image: url('scroll_bg.jpeg'); /* Подтягиваем картинку-пергамент из Шедеврума */
-    background-size: 100% 100%; /* Картинка пергамента идеально натягивается на весь блок */
+    max-width: 950px; /* Увеличиваем ширину: теперь это монументальный манускрипт, а не записка! */
+    background-image: url('scroll_bg.jpg'); 
+    background-size: 100% 100%; /* Картинка пергамента растягивается под новую величественную ширину */
     background-repeat: no-repeat;
-    border-radius: 4px;
-    padding: 60px 50px; /* Большие внутренние отступы, имитирующие поля свитка */
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 
-                0 0 30px rgba(230, 198, 135, 0.15);
+    
+    /* Настраиваем идеальные королевские отступы: сверху и снизу побольше, по бокам — чтобы войти в чистую зону */
+    padding: 110px 140px; 
+    
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8),
+                0 0 40px rgba(230, 198, 135, 0.2);
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -69,21 +71,22 @@ body, html {
     text-align: center;
     border-bottom: 2px dashed rgba(43, 31, 17, 0.2);
     padding-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 .scroll-title {
     font-family: 'Cinzel', serif;
-    font-size: 2.2rem;
+    font-size: 2.8rem; /* Делаем заголовок еще крупнее и презентабельно */
     font-weight: 900;
-    color: #4a3319; /* Темный золотисто-коричневый */
-    letter-spacing: 2px;
+    color: #36220f; 
+    letter-spacing: 4px;
     margin-bottom: 5px;
 }
 
 .scroll-subtitle {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    color: #614629;
+    color: #523a21;
 }
 /* ==========================================
    3. ПОЧЕРК ЛОКИ И СТИЛИЗАЦИЯ ТЕКСТА
@@ -151,27 +154,34 @@ body, html {
 }
 
 /* ==========================================
-   4. МОБИЛЬНЫЙ АВТОМАСШТАБ СВИТКА
+   4. МОБИЛЬНЫЙ АВТОМАСШТАБ (БРОНЕБОЙНЫЙ АДАПТИВ)
    ========================================== */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
     .library-container {
-        padding: 70px 10px 20px 10px; /* Уменьшаем внешние отступы */
+        padding: 80px 10px 20px 10px; 
     }
 
     .ancient-scroll {
-        padding: 40px 20px; /* Сужаем поля пергамента, чтобы текст на смартфонах не сжался в узкую полоску */
-        gap: 20px;
+        /* На смартфонах и планшетах переключаемся в режим чистого пергамента,
+           чтобы у детей ничего не сжималось в узкую полоску */
+        background-image: none;
+        background-color: #f4ebd4; 
+        border: 2px solid #e6c687;
+        border-radius: 16px;
+        padding: 40px 25px; /* Компактные поля для смартфонов */
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
 
     .scroll-title {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
     }
 
     .scroll-subtitle {
-        font-size: 0.85rem;
+        font-size: 0.95rem;
     }
 
     .scroll-body {
-        font-size: 1.3rem; /* Чуть-чуть уменьшаем почерк для идеального чтения на экранах телефонов */
+        font-size: 1.4rem; 
+        text-shadow: none;
     }
 }
