@@ -1,0 +1,462 @@
+/* ==========================================================================
+   1. БАЗОВЫЕ НАСТРОЙКИ И АТМОСФЕРА АСГАРДА
+   ========================================================================== */
+:root {
+    --emerald-neon: #00ff80;
+    --emerald-dark: #00aa54;
+    --gold-neon: #ffd700;
+    --gold-dark: #b39200;
+    --bg-dark: #0b1a10;
+    --card-bg: rgba(15, 35, 25, 0.9);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent; /* Убираем синее выделение при клике на смартфонах */
+}
+
+body {
+    background: var(--bg-dark) url('background-shedevrum.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Comfortaa', sans-serif;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    overflow-x: hidden;
+}
+
+/* Эффект магического неонового тумана на фоне */
+.asgard-bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle, rgba(0, 255, 128, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   2. ГЕОМЕТРИЯ ПРИЛОЖЕНИЯ И АДАПТИВНОСТЬ
+   ========================================================================== */
+.app-container {
+    width: 100%;
+    max-width: 1000px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Шапка с навигацией */
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+}
+
+/* Кнопка возврата в меню */
+.back-to-menu-btn {
+    text-decoration: none;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-to-menu-btn:hover {
+    background: rgba(0, 255, 128, 0.15);
+    border-color: var(--emerald-neon);
+    box-shadow: 0 0 10px rgba(0, 255, 128, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Счётчик очков */
+.score-badge {
+    background: rgba(255, 215, 0, 0.1);
+    border: 2px solid var(--gold-neon);
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    color: var(--gold-neon);
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+/* Главная Pixar-карточка теста */
+.quiz-card {
+    background: var(--card-bg);
+    border: 4px solid var(--emerald-neon);
+    border-radius: 28px;
+    padding: 25px;
+    box-shadow: 0 12px 0 var(--emerald-dark), 0 0 30px rgba(0, 255, 128, 0.2); /* 3D выдавливание */
+    position: relative;
+    width: 100%;
+}
+
+/* Шкала прогресса теста */
+.progress-container {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--emerald-dark), var(--emerald-neon));
+    box-shadow: 0 0 8px var(--emerald-neon);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0%;
+}
+/* ==========================================================================
+   3. ДИАЛОГ ЛОКИ И ДИНАМИЧЕСКИЕ ШАГИ
+   ========================================================================== */
+.loki-character-zone {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px 20px;
+    border-radius: 18px;
+    border-left: 5px solid var(--gold-neon);
+    margin-bottom: 25px;
+}
+
+.loki-avatar {
+    font-size: 2rem;
+    background: linear-gradient(135deg, #122c1e, #00ff80);
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 4px 0 #00aa54, 0 0 10px rgba(0, 255, 128, 0.4);
+    flex-shrink: 0;
+}
+
+.loki-bubble p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #e0f7fa;
+}
+
+/* Логика пошагового переключения экранов */
+.quiz-step {
+    display: none;
+}
+
+.quiz-step.active {
+    display: block;
+    animation: fadeInStep 0.4s ease-out forwards;
+}
+
+@keyframes fadeInStep {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Приветственный экран */
+.welcome-screen {
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.neon-title {
+    font-size: 2.2rem;
+    color: var(--gold-neon);
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+    margin-bottom: 15px;
+}
+
+.quiz-description {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #b0c4de;
+    margin-bottom: 30px;
+}
+
+/* ==========================================================================
+   4. ИСПЫТАНИЕ I: СТИЛИ КАРТОЧЕК С СЕЛЕКТАМИ
+   ========================================================================== */
+.task-instruction {
+    font-size: 1.15rem;
+    color: var(--gold-neon);
+    text-align: center;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+/* Адаптивная CSS Grid-сетка: на мобильных 1 колонка, от 550px - 2, от 850px - 4 */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+@media (min-width: 550px) {
+    .cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 850px) {
+    .cards-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.bio-card {
+    background: rgba(10, 25, 15, 0.8);
+    border: 3px solid var(--emerald-neon);
+    border-radius: 20px;
+    box-shadow: 0 8px 0 var(--emerald-dark), 0 0 15px rgba(0, 255, 128, 0.15);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 0 var(--emerald-dark), 0 0 25px rgba(0, 255, 128, 0.4);
+}
+
+.card-image-box {
+    width: 100%;
+    height: 140px;
+    background: #ffffff;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}
+
+.bio-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.card-info {
+    width: 100%;
+    text-align: center;
+    margin-top: 12px;
+}
+
+.card-title {
+    font-size: 0.95rem;
+    color: #ffffff;
+    margin-bottom: 12px;
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.magic-select {
+    width: 100%;
+    padding: 12px;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 0.85rem;
+    background: #102518;
+    color: #ffffff;
+    border: 2px solid var(--gold-neon);
+    border-radius: 12px;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0 4px 0 var(--gold-dark);
+}
+
+/* ==========================================================================
+   5. ИСПЫТАНИЯ II, III, IV: НЕОНОВЫЕ ПЛИТКИ ОПЦИЙ (RADIO)
+   ========================================================================== */
+.options-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.option-tile {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.04);
+    border: 2px solid rgba(0, 255, 128, 0.3);
+    border-radius: 16px;
+    padding: 16px 20px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 rgba(0, 170, 84, 0.1);
+    transition: all 0.2s ease;
+}
+
+.option-tile:hover {
+    background: rgba(0, 255, 128, 0.08);
+    border-color: var(--emerald-neon);
+    box-shadow: 0 5px 0 var(--emerald-dark), 0 0 15px rgba(0, 255, 128, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Прячем дефолтный кружок radio и стилизуем текст */
+.option-tile input[type="radio"] {
+    margin-right: 15px;
+    accent-color: var(--emerald-neon);
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.option-tile span {
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+/* ==========================================================================
+   6. ИСПЫТАНИЕ V: МЕХАНИКА «КЛИКНИ И СВЯЖИ» (ЦАРСТВА)
+   ========================================================================== */
+.matching-game-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+/* На больших экранах ПК выстраиваем организмы и царства в две удобные колонки */
+@media (min-width: 768px) {
+    .matching-game-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.matching-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Интерактивные плитки организмов */
+.match-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px dashed rgba(255, 215, 0, 0.4);
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.match-item:hover {
+    border-color: var(--gold-neon);
+    background: rgba(255, 215, 0, 0.05);
+    transform: scale(1.02);
+}
+
+/* Состояние, когда ребенок выбрал организм на смартфоне/ПК */
+.match-item.selected {
+    border-style: solid;
+    border-color: var(--gold-neon);
+    background: rgba(255, 215, 0, 0.15);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+/* Кнопки-Царства в стиле Pixar */
+.kingdom-btn {
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #ffffff;
+    border: none;
+    border-radius: 14px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.btn-plants { background: #2e7d32; box-shadow: 0 5px 0 #1b5e20; }
+.btn-animals { background: #1565c0; box-shadow: 0 5px 0 #0d47a1; }
+.btn-fungi { background: #ef6c00; box-shadow: 0 5px 0 #e65100; }
+.btn-bacteria { background: #6a1b9a; box-shadow: 0 5px 0 #4a148c; }
+
+.kingdom-btn:active {
+    transform: translateY(3px);
+    box-shadow: none;
+}
+
+/* Состояние, когда организм уже правильно сопоставлен (скрывается или блокируется) */
+.match-item.matched-success {
+    border-color: var(--emerald-neon);
+    background: rgba(0, 255, 128, 0.1);
+    color: var(--emerald-neon);
+    border-style: solid;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   7. ГЛАВНЫЕ 3D-КНОПКИ И КЛАССЫ РЕЗУЛЬТАТОВ
+   ========================================================================== */
+.magic-btn {
+    display: block;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--gold-neon), #ffb300);
+    border: none;
+    border-radius: 16px;
+    padding: 16px 36px;
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--bg-dark);
+    box-shadow: 0 6px 0 var(--gold-dark), 0 0 20px rgba(255, 215, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.magic-btn:hover {
+    box-shadow: 0 6px 0 var(--gold-dark), 0 0 25px rgba(255, 215, 0, 0.5);
+}
+
+.magic-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 var(--gold-dark);
+}
+
+/* Классы подсветки для Первого испытания (JS добавляет карточкам) */
+.bio-card.card-success {
+    border-color: var(--emerald-neon);
+    box-shadow: 0 8px 0 var(--emerald-dark), 0 0 25px rgba(0, 255, 128, 0.6);
+}
+
+.bio-card.card-error {
+    border-color: #ff4d4d;
+    box-shadow: 0 8px 0 #cc0000, 0 0 25px rgba(255, 77, 77, 0.6);
+}
+
+/* Адаптивные отступы для экранов смартфонов */
+@media (max-width: 480px) {
+    body { padding: 10px; }
+    .quiz-card { padding: 15px; border-radius: 20px; }
+    .neon-title { font-size: 1.7rem; }
+    .task-instruction { font-size: 1rem; }
+    .loki-character-zone { padding: 10px; flex-direction: column; text-align: center; }
+}
