@@ -209,7 +209,6 @@ h1 {
         padding: 20px 20px;
         font-size: 1rem;
     }
-}
 
 /* Простая анимация появления карточки */
 @keyframes fadeIn {
