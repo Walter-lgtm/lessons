@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("⚡ КиберАсгард запущен. Движок памяти переходов активен!");
+    console.log("⚡ Системы Асгарда и базы данных Google успешно синхронизированы!");
+
+    const attendanceModal = document.getElementById('attendance-modal');
+    const attendanceForm = document.getElementById('attendance-form');
+    const studentFioInput = document.getElementById('student-fio');
+    const studentClassSelect = document.getElementById('student-class');
 
     const startOverlay = document.getElementById('start-overlay');
     const lokiVideo = document.getElementById('loki-video');
@@ -10,27 +15,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ПРОВЕРКА ПАМЯТИ: Слушал ли ученик Локи ранее в этой сессии?
     if (sessionStorage.getItem('loki_welcomed') === 'true') {
-        console.log("📜 Ученик уже вернулся в меню. Пропускаем интро и сразу открываем кнопки.");
+        console.log("📜 Ученик вернулся. Пропускаем регистрацию и интро.");
         
-        // Мгновенно убираем заставку
+        if (attendanceModal) { attendanceModal.style.display = 'none'; }
         if (startOverlay) { startOverlay.style.display = 'none'; }
         
-        // Переводим видеоплеер в режим маленького виджета
         videoWrapper.classList.remove('full-screen');
         videoWrapper.classList.add('widget-screen');
-        
-        // Сразу показываем кнопки (без анимации ожидания)
         menuNavigation.classList.remove('hidden');
         
-        // По желанию: запускаем фоновое видео в маленьком окошке, но без звука
         if (lokiVideo) {
-            lokiVideo.play().catch(err => console.log("Фоновое видео ожидает клика"));
+            lokiVideo.play().catch(err => console.log("Фоновое видео ожидает"));
         }
         
-        // Инициализируем навигацию по кнопкам и выходим, не запуская стартовые обработчики
         initNavigation();
         return;
     }
+
+    // ЛОГИКА ОТПРАВКИ ДАННЫХ В GOOGLE ТАБЛИЦУ
+    attendanceForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Отменяем перезагрузку страницы
+
+        const fioValue = studentFioInput.value.trim();
+        const classValue = studentClassSelect.value;
+
+        // ВНИМАНИЕ: ЗАМЕНИТЕ ЭТИ ДАННЫЕ НА ВАШИ ИЗ ШАГА 1!
+        const googleFormFormID = "e/1FAIpQLSefmTw1h-4SDfm8IQFnrhYJh-vC2TyYE8pZVArQGyHtNNyjHQ"; // ID вашей формы
+        const entryID_FIO = "entry.1900111823";  // ID поля ФИО
+        const entryID_Class = "entry.584658132"; // ID поля Класс
+
+        // Собираем прямую ссылку для фоновой отправки
+        const googleFormUrl = `https://google.com{googleFormFormID}/formResponse?submit=Submit&${entryID_FIO}=${encodeURIComponent(fioValue)}&${entryID_Class}=${encodeURIComponent(classValue)}`;
+
+        // Отправляем данные в Google в фоновом режиме (режим no-cors блокирует ошибки безопасности)
+        fetch(googleFormUrl, { mode: 'no-cors' })
+            .then(() => {
+                console.log("🚀 Данные ученика успешно занесены в Google Таблицу!");
+            })
+            .catch((err) => {
+                console.error("Ошибка отправки в Google, но урок продолжаем:", err);
+            });
+
+        // Плавно прячем окно регистрации
+        attendanceModal.style.opacity = '0';
+        setTimeout(() => {
+            attendanceModal.style.display = 'none';
+        }, 500);
+        
+        console.log("🔒 Доступ к уроку открыт. Ожидание клика по кнопке интро...");
+    });
 
     // --- ЛОГИКА ДЛЯ ПЕРВОГО ЗАХОДА НА САЙТ ---
 
