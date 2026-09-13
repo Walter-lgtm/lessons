@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магия Биологии: Правила ТБ от Локи | 5 класс</title>
+    <!-- Google Fonts: Сказочный и современный шрифты -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Comfortaa:wght@400;700&family=Marck+Script&display=swap" rel="stylesheet">
+    <!-- Иконки FontAwesome для кнопок и элементов -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <!-- Подключение стилей -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Кнопка возврата в главное меню -->
+    <header class="app-header">
+        <a href="../index.html" class="back-to-menu-btn">
+            <i class="fa-solid fa-arrow-left"></i> Назад в главное меню
+        </a>
+        <div class="asgard-logo">
+            <span class="magic-sparkle">✨</span> Асгардская Академия Биологии
+        </div>
+    </header>
+
+    <main class="main-container">
+        <!-- Сюжетный баннер: Кабинет биологии в Асгарде -->
+        <section class="hero-banner">
+            <div class="classroom-bg">
+                <!-- Школьная доска с главной моралью -->
+                <div class="chalkboard">
+                    <h1 class="board-title">Правила ТБ</h1>
+                    <p class="board-warning">Несоблюдение ТБ превратит тебя в лягушку!</p>
+                </div>
+
+                <!-- Персонажи (стилизация под 3D Pixar) -->
+                <div class="characters-container">
+                    <!-- Локи-Трикстер -->
+                    <div class="char-loki" id="loki-avatar">
+                        <div class="loki-speech-bubble" id="loki-bubble">
+                            Привет, смертный пятиклассник! Я — Локи. Справа на парте мой брат Тор. Он решил, что правила ТБ — это шутка. Теперь он квакает. Не повторяй его ошибок! 👇
+                        </div>
+                        <div class="pixar-character loki-3d">
+                            <!-- Иконка или плейсхолдер для 3D Локи -->
+                            <div class="horns-helmet"></div>
+                            <div class="smirk-face">😏</div>
+                        </div>
+                    </div>
+
+                    <!-- Тор-Лягушонок -->
+                    <div class="char-thor" id="thor-frog">
+                        <div class="pixar-character frog-3d">
+                            <!-- Элементы одежды Тора -->
+                            <div class="winged-helmet"></div>
+                            <div class="red-cape"></div>
+                            <div class="frog-face">🐸 <span class="angry-cloud">💢</span></div>
+                        </div>
+                        <span class="character-name">Брат Тор (жертва ТБ)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Контейнер для правил начнется в следующей части -->
+        <section class="rules-section">
+          <h2 class="section-title"><i class="fa-solid fa-scroll"></i> Кодекс Безопасности Трикстера</h2>
+            <p class="section-subtitle">Кликай по свиткам, чтобы узнать, как не превратиться в амфибию</p>
+
+            <!-- Сетка с карточками правил (заполняется из JS для гибкости) -->
+            <div class="rules-grid" id="rules-container">
+                <!-- Карточки будут динамически генерироваться через script.js -->
+                <noscript>
+                    <div class="noscript-warning">
+                        Включи магию JavaScript в браузере, иначе заклинания Локи не сработают!
+                    </div>
+                </noscript>
+            </div>
+
+            <!-- Интерактивный блок проверки/пасхалки -->
+            <div class="magic-check-box">
+                <button id="check-thor-btn" class="magic-btn">
+                    <i class="fa-solid fa-wand-sparkles"></i> Проверить Тора на знание ТБ
+                </button>
+                <div id="check-result" class="check-result-text hidden"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал приложения -->
+    <footer class="app-footer">
+        <p>© Асгардская Академия Биологии, 2026. Под присмотром Всеотца.</p>
+    </footer>
+
+    <!-- Подключение логики -->
+    <script src="script.js"></script>
+</body>
+</html>
