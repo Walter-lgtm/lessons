@@ -14,7 +14,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background: #0b111e url('assets/shedevrum-loki-thor.jpg') no-repeat center center/cover;
+    background: #0b111e url('shedevrum-loki-thor.jpeg') no-repeat center center/cover;
     background-attachment: fixed;
     overflow-x: hidden;
 }
