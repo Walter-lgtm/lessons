@@ -39,30 +39,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const fioValue = studentFioInput.value.trim();
         const classValue = studentClassSelect.value;
 
-        // ВНИМАНИЕ: ЗАМЕНИТЕ ЭТИ ДАННЫЕ НА ВАШИ ИЗ ШАГА 1!
-        const googleFormFormID = "e/1FAIpQLSefmTw1h-4SDfm8IQFnrhYJh-vC2TyYE8pZVArQGyHtNNyjHQ"; // ID вашей формы
-        const entryID_FIO = "entry.1900111823";  // ID поля ФИО
-        const entryID_Class = "entry.584658132"; // ID поля Класс
+        // 1. ВСТАВЬТЕ СЮДА ВАШИ ИСТИННЫЕ ENTRY-ID ИЗ КОНСОЛИ F12:
+        const entryID_FIO = "entry.1900111823";   // Замените на ваш номер для ФИО
+        const entryID_Class = "entry.584658132"; // Замените на ваш номер для Класса
 
-        // Собираем прямую ссылку для фоновой отправки
-        const googleFormUrl = `https://google.com{googleFormFormID}/formResponse?submit=Submit&${entryID_FIO}=${encodeURIComponent(fioValue)}&${entryID_Class}=${encodeURIComponent(classValue)}`;
+        // 2. ПРОСТО ВСТАВЬТЕ СЮДА ВАШУ ПОЛНУЮ ССЫЛКУ С formResponse НА КОНЦЕ:
+        const googleFormBaseUrl = "https://docs.google.com/forms/d/e/1FAIpQLSefmTw1h-4SDfm8IQFnrhYJh-vC2TyYE8pZVArQGyHtNNyjHQ/formResponse";
 
-        // Отправляем данные в Google в фоновом режиме (режим no-cors блокирует ошибки безопасности)
-        fetch(googleFormUrl, { mode: 'no-cors' })
+        // Скрипт сам аккуратно прикрепит ответы ученика к вашей ссылке
+        const googleFormFullUrl = `${googleFormBaseUrl}?submit=Submit&${entryID_FIO}=${encodeURIComponent(fioValue)}&${entryID_Class}=${encodeURIComponent(classValue)}`;
+
+        // Отправляем данные в Google в фоновом режиме
+        fetch(googleFormFullUrl, { mode: 'no-cors' })
             .then(() => {
-                console.log("🚀 Данные ученика успешно занесены в Google Таблицу!");
+                console.log("🚀 Данные ученика успешно улетели в Google Таблицу!");
             })
             .catch((err) => {
-                console.error("Ошибка отправки в Google, но урок продолжаем:", err);
+                console.error("Ошибка сети, но урок продолжаем:", err);
             });
 
-        // Плавно прячем окно регистрации
+        // Плавно прячем окно регистрации и открываем оверлей Локи
         attendanceModal.style.opacity = '0';
         setTimeout(() => {
             attendanceModal.style.display = 'none';
         }, 500);
         
-        console.log("🔒 Доступ к уроку открыт. Ожидание клика по кнопке интро...");
+        console.log("🔒 Доступ к уроку открыт.");
     });
 
     // --- ЛОГИКА ДЛЯ ПЕРВОГО ЗАХОДА НА САЙТ ---
