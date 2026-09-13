@@ -28,7 +28,7 @@ body::before {
     width: 100%;
     height: 100%;
     /* Путь к твоей картинке */
-    background: url('assets/shedevrum-loki-thor.jpeg') no-repeat center center;
+    background: url('shedevrum-loki-thor.jpeg') no-repeat center center;
     background-size: cover; /* Картинка всегда заполняет экран без искажений */
     z-index: -1; /* Уводим на самый задний план */
     
