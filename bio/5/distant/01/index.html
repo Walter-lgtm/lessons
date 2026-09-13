@@ -21,20 +21,12 @@
             <form id="attendance-form" onsubmit="return false;">
                 <div class="input-field-group">
                     <label for="student-fio">Твои Фамилия и Имя:</label>
-                    <input type="text" id="student-fio" placeholder="Например: Иванов Иван" required autocomplete="off">
+                    <input type="text" id="student-fio" required autocomplete="off">
                 </div>
 
                 <div class="input-field-group">
                     <label for="student-class">Твой класс:</label>
-                    <select id="student-class" required>
-                        <option value="" disabled selected>Выбери класс...</option>
-                        <option value="5 А">5 «А» класс</option>
-                        <option value="5 Б">5 «Б» класс</option>
-                        <option value="5 В">5 «В» класс</option>
-                        <option value="5 Г">5 «Г» класс</option>
-                        <option value="5 Г">5 «Д» класс</option>
-                        <option value="5 Г">5 «Ж» класс</option>
-                    </select>
+                    <input type="text" id="student-class" required autocomplete="off">
                 </div>
 
                 <button type="submit" id="submit-attendance-btn" class="enter-lesson-btn">ВОЙТИ НА УРОК</button>
