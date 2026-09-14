@@ -311,3 +311,44 @@ textarea:focus {
 .hidden {
     display: none;
 }
+/* Кнопка PDF */
+.btn-pdf {
+    background-color: #10b981;
+}
+.btn-pdf:hover {
+    background-color: #059669;
+}
+
+/* Стили для генерации PDF (при печати страницы) */
+@media print {
+    body {
+        background-color: #ffffff;
+        padding: 0;
+    }
+    .container {
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+    }
+    /* Скрываем элементы управления, которые не нужны учителю */
+    .action-bar, .instruction-box, .media-column, .task-num {
+        display: none !important;
+    }
+    /* Перестраиваем верстку в одну полноценную колонку для листа А4 */
+    .workspace {
+        grid-template-columns: 1fr;
+    }
+    /* Делаем поля ввода похожими на обычный печатный текст */
+    table input[type="text"], textarea {
+        border: none;
+        border-bottom: 1px dashed #333;
+        background: transparent !important;
+        padding: 4px 0;
+    }
+    .task-card {
+        border: none;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 10px 0;
+        box-shadow: none;
+    }
+}
