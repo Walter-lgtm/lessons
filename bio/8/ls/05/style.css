@@ -325,36 +325,34 @@ body {
     padding: 15px;
 }
 
-/* Сетка кроссворда */
+/* Новая сетка кроссворда строго по скриншоту (16 столбцов, 15 строк) */
 .crossword-grid {
     display: grid;
-    grid-template-columns: repeat(17, 24px);
-    grid-template-rows: repeat(14, 24px);
-    gap: 2px;
-    background: #bccee0;
-    padding: 4px;
-    border-radius: 8px;
+    grid-template-columns: repeat(16, 26px);
+    grid-template-rows: repeat(15, 26px);
+    gap: 1px;
+    background: #a1b2c9;
+    padding: 3px;
+    border-radius: 4px;
     margin-bottom: 15px;
 }
 
 /* Ячейка кроссворда */
 .crossword-cell {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     position: relative;
-    background: transparent;
 }
 
-/* Пустая неактивная клетка */
+/* Пустая неактивная клетка (голубовато-серый цвет фона из скриншота) */
 .crossword-cell.empty {
-    background: #7f8c8d; /* Темно-серый фон как на скриншоте */
-    opacity: 0.4;
+    background: #a2b0c4;
 }
 
 /* Клетка для ввода буквы */
 .crossword-cell.active-cell {
     background: #ffffff;
-    border: 1px solid #34495e;
+    border: 1px solid #7a8a9e;
 }
 
 /* Поле ввода внутри ячейки */
@@ -363,24 +361,28 @@ body {
     height: 100%;
     border: none;
     text-align: center;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: bold;
     text-transform: uppercase;
     background: transparent;
-    color: #2c3e50;
+    color: #1e3c72;
     outline: none;
 }
 
-/* Цифра-подсказка в углу ячейки */
+/* Цифра-подсказка РЯДОМ или ВНУТРИ ячейки */
 .cell-number {
     position: absolute;
-    top: 1px;
-    left: 2px;
-    font-size: 0.55rem;
-    color: #555555;
+    top: -1px;
+    left: -14px; /* Выносит цифру чуть левее клетки, как на скрине */
+    font-size: 0.75rem;
+    color: #333333;
     font-weight: bold;
-    pointer-events: none;
     z-index: 10;
+}
+/* Для вертикальных номеров, которые стоят над буквами */
+.cell-number.top-num {
+    top: -16px;
+    left: 8px;
 }
 
 /* Подсветка правильного/неправильного ответа */
