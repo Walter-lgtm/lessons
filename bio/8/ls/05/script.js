@@ -3,7 +3,7 @@
 // ==========================================================================
 
 let currentSlide = 1;
-const totalSlides = 7;
+const totalSlides = 6;
 
 function updateSlides() {
     document.querySelectorAll('.slide').forEach(slide => {
