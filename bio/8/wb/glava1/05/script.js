@@ -64,13 +64,18 @@ const ENTRY_GRADE = 'entry.1031192792';  // ID поля для Оценки (н�
             feedbackDiv.classList.remove('hidden', 'success-text', 'error-text');
             card.classList.remove('correct-answer', 'wrong-answer');
 
-            if (selectedRadio.value === CORRECT_ANSWERS[`q${i}`]) {
+            // Безопасное очищение строк от точек, пробелов на концах и приведение к нижнему регистру
+            const cleanUserAnswer = selectedRadio.value.trim().replace(/\.$/, '').toLowerCase();
+            const cleanCorrectAnswer = CORRECT_ANSWERS[`q${i}`].trim().replace(/\.$/, '').toLowerCase();
+
+            if (cleanUserAnswer === cleanCorrectAnswer) {
                 correctCount++;
                 card.classList.add('correct-answer');
                 feedbackDiv.textContent = '✅ Верно!';
                 feedbackDiv.classList.add('success-text');
             } else {
                 card.classList.add('wrong-answer');
+                // Выводим текст ответа красиво, как он зашит в ключах
                 feedbackDiv.textContent = `❌ Неверно. Правильный ответ: ${CORRECT_ANSWERS[`q${i}`]}`;
                 feedbackDiv.classList.add('error-text');
             }
