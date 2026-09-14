@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('submit-btn');
+    const pdfBtn = document.getElementById('pdf-btn');
     const statusMessage = document.getElementById('status-message');
     const allInputs = document.querySelectorAll('table input[type="text"]');
     const allTextareas = document.querySelectorAll('textarea');
 
-    // Функция сброса стилей валидации при изменении полей
+    // Сброс красной подсветки при вводе данных
     const clearStatusOnChange = (element) => {
         element.addEventListener('input', () => {
             element.style.borderColor = '';
@@ -15,15 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
     allInputs.forEach(clearStatusOnChange);
     allTextareas.forEach(clearStatusOnChange);
 
-    // Обработчик проверки формы
+    // 1. Кнопка "Проверить работу"
     submitBtn.addEventListener('click', () => {
         let emptyCount = 0;
 
-        // 1. Проверяем инпуты в таблицах
         allInputs.forEach(input => {
             if (!input.value.trim()) {
-                input.style.borderColor = '#ef4444'; // красный цвет рамки
-                input.style.backgroundColor = '#fef2f2'; // светло-красный фон
+                input.style.borderColor = '#ef4444';
+                input.style.backgroundColor = '#fef2f2';
                 emptyCount++;
             } else {
                 input.style.borderColor = '';
@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 2. Проверяем текстовые поля ответов и вывода
         allTextareas.forEach(textarea => {
             if (!textarea.value.trim()) {
                 textarea.style.borderColor = '#ef4444';
@@ -43,17 +42,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // 3. Выводим итоговый статус
         statusMessage.classList.remove('hidden', 'success', 'warning');
 
         if (emptyCount > 0) {
             statusMessage.textContent = `⚠️ Работа не завершена. Осталось заполнить полей: ${emptyCount}.`;
             statusMessage.classList.add('warning');
+            pdfBtn.classList.add('hidden'); // Прячем кнопку PDF, если есть ошибки
         } else {
-            statusMessage.textContent = '✅ Практическая работа успешно заполнена и готова к отправке!';
+            statusMessage.textContent = '✅ Практическая работа успешно заполнена! Теперь вы можете сохранить её в PDF.';
             statusMessage.classList.add('success');
-            
-            // Здесь при необходимости можно добавить отправку данных на сервер или сохранение в LocalStorage
+            pdfBtn.classList.remove('hidden'); // Показываем кнопку PDF
         }
+    });
+
+    // 2. Кнопка "Сохранить в PDF"
+    pdfBtn.addEventListener('click', () => {
+        window.print(); // Запуск стандартного сохранения/печати страницы
     });
 });
