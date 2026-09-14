@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практическая работа: Органы опоры и движения</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Главный заголовок -->
+        <header class="work-header">
+            <h1>Практическая работа «Ознакомление с органами опоры и движения у животных»</h1>
+            <div class="instruction-box">
+                <span class="icon-info">📋</span>
+                <p>Выполни практическую работу, ответь на предложенные вопросы и сделай выводы.</p>
+            </div>
+        </header>
+
+        <!-- Блок Темы и Цели -->
+        <section class="meta-box">
+            <div class="meta-icon">✏️</div>
+            <div class="meta-content">
+                <p class="meta-notice">Запиши тему и цель практической работы в тетрадь.</p>
+                <p><strong>Тема:</strong> Практическая работа «Ознакомление с органами опоры и движения у животных».</p>
+                <p><strong>Цель работы:</strong> ознакомиться с органами опоры и движения у животных.</p>
+            </div>
+        </section>
+
+        <!-- Основной контент: Изображения и Задания -->
+        <main class="workspace">
+            <!-- Левая колонка: Иллюстрации -->
+            <div class="media-column">
+                <div class="image-wrapper card-table">
+                    <img src="table.jpg" alt="Информационная карточка" class="work-img">
+                </div>
+                <div class="image-wrapper card-zoo">
+                    <img src="zoo_01.jpg" alt="Коллаж животных" class="work-img">
+                </div>
+            </div>
+
+            <!-- Правая колонка: Интерактивные задания -->
+            <div class="tasks-column">
+                
+                <!-- Шаг 1 -->
+                <div class="task-card">
+                    <div class="task-num">1</div>
+                    <div class="task-text">
+                        <p>Внимательно изучи коллаж и впиши в таблицу названия всех изображенных животных. Заполни таблицу.</p>
+                    </div>
+                    <div class="table-container">
+                        <table id="skeletons-table">
+                            <thead>
+                                <tr>
+                                    <th>Представители животного мира</th>
+                                    <th>Наружный скелет</th>
+                                    <th>Внутренний скелет</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- 7 строк для животных из коллажа -->
+                                <tr><td><input type="text" placeholder="Животное 1"></td><td><input type="text" placeholder="—"></td><td><input type="text" placeholder="—"></td></tr>
+                                <tr><td><input type="text" placeholder="Животное 2"></td><td><input type="text" placeholder="—"></td><td><input type="text" placeholder="—"></td></tr>
+                                <tr><td><input type="text" placeholder="Животное 3"></td><td><input type="text" placeholder="—"></td><td><input type="text" placeholder="—"></td></tr>
+                                <tr><td><input type="text" placeholder="Животное 4"></td><td><input type="text" placeholder="—"></td><td><input type="text" placeholder="—"></td></tr>
+                                <tr><td><input type="text" placeholder="Животное 5"></td><td><input type="text" placeholder="—"></td><td><input type="text" placeholder="—"></td></tr>
+                                <tr><td><input type="text" placeholder="Животное 6"></td><td><input type="text" placeholder="—"></td><td><input type="text" placeholder="—"></td></tr>
+                                <tr><td><input type="text" placeholder="Животное 7"></td><td><input type="text" placeholder="—"></td><td><input type="text" placeholder="—"></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Шаг 2 -->
+                <div class="task-card">
+                    <div class="task-num">2</div>
+                    <div class="task-text">
+                        <p>Используя изображение, поясни, какие органы и части тела участвуют в перемещении данных животных.</p>
+                    </div>
+                    <div class="table-container">
+                        <table id="movement-table">
+                            <thead>
+                                <tr>
+                                    <th>Представитель животного мира</th>
+                                    <th>Органы, участвующие в движении</th>
+                                    <th>Среда обитания</th>
+                                    <th>Число способов передвижения</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><input type="text" placeholder="Животное"></td><td><input type="text" placeholder="Органы"></td><td><input type="text" placeholder="Среда"></td><td><input type="text" placeholder="Число"></td></tr>
+                                <tr><td><input type="text" placeholder="Животное"></td><td><input type="text" placeholder="Органы"></td><td><input type="text" placeholder="Среда"></td><td><input type="text" placeholder="Число"></td></tr>
+                                <tr><td><input type="text" placeholder="Животное"></td><td><input type="text" placeholder="Органы"></td><td><input type="text" placeholder="Среда"></td><td><input type="text" placeholder="Число"></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Вопросы из Скрина 2 -->
+                <div class="task-card questions-box">
+                    <div class="question-header">
+                        <span class="icon-q">?</span>
+                        <h3>Ответь на вопросы</h3>
+                    </div>
+                    <div class="question-item">
+                        <label for="q1">Какие виды движения животных тебе известны?</label>
+                        <textarea id="q1" rows="2" placeholder="Твой ответ..."></textarea>
+                    </div>
+                    <div class="question-item">
+                        <label for="q2">Что обеспечивает опору живых организмов?</label>
+                        <textarea id="q2" rows="2" placeholder="Твой ответ..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Шаг 3: Вывод -->
+                <div class="task-card">
+                    <div class="task-num">3</div>
+                    <div class="task-text">
+                        <p>Сделай вывод о проделанной работе.</p>
+                    </div>
+                    <textarea id="final-conclusion" rows="3" placeholder="Напиши вывод здесь..."></textarea>
+                </div>
+
+                <!-- Кнопка проверки -->
+                <div class="action-bar">
+                    <button id="submit-btn" class="btn">Проверить работу</button>
+                    <div id="status-message" class="status-msg hidden"></div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
