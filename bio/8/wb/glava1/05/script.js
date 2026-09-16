@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(err => {
             console.error('Ошибка отправки:', err);
-            showStatus::(`❌ Результат зафиксирован: ${correctCount}/${totalQuestions} (Оценка: ${grade}). Ошибка сети при передаче. Покажи экран учителю.`, 'warning');
+            showStatus(`❌ Результат зафиксирован: ${correctCount}/${totalQuestions} (Оценка: ${grade}). Ошибка сети при передаче. Покажи экран учителю.`, 'warning');
         });
     }
 
