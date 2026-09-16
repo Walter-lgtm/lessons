@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     // === НАСТРОЙКА ИНТЕГРАЦИИ С GOOGLE ТАБЛИЦЕЙ ===
-    const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdyXSo2ckUKNmO0SzRZDaZVSkMx95k5CLOB0ujP-m4S9tHr7w/formResponse'; // Вставьте вашу ссылку
-    const ENTRY_NAME = 'entry.1245506676';   // ID поля для ФИО
-  const ENTRY_CLASS = 'entry.1414335318';  // ID поля для Класса  
-  const ENTRY_SCORE = 'entry.355731812';  // ID поля для Баллов (например: 6 из 7)
-const ENTRY_GRADE = 'entry.1031192792';  // ID поля для Оценки (например: 5, 4, 3)
+    const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdyXSo2ckUKNmO0SzRZDaZVSkMx95k5CLOB0ujP-m4S9tHr7w/formResponse'; 
+    const ENTRY_NAME = 'entry.1245506676';   
+    const ENTRY_CLASS = 'entry.1414335318';  
+    const ENTRY_SCORE = 'entry.355731812';  
+    const ENTRY_GRADE = 'entry.1031192792';  
 
-    // Правильные ответы (ключи теста)
+    // Ключи именно для первого теста (7 вопросов со скриншота)
     const CORRECT_ANSWERS = {
         q1: 'насекомых.',
         q2: 'Неспособность к росту',
@@ -21,24 +21,51 @@ const ENTRY_GRADE = 'entry.1031192792';  // ID поля для Оценки (н�
     const statusMessage = document.getElementById('status-message');
     const nameInput = document.getElementById('student-name');
     const classInput = document.getElementById('student-class');
+    const timerClock = document.getElementById('timer-clock');
+    const timerBox = document.getElementById('quiz-timer');
+
+    const cleanStr = (str) => str.trim().replace(/\.$/, '').toLowerCase();
+    
+    // === ЛОГИКА ТАЙМЕРА (5 минут = 300 секунд) ===
+    let timeRemaining = 300; 
+    let timerInterval = null;
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            timeRemaining--;
+            
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            timerClock.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            if (timeRemaining <= 60) {
+                timerBox.classList.add('time-warning');
+            }
+
+            if (timeRemaining <= 0) {
+                clearInterval(timerInterval);
+                processQuiz(true); // Форсированная отправка
+            }
+        }, 1000);
+    }
+
+    startTimer();
 
     submitBtn.addEventListener('click', () => {
-        const name = nameInput.value.trim();
-        const studentClass = classInput.value.trim();
+        processQuiz(false);
+    });
 
-        // 1. Валидация ввода данных ученика
-        if (!name || !studentClass) {
+    function processQuiz(isTimeOver = false) {
+        const name = nameInput.value.trim() || (isTimeOver ? "Время истекло (Аноним)" : "");
+        const studentClass = classInput.value.trim() || (isTimeOver ? "—" : "");
+
+        if (!isTimeOver && (!name || !studentClass)) {
             showStatus('⚠️ Пожалуйста, заполни свои Фамилию, Имя и Класс перед отправкой!', 'warning');
             if (!name) nameInput.style.borderColor = '#ef4444';
             if (!studentClass) classInput.style.borderColor = '#ef4444';
             return;
         }
 
-        // Сброс рамок ввода
-        nameInput.style.borderColor = '';
-        classInput.style.borderColor = '';
-
-        // 2. Проверка заполненности всех вопросов
         let answeredCount = 0;
         const totalQuestions = Object.keys(CORRECT_ANSWERS).length;
 
@@ -48,12 +75,16 @@ const ENTRY_GRADE = 'entry.1031192792';  // ID поля для Оценки (н�
             }
         }
 
-        if (answeredCount < totalQuestions) {
-            showStatus(`⚠️ Выполнены не все задания! Найдено ответов: ${answeredCount} из ${totalQuestions}.`, 'warning');
+        if (!isTimeOver && answeredCount < totalQuestions) {
+            showStatus(`⚠️ Выполнены не все задания! Отмечено ответов: ${answeredCount} из ${totalQuestions}.`, 'warning');
             return;
         }
 
-        // 3. Подсчет правильных ответов и вывод фидбека по каждому вопросу
+        clearInterval(timerInterval);
+        timerBox.style.display = 'none';
+
+        document.querySelectorAll('input[type="radio"]').forEach(radio => radio.disabled = true);
+
         let correctCount = 0;
 
         for (let i = 1; i <= totalQuestions; i++) {
@@ -64,42 +95,39 @@ const ENTRY_GRADE = 'entry.1031192792';  // ID поля для Оценки (н�
             feedbackDiv.classList.remove('hidden', 'success-text', 'error-text');
             card.classList.remove('correct-answer', 'wrong-answer');
 
-            // Безопасное очищение строк от точек, пробелов на концах и приведение к нижнему регистру
-            const cleanUserAnswer = selectedRadio.value.trim().replace(/\.$/, '').toLowerCase();
-            const cleanCorrectAnswer = CORRECT_ANSWERS[`q${i}`].trim().replace(/\.$/, '').toLowerCase();
-
-            if (cleanUserAnswer === cleanCorrectAnswer) {
-                correctCount++;
-                card.classList.add('correct-answer');
-                feedbackDiv.textContent = '✅ Верно!';
-                feedbackDiv.classList.add('success-text');
+            if (selectedRadio) {
+                if (cleanStr(selectedRadio.value) === cleanStr(CORRECT_ANSWERS[`q${i}`])) {
+                    correctCount++;
+                    card.classList.add('correct-answer');
+                    feedbackDiv.textContent = '✅ Верно!';
+                    feedbackDiv.classList.add('success-text');
+                } else {
+                    card.classList.add('wrong-answer');
+                    feedbackDiv.textContent = `❌ Неверно. Правильный ответ: ${CORRECT_ANSWERS[`q${i}`]}`;
+                    feedbackDiv.classList.add('error-text');
+                }
             } else {
                 card.classList.add('wrong-answer');
-                // Выводим текст ответа красиво, как он зашит в ключах
-                feedbackDiv.textContent = `❌ Неверно. Правильный ответ: ${CORRECT_ANSWERS[`q${i}`]}`;
+                feedbackDiv.textContent = `❌ Нет ответа. Правильный ответ: ${CORRECT_ANSWERS[`q${i}`]}`;
                 feedbackDiv.classList.add('error-text');
             }
         }
 
-        // Вычисление школьной оценки (пятибалльная система)
+        // Оценка для 7 вопросов (6-7 = "5", 5 = "4", 4 = "3")
         let grade = 2;
         const percent = (correctCount / totalQuestions) * 100;
-        if (percent >= 90) grade = 5;
+        if (percent >= 85) grade = 5;
         else if (percent >= 70) grade = 4;
         else if (percent >= 50) grade = 3;
 
-        const resultText = `Результат: ${correctCount} из ${totalQuestions} баллов. Оценка: ${grade}`;
+        const formData = new FormData();
+        formData.append(ENTRY_NAME, name);
+        formData.append(ENTRY_CLASS, studentClass);
+        formData.append(ENTRY_SCORE, `${correctCount} из ${totalQuestions}`);
+        formData.append(ENTRY_GRADE, grade.toString());
 
-        /// 4. Скрытая отправка данных в Google-Форму
-const formData = new FormData();
-formData.append(ENTRY_NAME, name);
-formData.append(ENTRY_CLASS, studentClass);
-formData.append(ENTRY_SCORE, `${correctCount} из ${totalQuestions}`); // Отправляем чистые баллы
-formData.append(ENTRY_GRADE, grade.toString()); // Отправляем чистую оценку (цифру)
-
-        // Отключаем кнопку, чтобы избежать повторных отправк
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Отправка данных...';
+        submitBtn.textContent = 'Результаты зафиксированы';
 
         fetch(GOOGLE_FORM_URL, {
             method: 'POST',
@@ -107,16 +135,14 @@ formData.append(ENTRY_GRADE, grade.toString()); // Отправляем чист
             body: formData
         })
         .then(() => {
-            showStatus(`🎉 Тест завершен! Твой результат: ${correctCount}/${totalQuestions} (Оценка: ${grade}). Данные успешно занесены в журнал учителя.`, 'success');
-            submitBtn.textContent = 'Результаты отправлены';
+            const msgPrefix = isTimeOver ? '⏰ Время истекло! ' : '🎉 Тест успешно завершен! ';
+            showStatus(`${msgPrefix} Твой результат: ${correctCount}/${totalQuestions} (Оценка: ${grade}). Данные отправлены учителю.`, 'success');
         })
         .catch(err => {
             console.error('Ошибка отправки:', err);
-            showStatus(`❌ Произошла техническая ошибка при отправке ответов, но твой результат проверен: ${correctCount}/${totalQuestions} (Оценка: ${grade}). Покажи этот экран учителю.`, 'warning');
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Попробовать отправить снова';
+            showStatus::(`❌ Результат зафиксирован: ${correctCount}/${totalQuestions} (Оценка: ${grade}). Ошибка сети при передаче. Покажи экран учителю.`, 'warning');
         });
-    });
+    }
 
     function showStatus(text, type) {
         statusMessage.textContent = text;
