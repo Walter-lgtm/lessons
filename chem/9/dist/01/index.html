@@ -1,1 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Классификация химических реакций</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <div class="container">
+    <h1>Тренировочная работа по химии</h1>
+    <p class="subtitle">Тема: «Классификация химических реакций по различным признакам»</p>
+
+    <!-- Блок ввода данных ученика -->
+    <div class="user-info-card">
+      <h3>Данные ученика</h3>
+      <div class="input-group">
+        <label for="studentName">Фамилия, Имя:</label>
+        <input type="text" id="studentName" required>
+      </div>
+      <div class="input-group">
+        <label for="studentClass">Класс:</label>
+        <input type="text" id="studentClass" required>
+      </div>
+    </div>
+
+    <!-- Скрытая Google Форма для фонового сбора данных -->
+    <!-- Ссылку и name-атрибуты заменим на ваши в следующем шаге в script.js -->
+    <form id="googleForm" target="hiddenFrame" style="display: none;">
+      <input type="text" id="gName" name="entry.111111111">
+      <input type="text" id="gClass" name="entry.222222222">
+      <input type="text" id="gPoints" name="entry.333333333">
+      <input type="text" id="gGrade" name="entry.444444444">
+    </form>
+    <iframe name="hiddenFrame" id="hiddenFrame" style="display: none;"></iframe>
+
+    <!-- Контейнер для динамической генерации заданий из JS -->
+    <div id="quiz-container"></div>
+
+    <!-- Кнопка отправки и проверки -->
+    <div class="action-zone">
+      <button id="submitBtn" class="btn">Проверить и отправить результат</button>
+    </div>
+
+    <!-- Модальное окно или блок результатов (появится после проверки) -->
+    <div id="result-block" class="result-card hidden">
+      <h2>Ваш результат</h2>
+      <div class="score-summary">
+        <p>Итоговый балл: <span id="totalPoints">0</span> из 5</p>
+        <p>Ваша оценка: <span id="finalGrade" class="grade-badge">-</span></p>
+      </div>
+      <div id="detailed-feedback">
+        <!-- Сюда JS выведет ошибки и пояснения -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Подключаем скрипт -->
+  <script src="script.js"></script>
+</body>
+</html>
