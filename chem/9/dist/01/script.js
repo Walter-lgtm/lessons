@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("submitBtn").addEventListener("click", processQuiz);
 });
 
-// Автоматическая генерация заданий на странице
+// Автоматическая генерация заданий на странице (ИСПРАВЛЕННАЯ)
 function renderQuiz() {
   const container = document.getElementById("quiz-container");
   let html = "";
