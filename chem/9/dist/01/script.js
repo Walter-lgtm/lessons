@@ -165,8 +165,7 @@ function renderQuiz() {
           <input type="text" 
                  id="input-${task.id}" 
                  class="answer-input" 
-                 maxlength="4" 
-                 placeholder="1234" 
+                 maxlength="4"  
                  data-task-id="${task.id}">
         </div>
       </div>
