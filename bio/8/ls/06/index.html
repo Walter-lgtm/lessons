@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест: Питание и пищеварение животных</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Блок таймера обратного отсчета -->
+        <div id="quiz-timer" class="timer-box">
+            ⏱️ Осталось времени: <span id="timer-clock">05:00</span>
+        </div>
+
+        <!-- Шапка теста -->
+        <header class="work-header">
+            <h1>Тест по теме «Питание и пищеварение животных» (7 класс)</h1>
+            <div class="instruction-box">
+                <span class="icon-info">📋</span>
+                <p>Внимательно прочитай вопросы, выбери один верный вариант ответа в каждом задании и нажми кнопку «Отправить результаты».</p>
+            </div>
+        </header>
+
+        <!-- Идентификация ученика -->
+        <section class="student-info-box">
+            <div class="input-group">
+                <label for="student-name">Фамилия и Имя:</label>
+                <input type="text" id="student-name" placeholder="Иванов Иван" required>
+            </div>
+            <div class="input-group">
+                <label for="student-class">Класс:</label>
+                <input type="text" id="student-class" placeholder="7-А" required>
+            </div>
+        </section>
+
+        <!-- Тестовые задания -->
+        <main class="quiz-container">
+            
+            <!-- Вопрос 1 -->
+            <div class="quiz-card" data-q="1">
+                <p class="section-tag">Выбери верный вариант ответа.</p>
+                <p class="question-text">Инфузории-туфельки выводят непереваренные остатки наружу через особое отверстие:</p>
+                <div class="options">
+                    <label class="option-item"><input type="radio" name="q1" value="сократительную вакуоль"> сократительную вакуоль</label>
+                    <label class="option-item"><input type="radio" name="q1" value="порошицу"> порошицу</label>
+                    <label class="option-item"><input type="radio" name="q1" value="клеточный рот"> клеточный рот</label>
+                    <label class="option-item"><input type="radio" name="q1" value="всей поверхностью тела"> всей поверхностью тела</label>
+                </div>
+                <div class="feedback hidden"></div>
+            </div>
+
+            <!-- Вопрос 2 -->
+            <div class="quiz-card" data-q="2">
+                <p class="section-tag">Выбери верный вариант ответа.</p>
+                <p class="question-text">Внутренняя полость гидры называется:</p>
+                <div class="options">
+                    <label class="option-item"><input type="radio" name="q2" value="первичная"> первичная</label>
+                    <label class="option-item"><input type="radio" name="q2" value="вторичная"> вторичная</label>
+                    <label class="option-item"><input type="radio" name="q2" value="кишечная"> кишечная</label>
+                    <label class="option-item"><input type="radio" name="q2" value="смешанная"> смешанная</label>
+                </div>
+                <div class="feedback hidden"></div>
+            </div>
+
+            <!-- Вопрос 3 -->
+            <div class="quiz-card" data-q="3">
+                <p class="section-tag">Выбери верный вариант ответа.</p>
+                <p class="question-text">Органом измельчения пищи у брюхоногих (и головоногих) моллюсков служит терка, или:</p>
+                <div class="options">
+                    <label class="option-item"><input type="radio" name="q3" value="радула"> радула</label>
+                    <label class="option-item"><input type="radio" name="q3" value="хитиновые зубцы"> хитиновые зубцы</label>
+                    <label class="option-item"><input type="radio" name="q3" value="челюсть"> челюсть</label>
+                    <label class="option-item"><input type="radio" name="q3" value="мальпигиевы сосуды"> мальпигиевы сосуды</label>
+                </div>
+                <div class="feedback hidden"></div>
+            </div>
+
+            <!-- Вопрос 4 -->
+            <div class="quiz-card" data-q="4">
+                <p class="section-tag">Выбери верный вариант ответа.</p>
+                <p class="question-text">Отдел желудка, в котором происходит выделение желудочного сока и размягчается пища, называется:</p>
+                <div class="options">
+                    <label class="option-item"><input type="radio" name="q4" value="мускульный"> мускульный</label>
+                    <label class="option-item"><input type="radio" name="q4" value="сетка"> сетка</label>
+                    <label class="option-item"><input type="radio" name="q4" value="железистый"> железистый</label>
+                    <label class="option-item"><input type="radio" name="q4" value="сычуг"> сычуг</label>
+                </div>
+                <div class="feedback hidden"></div>
+            </div>
+
+            <!-- Вопрос 5 -->
+            <div class="quiz-card" data-q="5">
+                <p class="section-tag">Выбери верный вариант ответа.</p>
+                <p class="question-text">Желудок жвачных животных имеет общую схему строения и обычно имеет ___ отдела:</p>
+                <div class="options">
+                    <label class="option-item"><input type="radio" name="q5" value="два"> два</label>
+                    <label class="option-item"><input type="radio" name="q5" value="три"> три</label>
+                    <label class="option-item"><input type="radio" name="q5" value="четыре"> четыре</label>
+                    <label class="option-item"><input type="radio" name="q5" value="один"> один</label>
+                </div>
+                <div class="feedback hidden"></div>
+            </div>
+
+            <!-- Панель отправки -->
+            <div class="action-bar">
+                <button id="submit-btn" class="btn">Отправить результаты</button>
+                <div id="status-message" class="status-msg hidden"></div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
