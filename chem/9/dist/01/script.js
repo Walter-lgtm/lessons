@@ -116,3 +116,189 @@ const quizData = [
     }
   }
 ];
+// НАСТРОЙКА ИНТЕГРАЦИИ С GOOGLE ФОРМОЙ
+// Замените эти значения на данные вашей формы, когда они у вас будут:
+const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSc8fZPeJ8w9IzgGRwxKwONt11xPm7BEE0PCO-yObopIIAtxdA/formResponse"; 
+const ENTRY_NAME   = "entry.1692260808"; // ID поля "ФИО"
+const ENTRY_CLASS  = "entry.1750905112"; // ID поля "Класс"
+const ENTRY_POINTS = "entry.565560636"; // ID поля "Баллы"
+const ENTRY_GRADE  = "entry.128728619"; // ID поля "Оценка"
+
+// Инициализация при загрузке страницы
+document.addEventListener("DOMContentLoaded", () => {
+  renderQuiz();
+  setupInputRestrictions();
+  
+  document.getElementById("submitBtn").addEventListener("click", processQuiz);
+});
+
+// Автоматическая генерация заданий на странице
+function renderQuiz() {
+  const container = document.getElementById("quiz-container");
+  let html = "";
+
+  quizData.forEach((task, index) => {
+    html += `
+      <div class="task-card" id="task-${task.id}">
+        <div class="task-title">${task.title}</div>
+        <div class="quiz-grid">
+          <div class="column-formulas">
+            ${task.formulas.map(f => `<div>\${f}</div>`).join('')}
+          </div>
+          <div class="column-types">
+            ${task.types.map(t => `<div>\${t}</div>`).join('')}
+          </div>
+        </div>
+        <div class="answer-zone">
+          <label for="input-${task.id}">Ваш ответ (последовательность 4 цифр):</label>
+          <input type="text" 
+                 id="input-${task.id}" 
+                 class="answer-input" 
+                 maxlength="4" 
+                 placeholder="1234" 
+                 data-task-id="${task.id}">
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
+// Ограничение ввода: только цифры, максимум 4 символа
+function setupInputRestrictions() {
+  document.getElementById("quiz-container").addEventListener("input", (e) => {
+    if (e.target.classList.contains("answer-input")) {
+      // Удаляем всё, кроме цифр
+      e.target.value = e.target.value.replace(/\D/g, "");
+    }
+  });
+}
+
+// Главная функция проверки и отправки результатов
+function processQuiz() {
+  const nameInput = document.getElementById("studentName");
+  const classInput = document.getElementById("studentClass");
+
+  // Валидация данных ученика
+  const name = nameInput.value.trim();
+  const studentClass = classInput.value.trim();
+
+  if (!name || !studentClass) {
+    alert("Пожалуйста, заполните ваши ФИО и Класс перед отправкой!");
+    nameInput.focus();
+    return;
+  }
+
+  let totalPoints = 0;
+  let feedbackHtml = "";
+
+  // Проверка каждого задания
+  quizData.forEach((task) => {
+    const userInput = document.getElementById(`input-${task.id}`).value.trim();
+    const isCorrect = (userInput === task.correctAnswer);
+
+    if (isCorrect) {
+      totalPoints++;
+      feedbackHtml += `
+        <div class="feedback-item correct">
+          <div class="feedback-title">✓ ${task.title} — Верно!</div>
+        </div>
+      `;
+    } else {
+      // Формируем детальный разбор ошибок
+      let errorsDetails = "";
+      const letters = ["А", "Б", "В", "Г"];
+      
+      // Идем по каждой букве уравнения и проверяем, совпадает ли цифра ответа
+      for (let i = 0; i < 4; i++) {
+        const userDigit = userInput[i] || "?";
+        const correctDigit = task.correctAnswer[i];
+        
+        if (userDigit !== correctDigit) {
+          errorsDetails += `
+            <div class="error-explanation">
+              <strong>Ошибка в уравнении ${letters[i]}:</strong> Ваша цифра: <strong>${userDigit}</strong>. 
+              <br>${task.explanations[letters[i]]}
+            </div>
+          `;
+        }
+      }
+
+      feedbackHtml += `
+        <div class="feedback-item wrong">
+          <div class="feedback-title">✗ ${task.title}</div>
+          <div class="feedback-details">
+            Ваш ответ: <span style="color:var(--error-color)">${userInput || "пусто"}</span>, 
+            правильный ответ: <span style="color:var(--success-color)">${task.correctAnswer}</span>.
+          </div>
+          ${errorsDetails}
+        </div>
+      `;
+    }
+  });
+
+  // Расчет школьной оценки
+  let grade = 2;
+  if (totalPoints === 5) grade = 5;
+  else if (totalPoints === 4) grade = 4;
+  else if (totalPoints === 3) grade = 3;
+
+  // Отображение результатов на экране ученика
+  document.getElementById("totalPoints").innerText = totalPoints;
+  
+  const gradeBadge = document.getElementById("finalGrade");
+  gradeBadge.innerText = grade;
+  
+  // Меняем цвет плашки оценки
+  if (grade >= 4) {
+    gradeBadge.style.backgroundColor = "var(--success-color)";
+  } else if (grade === 3) {
+    gradeBadge.style.backgroundColor = "#ecc94b"; // желтый
+  } else {
+    gradeBadge.style.backgroundColor = "var(--error-color)";
+  }
+
+  document.getElementById("detailed-feedback").innerHTML = feedbackHtml;
+  document.getElementById("result-block").classList.remove("hidden");
+
+  // Деактивируем кнопку, чтобы избежать повторной отправки
+  const submitBtn = document.getElementById("submitBtn");
+  submitBtn.disabled = true;
+  submitBtn.innerText = "Результаты отправлены учителю";
+  submitBtn.style.backgroundColor = "#a0aec0";
+
+  // Отправка данных в Google Таблицу через Google Форму
+  sendToGoogleForm(name, studentClass, totalPoints, grade);
+
+  // Скроллим страницу к результатам
+  document.getElementById("result-block").scrollIntoView({ behavior: 'smooth' });
+}
+
+// Фоновая отправка данных в форму
+function sendToGoogleForm(name, studentClass, points, grade) {
+  // На всякий случай проверяем, изменены ли дефолтные значения url формы
+  if (GOOGLE_FORM_URL.includes("e/1FAIpQLSfXXXXXXXXXXXXXXX")) {
+    console.warn("Данные не отправлены в Google: настройте параметры связи с вашей формой.");
+    return;
+  }
+
+  // Подставляем данные в невидимые инпуты нашей технической формы
+  document.getElementById("gName").name = ENTRY_NAME;
+  document.getElementById("gName").value = name;
+
+  document.getElementById("gClass").name = ENTRY_CLASS;
+  document.getElementById("gClass").value = studentClass;
+
+  document.getElementById("gPoints").name = ENTRY_POINTS;
+  document.getElementById("gPoints").value = points;
+
+  document.getElementById("gGrade").name = ENTRY_GRADE;
+  document.getElementById("gGrade").value = grade;
+
+  // Направляем экшн формы на адрес Google и делаем сабмит
+  const form = document.getElementById("googleForm");
+  form.action = GOOGLE_FORM_URL;
+  form.method = "POST";
+  form.submit();
+}
