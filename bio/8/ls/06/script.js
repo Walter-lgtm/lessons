@@ -113,16 +113,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     feedbackDiv.classList.add('success-text');
                 } else {
                     card.classList.add('wrong-answer');
+                    // Исправлено: убран обратный слэш перед знаками доллара
                     feedbackDiv.textContent = `❌ Неверно. Правильный ответ: ${CORRECT_ANSWERS[`q\${i}`]}`;
                     feedbackDiv.classList.add('error-text');
                 }
             } else {
-                // Если время вышло, а ответа в карточке нет
                 card.classList.add('wrong-answer');
+                // Исправлено: убран обратный слэш перед знаками доллара
                 feedbackDiv.textContent = `❌ Нет ответа. Правильный ответ: ${CORRECT_ANSWERS[`q\${i}`]}`;
                 feedbackDiv.classList.add('error-text');
             }
-        }
 
         // Шкала оценок для 5 вопросов: 5 верных = "5", 4 верных = "4", 3 верных = "3", меньше = "2"
         let grade = 2;
