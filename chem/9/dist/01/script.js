@@ -132,22 +132,33 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("submitBtn").addEventListener("click", processQuiz);
 });
 
-// Автоматическая генерация заданий на странице (ИСПРАВЛЕННАЯ)
+// Полностью исправленная и надежная генерация заданий
 function renderQuiz() {
   const container = document.getElementById("quiz-container");
   let html = "";
 
-  quizData.forEach((task, index) => {
+  for (let i = 0; i < quizData.length; i++) {
+    const task = quizData[i];
+    
+    // Собираем строки с формулами
+    let formulasHtml = "";
+    for (let j = 0; j < task.formulas.length; j++) {
+      formulasHtml += "<div>" + task.formulas[j] + "</div>";
+    }
+
+    // Собираем строки с типами реакций
+    let typesHtml = "";
+    for (let k = 0; k < task.types.length; k++) {
+      typesHtml += "<div>" + task.types[k] + "</div>";
+    }
+
+    // Собираем весь каркас задания
     html += `
       <div class="task-card" id="task-${task.id}">
         <div class="task-title">${task.title}</div>
         <div class="quiz-grid">
-          <div class="column-formulas">
-            ${task.formulas.map(f => `<div>\${f}</div>`).join('')}
-          </div>
-          <div class="column-types">
-            ${task.types.map(t => `<div>\${t}</div>`).join('')}
-          </div>
+          <div class="column-formulas">${formulasHtml}</div>
+          <div class="column-types">${typesHtml}</div>
         </div>
         <div class="answer-zone">
           <label for="input-${task.id}">Ваш ответ (последовательность 4 цифр):</label>
@@ -160,7 +171,7 @@ function renderQuiz() {
         </div>
       </div>
     `;
-  });
+  }
 
   container.innerHTML = html;
 }
