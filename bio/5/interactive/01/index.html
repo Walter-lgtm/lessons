@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Источники биологических знаний — Интерактивный тест (5 класс)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="quiz-container">
+        <!-- Экран старта -->
+        <div id="start-screen" class="screen active">
+            <h1>🔍 Источники биологических знаний</h1>
+            <p class="subtitle">Интерактивный тест для 5 класса</p>
+
+            <div class="form-group">
+                <label for="student-name">ФИО ученика:</label>
+                <input type="text" id="student-name" placeholder="Иванов Иван Иванович" maxlength="80">
+            </div>
+            <div class="form-group">
+                <label for="student-class">Класс:</label>
+                <input type="text" id="student-class" placeholder="5А" maxlength="10">
+            </div>
+
+            <button id="start-btn" class="btn-primary">Начать тест 🚀</button>
+            <p class="hint">Всего 10 заданий. За каждый правильный ответ — 1 балл.</p>
+        </div>
+
+        <!-- Экран теста -->
+        <div id="test-screen" class="screen">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="question-counter">
+                Вопрос <span id="q-current">1</span> из <span id="q-total">10</span>
+            </div>
+            <div id="question-area"></div>
+            <div class="nav-buttons">
+                <button id="prev-btn" class="btn-secondary" style="display:none;">← Назад</button>
+                <button id="next-btn" class="btn-primary">Далее →</button>
+                <button id="finish-btn" class="btn-primary" style="display:none;">Завершить тест ✓</button>
+            </div>
+        </div>
+
+        <!-- Экран результатов -->
+        <div id="result-screen" class="screen">
+            <h2>Результат теста</h2>
+            <div class="result-card">
+                <div class="result-row"><span class="result-label">Ученик:</span> <span id="result-name">—</span></div>
+                <div class="result-row"><span class="result-label">Класс:</span> <span id="result-class">—</span></div>
+                <div class="result-row"><span class="result-label">Баллы:</span> <span id="result-score">0</span> / 10</div>
+                <div class="result-row"><span class="result-label">Оценка:</span> <span id="result-grade">—</span></div>
+            </div>
+            <div id="result-message"></div>
+            <div id="answers-review"></div>
+            <div id="submit-status" class="submit-status"></div>
+            <button id="restart-btn" class="btn-secondary">Пройти заново 🔄</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

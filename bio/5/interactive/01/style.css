@@ -1,0 +1,297 @@
+/* === Базовый сброс === */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body, html {
+    width: 100%;
+    min-height: 100dvh;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    color: #1b5e20;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#quiz-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px 16px;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* === Экраны === */
+.screen {
+    display: none;
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 24px rgba(46, 125, 50, 0.15);
+    animation: fadeIn 0.4s ease;
+}
+.screen.active { display: block; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* === Стартовый экран === */
+h1 {
+    text-align: center;
+    font-size: 1.6rem;
+    color: #2e7d32;
+    margin-bottom: 8px;
+}
+.subtitle {
+    text-align: center;
+    color: #66bb6a;
+    margin-bottom: 24px;
+    font-size: 1.05rem;
+}
+.form-group {
+    margin-bottom: 16px;
+}
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #2e7d32;
+}
+.form-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #c8e6c9;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.form-group input:focus {
+    border-color: #66bb6a;
+}
+.hint {
+    text-align: center;
+    color: #888;
+    font-size: 0.85rem;
+    margin-top: 16px;
+}
+
+/* === Кнопки === */
+.btn-primary, .btn-secondary {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+.btn-primary {
+    background: #43a047;
+    color: #fff;
+    margin-top: 12px;
+}
+.btn-primary:active {
+    transform: scale(0.97);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.2);
+}
+.btn-secondary {
+    background: #e0e0e0;
+    color: #555;
+    margin-top: 16px;
+}
+.btn-secondary:active { transform: scale(0.97); }
+
+/* === Прогресс-бар === */
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e8f5e9;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #66bb6a, #43a047);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+    width: 10%;
+}
+
+/* === Вопросы === */
+.question-counter {
+    text-align: center;
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+}
+.question-text {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #2e7d32;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.answer-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.answer-option {
+    padding: 14px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+    background: #fafafa;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.answer-option:hover { border-color: #a5d6a7; background: #f1f8e9; }
+.answer-option.selected {
+    border-color: #43a047;
+    background: #e8f5e9;
+}
+.answer-option .option-letter {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+}
+.answer-option.selected .option-letter {
+    background: #43a047;
+    color: #fff;
+}
+.answer-option.correct {
+    border-color: #2e7d32;
+    background: #c8e6c9;
+}
+.answer-option.incorrect {
+    border-color: #c62828;
+    background: #ffcdd2;
+}
+.answer-option.correct .option-letter { background: #2e7d32; color: #fff; }
+.answer-option.incorrect .option-letter { background: #c62828; color: #fff; }
+
+/* === Соответствие === */
+.matching-area {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.match-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.match-left {
+    font-weight: 600;
+    min-width: 140px;
+    color: #2e7d32;
+}
+.match-select {
+    flex: 1;
+    min-width: 160px;
+    padding: 10px 12px;
+    border: 2px solid #c8e6c9;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    background: #fff;
+}
+.match-select:focus { border-color: #66bb6a; }
+
+/* === Ввод текста === */
+.text-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #c8e6c9;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.text-input:focus { border-color: #66bb6a; }
+
+/* === Навигация === */
+.nav-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+.nav-buttons button { flex: 1; }
+
+/* === Результаты === */
+.result-card {
+    background: #f1f8e9;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+}
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #d7e8d7;
+    font-size: 1.05rem;
+}
+.result-row:last-child { border-bottom: none; }
+.result-label { font-weight: 600; color: #555; }
+#result-grade { font-weight: 700; font-size: 1.3rem; }
+
+#result-message {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.review-item {
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+.review-item.correct {
+    background: #e8f5e9;
+    border-left: 4px solid #43a047;
+}
+.review-item.incorrect {
+    background: #ffebee;
+    border-left: 4px solid #c62828;
+}
+.review-item .review-q { font-weight: 600; margin-bottom: 4px; }
+.review-item .review-a { color: #666; }
+
+.submit-status {
+    text-align: center;
+    margin: 12px 0;
+    font-size: 0.95rem;
+    color: #2e7d32;
+}
+.submit-status.error { color: #c62828; }
+
+/* === Адаптив === */
+@media (max-width: 480px) {
+    h1 { font-size: 1.3rem; }
+    .question-text { font-size: 1rem; }
+    .answer-option { padding: 12px; font-size: 0.95rem; }
+    .match-left { min-width: 100px; font-size: 0.9rem; }
+    .screen { padding: 20px 16px; }
+}
