@@ -31,6 +31,7 @@ const targetKingdom = document.getElementById("target-kingdom");
 startBtn.addEventListener("click", startGame);
 
 function startGame() {
+    initAudio();
     startScreen.style.display = "none";
     score = 0;
     level = 1;
@@ -123,6 +124,7 @@ function handleEmojiClick(emojiEl) {
 
     if (isCorrect) {
         score += 10;
+        playSound("correct");
         updateScoreDisplay();
         
         // Визуальный эффект успеха
@@ -144,6 +146,7 @@ function handleEmojiClick(emojiEl) {
     } else {
         // Ошибка: штраф по очкам (не уходим в минус)
         score = Math.max(0, score - 5);
+        playSound("wrong");
         updateScoreDisplay();
         
         // Анимация тряски при ошибке
@@ -221,4 +224,62 @@ function gameOver() {
         // Перезагрузка страницы или сброс для новой игры
         location.reload();
     });
+}
+// Логика звуковых эффектов (Web Audio API)
+let isMuted = false;
+let audioCtx = null;
+
+const muteBtn = document.getElementById("mute-btn");
+
+muteBtn.addEventListener("click", () => {
+    isMuted = !isMuted;
+    muteBtn.textContent = isMuted ? "🔇" : "🔊";
+    muteBtn.classList.toggle("muted", isMuted);
+});
+
+// Функция для инициализации аудио (нужна из-за политики безопасности браузеров)
+function initAudio() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+}
+
+// Универсальный синтезатор коротких звуков
+function playSound(type) {
+    if (isMuted) return;
+    
+    initAudio();
+    if (!audioCtx) return;
+
+    const osc = audioCtx.createOscillator();
+    const gainContainer = audioCtx.createGain();
+    
+    osc.connect(gainContainer);
+    gainContainer.connect(audioCtx.destination);
+
+    const now = audioCtx.currentTime;
+
+    if (type === "correct") {
+        // Ретро-звук успеха (короткий прыжок частоты вверх)
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(400, now);
+        osc.frequency.exponentialRampToValueAtTime(800, now + 0.1);
+        
+        gainContainer.gain.setValueAtTime(0.3, now);
+        gainContainer.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+        
+        osc.start(now);
+        osc.stop(now + 0.15);
+    } else if (type === "wrong") {
+        // Звук ошибки (низкий, нисходящий басовый звук)
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(150, now);
+        osc.frequency.linearRampToValueAtTime(70, now + 0.2);
+        
+        gainContainer.gain.setValueAtTime(0.2, now);
+        gainContainer.gain.linearRampToValueAtTime(0.01, now + 0.2);
+        
+        osc.start(now);
+        osc.stop(now + 0.2);
+    }
 }
