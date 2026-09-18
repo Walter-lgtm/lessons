@@ -76,14 +76,11 @@ body, html {
 }
 
 /* Боковые панели распределяют элементы строго по вертикали внутри себя */
+/* Левая и правая панели теперь служат просто ограничителями */
 .side-panel {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; 
-    align-items: center;
-    width: 20vw; /* Занимают строго по 20% ширины экрана по бокам */
+    width: 20vw;
     height: 100%;
-    padding: 1vh 0;
+    position: relative;
 }
 
 .left-side {
@@ -94,11 +91,15 @@ body, html {
     justify-content: flex-end; /* Кнопки справа всегда в самом низу */
 }
 
-/* Окно "Next" */
+/* Окно "Next" намертво закреплено в верхнем левом углу */
 .next-box-container {
+    position: absolute;
+    top: 2vh;
+    left: 2vw;
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 10;
 }
 
 .side-label {
@@ -121,19 +122,26 @@ body, html {
     font-weight: bold;
 }
 
-/* Контейнеры кнопок */
-.left-controls, .right-controls {
-    display: flex;
-    gap: 2vh;
-}
-
+/* Кнопки слева: подняли на 22% от низа экрана, чтобы не мешал браузер */
 .left-controls {
-    flex-direction: column; /* Пауза над стрелкой влево */
-    align-items: center;
+    position: absolute;
+    bottom: 22vh; 
+    left: 3vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+    z-index: 10;
 }
 
+/* Кнопки справа: симметрично левой стороне, стоят в ряд */
 .right-controls {
-    flex-direction: row; /* Стрелки вниз и вправо стоят рядышком */
+    position: absolute;
+    bottom: 22vh;
+    right: 3vw;
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+    z-index: 10;
 }
 
 /* АДАПТИВНЫЕ КНОПКИ УПРАВЛЕНИЯ */
