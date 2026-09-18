@@ -1,4 +1,6 @@
-/* Базовый сброс и защита от багов мобильного тапа */
+/* ==========================================================================
+   1. БАЗОВЫЙ СБРОС И ЗАЩИТА ОТ БАГОВ МОБИЛЬНОГО ТАПА
+   ========================================================================== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -25,15 +27,19 @@ body, html {
     height: 100%;
     background: #f8f9fa;
     padding: 10px;
+    position: relative; /* База для абсолютного позиционирования элементов */
 }
 
-/* Верхняя панель: Формула и Статистика */
+/* ==========================================================================
+   2. ВЕРХНЯЯ ПАНЕЛЬ (ТАБЛО С ФОРМУЛОЙ)
+   ========================================================================== */
 .top-panel {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     margin-bottom: 5px;
+    z-index: 5;
 }
 
 .formula-display-container {
@@ -53,7 +59,6 @@ body, html {
     letter-spacing: 1px;
 }
 
-/* Индексы в формуле (нижние) */
 #formula-board sub {
     font-size: 1rem;
     bottom: -0.2em;
@@ -69,47 +74,63 @@ body, html {
     font-weight: bold;
 }
 
-/* --- СКОРРЕКТИРОВАННАЯ ИГРОВАЯ ЗОНА (Поднимаем дно стакана) --- */
+/* ==========================================================================
+   3. ОСНОВНАЯ ИГРОВАЯ ЗОНА И СТАКАН ТЕРМИНАЛА
+   ========================================================================== */
 .main-game-area {
     display: flex;
     flex: 1;
     width: 100%;
-    /* Слегка уменьшили высоту зоны, чтобы приподнять всё содержимое над нижней плашкой браузера */
     height: calc(100% - 105px); 
 }
 
+.glass-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#chemistry-glass {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 500px; 
+    max-height: 280px; /* Удерживает дно стакана в зоне видимости */
+    background: #fff;
+    border: 2px solid #333;
+    box-shadow: 4px 4px 0px #000;
+    overflow: hidden;
+    
+    display: grid;
+    grid-template-columns: repeat(14, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+}
+
+.grid-cell {
+    border: 1px dashed #e2e8f0;
+}
+
+/* ==========================================================================
+   4. НАДЁЖНОЕ УПРАВЛЕНИЕ: ЖЕСТКАЯ ФИКСАЦИЯ И ПОДЪЕМ ЭЛЕМЕНТОВ ВВЕРХ
+   ========================================================================== */
+
+/* Боковые панели теперь просто удерживают ширину */
 .side-panel {
-    display: flex;
-    flex-direction: column;
-    padding: 5px;
     min-width: 110px;
-    padding-bottom: 20px; 
+    height: 100%;
 }
 
-.left-side {
-    justify-content: flex-start; /* Изменено: прижимает ВСЕ элементы левой панели к верхнему краю */
-    gap: 20px; /* Задает комфортное расстояние между окном Next и кнопками под ним */
-}
-
-.right-side {
-    align-items: flex-end;
-    justify-content: flex-end;
-}
-
-/* Левый блок управления (Пауза и Стрелка влево) */
-.left-controls {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 10px; /* Дополнительно регулирует отступ от окна Next, удерживая всю конструкцию наверху */
-}
-
-/* --- УВЕЛИЧЕННОЕ ОКОШКО NEXT --- */
+/* --- ЛЕВАЯ СТОРОНА: НАМЕРТВО ПРИВЯЗАНА К ВЕРХУ ПО ВАШЕЙ СТРЕЛКЕ --- */
 .next-box-container {
+    position: absolute;
+    top: 75px; /* Сдвинули чуть ниже табло формулы, но строго в верхней половине */
+    left: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 5px; 
+    z-index: 10;
 }
 
 .side-label {
@@ -120,33 +141,44 @@ body, html {
 }
 
 .ion-preview-slot {
-    width: 80px;  /* УВЕЛИЧЕНО: Было 70px */
-    height: 80px; /* УВЕЛИЧЕНО: Было 70px */
+    width: 80px;  
+    height: 80px; 
     border: 2px solid #333;
     background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 2px 2px 0px #000;
-    font-size: 1.3rem; /* Сделали крупнее сам ион внутри подсказки */
+    font-size: 1.3rem;
 }
 
-/* Контейнеры кнопок */
-.left-controls, .right-controls {
+/* Левые кнопки (Пауза и Назад) привязаны строго ПОД окном Next на безопасной высоте */
+.left-controls {
+    position: absolute;
+    top: 195px; /* Идеально встают под окном Next, высоко над полосой браузера! */
+    left: 25px;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    z-index: 10;
 }
 
+/* --- ПРАВАЯ СТОРОНА: ОСТАЕТСЯ В ВАШЕМ СТАБИЛЬНОМ РАБОЧЕМ ВАРИАНТЕ --- */
 .right-controls {
-    flex-direction: row; /* Стрелки вниз и вправо стоят в ряд */
+    position: absolute;
+    bottom: 45px; 
+    right: 20px;
+    display: flex;
+    flex-direction: row; 
+    gap: 15px;
+    z-index: 10;
 }
 
-/* --- УВЕЛИЧЕННЫЕ МОБИЛЬНЫЕ КНОПКИ --- */
+/* Размеры кнопок и стрелок */
 .control-btn {
-    width: 70px;      /* УВЕЛИЧЕНО: Было 60px — теперь промахнуться невозможно! */
-    height: 70px;     /* УВЕЛИЧЕНО: Было 60px */
-    font-size: 1.8rem; /* УВЕЛИЧЕНО: Стрелочки стали крупнее и заметнее */
+    width: 70px;      
+    height: 70px;     
+    font-size: 1.8rem; 
     background: #fff;
     border: 2px solid #333;
     border-radius: 10px;
@@ -163,38 +195,9 @@ body, html {
     box-shadow: 1px 1px 0px #000;
 }
 
-/* Центральный игровой стакан */
-.glass-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-/* --- ОГРАНИЧЕНИЕ ВЫСОТЫ СТАКАНА --- */
-#chemistry-glass {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    max-width: 500px; /* Немного уменьшили максимальную ширину, чтобы пропорционально уменьшилась высота */
-    max-height: 280px; /* ЖЕСТКОЕ ОГРАНИЧЕНИЕ: Стакан больше не уползет под экран браузера */
-    background: #fff;
-    border: 2px solid #333;
-    box-shadow: 4px 4px 0px #000;
-    overflow: hidden;
-    
-    display: grid;
-    grid-template-columns: repeat(14, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-}
-
-/* Ячейки сетки для структуры */
-.grid-cell {
-    border: 1px dashed #e2e8f0;
-}
-
-/* Игровые плашки ионов */
+/* ==========================================================================
+   5. ПЛАШКИ И ХИМИЧЕСКИЕ ЭФФЕКТЫ
+   ========================================================================== */
 .ion-block {
     position: absolute;
     width: calc(100% / 14);
@@ -217,7 +220,6 @@ body, html {
     object-fit: cover;
 }
 
-/* Эффекты химических реакций */
 .effect-precipitate { animation: precipitateFall 0.5s forwards; }
 .effect-gas { animation: gasFading 0.4s linear infinite; }
 
@@ -233,12 +235,14 @@ body, html {
     100% { opacity: 0; transform: translateY(-20px); }
 }
 
-/* Экраны блокировок и стартов */
+/* ==========================================================================
+   6. ИНТЕРФЕЙСНЫЕ ОКНА И ЗАГЛУШКИ
+   ========================================================================== */
 .overlay-screen {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(255, 255, 255, 0.95);
-    z-index: 10; display: flex; flex-direction: column;
+    z-index: 20; display: flex; flex-direction: column;
     justify-content: center; align-items: center; padding: 20px; text-align: center;
 }
 
@@ -250,7 +254,6 @@ body, html {
 }
 .overlay-screen button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #000; }
 
-/* Предупреждение о перевороте экрана */
 .screen-warning {
     display: none;
     position: fixed;
