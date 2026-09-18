@@ -10,9 +10,9 @@
 
 body, html {
     width: 100%;
-    height: 100%;
+    height: 100dvh; /* ИСПРАВЛЕНО: 100% → 100dvh — учитывает адресную строку */
     overflow: hidden;
-    font-family: 'Courier New', Courier, monospace; /* Научный/лабораторный стиль шрифта */
+    font-family: 'Courier New', Courier, monospace;
     background-color: #121214;
     color: #333;
 }
@@ -22,9 +22,14 @@ body, html {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
+    height: 100dvh; /* ИСПРАВЛЕНО: 100% → 100dvh */
     background: #f8f9fa;
     padding: 10px;
+    /* ИСПРАВЛЕНО: безопасные отступы для вырезов и браузерных панелей */
+    padding-top: max(10px, env(safe-area-inset-top));
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+    padding-left: max(10px, env(safe-area-inset-left));
+    padding-right: max(10px, env(safe-area-inset-right));
 }
 
 /* Верхняя панель: Формула и Статистика */
@@ -34,13 +39,14 @@ body, html {
     align-items: center;
     width: 100%;
     margin-bottom: 5px;
+    flex-shrink: 0; /* ИСПРАВЛЕНО: не сжимать панель */
 }
 
 .formula-display-container {
     border: 2px solid #333;
     background: #fff;
     width: 250px;
-    height: 60px;
+    min-height: 50px; /* ИСПРАВЛЕНО: height → min-height */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,6 +57,7 @@ body, html {
     font-size: 1.8rem;
     font-weight: bold;
     letter-spacing: 1px;
+    text-align: center;
 }
 
 /* Индексы в формуле (нижние) */
@@ -74,7 +81,9 @@ body, html {
     display: flex;
     flex: 1;
     width: 100%;
-    height: calc(100% - 90px);
+    /* ИСПРАВЛЕНО: убрали жёсткий calc(100% - 90px) — flex: 1 сам растянет */
+    min-height: 0; /* критично для flex-потомков */
+    overflow: hidden;
 }
 
 /* Боковые панели */
@@ -83,12 +92,14 @@ body, html {
     flex-direction: column;
     justify-content: flex-end;
     padding: 10px;
-    min-width: 100px;
+    /* ИСПРАВЛЕНО: 100px → 70px + flex-shrink: 0 */
+    min-width: 70px;
+    flex-shrink: 0;
 }
 
 .left-side {
     align-items: flex-start;
-    justify-content: space-between; /* Next сверху, кнопки снизу */
+    justify-content: space-between;
 }
 
 .right-side {
@@ -128,7 +139,7 @@ body, html {
 }
 
 .right-controls {
-    flex-direction: row; /* Стрелки вниз и вправо стоят в ряд */
+    flex-direction: row;
 }
 
 /* Мобильные кнопки управления */
@@ -145,6 +156,7 @@ body, html {
     justify-content: center;
     box-shadow: 3px 3px 0px #000;
     transition: transform 0.05s, box-shadow 0.05s;
+    flex-shrink: 0; /* ИСПРАВЛЕНО: не сжимать кнопки */
 }
 
 .control-btn:active {
@@ -159,22 +171,25 @@ body, html {
     justify-content: center;
     align-items: center;
     height: 100%;
+    min-width: 0; /* ИСПРАВЛЕНО: критично для flex-потомков */
+    overflow: hidden;
 }
 
 #chemistry-glass {
     position: relative;
     width: 100%;
     height: 100%;
-    max-width: 560px; /* Соотношение сторон под сетку (например, 14х8) */
+    max-width: 560px;
     background: #fff;
     border: 2px solid #333;
     box-shadow: 4px 4px 0px #000;
     overflow: hidden;
     
-    /* Сетка Тетриса */
     display: grid;
     grid-template-columns: repeat(14, 1fr);
     grid-template-rows: repeat(8, 1fr);
+    /* ИСПРАВЛЕНО: сохраняем пропорции */
+    aspect-ratio: 14 / 8;
 }
 
 /* Ячейки сетки для структуры */
@@ -200,7 +215,6 @@ body, html {
     z-index: 2;
 }
 
-/* Если внутри плашки будет картинка ИИ */
 .ion-block img {
     width: 100%;
     height: 100%;
@@ -222,9 +236,10 @@ body, html {
     100% { transform: scale(0); opacity: 0; }
 }
 
+/* ИСПРАВЛЕНО: убрали filter: min-width(50%) — это синтаксическая ошибка */
 @keyframes gasFading {
     0% { opacity: 1; filter: contrast(200%) grayscale(100%); transform: translate(1px, 1px); }
-    50% { opacity: 0.5; filter: min-width(50%) blur(1px); transform: translate(-1px, -1px); }
+    50% { opacity: 0.5; filter: blur(1px); transform: translate(-1px, -1px); }
     100% { opacity: 0; transform: translateY(-20px); }
 }
 
@@ -274,74 +289,123 @@ body, html {
     #game-container { display: none; }
 }
 
-/* --- Адаптив для мобильных (портрет/узкие экраны) --- */
-@media (max-width: 768px) {
-  html, body {
-    height: 100dvh; /* динамическая высота с учётом адресной строки */
-    margin: 0;
-    padding: 0;
-  }
+/* ============================================== */
+/* ИСПРАВЛЕНИЯ ДЛЯ МОБИЛЬНЫХ (альбомный режим)    */
+/* ============================================== */
+@media (max-width: 900px) and (orientation: landscape) {
+    #game-container {
+        padding: 4px;
+        padding-top: max(4px, env(safe-area-inset-top));
+        padding-bottom: max(4px, env(safe-area-inset-bottom));
+        padding-left: max(4px, env(safe-area-inset-left));
+        padding-right: max(4px, env(safe-area-inset-right));
+    }
 
-  #game-container {
-    min-height: 100dvh;
-    flex-direction: column; /* выстраиваем вертикально: верх → стакан → кнопки */
-    padding: 4px;
-  }
+    .top-panel {
+        margin-bottom: 2px;
+    }
 
-  .top-panel {
-    width: 100%;
-    min-height: auto;
-    padding: 8px;
-    order: 1; /* ставим наверх */
-  }
+    .formula-display-container {
+        width: 180px;
+        min-height: 36px;
+    }
 
-  .main-game-area {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    width: 100%;
-    height: auto;
-    min-height: calc(100dvh - 130px); /* оставляем место под панель + нижний блок */
-    order: 2;
-  }
+    #formula-board {
+        font-size: 1.2rem;
+    }
 
-  /* На мобильных боковые панели убираем, кнопки переносим вниз */
-  .side-panel {
-    display: none; /* скрываем боковые панели */
-  }
+    .stats-row {
+        font-size: 0.75rem;
+        margin-top: 2px;
+    }
 
-  /* Контейнер для мобильных кнопок управления */
-  .mobile-controls-wrapper {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    padding: 6px 4px;
-    background: rgba(248, 249, 250, 0.95);
-    border-top: 1px solid #ccc;
-    z-index: 50;
-    order: 3;
-  }
+    .side-panel {
+        padding: 4px;
+        min-width: 52px;
+    }
 
-  .glass-container {
-    flex: 1;
-    justify-content: center;
-    align-items: flex-end; /* стакан прижимаем к верху, чтобы кнопки были под ним */
-    height: auto;
-    max-height: calc(100dvh - 160px);
-  }
+    .ion-preview-slot {
+        width: 48px;
+        height: 48px;
+        font-size: 0.8rem;
+    }
 
-  #chemistry-glass {
-    max-width: 96vw; /* почти во всю ширину, но с небольшим отступом */
-    aspect-ratio: 14 / 8; /* сохраняем пропорции сетки */
-    max-height: 85vh; /* ограничиваем высоту, чтобы не вылезало */
-  }
+    .side-label {
+        font-size: 0.7rem;
+    }
 
-  /* Переиспользуем стиль кнопок, но делаем их чуть компактнее */
-  .control-btn {
-    width: 52px;
-    height: 52px;
-    font-size: 1.3rem;
-  }
+    .left-controls, .right-controls {
+        gap: 6px;
+    }
+
+    .control-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+        border-radius: 6px;
+        box-shadow: 2px 2px 0px #000;
+    }
+
+    #chemistry-glass {
+        max-width: 100%;
+    }
+
+    .ion-block {
+        font-size: 0.6rem;
+    }
+
+    .overlay-screen h2 { font-size: 1.4rem; }
+    .overlay-screen p { font-size: 0.85rem; }
+    .overlay-screen button {
+        padding: 8px 18px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Очень узкие экраны (маленькие телефоны в альбомном) */
+@media (max-width: 600px) and (orientation: landscape) {
+    .side-panel {
+        min-width: 42px;
+        padding: 2px;
+    }
+
+    .ion-preview-slot {
+        width: 38px;
+        height: 38px;
+        font-size: 0.65rem;
+    }
+
+    .side-label {
+        font-size: 0.6rem;
+        margin-bottom: 2px;
+    }
+
+    .control-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 0.95rem;
+        border-radius: 5px;
+        box-shadow: 1px 1px 0px #000;
+    }
+
+    .left-controls, .right-controls {
+        gap: 4px;
+    }
+
+    .formula-display-container {
+        width: 130px;
+        min-height: 28px;
+    }
+
+    #formula-board {
+        font-size: 0.9rem;
+    }
+
+    .stats-row {
+        font-size: 0.65rem;
+    }
+
+    .ion-block {
+        font-size: 0.5rem;
+    }
 }
