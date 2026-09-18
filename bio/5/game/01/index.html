@@ -17,11 +17,15 @@
 
     <!-- Главный игровой интерфейс -->
     <div id="game-container">
-        <!-- Верхняя панель управления с кнопкой звука -->
+        <!-- Верхняя панель управления: Уровень, Жизни, Цель, Пауза, Звук, Счет -->
         <header class="game-header">
-            <div class="stat-box left">
-                <span class="label">Уровень:</span>
-                <span id="level-value">1</span>
+            <div class="stat-container">
+                <div class="stat-box left">
+                    <span class="label">Ур:</span>
+                    <span id="level-value">1</span>
+                </div>
+                <!-- Контейнер для сердечек -->
+                <div id="lives-container" class="lives-box">❤️❤️❤️</div>
             </div>
             
             <div class="target-box">
@@ -29,22 +33,32 @@
                 <div id="target-kingdom">БАКТЕРИИ</div>
             </div>
 
-            <!-- Кнопка звука -->
-            <button id="mute-btn" class="mute-btn">🔊</button>
+            <div class="controls-container">
+                <!-- Кнопка Паузы -->
+                <button id="pause-btn" class="control-btn">⏸️</button>
+                <!-- Кнопка Звука -->
+                <button id="mute-btn" class="control-btn">🔊</button>
+            </div>
             
             <div class="stat-box right">
                 <span class="label">Счет:</span>
                 <span id="score-value">0</span>
             </div>
         </header>
-
         <!-- Игровой терминал (зона падения эмодзи) -->
         <main id="game-terminal">
-            <!-- Сюда JS будет динамически добавлять падающие эмодзи -->
+            <!-- Стартовый экран -->
             <div id="start-screen" class="overlay-screen">
                 <h2>Царства Живой Природы</h2>
                 <p>Кликай только по тем организмам, которые относятся к указанному царству!</p>
                 <button id="start-btn">Начать игру</button>
+            </div>
+
+            <!-- Экран Паузы -->
+            <div id="pause-screen" class="overlay-screen" style="display: none;">
+                <h2>Игра на паузе ⏸️</h2>
+                <p>Биология никуда не убежит. Отдохни и возвращайся!</p>
+                <button id="resume-btn">Продолжить</button>
             </div>
         </main>
     </div>
