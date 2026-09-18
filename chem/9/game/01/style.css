@@ -1,4 +1,4 @@
-/* Базовый сброс и защита от багов мобильного тапа */
+/* 1. БАЗОВЫЙ СБРОС И ЗАЩИТА ОТ МОБИЛЬНЫХ БАГОВ */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -9,38 +9,39 @@
 }
 
 body, html {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
-    font-family: 'Courier New', Courier, monospace; /* Научный/лабораторный стиль шрифта */
+    font-family: 'Courier New', Courier, monospace;
     background-color: #121214;
     color: #333;
 }
 
-/* Главный контейнер (Альбомный режим) */
+/* 2. ГЛАВНЫЙ АДАПТИВНЫЙ КОНТЕЙНЕР */
 #game-container {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background: #f8f9fa;
-    padding: 10px;
+    padding: 1vh; /* Отступы масштабируются от высоты экрана */
 }
 
-/* Верхняя панель: Формула и Статистика */
+/* 3. ВЕРХНЯЯ ПАНЕЛЬ (Масштабируется строго по высоте) */
 .top-panel {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin-bottom: 5px;
+    height: 16vh; /* Занимает ровно 16% высоты экрана */
+    justify-content: center;
 }
 
 .formula-display-container {
     border: 2px solid #333;
     background: #fff;
-    width: 250px;
-    height: 60px;
+    width: 40vh; /* Ширина табло зависит от высоты экрана */
+    height: 9vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,113 +49,101 @@ body, html {
 }
 
 #formula-board {
-    font-size: 1.8rem;
+    font-size: 3.5vh; /* Шрифт растет пропорционально */
     font-weight: bold;
     letter-spacing: 1px;
 }
 
-/* Индексы в формуле (нижние) */
 #formula-board sub {
-    font-size: 1rem;
-    bottom: -0.2em;
+    font-size: 2vh;
+    bottom: -0.1em;
 }
 
 .stats-row {
     display: flex;
     justify-content: space-between;
-    width: 60%;
-    max-width: 600px;
-    margin-top: 5px;
-    font-size: 1rem;
+    width: 50vh;
+    margin-top: 0.5vh;
+    font-size: 2vh;
     font-weight: bold;
 }
 
-/* Основная игровая зона (Сплит на 3 части) */
+/* 4. ОСНОВНАЯ ИГРОВАЯ ЗОНА (ФЛЕКС-РЯД) */
 .main-game-area {
     display: flex;
-    flex: 1;
     width: 100%;
-    height: calc(100% - 90px);
+    height: 82vh; /* Занимает оставшиеся 82% высоты */
 }
 
-/* Боковые панели */
+/* Боковые панели распределяют элементы строго по вертикали внутри себя */
 .side-panel {
     display: flex;
     flex-direction: column;
-    padding: 5px;
-    min-width: 100px;
-    position: relative;
+    justify-content: space-between; 
+    align-items: center;
+    width: 20vw; /* Занимают строго по 20% ширины экрана по бокам */
     height: 100%;
+    padding: 1vh 0;
 }
 
 .left-side {
-    align-items: flex-start;
+    justify-content: space-between; /* Окно Next сверху, кнопки строго внизу */
 }
 
 .right-side {
-    align-items: flex-end;
+    justify-content: flex-end; /* Кнопки справа всегда в самом низу */
 }
 
-/* Блок "Next" — жестко закрепили в самом верху левой панели */
+/* Окно "Next" */
 .next-box-container {
-    position: absolute;
-    top: 5px;
-    left: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 5;
 }
 
 .side-label {
-    font-size: 0.9rem;
+    font-size: 1.8vh;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 0.5vh;
     text-transform: uppercase;
 }
 
 .ion-preview-slot {
-    width: 60px;  /* Было 70px, сделали чуть компактнее */
-    height: 60px; /* Было 70px */
+    width: 10vh; /* Размеры гибко подстраиваются под экран */
+    height: 10vh;
     border: 2px solid #333;
     background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 2px 2px 0px #000;
+    font-size: 2.5vh;
+    font-weight: bold;
 }
 
-/* Левый блок управления (Пауза и Стрелка влево) */
-/* Мы немного опустили его относительно предыдущего варианта, но за счет переноса Next вверх они больше не пересекутся */
+/* Контейнеры кнопок */
+.left-controls, .right-controls {
+    display: flex;
+    gap: 2vh;
+}
+
 .left-controls {
-    position: absolute;
-    bottom: 65px; /* Безопасная высота от нижней полосы браузера */
-    left: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 5;
+    flex-direction: column; /* Пауза над стрелкой влево */
+    align-items: center;
 }
 
-/* Правый блок управления (Стрелки вниз и вправо) */
 .right-controls {
-    position: absolute;
-    bottom: 65px; /* Симметрично левой стороне */
-    right: 15px;
-    display: flex;
-    flex-direction: row; /* Стрелки стоят в один горизонтальный ряд, не занимая высоту */
-    gap: 15px;
-    z-index: 5;
+    flex-direction: row; /* Стрелки вниз и вправо стоят рядышком */
 }
 
-/* Мобильные кнопки управления */
+/* АДАПТИВНЫЕ КНОПКИ УПРАВЛЕНИЯ */
 .control-btn {
-    width: 50px;  /* Было 60px, уменьшили высоту "башни" кнопок */
-    height: 50px; /* Было 60px */
-    font-size: 1.3rem;
+    width: 9vh; /* Размер кнопки зависит ТОЛЬКО от высоты экрана */
+    height: 9vh;
+    font-size: 3vh;
     background: #fff;
     border: 2px solid #333;
-    border-radius: 8px;
+    border-radius: 12%;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -168,34 +157,25 @@ body, html {
     box-shadow: 1px 1px 0px #000;
 }
 
-/* Центральный игровой стакан */
+/* 5. ЦЕНТРАЛЬНЫЙ ИГРОВОЙ СТАКАН */
 .glass-container {
-    flex: 1;
+    width: 60vw; /* Стакан занимает 60% ширины по центру */
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
 }
 
 #chemistry-glass {
     position: relative;
-    width: 100%;
-    height: 100%;
-    max-width: 560px; /* Соотношение сторон под сетку (например, 14х8) */
+    /* Идеальная математическая пропорция тетриса 14х8 привязана к высоте */
+    height: 78vh; 
+    width: calc(78vh * (14 / 8)); 
+    max-width: 100%;
     background: #fff;
-    border: 2px solid #333;
+    border: 3px solid #333;
     box-shadow: 4px 4px 0px #000;
     overflow: hidden;
-    
-    /* Сетка Тетриса */
-    display: grid;
-    grid-template-columns: repeat(14, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-}
-
-/* Ячейки сетки для структуры */
-.grid-cell {
-    border: 1px dashed #e2e8f0;
 }
 
 /* Игровые плашки ионов */
@@ -207,82 +187,59 @@ body, html {
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 2.2vh; /* Размер шрифта ионов тоже адаптивный! */
     background: #fff;
     border: 2px solid #333;
-    box-shadow: inset -2px -2px 0px rgba(0,0,0,0.1);
     box-sizing: border-box;
-    transition: all 0.1s ease;
     z-index: 2;
 }
 
-/* Если внутри плашки будет картинка ИИ */
 .ion-block img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-/* Эффекты химических реакций */
-.effect-precipitate {
-    animation: precipitateFall 0.5s forwards;
-}
-
-.effect-gas {
-    animation: gasFading 0.4s linear infinite;
-}
+/* 6. ХИМИЧЕСКИЕ ЭФФЕКТЫ АНИМАЦИИ */
+.effect-precipitate { animation: precipitateFall 0.5s forwards; }
+.effect-gas { animation: gasFading 0.4s linear infinite; }
 
 @keyframes precipitateFall {
     0% { transform: scale(1); }
     50% { transform: scale(1.1); filter: brightness(1.2); }
     100% { transform: scale(0); opacity: 0; }
 }
-
 @keyframes gasFading {
-    0% { opacity: 1; filter: contrast(200%) grayscale(100%); transform: translate(1px, 1px); }
-    50% { opacity: 0.5; filter: min-width(50%) blur(1px); transform: translate(-1px, -1px); }
+    0% { opacity: 1; transform: translate(1px, 1px); }
+    50% { opacity: 0.5; transform: translate(-1px, -1px); }
     100% { opacity: 0; transform: translateY(-20px); }
 }
 
-/* Экраны блокировок и стартов */
+/* 7. ЭКРАНЫ БЛОКИРОВОК И ИНТЕРФЕЙСА */
 .overlay-screen {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(255, 255, 255, 0.95);
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    text-align: center;
+    z-index: 10; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; padding: 2vh; text-align: center;
 }
-
-.overlay-screen h2 { font-size: 2rem; margin-bottom: 10px; }
-.overlay-screen p { margin-bottom: 20px; max-width: 400px; color: #555; }
+.overlay-screen h2 { font-size: 4vh; margin-bottom: 1vh; }
+.overlay-screen p { font-size: 2.2vh; margin-bottom: 2vh; max-width: 60vh; color: #555; }
 .overlay-screen button {
-    padding: 10px 25px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    background: #fff;
-    border: 2px solid #333;
-    box-shadow: 3px 3px 0px #000;
-    cursor: pointer;
+    padding: 1.5vh 4vh; font-size: 2.5vh; font-weight: bold;
+    background: #fff; border: 2px solid #333; box-shadow: 3px 3px 0px #000; cursor: pointer;
 }
 .overlay-screen button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #000; }
 
-/* Предупреждение о перевороте экрана */
+/* Предупреждение о повороте экрана */
 .screen-warning {
     display: none;
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
+    top: 0; left: 0; width: 100vw; height: 100vh;
     background: #121214; color: #fff;
     z-index: 9999; justify-content: center; align-items: center; text-align: center;
 }
-.phone-icon { font-size: 3rem; animation: rotatePhone 2s infinite ease-in-out; margin-bottom: 15px; }
+.phone-icon { font-size: 8vh; animation: rotatePhone 2s infinite ease-in-out; margin-bottom: 2vh; }
 @keyframes rotatePhone { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(90deg); } }
 
 @media (orientation: portrait) {
