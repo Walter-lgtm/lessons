@@ -12,41 +12,78 @@ const KINGDOM_NAMES = Object.keys(KINGDOMS_DATA);
 // Игровые переменные
 let score = 0;
 let level = 1;
+let lives = 3; // Новая переменная для жизней
 let currentTargetKingdom = "";
 let gameActive = false;
-let baseSpeed = 3.5; // БЫЛО 1.5. Теперь эмодзи летят бодрее с самого начала!
-let spawnInterval = 900; // БЫЛО 1200. Теперь они появляются чуть чаще, создавая динамику.
+let isPaused = false; // Новое состояние паузы
+let baseSpeed = 3.5; 
+let spawnInterval = 900; 
 let spawnTimerId = null;
 let activeEmojis = [];
 
 // DOM элементы
 const gameTerminal = document.getElementById("game-terminal");
 const startScreen = document.getElementById("start-screen");
+const pauseScreen = document.getElementById("pause-screen"); // Элемент экрана паузы
 const startBtn = document.getElementById("start-btn");
+const pauseBtn = document.getElementById("pause-btn"); // Кнопка паузы
+const resumeBtn = document.getElementById("resume-btn"); // Кнопка продолжить
 const scoreValue = document.getElementById("score-value");
 const levelValue = document.getElementById("level-value");
+const livesContainer = document.getElementById("lives-container"); // Контейнер жизней
 const targetKingdom = document.getElementById("target-kingdom");
 
 // Старт игры по клику на кнопку
 startBtn.addEventListener("click", startGame);
+// Обработчики для паузы
+pauseBtn.addEventListener("click", togglePause);
+resumeBtn.addEventListener("click", togglePause);
+
+function togglePause() {
+    if (!gameActive) return; // Не ставим на паузу, если игра не началась или окончена
+
+    isPaused = !isPaused;
+    
+    if (isPaused) {
+        // Включаем паузу
+        pauseScreen.style.display = "flex";
+        pauseBtn.textContent = "▶️";
+        pauseBtn.classList.add("paused");
+        clearTimeout(spawnTimerId); // Останавливаем появление новых эмодзи
+    } else {
+        // Выключаем паузу
+        pauseScreen.style.display = "none";
+        pauseBtn.textContent = "⏸️";
+        pauseBtn.classList.remove("paused");
+        // Перезапускаем игровой цикл анимации и генерации
+        requestAnimationFrame(gameLoop);
+        scheduleNextSpawn();
+    }
+}
 
 function startGame() {
     initAudio();
     startScreen.style.display = "none";
     score = 0;
     level = 1;
-    baseSpeed = 1.5;
-    spawnInterval = 1200;
+    lives = 3; // Сброс жизней
+    baseSpeed = 3.5;
+    spawnInterval = 900;
     activeEmojis = [];
     gameActive = true;
+    isPaused = false;
     
     updateScoreDisplay();
     updateLevelDisplay();
+    updateLivesDisplay(); // Обновление сердечек на экране
     changeTargetKingdom();
     
-    // Запуск генерации эмодзи
     gameLoop();
     scheduleNextSpawn();
+}
+
+function updateLivesDisplay() {
+    livesContainer.textContent = "❤️".repeat(lives) + "🖤".repeat(3 - lives);
 }
 
 // Выбор нового случайного целевого царства
@@ -116,9 +153,8 @@ function spawnEmoji() {
     });
 }
 
-// Обработка клика/тапа
 function handleEmojiClick(emojiEl) {
-    if (!gameActive) return;
+    if (!gameActive || isPaused) return; // Блокируем клики на паузе
 
     const isCorrect = emojiEl.dataset.correct === "true";
 
@@ -127,31 +163,30 @@ function handleEmojiClick(emojiEl) {
         playSound("correct");
         updateScoreDisplay();
         
-        // Визуальный эффект успеха
         emojiEl.style.transform += " scale(1.3)";
         emojiEl.style.opacity = "0";
         emojiEl.style.pointerEvents = "none";
         
-        // Каждые 100 очков повышаем уровень и скорость
         if (score % 100 === 0) {
             levelUp();
         }
         
-        // Смена цели раз в несколько верных тапов (для динамики)
         if (Math.random() > 0.6) {
             changeTargetKingdom();
-            // Обновляем статус у всех летящих эмодзи под новую цель
             updateActiveEmojisStatus();
         }
     } else {
-        // Ошибка: штраф по очкам (не уходим в минус)
-        score = Math.max(0, score - 5);
+        // Ошибка: минус жизнь
+        lives--;
         playSound("wrong");
-        updateScoreDisplay();
+        updateLivesDisplay();
         
-        // Анимация тряски при ошибке
         emojiEl.style.filter = "grayscale(100%) opacity(0.5)";
         emojiEl.style.pointerEvents = "none";
+        
+        if (lives <= 0) {
+            gameOver();
+        }
     }
 }
 
@@ -177,26 +212,29 @@ function updateLevelDisplay() { levelValue.textContent = level; }
 
 // Главный игровой цикл для плавной анимации падения
 function gameLoop() {
-    if (!gameActive) return;
+    if (!gameActive || isPaused) return; // Если пауза — останавливаем перерисовку кадров
 
     const terminalHeight = gameTerminal.clientHeight;
 
     for (let i = activeEmojis.length - 1; i >= 0; i--) {
         const item = activeEmojis[i];
         
-        // Скорость зависит от уровня
         item.y += baseSpeed;
         item.element.style.transform = `translateY(${item.y}px)`;
 
-        // Если эмодзи упал за нижний край экрана
         if (item.y > terminalHeight) {
-            // Если игрок пропустил НУЖНОЕ царство — штрафуем
-            if (item.isCorrect && item.element.style.opacity !== "0") {
-                score = Math.max(0, score - 5);
-                updateScoreDisplay();
+            // Если игрок ПРОПУСТИЛ нужное царство (оно улетело вниз целым)
+            if (item.isCorrect && item.element.style.opacity !== "0" && item.element.style.pointerEvents !== "none") {
+                lives--;
+                playSound("wrong");
+                updateLivesDisplay();
+                
+                if (lives <= 0) {
+                    gameOver();
+                    return; // Немедленно выходим из цикла
+                }
             }
             
-            // Удаляем элемент
             item.element.remove();
             activeEmojis.splice(i, 1);
         }
