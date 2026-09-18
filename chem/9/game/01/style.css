@@ -1,0 +1,275 @@
+/* Базовый сброс и защита от багов мобильного тапа */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Courier New', Courier, monospace; /* Научный/лабораторный стиль шрифта */
+    background-color: #121214;
+    color: #333;
+}
+
+/* Главный контейнер (Альбомный режим) */
+#game-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background: #f8f9fa;
+    padding: 10px;
+}
+
+/* Верхняя панель: Формула и Статистика */
+.top-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.formula-display-container {
+    border: 2px solid #333;
+    background: #fff;
+    width: 250px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 0px #000;
+}
+
+#formula-board {
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Индексы в формуле (нижние) */
+#formula-board sub {
+    font-size: 1rem;
+    bottom: -0.2em;
+}
+
+.stats-row {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    max-width: 600px;
+    margin-top: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Основная игровая зона (Сплит на 3 части) */
+.main-game-area {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    height: calc(100% - 90px);
+}
+
+/* Боковые панели */
+.side-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px;
+    min-width: 100px;
+}
+
+.left-side {
+    align-items: flex-start;
+    justify-content: space-between; /* Next сверху, кнопки снизу */
+}
+
+.right-side {
+    align-items: flex-end;
+}
+
+/* Блок "Next" */
+.next-box-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.side-label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.ion-preview-slot {
+    width: 70px;
+    height: 70px;
+    border: 2px solid #333;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 0px #000;
+}
+
+/* Контейнеры кнопок */
+.left-controls, .right-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.right-controls {
+    flex-direction: row; /* Стрелки вниз и вправо стоят в ряд */
+}
+
+/* Мобильные кнопки управления */
+.control-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    background: #fff;
+    border: 2px solid #333;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 3px 3px 0px #000;
+    transition: transform 0.05s, box-shadow 0.05s;
+}
+
+.control-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px #000;
+}
+
+/* Центральный игровой стакан */
+.glass-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#chemistry-glass {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 560px; /* Соотношение сторон под сетку (например, 14х8) */
+    background: #fff;
+    border: 2px solid #333;
+    box-shadow: 4px 4px 0px #000;
+    overflow: hidden;
+    
+    /* Сетка Тетриса */
+    display: grid;
+    grid-template-columns: repeat(14, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+}
+
+/* Ячейки сетки для структуры */
+.grid-cell {
+    border: 1px dashed #e2e8f0;
+}
+
+/* Игровые плашки ионов */
+.ion-block {
+    position: absolute;
+    width: calc(100% / 14);
+    height: calc(100% / 8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    background: #fff;
+    border: 2px solid #333;
+    box-shadow: inset -2px -2px 0px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    transition: all 0.1s ease;
+    z-index: 2;
+}
+
+/* Если внутри плашки будет картинка ИИ */
+.ion-block img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Эффекты химических реакций */
+.effect-precipitate {
+    animation: precipitateFall 0.5s forwards;
+}
+
+.effect-gas {
+    animation: gasFading 0.4s linear infinite;
+}
+
+@keyframes precipitateFall {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); filter: brightness(1.2); }
+    100% { transform: scale(0); opacity: 0; }
+}
+
+@keyframes gasFading {
+    0% { opacity: 1; filter: contrast(200%) grayscale(100%); transform: translate(1px, 1px); }
+    50% { opacity: 0.5; filter: min-width(50%) blur(1px); transform: translate(-1px, -1px); }
+    100% { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Экраны блокировок и стартов */
+.overlay-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.overlay-screen h2 { font-size: 2rem; margin-bottom: 10px; }
+.overlay-screen p { margin-bottom: 20px; max-width: 400px; color: #555; }
+.overlay-screen button {
+    padding: 10px 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background: #fff;
+    border: 2px solid #333;
+    box-shadow: 3px 3px 0px #000;
+    cursor: pointer;
+}
+.overlay-screen button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #000; }
+
+/* Предупреждение о перевороте экрана */
+.screen-warning {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #121214; color: #fff;
+    z-index: 9999; justify-content: center; align-items: center; text-align: center;
+}
+.phone-icon { font-size: 3rem; animation: rotatePhone 2s infinite ease-in-out; margin-bottom: 15px; }
+@keyframes rotatePhone { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(90deg); } }
+
+@media (orientation: portrait) {
+    .screen-warning { display: flex; }
+    #game-container { display: none; }
+}
