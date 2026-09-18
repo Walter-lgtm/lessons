@@ -2,7 +2,6 @@
 // 1. БАЗА ДАННЫХ ХИМИЧЕСКИХ ИОНОВ И ПРАВИЛ
 // ==========================================
 
-// Паспорт каждого иона: тип, заряд, текст для рендеринга и ИИ-картинка (пока placeholder)
 const IONS_POOL = {
     // Катионы (+)
     "H+":   { type: "cation", charge: 1,  html: "H<sup>+</sup>",   img: "" },
@@ -27,30 +26,28 @@ const IONS_POOL = {
 
 // Функция определения свойств получившегося вещества (Таблица растворимости)
 function checkSubstanceProperty(cations, anions) {
-    // Извлекаем уникальные имена ионов для анализа типа соли/основания
     const catName = Object.keys(cations)[0];
     const anName = Object.keys(anions)[0];
     
-    // 1. ПРАВИЛА ДЛЯ ГАЗОВ (И слабых распадающихся кислот)
+    // 1. ПРАВИЛА ДЛЯ ГАЗОВ
     if (catName === "H+" && anName === "CO32-") return { status: "GAS", label: "CO2 ↑ + H2O", color: "#e2e8f0" };
     if (catName === "H+" && anName === "S2-") return { status: "GAS", label: "H2S ↑", color: "#cbd5e1" };
     
-    // 2. ПРАВИЛА ДЛЯ ОСАДКОВ (Нерастворимые «Н» и малорастворимые «М»)
-    if (catName === "Ba2+" && anName === "SO42-") return { status: "PRECIPITATE", label: "BaSO4 ↓", color: "#ffffff" }; // Белый осадок
-    if (catName === "Ag+" && anName === "Cl-") return { status: "PRECIPITATE", label: "AgCl ↓", color: "#f8fafc" }; // Белый творожистый
-    if (catName === "Cu2+" && anName === "OH-") return { status: "PRECIPITATE", label: "Cu(OH)2 ↓", color: "#38bdf8" }; // Голубой осадок
+    // 2. ПРАВИЛА ДЛЯ ОСАДКОВ
+    if (catName === "Ba2+" && anName === "SO42-") return { status: "PRECIPITATE", label: "BaSO4 ↓", color: "#ffffff" };
+    if (catName === "Ag+" && anName === "Cl-") return { status: "PRECIPITATE", label: "AgCl ↓", color: "#f8fafc" };
+    if (catName === "Cu2+" && anName === "OH-") return { status: "PRECIPITATE", label: "Cu(OH)2 ↓", color: "#38bdf8" };
     
-    // Общие правила осадков карбонатов, фосфатов, силикатов (кроме Na, K, NH4)
     const isActiveBase = ["Na+", "K+", "NH4+"].includes(catName);
     if (!isActiveBase && ["CO32-", "PO43-", "SiO32-"].includes(anName)) {
-        return { status: "PRECIPITATE", label: `${catName.replace('+','')}${anName.replace('2-','').replace('3','')}`.replace('2','').replace('3','') + " ↓", color: "#e2e8f0" };
+        return { status: "PRECIPITATE", label: "Осадок ↓", color: "#e2e8f0" };
     }
     if (!isActiveBase && anName === "OH-" && catName !== "Ca2+" && catName !== "H+") {
         return { status: "PRECIPITATE", label: "Осадок гидроксида ↓", color: "#f1f5f9" };
     }
 
-    // 3. ВСЕ ОСТАЛЬНОЕ — РАСТВОРИМО (Диссоциация)
-    return { status: "DISSOLVE", label: "Растворимо (Ионы распались)", color: "#4ade80" };
+    // 3. ВСЕ ОСТАЛЬНОЕ — РАСТВОРИМО
+    return { status: "DISSOLVE", label: "Растворимо", color: "#4ade80" };
 }
 
 // ==========================================
@@ -67,9 +64,8 @@ let level = 1;
 let gameActive = false;
 let isPaused = false;
 let gameTimerId = null;
-let fallSpeed = 1000; // мс на одну клетку вниз
+let fallSpeed = 1000;
 
-// DOM Элементы
 const glass = document.getElementById("chemistry-glass");
 const formulaBoard = document.getElementById("formula-board");
 const levelVal = document.getElementById("level-val");
@@ -82,19 +78,30 @@ const finalScore = document.getElementById("final-score");
 // Инициализация кнопок
 document.getElementById("start-btn").addEventListener("click", startGame);
 document.getElementById("restart-btn").addEventListener("click", startGame);
-document.getElementById("btn-pause").addEventListener("click", togglePause);
 
+// ИСПРАВЛЕНО: все кнопки (включая паузу) через единую функцию
 setupMobileControls();
 
 function setupMobileControls() {
     const bindBtn = (id, action) => {
         const btn = document.getElementById(id);
-        btn.addEventListener("touchstart", (e) => { e.preventDefault(); action(); });
-        btn.addEventListener("mousedown", () => { action(); });
+        if (!btn) return;
+        // touchstart — основной для мобильных
+        btn.addEventListener("touchstart", (e) => {
+            e.preventDefault();
+            action();
+        }, { passive: false });
+        // mousedown — для десктопа
+        btn.addEventListener("mousedown", (e) => {
+            e.preventDefault();
+            action();
+        });
     };
+
     bindBtn("btn-left", () => movePiece(-1, 0));
     bindBtn("btn-right", () => movePiece(1, 0));
     bindBtn("btn-down", () => dropPieceFast());
+    bindBtn("btn-pause", togglePause);
 }
 
 // ==========================================
@@ -109,6 +116,9 @@ function startGame() {
     fallSpeed = 1000;
     gameActive = true;
     isPaused = false;
+    
+    // ИСПРАВЛЕНО: сбросить иконку паузы
+    document.getElementById("btn-pause").textContent = "⏸️";
     
     updateCounters();
     renderGridStructure();
@@ -152,7 +162,6 @@ function spawnPiece() {
         data: IONS_POOL[id]
     };
 
-    // Если место появления уже занято — стакан переполнен!
     if (grid[currentPiece.y][currentPiece.x] !== null) {
         gameOver();
     } else {
@@ -182,7 +191,6 @@ function movePiece(dx, dy) {
         return true;
     }
 
-    // Если двигались вниз и упёрлись — фиксируем плашку
     if (dy > 0) {
         lockPiece();
     }
@@ -205,7 +213,6 @@ function lockPiece() {
     };
     currentPiece = null;
     
-    // Запускаем проверку химических реакций
     checkChemicalReactions();
 }
 
@@ -219,11 +226,9 @@ function checkChemicalReactions() {
     for (let r = 0; r < ROWS; r++) {
         for (let c = 0; c < COLS; c++) {
             if (grid[r][c] !== null && !visited[r][c]) {
-                // Находим всю группу соприкасающихся плашек
                 let cluster = [];
                 findCluster(r, c, visited, cluster);
 
-                // Вычисляем суммарный баланс зарядов в группе
                 let totalCharge = 0;
                 let cations = {};
                 let anions = {};
@@ -235,7 +240,6 @@ function checkChemicalReactions() {
                     if (block.data.type === "anion") anions[block.id] = (anions[block.id] || 0) + 1;
                 });
 
-                // Если заряд сбалансирован до нуля и в группе есть и (+) и (-)
                 if (totalCharge === 0 && Object.keys(cations).length > 0 && Object.keys(anions).length > 0) {
                     processReaction(cluster, cations, anions);
                     reactionOccurred = true;
@@ -245,20 +249,16 @@ function checkChemicalReactions() {
     }
 
     if (reactionOccurred) {
-        // Заставляем плашки сверху упасть на свободные места
         setTimeout(() => {
             applyGravity();
             renderGrid();
-            // Повторная проверка после падения верхних плашек
             checkChemicalReactions();
         }, 500);
     } else {
-        // Если никаких реакций нет — даём ход следующей плашке
         spawnPiece();
     }
 }
 
-// Поиск связных элементов алгоритмом BFS (по горизонтали и вертикали)
 function findCluster(startR, startC, visited, cluster) {
     let queue = [{ r: startR, c: startC }];
     visited[startR][startC] = true;
@@ -285,17 +285,14 @@ function findCluster(startR, startC, visited, cluster) {
 function processReaction(cluster, cations, anions) {
     const result = checkSubstanceProperty(cations, anions);
     
-    // Выводим формулу на верхнее табло
     formulaBoard.innerHTML = result.label;
     formulaBoard.style.color = result.color;
 
-    // Начисление очков в зависимости от типа реакции
     let points = cluster.length * 15;
-    if (result.status === "PRECIPITATE") points += 50; // Бонус за красивый осадок
-    if (result.status === "GAS") points += 70;         // Бонус за летучий газ
+    if (result.status === "PRECIPITATE") points += 50;
+    if (result.status === "GAS") points += 70;
     score += points;
     
-    // Повышение уровня
     if (score > level * 300) {
         level++;
         fallSpeed = Math.max(200, fallSpeed - 150);
@@ -303,7 +300,6 @@ function processReaction(cluster, cations, anions) {
     }
     updateCounters();
 
-    // Визуальные эффекты уничтожения плашек
     cluster.forEach(cell => {
         const domEl = document.querySelector(`[data-r="${cell.r}"][data-c="${cell.c}"]`);
         if (domEl) {
@@ -317,7 +313,7 @@ function processReaction(cluster, cations, anions) {
                 domEl.style.opacity = "0";
             }
         }
-        grid[cell.r][cell.c] = null; // Очищаем массив
+        grid[cell.r][cell.c] = null;
     });
 }
 
@@ -351,10 +347,8 @@ function renderGridStructure() {
 }
 
 function renderGrid() {
-    // Удаляем все старые плашки, оставляя только пустую сетку структуры
     document.querySelectorAll(".ion-block").forEach(el => el.remove());
 
-    // Рендерим зафиксированные плашки
     for (let r = 0; r < ROWS; r++) {
         for (let c = 0; c < COLS; c++) {
             if (grid[r][c] !== null) {
@@ -363,7 +357,6 @@ function renderGrid() {
         }
     }
 
-    // Рендерим текущую падающую плашку
     if (currentPiece) {
         createBlockDOM(currentPiece.x, currentPiece.y, currentPiece.id, currentPiece.data);
     }
@@ -375,21 +368,17 @@ function createBlockDOM(x, y, id, data) {
     block.setAttribute("data-r", y);
     block.setAttribute("data-c", x);
     
-    // Координаты размещения на Grid-сетке стакана
     block.style.left = `calc((100% / ${COLS}) * ${x})`;
     block.style.top = `calc((100% / ${ROWS}) * ${y})`;
     
-    // Стилизация по типу заряда (текстовый режим)
     block.style.color = data.type === "cation" ? "#ef4444" : "#3b82f6";
     block.style.borderColor = data.type === "cation" ? "#fca5a5" : "#93c5fd";
 
-    // Если картинка от ИИ сгенерирована — загружаем её, иначе красивый HTML текст с индексами
     if (data.img) {
         const img = document.createElement("img");
         img.src = data.img;
         block.appendChild(img);
     } else {
-        // ИСПОЛЬЗУЕМ data.html ВМЕСТО ОБЫЧНОГО ТЕКСТА, ЧТОБЫ СОХРАНЯТЬ СТЕПЕНИ <sup> И ИНДЕКСЫ <sub>
         block.innerHTML = data.html; 
     }
 
