@@ -26,28 +26,42 @@ body, html {
     position: relative;
 }
 
-/* Верхняя панель */
+/* Обновленная верхняя панель */
 .game-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 60px;
+    height: 70px; /* Немного увеличили высоту для удобства тапа */
     background: linear-gradient(180deg, #16213e 0%, #0f172a 100%);
-    padding: 0 20px;
+    padding: 0 15px;
     border-bottom: 3px solid #4e54c8;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     z-index: 10;
 }
 
+/* Группировка элементов слева и справа */
+.stat-container, .controls-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .stat-box {
     background: rgba(255, 255, 255, 0.1);
-    padding: 8px 16px;
+    padding: 6px 12px;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: bold;
-    min-width: 120px;
+    min-width: 90px;
     text-align: center;
+}
+
+/* Блок жизней */
+.lives-box {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    filter: drop-shadow(0 0 5px rgba(239, 68, 68, 0.5));
 }
 
 .stat-box.left { border-left: 4px solid #00f2fe; }
@@ -56,6 +70,29 @@ body, html {
 .label {
     color: #94a3b8;
     margin-right: 5px;
+}
+
+/* Кнопки управления (Звук и Пауза) */
+.control-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-size: 1.2rem;
+    padding: 6px 12px;
+    cursor: pointer;
+    box-shadow: none;
+    transition: background 0.2s, transform 0.1s;
+}
+.control-btn:active {
+    transform: scale(0.95);
+}
+.control-btn.muted {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
+}
+.control-btn.paused {
+    background: rgba(234, 179, 8, 0.2);
+    border-color: #eab308;
 }
 
 /* Блок с текущей целью (Царством) */
