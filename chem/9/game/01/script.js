@@ -267,7 +267,7 @@ function findCluster(startR, startC, visited, cluster) {
         let curr = queue.shift();
         cluster.push(curr);
 
-        const directions = [[0,1], [0,-1], [1,0], [-1,0]];
+        const directions = [[0, 1], [0, -1], [1, 0], [-1, 0]];
         for (let [dr, dc] of directions) {
             let nr = curr.r + dr;
             let nc = curr.c + dc;
