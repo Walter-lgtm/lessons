@@ -78,29 +78,29 @@ body, html {
 }
 
 /* Боковые панели (приподняли управление от самого низа) */
+/* Боковые панели */
 .side-panel {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
     padding: 10px;
     min-width: 100px;
-    padding-bottom: 40px; /* ДОБАВЛЕНО: Безопасный отступ снизу, чтобы кнопки не перекрывались строкой браузера */
+    position: relative; /* Для правильного отсчета координат внутри */
 }
 
 .left-side {
     align-items: flex-start;
-    justify-content: space-between; /* Next сверху, кнопки снизу */
 }
 
 .right-side {
     align-items: flex-end;
 }
 
-/* Блок "Next" */
+/* Блок "Next" остается аккуратно сверху слева */
 .next-box-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .side-label {
@@ -121,16 +121,24 @@ body, html {
     box-shadow: 2px 2px 0px #000;
 }
 
-/* Контейнеры кнопок */
-.left-controls, .right-controls {
+/* Левый блок управления (Пауза и Стрелка влево) */
+.left-controls {
+    position: absolute;
+    bottom: 80px; /* НАДЕЖНО: Подняли кнопки на 80 пикселей от самого низа экрана */
+    left: 15px;
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-bottom: 10px; /* ДОБАВЛЕНО: Дополнительный подъем для кнопок */
 }
 
+/* Правый блок управления (Стрелки вниз и вправо) */
 .right-controls {
-    flex-direction: row; /* Стрелки вниз и вправо стоят в ряд */
+    position: absolute;
+    bottom: 80px; /* НАДЕЖНО: Подняли зеркально левой стороне */
+    right: 15px;
+    display: flex;
+    flex-direction: row; /* Стрелки стоят в ряд */
+    gap: 15px;
 }
 
 /* Мобильные кнопки управления */
