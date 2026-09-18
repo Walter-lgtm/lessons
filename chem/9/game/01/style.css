@@ -77,13 +77,14 @@ body, html {
     height: calc(100% - 90px);
 }
 
-/* Боковые панели */
+/* Боковые панели (приподняли управление от самого низа) */
 .side-panel {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     padding: 10px;
     min-width: 100px;
+    padding-bottom: 40px; /* ДОБАВЛЕНО: Безопасный отступ снизу, чтобы кнопки не перекрывались строкой браузера */
 }
 
 .left-side {
@@ -125,6 +126,7 @@ body, html {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin-bottom: 10px; /* ДОБАВЛЕНО: Дополнительный подъем для кнопок */
 }
 
 .right-controls {
