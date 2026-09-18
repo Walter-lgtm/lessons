@@ -77,14 +77,14 @@ body, html {
     height: calc(100% - 90px);
 }
 
-/* Боковые панели (приподняли управление от самого низа) */
 /* Боковые панели */
 .side-panel {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 5px;
     min-width: 100px;
-    position: relative; /* Для правильного отсчета координат внутри */
+    position: relative;
+    height: 100%;
 }
 
 .left-side {
@@ -95,12 +95,15 @@ body, html {
     align-items: flex-end;
 }
 
-/* Блок "Next" остается аккуратно сверху слева */
+/* Блок "Next" — жестко закрепили в самом верху левой панели */
 .next-box-container {
+    position: absolute;
+    top: 5px;
+    left: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
+    z-index: 5;
 }
 
 .side-label {
@@ -111,8 +114,8 @@ body, html {
 }
 
 .ion-preview-slot {
-    width: 70px;
-    height: 70px;
+    width: 60px;  /* Было 70px, сделали чуть компактнее */
+    height: 60px; /* Было 70px */
     border: 2px solid #333;
     background: #fff;
     display: flex;
@@ -122,30 +125,33 @@ body, html {
 }
 
 /* Левый блок управления (Пауза и Стрелка влево) */
+/* Мы немного опустили его относительно предыдущего варианта, но за счет переноса Next вверх они больше не пересекутся */
 .left-controls {
     position: absolute;
-    bottom: 80px; /* НАДЕЖНО: Подняли кнопки на 80 пикселей от самого низа экрана */
+    bottom: 65px; /* Безопасная высота от нижней полосы браузера */
     left: 15px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
+    z-index: 5;
 }
 
 /* Правый блок управления (Стрелки вниз и вправо) */
 .right-controls {
     position: absolute;
-    bottom: 80px; /* НАДЕЖНО: Подняли зеркально левой стороне */
+    bottom: 65px; /* Симметрично левой стороне */
     right: 15px;
     display: flex;
-    flex-direction: row; /* Стрелки стоят в ряд */
+    flex-direction: row; /* Стрелки стоят в один горизонтальный ряд, не занимая высоту */
     gap: 15px;
+    z-index: 5;
 }
 
 /* Мобильные кнопки управления */
 .control-btn {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
+    width: 50px;  /* Было 60px, уменьшили высоту "башни" кнопок */
+    height: 50px; /* Было 60px */
+    font-size: 1.3rem;
     background: #fff;
     border: 2px solid #333;
     border-radius: 8px;
