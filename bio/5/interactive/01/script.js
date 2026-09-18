@@ -17,12 +17,12 @@
 // 4. Вставьте их ниже:
 
 const GOOGLE_FORM_CONFIG = {
-    formUrl: "https://docs.google.com/forms/d/e/ЗАМЕНИТЕ_НА_СВОЙ_ID/formResponse",
+    formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdv1Pp5tp61pG5jbjnHkGvhB6rceDFsCeSI6Xhgc6AQf0cbCw/formResponse",
     fields: {
-        name:   "entry.111111111",   // <-- замените на свой ID поля "ФИО"
-        class:  "entry.222222222",   // <-- замените на свой ID поля "Класс"
-        score:  "entry.333333333",   // <-- замените на свой ID поля "Баллы"
-        grade:  "entry.444444444"    // <-- замените на свой ID поля "Оценка"
+        name:   "entry.388325519",   // <-- замените на свой ID поля "ФИО"
+        class:  "entry.998874399",   // <-- замените на свой ID поля "Класс"
+        score:  "entry.740244581",   // <-- замените на свой ID поля "Баллы"
+        grade:  "entry.1670172372"    // <-- замените на свой ID поля "Оценка"
     }
 };
 
