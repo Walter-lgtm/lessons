@@ -383,13 +383,14 @@ function createBlockDOM(x, y, id, data) {
     block.style.color = data.type === "cation" ? "#ef4444" : "#3b82f6";
     block.style.borderColor = data.type === "cation" ? "#fca5a5" : "#93c5fd";
 
-    // Если картинка от ИИ сгенерирована — загружаем её, иначе красивый текст
+    // Если картинка от ИИ сгенерирована — загружаем её, иначе красивый HTML текст с индексами
     if (data.img) {
         const img = document.createElement("img");
         img.src = data.img;
         block.appendChild(img);
     } else {
-        block.innerHTML = data.html;
+        // ИСПОЛЬЗУЕМ data.html ВМЕСТО ОБЫЧНОГО ТЕКСТА, ЧТОБЫ СОХРАНЯТЬ СТЕПЕНИ <sup> И ИНДЕКСЫ <sub>
+        block.innerHTML = data.html; 
     }
 
     glass.appendChild(block);
