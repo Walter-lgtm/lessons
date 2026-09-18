@@ -1,0 +1,196 @@
+/* Базовые настройки для мобильного гейминга */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none; /* Запрещаем выделение текста при быстрых тапах */
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a2e;
+    color: #fff;
+}
+
+/* Главный контейнер игры */
+#game-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Верхняя панель */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    background: linear-gradient(180deg, #16213e 0%, #0f172a 100%);
+    padding: 0 20px;
+    border-bottom: 3px solid #4e54c8;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.stat-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 1.1rem;
+    font-weight: bold;
+    min-width: 120px;
+    text-align: center;
+}
+
+.stat-box.left { border-left: 4px solid #00f2fe; }
+.stat-box.right { border-right: 4px solid #4facfe; }
+
+.label {
+    color: #94a3b8;
+    margin-right: 5px;
+}
+
+/* Блок с текущей целью (Царством) */
+.target-box {
+    text-align: center;
+}
+
+.target-title {
+    font-size: 0.8rem;
+    color: #a78bfa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#target-kingdom {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #ffff00;
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
+}
+
+/* Игровой терминал */
+#game-terminal {
+    flex: 1;
+    position: relative;
+    background: #0f0c1b;
+    background-image: 
+        radial-gradient(rgba(78, 84, 200, 0.1) 1px, transparent 0),
+        radial-gradient(rgba(78, 84, 200, 0.1) 1px, transparent 0);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    overflow: hidden;
+}
+
+/* Падающие эмодзи */
+.emoji-item {
+    position: absolute;
+    font-size: 3.5rem; /* Оптимальный размер для тапа пальцем */
+    cursor: pointer;
+    will-change: transform;
+    transform: translateY(-100px);
+    transition: transform 0.1s linear;
+    /* Центрируем точку тапа */
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Стартовый и финишный экраны поверх терминала */
+.overlay-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 12, 27, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    padding: 20px;
+    text-align: center;
+}
+
+.overlay-screen h2 {
+    font-size: 2rem;
+    color: #4e54c8;
+    margin-bottom: 15px;
+}
+
+.overlay-screen p {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    max-width: 500px;
+    color: #cbd5e1;
+}
+
+button {
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(45deg, #4e54c8, #8f94fb);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(78, 84, 200, 0.4);
+    transition: transform 0.2s;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Экран предупреждения о повороте (работает по умолчанию) */
+.screen-warning {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0f172a;
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.warning-content {
+    color: #fff;
+}
+
+.phone-icon {
+    font-size: 4rem;
+    animation: rotatePhone 2s infinite ease-in-out;
+    margin-bottom: 20px;
+}
+
+@keyframes rotatePhone {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(90deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Если телефон в портретном режиме — показываем заглушку */
+@media (orientation: portrait) {
+    .screen-warning {
+        display: flex;
+    }
+    #game-container {
+        display: none;
+    }
+}
