@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- ИСПРАВЛЕНО: добавлен viewport-fit=cover для safe-area-inset -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Химический Тетрис: Ионный Баланс</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -76,13 +78,6 @@
 
         </div>
     </div>
-    <!-- Мобильная панель управления (показывается только на мобильных) -->
-<div class="mobile-controls-wrapper">
-  <button id="btn-mobile-left" class="control-btn arrow-btn">◀️</button>
-  <button id="btn-mobile-down" class="control-btn arrow-btn">🔽</button>
-  <button id="btn-mobile-right" class="control-btn arrow-btn">▶️</button>
-  <button id="btn-mobile-pause" class="control-btn icon-btn">⏸️</button>
-</div>
 
     <script src="script.js"></script>
 </body>
