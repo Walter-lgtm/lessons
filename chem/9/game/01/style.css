@@ -69,33 +69,36 @@ body, html {
     font-weight: bold;
 }
 
-/* Основная игровая зона (Сплит на 3 части) */
+/* --- СКОРРЕКТИРОВАННАЯ ИГРОВАЯ ЗОНА (Поднимаем дно стакана) --- */
 .main-game-area {
     display: flex;
     flex: 1;
     width: 100%;
-    height: calc(100% - 90px);
+    /* Слегка уменьшили высоту зоны, чтобы приподнять всё содержимое над нижней плашкой браузера */
+    height: calc(100% - 105px); 
 }
 
-/* БОКОВЫЕ ПАНЕЛИ: Вернули логику первой версии, но приподняли всё вверх отступом снизу */
+/* Боковые панели */
 .side-panel {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Кнопки прижаты к низу внутренней зоны... */
-    padding: 10px;
-    min-width: 100px;
-    padding-bottom: 55px; /* ...НО мы подняли всю эту зону на 55px вверх от нижней рамки браузера! */
+    justify-content: space-between; /* Next строго сверху, кнопки строго снизу */
+    padding: 5px;
+    min-width: 110px;
+    /* Слегка приподняли кнопки внутри панели, чтобы они не жались к самому краю */
+    padding-bottom: 20px; 
 }
 
 .left-side {
-    justify-content: space-between; /* Next остается сверху панели, кнопки уходят вниз */
+    justify-content: space-between;
 }
 
 .right-side {
     align-items: flex-end;
+    justify-content: flex-end; /* Кнопки справа всегда внизу */
 }
 
-/* Блок "Next" — приподнялся выше за счет уменьшения общих отступов */
+/* --- УВЕЛИЧЕННОЕ ОКОШКО NEXT --- */
 .next-box-container {
     display: flex;
     flex-direction: column;
@@ -104,21 +107,22 @@ body, html {
 }
 
 .side-label {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: bold;
     margin-bottom: 5px;
     text-transform: uppercase;
 }
 
 .ion-preview-slot {
-    width: 70px;
-    height: 70px;
+    width: 80px;  /* УВЕЛИЧЕНО: Было 70px */
+    height: 80px; /* УВЕЛИЧЕНО: Было 70px */
     border: 2px solid #333;
     background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 2px 2px 0px #000;
+    font-size: 1.3rem; /* Сделали крупнее сам ион внутри подсказки */
 }
 
 /* Контейнеры кнопок */
@@ -132,14 +136,14 @@ body, html {
     flex-direction: row; /* Стрелки вниз и вправо стоят в ряд */
 }
 
-/* Мобильные кнопки управления */
+/* --- УВЕЛИЧЕННЫЕ МОБИЛЬНЫЕ КНОПКИ --- */
 .control-btn {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
+    width: 70px;      /* УВЕЛИЧЕНО: Было 60px — теперь промахнуться невозможно! */
+    height: 70px;     /* УВЕЛИЧЕНО: Было 60px */
+    font-size: 1.8rem; /* УВЕЛИЧЕНО: Стрелочки стали крупнее и заметнее */
     background: #fff;
     border: 2px solid #333;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -162,11 +166,13 @@ body, html {
     height: 100%;
 }
 
+/* --- ОГРАНИЧЕНИЕ ВЫСОТЫ СТАКАНА --- */
 #chemistry-glass {
     position: relative;
     width: 100%;
     height: 100%;
-    max-width: 560px;
+    max-width: 500px; /* Немного уменьшили максимальную ширину, чтобы пропорционально уменьшилась высота */
+    max-height: 280px; /* ЖЕСТКОЕ ОГРАНИЧЕНИЕ: Стакан больше не уползет под экран браузера */
     background: #fff;
     border: 2px solid #333;
     box-shadow: 4px 4px 0px #000;
