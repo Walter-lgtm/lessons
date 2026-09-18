@@ -273,3 +273,75 @@ body, html {
     .screen-warning { display: flex; }
     #game-container { display: none; }
 }
+
+/* --- Адаптив для мобильных (портрет/узкие экраны) --- */
+@media (max-width: 768px) {
+  html, body {
+    height: 100dvh; /* динамическая высота с учётом адресной строки */
+    margin: 0;
+    padding: 0;
+  }
+
+  #game-container {
+    min-height: 100dvh;
+    flex-direction: column; /* выстраиваем вертикально: верх → стакан → кнопки */
+    padding: 4px;
+  }
+
+  .top-panel {
+    width: 100%;
+    min-height: auto;
+    padding: 8px;
+    order: 1; /* ставим наверх */
+  }
+
+  .main-game-area {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    height: auto;
+    min-height: calc(100dvh - 130px); /* оставляем место под панель + нижний блок */
+    order: 2;
+  }
+
+  /* На мобильных боковые панели убираем, кнопки переносим вниз */
+  .side-panel {
+    display: none; /* скрываем боковые панели */
+  }
+
+  /* Контейнер для мобильных кнопок управления */
+  .mobile-controls-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 4px;
+    background: rgba(248, 249, 250, 0.95);
+    border-top: 1px solid #ccc;
+    z-index: 50;
+    order: 3;
+  }
+
+  .glass-container {
+    flex: 1;
+    justify-content: center;
+    align-items: flex-end; /* стакан прижимаем к верху, чтобы кнопки были под ним */
+    height: auto;
+    max-height: calc(100dvh - 160px);
+  }
+
+  #chemistry-glass {
+    max-width: 96vw; /* почти во всю ширину, но с небольшим отступом */
+    aspect-ratio: 14 / 8; /* сохраняем пропорции сетки */
+    max-height: 85vh; /* ограничиваем высоту, чтобы не вылезало */
+  }
+
+  /* Переиспользуем стиль кнопок, но делаем их чуть компактнее */
+  .control-btn {
+    width: 52px;
+    height: 52px;
+    font-size: 1.3rem;
+  }
+}
