@@ -78,24 +78,30 @@ body, html {
     height: calc(100% - 105px); 
 }
 
-/* Боковые панели */
 .side-panel {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Next строго сверху, кнопки строго снизу */
     padding: 5px;
     min-width: 110px;
-    /* Слегка приподняли кнопки внутри панели, чтобы они не жались к самому краю */
     padding-bottom: 20px; 
 }
 
 .left-side {
-    justify-content: space-between;
+    justify-content: flex-start; /* Изменено: прижимает ВСЕ элементы левой панели к верхнему краю */
+    gap: 20px; /* Задает комфортное расстояние между окном Next и кнопками под ним */
 }
 
 .right-side {
     align-items: flex-end;
-    justify-content: flex-end; /* Кнопки справа всегда внизу */
+    justify-content: flex-end;
+}
+
+/* Левый блок управления (Пауза и Стрелка влево) */
+.left-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px; /* Дополнительно регулирует отступ от окна Next, удерживая всю конструкцию наверху */
 }
 
 /* --- УВЕЛИЧЕННОЕ ОКОШКО NEXT --- */
