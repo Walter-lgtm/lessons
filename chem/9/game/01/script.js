@@ -24,34 +24,37 @@ const IONS_POOL = {
     "SiO32-":{ type: "anion", charge: -2, html: "SiO<sub>3</sub><sup>2-</sup>", img: "" }
 };
 
-// Функция определения свойств получившегося вещества (Таблица растворимости)
+// ==========================================
+// ПРАВИЛА РАСТВОРИМОСТИ
+// ==========================================
+
 function checkSubstanceProperty(cations, anions) {
     const catName = Object.keys(cations)[0];
     const anName = Object.keys(anions)[0];
     
-    // 1. ПРАВИЛА ДЛЯ ГАЗОВ
-    if (catName === "H+" && anName === "CO32-") return { status: "GAS", label: "CO2 ↑ + H2O", color: "#e2e8f0" };
-    if (catName === "H+" && anName === "S2-") return { status: "GAS", label: "H2S ↑", color: "#cbd5e1" };
+    // 1. ГАЗЫ
+    if (catName === "H+" && anName === "CO32-") return { status: "GAS", label: "CO2 &uarr; + H2O", color: "#e2e8f0" };
+    if (catName === "H+" && anName === "S2-") return { status: "GAS", label: "H2S &uarr;", color: "#cbd5e1" };
     
-    // 2. ПРАВИЛА ДЛЯ ОСАДКОВ
-    if (catName === "Ba2+" && anName === "SO42-") return { status: "PRECIPITATE", label: "BaSO4 ↓", color: "#ffffff" };
-    if (catName === "Ag+" && anName === "Cl-") return { status: "PRECIPITATE", label: "AgCl ↓", color: "#f8fafc" };
-    if (catName === "Cu2+" && anName === "OH-") return { status: "PRECIPITATE", label: "Cu(OH)2 ↓", color: "#38bdf8" };
+    // 2. ОСАДКИ
+    if (catName === "Ba2+" && anName === "SO42-") return { status: "PRECIPITATE", label: "BaSO4 &darr;", color: "#ffffff" };
+    if (catName === "Ag+" && anName === "Cl-") return { status: "PRECIPITATE", label: "AgCl &darr;", color: "#f8fafc" };
+    if (catName === "Cu2+" && anName === "OH-") return { status: "PRECIPITATE", label: "Cu(OH)2 &darr;", color: "#38bdf8" };
     
     const isActiveBase = ["Na+", "K+", "NH4+"].includes(catName);
     if (!isActiveBase && ["CO32-", "PO43-", "SiO32-"].includes(anName)) {
-        return { status: "PRECIPITATE", label: "Осадок ↓", color: "#e2e8f0" };
+        return { status: "PRECIPITATE", label: "&Ocirc;ñàäîê &darr;", color: "#e2e8f0" };
     }
     if (!isActiveBase && anName === "OH-" && catName !== "Ca2+" && catName !== "H+") {
-        return { status: "PRECIPITATE", label: "Осадок гидроксида ↓", color: "#f1f5f9" };
+        return { status: "PRECIPITATE", label: "&Ocirc;ñàäîê &darr;", color: "#f1f5f9" };
     }
 
-    // 3. ВСЕ ОСТАЛЬНОЕ — РАСТВОРИМО
-    return { status: "DISSOLVE", label: "Растворимо", color: "#4ade80" };
+    // 3. РАСТВОРИМО
+    return { status: "DISSOLVE", label: "Ðàñòâîðèìî", color: "#4ade80" };
 }
 
 // ==========================================
-// 2. НАСТРОЙКИ ИГРОВОГО ДВИЖКА (ТЕТРИС)
+// 2. НАСТРОЙКИ ИГРОВОГО ДВИЖКА
 // ==========================================
 const COLS = 14;
 const ROWS = 8;
@@ -66,6 +69,7 @@ let isPaused = false;
 let gameTimerId = null;
 let fallSpeed = 1000;
 
+// DOM
 const glass = document.getElementById("chemistry-glass");
 const formulaBoard = document.getElementById("formula-board");
 const levelVal = document.getElementById("level-val");
@@ -75,29 +79,20 @@ const startScreen = document.getElementById("start-screen");
 const gameoverScreen = document.getElementById("gameover-screen");
 const finalScore = document.getElementById("final-score");
 
-// Инициализация кнопок
+// Кнопки
 document.getElementById("start-btn").addEventListener("click", startGame);
 document.getElementById("restart-btn").addEventListener("click", startGame);
 
-// ИСПРАВЛЕНО: все кнопки (включая паузу) через единую функцию
 setupMobileControls();
 
 function setupMobileControls() {
     const bindBtn = (id, action) => {
         const btn = document.getElementById(id);
         if (!btn) return;
-        // touchstart — основной для мобильных
-        btn.addEventListener("touchstart", (e) => {
-            e.preventDefault();
-            action();
-        }, { passive: false });
-        // mousedown — для десктопа
-        btn.addEventListener("mousedown", (e) => {
-            e.preventDefault();
-            action();
-        });
+        btn.addEventListener("touchstart", (e) => { e.preventDefault(); action(); }, { passive: false });
+        btn.addEventListener("mousedown", () => { action(); });
+        btn.addEventListener("click", () => { action(); });
     };
-
     bindBtn("btn-left", () => movePiece(-1, 0));
     bindBtn("btn-right", () => movePiece(1, 0));
     bindBtn("btn-down", () => dropPieceFast());
@@ -116,16 +111,13 @@ function startGame() {
     fallSpeed = 1000;
     gameActive = true;
     isPaused = false;
-    
-    // ИСПРАВЛЕНО: сбросить иконку паузы
-    document.getElementById("btn-pause").textContent = "⏸️";
+    document.getElementById("btn-pause").textContent = "\u23F8\uFE0F";
     
     updateCounters();
     renderGridStructure();
     
     nextPieceId = getRandomIonId();
     spawnPiece();
-    
     resetTimer();
 }
 
@@ -141,8 +133,8 @@ function resetTimer() {
 function togglePause() {
     if (!gameActive) return;
     isPaused = !isPaused;
-    document.getElementById("btn-pause").textContent = isPaused ? "▶️" : "⏸️";
-    formulaBoard.textContent = isPaused ? "ПАУЗА" : "—";
+    document.getElementById("btn-pause").textContent = isPaused ? "\u25B6\uFE0F" : "\u23F8\uFE0F";
+    formulaBoard.textContent = isPaused ? "\u041F\u0410\u0423\u0417\u0410" : "\u2014";
 }
 
 function getRandomIonId() {
@@ -212,13 +204,44 @@ function lockPiece() {
         data: currentPiece.data
     };
     currentPiece = null;
-    
     checkChemicalReactions();
 }
 
 // ==========================================
 // 5. УМНАЯ ХИМИЧЕСКАЯ ЛОГИКА (КЛАСТЕРЫ)
 // ==========================================
+
+// === НОВАЯ ФУНКЦИЯ: проверка локального баланса каждого иона ===
+// Для каждого иона в кластере считает сумму зарядов ПРОТИВОПОЛОЖНЫХ
+// прямых соседей (4 направления). Если хотя бы у одного иона
+// сумма < модуля его заряда — кластер не сбалансирован.
+function isClusterBalanced(cluster) {
+    const directions = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+
+    for (let cell of cluster) {
+        const block = grid[cell.r][cell.c];
+        const myCharge = Math.abs(block.data.charge);
+        let oppositeSum = 0;
+
+        for (let [dr, dc] of directions) {
+            const nr = cell.r + dr;
+            const nc = cell.c + dc;
+            if (nr >= 0 && nr < ROWS && nc >= 0 && nc < COLS) {
+                const neighbor = grid[nr][nc];
+                if (neighbor !== null && neighbor.data.type !== block.data.type) {
+                    oppositeSum += Math.abs(neighbor.data.charge);
+                }
+            }
+        }
+
+        // Если у иона не хватает противоположных соседей для нейтрализации
+        if (oppositeSum < myCharge) {
+            return false;
+        }
+    }
+    return true;
+}
+
 function checkChemicalReactions() {
     let visited = Array(ROWS).fill(null).map(() => Array(COLS).fill(false));
     let reactionOccurred = false;
@@ -240,7 +263,14 @@ function checkChemicalReactions() {
                     if (block.data.type === "anion") anions[block.id] = (anions[block.id] || 0) + 1;
                 });
 
-                if (totalCharge === 0 && Object.keys(cations).length > 0 && Object.keys(anions).length > 0) {
+                // УСЛОВИЕ РЕАКЦИИ:
+                // 1. Суммарный заряд = 0 (общий баланс)
+                // 2. Есть и катионы, и анионы
+                // 3. Каждый ион "нейтрализован" соседями (локальный баланс)
+                if (totalCharge === 0 
+                    && Object.keys(cations).length > 0 
+                    && Object.keys(anions).length > 0
+                    && isClusterBalanced(cluster)) {
                     processReaction(cluster, cations, anions);
                     reactionOccurred = true;
                 }
@@ -271,7 +301,6 @@ function findCluster(startR, startC, visited, cluster) {
         for (let [dr, dc] of directions) {
             let nr = curr.r + dr;
             let nc = curr.c + dc;
-
             if (nr >= 0 && nr < ROWS && nc >= 0 && nc < COLS) {
                 if (grid[nr][nc] !== null && !visited[nr][nc]) {
                     visited[nr][nc] = true;
@@ -333,7 +362,7 @@ function applyGravity() {
 }
 
 // ==========================================
-// 6. ОТРИСОВКА И РЕНДЕРИНГ ИНТЕРФЕЙСА
+// 6. ОТРИСОВКА И РЕНДЕРИНГ
 // ==========================================
 function renderGridStructure() {
     glass.innerHTML = "";
