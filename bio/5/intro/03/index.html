@@ -10,15 +10,15 @@
 
     <!-- Экран авторизации ученика -->
     <div id="auth-screen" class="terminal-block">
-        <h2>ИДЕНТИФИКАЦИЯ УЧАСТНИКА</h2>
-        <p class="system-msg">> Модуль 03. Введите данные для доступа к панели:</p>
+        <h2>ИДЕНТИФИКАЦИЯ УЧЕНИКА</h2>
+        <p class="system-msg">> Модуль 03. Введите данные для доступа к терминалу:</p>
         <div class="input-group">
             <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
-            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+            <input type="text" id="student-name" autocomplete="off">
         </div>
         <div class="input-group">
             <label for="student-class">КЛАСС:</label>
-            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+            <input type="text" id="student-class" autocomplete="off">
         </div>
         <button id="start-btn" class="hl-btn">ПОДКЛЮЧИТЬСЯ К СИСТЕМЕ</button>
     </div>
@@ -98,7 +98,7 @@
         <!-- ЗАДАНИЕ 5 -->
         <section class="task-card" id="task5">
             <h3>[λ] Задание 5. Выбери верный ответ</h3>
-            <p class="question-text">Какая отрасль biology связана с производством новых лекарств, витаминов, вакцин и сывороток?</p>
+            <p class="question-text">Какая отрасль биологии связана с производством новых лекарств, витаминов, вакцин и сывороток?</p>
             <div class="radio-group">
                 <label class="hl-radio"><input type="radio" name="q5" value="Фармакология"><span></span> Фармакология</label>
                 <label class="hl-radio"><input type="radio" name="q5" value="Селекция"><span></span> Селекция</label>
@@ -144,9 +144,9 @@
     <!-- Финальный экран результатов -->
     <div id="result-screen" class="terminal-block hidden">
         <h2>ТЕСТИРОВАНИЕ ЗАВЕРШЕНО</h2>
-        <p class="system-msg">> Данные успешно переданы в архив Чёрной Мезы.</p>
+        <p class="system-msg">> Данные успешно переданы в архив учителя.</p>
         <div class="score-board">
-            <p>Сотрудник: <span id="res-name"></span></p>
+            <p>Ученик: <span id="res-name"></span></p>
             <p>Класс: <span id="res-class"></span></p>
             <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 7</p>
             <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
