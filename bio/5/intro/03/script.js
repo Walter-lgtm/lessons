@@ -1,18 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // ==========================================
-    // МАТЕМАТИЧЕСКАЯ КРИПТОЗАЩИТА (ХЭШ КНУТА)
-    // ==========================================
-    function validateToken(tokenStr) {
-        const t = tokenStr.trim().toUpperCase();
-        let hash = 5381;
-        for (let i = 0; i < t.length; i++) {
-            hash = ((hash << 5) + hash) + t.charCodeAt(i);
-        }
-        const secretMod = Math.abs(hash) % 997;
-        
-        // Меняйте это число для каждого приложения, беря значения из таблицы выше!
-        return secretMod === 120; 
-    }
     // Глобальные переменные данных ученика
     let studentName = "";
     let studentClass = "";
@@ -30,22 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
     startBtn.addEventListener("click", () => {
         studentName = inputName.value.trim();
         studentClass = inputClass.value.trim();
-        // 1. Считываем введенный токен
-        const tokenVal = document.getElementById("student-token").value;
 
-        // 2. Требуем, чтобы он был заполнен
-        if (!studentName || !studentClass || !tokenVal) {
-            alert("ВНИМАНИЕ! Доступ заблокирован. Заполните ФИО, Класс и Код доступа.");
+        if (!studentName || !studentClass) {
+            alert("ВНИМАНИЕ! Доступ заблокирован. Заполните ФИО и Класс.");
             return;
         }
 
-        // 3. Проверяем математику хэша
-        if (!validateToken(tokenVal)) {
-            alert("КРИТИЧЕСКАЯ ОШИБКА: Неверный или просроченный код доступа к терминалу!");
-            return;
-        }
-
-        // Если всё верно, старый код работает дальше без изменений:
         authScreen.classList.add("hidden");
         quizContainer.classList.remove("hidden");
         window.scrollTo(0, 0);
@@ -104,19 +80,18 @@ document.addEventListener("DOMContentLoaded", () => {
         // Вызов функции скрытой отправки данных на сервер
         sendToGoogleForm(studentName, studentClass, totalScore, finalGrade);
     });
-  // ==========================================
+
+    // ==========================================
     // 3. СКРЫТАЯ ПЕРЕДАЧА ДАННЫХ В GOOGLE ТАБЛИЦУ
     // ==========================================
     function sendToGoogleForm(name, className, score, finalGrade) {
-        // Укажите здесь URL вашей ТРЕТЬЕЙ (новой) опубликованной Google Формы
         const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSc8hiqzDXBBVKrihh91GE8pklssV75InjwnoEeoNo2kSG2IZQ/formResponse";
         const formData = new FormData();
         
-        // Укажите здесь реальные entry.ID полей вашей ТРЕТЬЕЙ формы
-        formData.append("entry.175845927", name);       // ID поля ФИО формы 03
-        formData.append("entry.2029457389", className);  // ID поля Класс формы 03
-        formData.append("entry.1381298714", score);      // ID поля Баллы формы 03
-        formData.append("entry.205211208", finalGrade); // ID поля Оценка формы 03
+        formData.append("entry.175845927", name);
+        formData.append("entry.2029457389", className);
+        formData.append("entry.1381298714", score);
+        formData.append("entry.205211208", finalGrade);
 
         fetch(formURL, {
             method: "POST",
@@ -124,4 +99,4 @@ document.addEventListener("DOMContentLoaded", () => {
             body: formData
         }).catch(err => console.log("Ошибка отправки данных: ", err));
     }
-}); // Самая последняя скобка, закрывающая DOMContentLoaded
+});
