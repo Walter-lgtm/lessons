@@ -33,24 +33,24 @@ function checkSubstanceProperty(cations, anions) {
     const anName = Object.keys(anions)[0];
     
     // 1. ГАЗЫ
-    if (catName === "H+" && anName === "CO32-") return { status: "GAS", label: "CO2 &uarr; + H2O", color: "#e2e8f0" };
-    if (catName === "H+" && anName === "S2-") return { status: "GAS", label: "H2S &uarr;", color: "#cbd5e1" };
+    if (catName === "H+" && anName === "CO32-") return { status: "GAS", label: "CO2 ↑ + H2O", color: "#e2e8f0" };
+    if (catName === "H+" && anName === "S2-") return { status: "GAS", label: "H2S ↑", color: "#cbd5e1" };
     
     // 2. ОСАДКИ
-    if (catName === "Ba2+" && anName === "SO42-") return { status: "PRECIPITATE", label: "BaSO4 &darr;", color: "#ffffff" };
-    if (catName === "Ag+" && anName === "Cl-") return { status: "PRECIPITATE", label: "AgCl &darr;", color: "#f8fafc" };
-    if (catName === "Cu2+" && anName === "OH-") return { status: "PRECIPITATE", label: "Cu(OH)2 &darr;", color: "#38bdf8" };
+    if (catName === "Ba2+" && anName === "SO42-") return { status: "PRECIPITATE", label: "BaSO4 ↓", color: "#ffffff" };
+    if (catName === "Ag+" && anName === "Cl-") return { status: "PRECIPITATE", label: "AgCl ↓", color: "#f8fafc" };
+    if (catName === "Cu2+" && anName === "OH-") return { status: "PRECIPITATE", label: "Cu(OH)2 ↓", color: "#38bdf8" };
     
     const isActiveBase = ["Na+", "K+", "NH4+"].includes(catName);
     if (!isActiveBase && ["CO32-", "PO43-", "SiO32-"].includes(anName)) {
-        return { status: "PRECIPITATE", label: "&Ocirc;ñàäîê &darr;", color: "#e2e8f0" };
+        return { status: "PRECIPITATE", label: "ОСАДОК ↓", color: "#e2e8f0" };
     }
     if (!isActiveBase && anName === "OH-" && catName !== "Ca2+" && catName !== "H+") {
-        return { status: "PRECIPITATE", label: "&Ocirc;ñàäîê &darr;", color: "#f1f5f9" };
+        return { status: "PRECIPITATE", label: "ОСАДОК ↓", color: "#f1f5f9" };
     }
 
     // 3. РАСТВОРИМО
-    return { status: "DISSOLVE", label: "Ðàñòâîðèìî", color: "#4ade80" };
+    return { status: "DISSOLVE", label: "РАСТВОР", color: "#4ade80" };
 }
 
 // ==========================================
