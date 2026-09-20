@@ -1,31 +1,33 @@
-/* Базовые научно-фантастические настройки */
+/* ========== Базовые настройки ========== */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
 }
 
 body {
-    background-color: #121212;
-    color: #ffb000; /* Фирменный оранжевый Half-Life */
+    background-color: #e8f5e9;
+    color: #333;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    font-size: 16px;
 }
 
-/* Утилиты видимости элементов */
+/* ========== Утилиты видимости ========== */
 .hidden {
     display: none !important;
 }
 
-/* Стили терминальных блоков (Авторизация и Финал) */
+/* ========== Экраны авторизации и финала ========== */
 .terminal-block {
-    background-color: #1a1a1a;
-    border: 2px solid #ffb000;
-    box-shadow: 0 0 15px rgba(255, 176, 0, 0.2);
+    background-color: #fff;
+    border: 2px solid #4caf50;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.15);
     padding: 30px;
     max-width: 500px;
     width: 100%;
@@ -35,18 +37,19 @@ body {
 
 .terminal-block h2 {
     font-size: 1.5rem;
-    margin-bottom: 15px;
-    letter-spacing: 2px;
+    margin-bottom: 10px;
+    color: #2e7d32;
 }
 
 .system-msg {
-    color: #888;
+    color: #666;
     font-size: 0.9rem;
     margin-bottom: 25px;
     text-align: left;
+    line-height: 1.5;
 }
 
-/* Поля ввода информации при входе */
+/* ========== Поля ввода ========== */
 .input-group {
     margin-bottom: 20px;
     text-align: left;
@@ -54,104 +57,112 @@ body {
 
 .input-group label {
     display: block;
-    font-size: 0.85rem;
-    margin-bottom: 5px;
-    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #2e7d32;
 }
 
 .input-group input {
     width: 100%;
-    background-color: #000;
-    border: 1px solid #ffb000;
-    color: #ffb000;
-    padding: 10px;
+    background-color: #f9fbe7;
+    border: 2px solid #a5d6a7;
+    border-radius: 8px;
+    color: #333;
+    padding: 10px 12px;
     font-size: 1rem;
     outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .input-group input:focus {
-    box-shadow: 0 0 8px rgba(255, 176, 0, 0.5);
+    border-color: #4caf50;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
 }
-/* Фирменные кнопки Black Mesa */
+
+/* ========== Кнопки ========== */
 .hl-btn {
-    background-color: #ffb000;
-    color: #000;
+    background-color: #4caf50;
+    color: #fff;
     border: none;
+    border-radius: 8px;
     padding: 12px 24px;
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s, box-shadow 0.2s;
     width: 100%;
-    letter-spacing: 1px;
 }
 
 .hl-btn:hover {
-    background-color: #ffc84d;
-    box-shadow: 0 0 12px rgba(255, 176, 0, 0.6);
+    background-color: #43a047;
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
 }
 
-/* Общий контейнер тестов и Шапка страницы */
+.hl-btn:active {
+    background-color: #2e7d32;
+}
+
+/* ========== Контейнер тестов ========== */
 #quiz-container {
     max-width: 800px;
     width: 100%;
 }
 
+/* ========== Шапка ========== */
 .hl-header {
     display: flex;
     align-items: center;
-    border-bottom: 2px solid #ffb000;
+    border-bottom: 3px solid #4caf50;
     padding-bottom: 15px;
     margin-bottom: 30px;
 }
 
 .hl-header .logo {
-    font-size: 3.5rem;
-    font-family: sans-serif;
-    margin-right: 20px;
+    font-size: 3rem;
+    margin-right: 15px;
     line-height: 1;
 }
 
 .title-block h1 {
     font-size: 1.6rem;
-    letter-spacing: 1px;
+    color: #2e7d32;
 }
 
 .title-block p {
-    color: #888;
+    color: #666;
     font-size: 0.85rem;
     margin-top: 4px;
 }
 
-/* Карточки с заданиями */
+/* ========== Карточки заданий ========== */
 .task-card {
-    background-color: #161616;
-    border-left: 4px solid #ffb000;
-    border-top: 1px solid #2a2a2a;
-    border-right: 1px solid #2a2a2a;
-    border-bottom: 1px solid #2a2a2a;
+    background-color: #fff;
+    border-left: 5px solid #4caf50;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
     padding: 20px;
     margin-bottom: 25px;
 }
 
 .task-card h3 {
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-    color: #ffb000;
-    text-transform: uppercase;
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+    color: #2e7d32;
 }
 
 .question-text {
     font-size: 1rem;
     margin-bottom: 15px;
-    color: #e0e0e0;
-    line-height: 1.4;
+    color: #444;
+    line-height: 1.5;
 }
-/* Кастомные радиокнопки (HUD-стиль) */
+
+/* ========== Радиокнопки ========== */
 .radio-group {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .hl-radio {
@@ -159,64 +170,83 @@ body {
     align-items: center;
     cursor: pointer;
     font-size: 1rem;
-    color: #ccc;
+    color: #555;
     user-select: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    background-color: #fafafa;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.hl-radio:hover {
+    border-color: #a5d6a7;
+    background-color: #f1f8e9;
 }
 
 .hl-radio input {
-    display: none; /* Прячем стандартные */
+    display: none;
 }
 
-/* Круглый индикатор для радиокнопок */
 .hl-radio span {
-    width: 18px;
-    height: 18px;
-    border: 2px solid #ffb000;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #4caf50;
     border-radius: 50%;
     margin-right: 12px;
     display: inline-block;
     position: relative;
-    background: #000;
+    background: #fff;
+    flex-shrink: 0;
 }
 
 .hl-radio input:checked + span::after {
     content: "";
-    width: 8px;
-    height: 8px;
-    background-color: #ffb000;
+    width: 10px;
+    height: 10px;
+    background-color: #4caf50;
     border-radius: 50%;
     position: absolute;
     top: 3px;
     left: 3px;
 }
 
-.hl-radio:hover {
-    color: #ffb000;
+.hl-radio:has(input:checked) {
+    border-color: #4caf50;
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    font-weight: 500;
 }
 
-/* Стиль для выпадающих списков (Задания 1, 2, 3, 7) */
+/* ========== Выпадающие списки ========== */
 .select-gaps p {
-    line-height: 2.2;
-    color: #e0e0e0;
-    margin-bottom: 15px;
+    line-height: 2.4;
+    color: #444;
+    margin-bottom: 12px;
 }
 
 .hl-select {
-    background-color: #000;
-    border: 1px solid #ffb000;
-    color: #ffb000;
-    padding: 4px 8px;
-    font-family: 'Courier New', Courier, monospace;
+    background-color: #f9fbe7;
+    border: 2px solid #a5d6a7;
+    border-radius: 6px;
+    color: #333;
+    padding: 6px 10px;
     font-size: 0.95rem;
     outline: none;
     cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.hl-select:focus {
+    border-color: #4caf50;
 }
 
 .hl-select option {
-    background-color: #1a1a1a;
-    color: #ffb000;
+    background-color: #fff;
+    color: #333;
 }
-/* Обёртка финальной кнопки */
+
+/* ========== Кнопка отправки ========== */
 .submit-wrapper {
     margin: 40px 0;
 }
@@ -224,43 +254,44 @@ body {
 .final-btn {
     font-size: 1.1rem;
     padding: 16px;
-    border: 2px solid #ffb000;
-    background-color: #000;
-    color: #ffb000;
+    background-color: #2e7d32;
+    color: #fff;
 }
 
 .final-btn:hover {
-    color: #000;
-    background-color: #ffb000;
+    background-color: #1b5e20;
 }
 
-/* Финальное табло результатов */
+/* ========== Табло результатов ========== */
 .score-board {
     text-align: left;
-    background-color: #0a0a0a;
+    background-color: #f9fbe7;
+    border-radius: 10px;
     padding: 20px;
-    border: 1px solid #ffb000;
+    border: 2px solid #a5d6a7;
     margin-top: 20px;
 }
 
 .score-board p {
     margin-bottom: 10px;
     font-size: 1rem;
+    color: #333;
 }
 
 .total-score {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #ffb000;
-    border-top: 1px dashed #ffb000;
+    color: #2e7d32;
+    border-top: 1px dashed #a5d6a7;
     padding-top: 10px;
     margin-top: 15px;
 }
 
-/* Адаптивность под мобильные телефоны */
+/* ========== Адаптивность ========== */
 @media (max-width: 600px) {
     body {
         padding: 10px;
+        font-size: 15px;
     }
     .hl-header {
         flex-direction: column;
@@ -268,6 +299,6 @@ body {
     }
     .hl-header .logo {
         margin-right: 0;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
 }
