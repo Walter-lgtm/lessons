@@ -3,33 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Проверка знаний по теме введение в биологию</title>
+    <title>Проверка знаний по теме "Введение в биологию"</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <!-- Экран авторизации ученика -->
     <div id="auth-screen" class="terminal-block">
-        <h2>КОНТРОЛЬНЫЙ ДОСТУП: ТЕМА "ВВЕДЕНИЕ В БИОЛОГИЮ"</h2>
-        <p class="system-msg">> Модуль 04. Система сформирует случайный вариант из 15 заданий:</p>
+        <h2>Проверочная работа</h2>
+        <p class="system-msg">Тема: «Введение в биологию». Система сформирует случайный вариант из 15 заданий.</p>
         <div class="input-group">
-            <label for="student-name">ФАМИЛИЯ И ИМЯ:</label>
+            <label for="student-name">Фамилия и имя:</label>
             <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
         </div>
         <div class="input-group">
-            <label for="student-class">КЛАСС:</label>
+            <label for="student-class">Класс:</label>
             <input type="text" id="student-class" placeholder="5А" autocomplete="off">
         </div>
-        <button id="start-btn" class="hl-btn">НАЧАТЬ ПРОВЕРОЧНУЮ РАБОТУ</button>
+        <button id="start-btn" class="hl-btn">Начать работу</button>
     </div>
 
     <!-- Основной контейнер контрольной работы -->
     <div id="quiz-container" class="hidden">
         <header class="hl-header">
-            <div class="logo">λ</div>
+            <div class="logo">🌿</div>
             <div class="title-block">
-                <h1>ЛАБОРАТОРИЯ</h1>
-                <p>ПРОВЕРОЧНАЯ РАБОТА: ВВЕДЕНИЕ В БИОЛОГИЮ</p>
+                <h1>БИОЛОГИЯ</h1>
+                <p>Проверочная работа: Введение в биологию</p>
             </div>
         </header>
 
@@ -38,19 +38,19 @@
 
         <!-- Кнопка отправки результатов -->
         <div class="submit-wrapper">
-            <button id="submit-quiz-btn" class="hl-btn final-btn">ЗАФИКСИРОВАТЬ И ОТПРАВИТЬ РЕЗУЛЬТАТЫ</button>
+            <button id="submit-quiz-btn" class="hl-btn final-btn">Проверить и отправить результаты</button>
         </div>
     </div>
 
     <!-- Финальный экран результатов -->
     <div id="result-screen" class="terminal-block hidden">
-        <h2>ПРОВЕРКА ЗАВЕРШЕНА</h2>
-        <p class="system-msg">> Протокол тестирования передан в архив Первого Сектора.</p>
+        <h2>Работа завершена</h2>
+        <p class="system-msg">Результаты успешно сохранены.</p>
         <div class="score-board">
-            <p>Участник: <span id="res-name"></span></p>
+            <p>Ученик: <span id="res-name"></span></p>
             <p>Класс: <span id="res-class"></span></p>
             <p class="total-score">ИТОГОВЫЙ БАЛЛ: <span id="res-score">0</span> / 15</p>
-            <p class="total-score" style="margin-top: 10px; color: #ffb000;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+            <p class="total-score" style="margin-top: 10px;">ОЦЕНКА: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
         </div>
     </div>
 
