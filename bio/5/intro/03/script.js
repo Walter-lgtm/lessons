@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Глобальные переменные данных ученика
     let studentName = "";
     let studentClass = "";
 
-    // Элементы интерфейса
     const authScreen = document.getElementById("auth-screen");
     const quizContainer = document.getElementById("quiz-container");
     const startBtn = document.getElementById("start-btn");
@@ -18,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         studentClass = inputClass.value.trim();
 
         if (!studentName || !studentClass) {
-            alert("ВНИМАНИЕ! Доступ заблокирован. Заполните ФИО и Класс.");
+            alert("Пожалуйста, заполните фамилию, имя и класс.");
             return;
         }
 
@@ -35,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
     submitBtn.addEventListener("click", () => {
         let totalScore = 0;
 
-        // --- Задания 1, 2, 3 (Выпадающие списки) ---
         const s1 = document.getElementById("t3-select1").value;
         const s2 = document.getElementById("t3-select2").value;
         const s3 = document.getElementById("t3-select3").value;
@@ -44,7 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (s2 === "термин") totalScore += 1;
         if (s3 === "символ") totalScore += 1;
 
-        // --- Задания 4, 5, 6 (Радиокнопки отраслей биологии) ---
         const t4Selected = document.querySelector('input[name="q4"]:checked');
         const t5Selected = document.querySelector('input[name="q5"]:checked');
         const t6Selected = document.querySelector('input[name="q6"]:checked');
@@ -53,11 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (t5Selected && t5Selected.value === "Фармакология") totalScore += 1;
         if (t6Selected && t6Selected.value === "Биохимия") totalScore += 1;
 
-        // --- Задание 7 (Выпадающий список "энциклопедия") ---
         const s7 = document.getElementById("t3-select7").value;
         if (s7 === "энциклопедия") totalScore += 1;
 
-        // --- Расчет оценки по пятибалльной шкале (из 7 баллов) ---
         let finalGrade = "2";
         if (totalScore >= 7) {
             finalGrade = "5 (Отлично)";
@@ -69,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
             finalGrade = "2 (Неудовл.)";
         }
 
-        // Вывод результатов ученику на экран терминала
         document.getElementById("quiz-container").classList.add("hidden");
         document.getElementById("res-name").textContent = studentName;
         document.getElementById("res-class").textContent = studentClass;
@@ -77,12 +70,11 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("res-grade").textContent = finalGrade;
         document.getElementById("result-screen").classList.remove("hidden");
 
-        // Вызов функции скрытой отправки данных на сервер
         sendToGoogleForm(studentName, studentClass, totalScore, finalGrade);
     });
 
     // ==========================================
-    // 3. СКРЫТАЯ ПЕРЕДАЧА ДАННЫХ В GOOGLE ТАБЛИЦУ
+    // 3. ПЕРЕДАЧА ДАННЫХ В GOOGLE ТАБЛИЦУ
     // ==========================================
     function sendToGoogleForm(name, className, score, finalGrade) {
         const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSc8hiqzDXBBVKrihh91GE8pklssV75InjwnoEeoNo2kSG2IZQ/formResponse";
