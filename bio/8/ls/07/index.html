@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Питание и пищеварение у простейших и беспозвоночных животных</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="presentation">
+        <!-- Progress bar -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <!-- Slides container -->
+        <div class="slides-container" id="slidesContainer">
+
+            <!-- SLIDE 1: Title -->
+            <div class="slide active" data-slide="0">
+                <div class="slide-content title-slide">
+                    <h1 class="main-title">Питание и пищеварение<br>у простейших и беспозвоночных животных</h1>
+                    <p class="subtitle">Биология · 8 класс</p>
+                    <p class="author">УМК: Пасечник В.В., Суматохин С.В. — Москва: Просвещение, 2023</p>
+                    <!-- РЕКОМЕНДАЦИЯ: изображение-фон — фото живой природы / капля воды под микроскопом -->
+                    <div class="image-placeholder" data-img="title-bg">
+                        <span>🖼️ Фоновое изображение: капля воды под микроскопом / колония инфузорий</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: Введение -->
+            <div class="slide" data-slide="1">
+                <div class="slide-content">
+                    <h2 class="slide-title">Что мы изучим?</h2>
+                    <div class="two-column">
+                        <div class="text-column">
+                            <ul class="info-list">
+                                <li>Как питаются <b>простейшие</b> организмы</li>
+                                <li>Способы пищеварения у <b>беспозвоночных</b></li>
+                                <li>Чем отличается внутриклеточное пищеварение от полостного</li>
+                                <li>Как устроена пищеварительная система у разных групп</li>
+                            </ul>
+                            <div class="key-concept">
+                                <p>🔍 <b>Ключевые понятия:</b> фагоцитоз, пиноцитоз, пищеварительная вакуоль, полостное пищеварение, внутриклеточное пищеварение</p>
+                            </div>
+                        </div>
+                        <div class="image-column">
+                            <!-- РЕКОМЕНДАЦИЯ: схема классификации беспозвоночных -->
+                            <div class="image-placeholder" data-img="classification">
+                                <span>🖼️ Схема: классификация беспозвоночных животных</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: Питание амёбы -->
+            <div class="slide" data-slide="2">
+                <div class="slide-content">
+                    <h2 class="slide-title">Питание амёбы обыкновенной</h2>
+                    <div class="two-column">
+                        <div class="text-column">
+                            <p class="lead-text"><i>Amoeba proteus</i> — одноклеточный организм, обитающий в пресных водоёмах.</p>
+                            <ul class="info-list">
+                                <li><b>Способ питания:</b> фагоцитоз — захват пищи ложноножками</li>
+                                <li><b>Пища:</b> бактерии, водоросли, другие простейшие</li>
+                                <li><b>Пищеварительная вакуоль</b> — пузырёк, в котором переваривается пища</li>
+                                <li><b>Выделение:</b> непереваренные остатки выводятся через любой участок мембраны</li>
+                            </ul>
+                            <div class="process-step">
+                                <p>⚙️ <b>Процесс:</b> ложноножки → окружение пищи → образование вакуоли → слияние с лизосомой → расщепление ферментами → всасывание</p>
+                            </div>
+                        </div>
+                        <div class="image-column">
+                            <!-- РЕКОМЕНДАЦИЯ: схема питания амёбы — захват пищи ложноножками + пищеварительная вакуоль -->
+                            <div class="image-placeholder" data-img="amoeba">
+                                <span>🖼️ Схема питания амёбы: фагоцитоз и пищеварительная вакуоль</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: Питание инфузории -->
+            <div class="slide" data-slide="3">
+                <div class="slide-content">
+                    <h2 class="slide-title">Питание инфузории-туфельки</h2>
+                    <div class="two-column">
+                        <div class="text-column">
+                            <p class="lead-text"><i>Paramecium caudatum</i> — более сложное простейшее с постоянным ртом.</p>
+                            <ul class="info-list">
+                                <li><b>Ротовое отверстие:</b> перист — углубление с мерцательными ресничками</li>
+                                <li><b>Движение пищи:</b> реснички создают ток воды → пища попадает в цитофаринкс</li>
+                                <li><b>Пищеварительная вакуоль</b> формируется на дне цитофаринкса</li>
+                                <li><b>Цикл пищеварения:</b> вакуоль движется по клетке ≈ 1 час</li>
+                                <li><b>Порошок:</b> непереваренные остатки выделяются через порошицу</li>
+                            </ul>
+                            <div class="fact-box">
+                                <p>💡 <b>Интересный факт:</b> у инфузории есть «рот» и «анус» — порошица. Это самый примитивный вариант пищевого канала!</p>
+                            </div>
+                        </div>
+                        <div class="image-column">
+                            <!-- РЕКОМЕНДАЦИЯ: схема строения инфузории-туфельки с подписанными органами -->
+                            <div class="image-placeholder" data-img="paramecium">
+                                <span>🖼️ Схема строения инфузории-туфельки: перист, цитофаринкс, порошица</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: Питание эвглены -->
+            <div class="slide" data-slide="4">
+                <div class="slide-content">
+                    <h2 class="slide-title">Питание эвглены зелёной</h2>
+                    <div class="two-column">
+                        <div class="text-column">
+                            <p class="lead-text"><i>Euglena viridis</i> — организм на границе животного и растительного мира.</p>
+                            <ul class="info-list">
+                                <li><b>Автотрофное питание:</b> на свету — фотосинтез с помощью хлоропластов</li>
+                                <li><b>Гетеротрофное питание:</b> в темноте — поглощение органики из воды (осмотрофное питание)</li>
+                                <li><b>Смешанный тип:</b> миксотроф — сочетает оба способа</li>
+                                <li><b>Светочувствительный глазок</b> (стигма) помогает находить освещённые места</li>
+                            </ul>
+                            <div class="fact-box">
+                                <p>🌿 <b>Интересный факт:</b> эвглена — живое доказательство того, что граница между царствами природы не всегда чёткая!</p>
+                            </div>
+                        </div>
+                        <div class="image-column">
+                            <!-- РЕКОМЕНДАЦИЯ: фото или схема эвглены зелёной с хлоропластами и глазком -->
+                            <div class="image-placeholder" data-img="euglena">
+                                <span>🖼️ Схема строения эвглены зелёной: хлоропласты, стигма, жгутик</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: Гидра -->
+            <div class="slide" data-slide="5">
+                <div class="slide-content">
+                    <h2 class="slide-title">Питание пресноводной гидры</h2>
+                    <div class="two-column">
+                        <div class="text-column">
+                            <p class="lead-text">Гидра — кишечнополостное животное. Появляется <b>полостное пищеварение</b> в кишечной (гастральной) полости.</p>
+                            <ul class="info-list">
+                                <li><b>Рот</b> окружён щупальцами со стрекательными клетками</li>
+                                <li><b>Захват добычи:</b> стрекательные нити парализуют жертву</li>
+                                <li><b>Полостное пищеварение:</b> ферменты выделяются в кишечную полость</li>
+                                <li><b>Внутриклеточное пищеварение:</b> клетки энтодермы фагоцитируют частицы</li>
+                                <li><b>Смешанный тип:</b> сочетание полостного и внутриклеточного</li>
+                            </ul>
+                            <div class="fact-box">
+                                <p>⚡ <b>Уникальность:</b> гидра — первый в эволюции организм, у которого появляется настоящая кишечная полость!</p>
+                            </div>
+                        </div>
+                        <div class="image-column">
+                            <!-- РЕКОМЕНДАЦИЯ: схема строения гидры + процесс захвата добычи щупальцами -->
+                            <div class="image-placeholder" data-img="hydra">
+                                <span>🖼️ Схема: строение гидры и процесс захвата добычи</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 7: Планария -->
+            <div class="slide" data-slide="6">
+                <div class="slide-content">
+                    <h2 class="slide-title">Питание белой планарии</h2>
+                    <div class="two-column">
+                        <div class="text-column">
+                            <p class="lead-text">Планария — плоский червь. Появляется <b>разветвлённая кишечная полость</b>.</p>
+                            <ul class="info-list">
+                                <li><b>Рот</b> расположен на брюшной стороне, в середине тела</li>
+                                <li><b>Глотка</b> — выдвигается наружу для захвата добычи</li>
+                                <li><b>Кишечник:</b> три ветви — одна вперёд, две назад</li>
+                                <li><b>Пищеварение:</b> смешанное — полостное + внутриклеточное</li>
+                                <li><b>Непереваренные остатки</b> выводятся через рот (ануса нет!)</li>
+                            </ul>
+                            <div class="fact-box">
+                                <p>🔧 <b>Эволюционный шаг:</b> у планарии впервые появляется разветвлённый кишечник — пища распределяется по всему телу!</p>
+                            </div>
+                        </div>
+                        <div class="image-column">
+                            <!-- РЕКОМЕНДАЦИЯ: схема строения планарии с разветвлённым кишечником -->
+                            <div class="image-placeholder" data-img="planaria">
+                                <span>🖼️ Схема строения белой планарии: глотка и разветвлённый кишечник</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 8: Дождевой червь -->
+            <div class="slide" data-slide="7">
+                <div class="slide-content">
+                    <h2 class="slide-title">Питание дождевого червя</h2>
+                    <div class="two-column">
+                        <div class="text-column">
+                            <p class="lead-text">Кольчатый червь. Появляется <b>сквозная пищеварительная трубка</b> с отделами.</p>
+                            <ul class="info-list">
+                                <li><b>Отделы:</b> рот → глотка → пищевод → зоб → желудок → кишка → анальное отверстие</li>
+                                <li><b>Пища:</b> почва с органикой, растительные остатки</li>
+                                <li><b>Зоб:</b> расширенная часть для накопления пищи</li>
+                                <li><b>Железы пищевода:</b> выделяют слизь и ферменты</li>
+                                <li><b>Кишка:</b> всасывание питательных веществ</li>
+                            </ul>
+                            <div class="fact-box">
+                                <p>🪱 <b>Важно:</b> у дождевого червя впервые появляется настоящий анальный канал — пища движется в одном направлении!</p>
+                            </div>
+                        </div>
+                        <div class="image-column">
+                            <!-- РЕКОМЕНДАЦИЯ: схема пищеварительной системы дождевого червя по отделам -->
+                            <div class="image-placeholder" data-img="earthworm">
+                                <span>🖼️ Схема: пищеварительная система дождевого червя по отделам</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 9: Насекомые -->
+            <div class="slide" data-slide="8">
+                <div class="slide-content">
+                    <h2 class="slide-title">Питание насекомых</h2>
+                    <div class="two-column">
+                        <div class="text-column">
+                            <p class="lead-text">Насекомые — наиболее сложно организованные беспозвоночные. Появляются <b>специализированные ротовые аппараты</b>.</p>
+                            <ul class="info-list">
+                                <li><b>Ротовые аппараты:</b> грызущий (жук), сосущий (бабочка), колюще-сосущий (комар), лижущий (муха)</li>
+                                <li><b>Отделы кишечника:</b> передний (рот, глотка, пищевод, зоб, желудок), средний, задний</li>
+                                <li><b>Слюнные железы:</b> выделяют ферменты для расщепления пищи</li>
+                                <li><b>Пищеварение:</b> только полостное (внеклеточное)</li>
+                            </ul>
+                            <div class="fact-box">
+                                <p>🦟 <b>Разнообразие:</b> насекомые освоили все типы питания — от крови до нектара, от листьев до древесины!</p>
+                            </div>
+                        </div>
+                        <div class="image-column">
+                            <!-- РЕКОМЕНДАЦИЯ: схемы типов ротовых аппаратов насекомых -->
+                            <div class="image-placeholder" data-img="insect-mouthparts">
+                                <span>🖼️ Схема: типы ротовых аппаратов насекомых (грызущий, сосущий, колюще-сосущий, лижущий)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 10: Сравнительная таблица -->
+            <div class="slide" data-slide="9">
+                <div class="slide-content">
+                    <h2 class="slide-title">Сравнение типов пищеварения</h2>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Организм</th>
+                                <th>Тип пищеварения</th>
+                                <th>Особенности</th>
+                                <th>Выделение остатков</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><b>Амёба</b></td>
+                                <td>Внутриклеточное</td>
+                                <td>Фагоцитоз, пищеварительная вакуоль</td>
+                                <td>Через мембрану</td>
+                            </tr>
+                            <tr>
+                                <td><b>Инфузория</b></td>
+                                <td>Внутриклеточное</td>
+                                <td>Постоянный рот, порошица</td>
+                                <td>Через порошицу</td>
+                            </tr>
+                            <tr>
+                                <td><b>Гидра</b></td>
+                                <td>Смешанное</td>
+                                <td>Кишечная полость + внутриклеточное</td>
+                                <td>Через рот</td>
+                            </tr>
+                            <tr>
+                                <td><b>Планария</b></td>
+                                <td>Смешанное</td>
+                                <td>Разветвлённый кишечник</td>
+                                <td>Через рот</td>
+                            </tr>
+                            <tr>
+                                <td><b>Дождевой червь</b></td>
+                                <td>Полостное</td>
+                                <td>Сквозная трубка с отделами</td>
+                                <td>Через анус</td>
+                            </tr>
+                            <tr>
+                                <td><b>Насекомые</b></td>
+                                <td>Полостное</td>
+                                <td>Ротовые аппараты, слюнные железы</td>
+                                <td>Через анус</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SLIDE 11: Интерактивная викторина -->
+            <div class="slide" data-slide="10">
+                <div class="slide-content">
+                    <h2 class="slide-title">Проверь себя!</h2>
+                    <p class="lead-text">Ответьте на вопросы, чтобы закрепить материал.</p>
+                    <div class="quiz" id="quiz">
+                        <!-- Quiz will be generated by JS -->
+                    </div>
+                    <div class="quiz-result" id="quizResult"></div>
+                </div>
+            </div>
+
+            <!-- SLIDE 12: Итоги -->
+            <div class="slide" data-slide="11">
+                <div class="slide-content title-slide">
+                    <h2 class="slide-title">Главные выводы</h2>
+                    <div class="summary-grid">
+                        <div class="summary-card">
+                            <span class="card-icon">1️⃣</span>
+                            <p>Простейшие переваривают пищу <b>внутри клетки</b> — в пищеварительных вакуолях</p>
+                        </div>
+                        <div class="summary-card">
+                            <span class="card-icon">2️⃣</span>
+                            <p>У кишечнополостных появляется <b>полостное пищеварение</b> в кишечной полости</p>
+                        </div>
+                        <div class="summary-card">
+                            <span class="card-icon">3️⃣</span>
+                            <p>У червей формируется <b>сквозная пищеварительная трубка</b> с отделами</p>
+                        </div>
+                        <div class="summary-card">
+                            <span class="card-icon">4️⃣</span>
+                            <p>У насекомых — <b>специализированные ротовые аппараты</b> и только полостное пищеварение</p>
+                        </div>
+                    </div>
+                    <p class="closing-text">Эволюция пищеварения шла от простого к сложному: от внутриклеточного → к смешанному → к полостному с специализированными органами 🧬</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-controls">
+            <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Назад</button>
+            <div class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">12</span>
+            </div>
+            <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Вперёд →</button>
+        </div>
+
+        <!-- Slide dots -->
+        <div class="slide-dots" id="slideDots"></div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
