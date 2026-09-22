@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практическая работа: Изучение строения многоклеточных нитчатых водорослей</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Лабораторная работа</h1>
+        <p class="subtitle">Изучение строения многоклеточных нитчатых водорослей<br>(на примере спирогиры и улотрикса)</p>
+    </header>
+
+    <main class="container">
+
+        <!-- Блок цели работы -->
+        <section class="card">
+            <h2>🎯 Цель работы</h2>
+            <p>Изучить особенности строения многоклеточных нитчатых водорослей на примере спирогиры и улотрикса; закрепить знания о клеточном строении водорослей.</p>
+            <h3>Оборудование</h3>
+            <ul>
+                <li>Микропрепараты спирогиры и улотрикса</li>
+                <li>Микроскоп</li>
+                <li>Таблица «Строение нитчатых водорослей»</li>
+                <li>Интерактивный микроскоп (симуляция)</li>
+            </ul>
+        </section>
+
+        <!-- Интерактивный микроскоп -->
+        <section class="card">
+            <h2>🔬 Просмотр спирогиры под микроскопом</h2>
+            <p>Наведите «окуляр» микроскопа на препарат, чтобы рассмотреть детали строения спирогиры. Перемещайте курсор по изображению для фокусировки.</p>
+            <div class="microscope-wrapper">
+                <div class="microscope-stage" id="microscopeStage">
+                    <img src="spirogira.jpg" alt="Спирогира под микроскопом" id="algaeImage">
+                </div>
+                <div class="microscope-lens" id="microscopeLens"></div>
+            </div>
+            <div class="microscope-controls">
+                <button class="btn" id="zoomIn">➕ Увеличить</button>
+                <button class="btn" id="zoomOut">➖ Уменьшить</button>
+                <span class="zoom-label">Увеличение: <span id="zoomLevel">1.0</span>x</span>
+            </div>
+            <p class="hint">💡 Что вы видите? Обратите внимание на лентовидные хлоропласты, расположенные спирально — это характерный признак спирогиры.</p>
+        </section>
+
+        <!-- Задание 1: Соотнесение -->
+        <section class="card">
+            <h2>📝 Задание 1. Соотнесите части клетки спирогиры с их функциями</h2>
+            <div class="matching-task" id="matchingTask1"></div>
+            <button class="btn btn-check" onclick="checkMatching()">Проверить задание 1</button>
+            <p class="feedback" id="feedback1"></p>
+        </section>
+
+        <!-- Задание 2: Тест -->
+        <section class="card">
+            <h2>📝 Задание 2. Тест по строению улотрикса</h2>
+            <div id="quizContainer"></div>
+            <button class="btn btn-check" onclick="checkQuiz()">Проверить тест</button>
+            <p class="feedback" id="feedback2"></p>
+        </section>
+
+        <!-- Задание 3: Заполнение пропусков -->
+        <section class="card">
+            <h2>📝 Задание 3. Заполните пропуски в тексте</h2>
+            <div class="fill-blanks" id="fillBlanksTask"></div>
+            <button class="btn btn-check" onclick="checkFillBlanks()">Проверить задание 3</button>
+            <p class="feedback" id="feedback3"></p>
+        </section>
+
+        <!-- Задание 4: Истина/Ложь -->
+        <section class="card">
+            <h2>📝 Задание 4. Определите, верно или неверно утверждение</h2>
+            <div class="true-false" id="trueFalseTask"></div>
+            <button class="btn btn-check" onclick="checkTrueFalse()">Проверить задание 4</button>
+            <p class="feedback" id="feedback4"></p>
+        </section>
+
+        <!-- Результаты и отправка -->
+        <section class="card results-card">
+            <h2>📊 Результаты выполнения работы</h2>
+            <div class="results-summary" id="resultsSummary">
+                <p>Выполните все задания и нажмите кнопку «Проверить всё», чтобы увидеть результаты.</p>
+            </div>
+            <button class="btn btn-final" onclick="checkAll()">Проверить все задания</button>
+
+            <div class="submit-section" id="submitSection" style="display:none;">
+                <h3>Отправка результатов</h3>
+                <div class="form-group">
+                    <label for="studentName">Фамилия и имя ученика:</label>
+                    <input type="text" id="studentName" placeholder="Иванов Иван">
+                </div>
+                <div class="form-group">
+                    <label for="studentClass">Класс:</label>
+                    <input type="text" id="studentClass" placeholder="7 А">
+                </div>
+                <button class="btn btn-submit" onclick="submitResults()">Отправить результаты в таблицу</button>
+                <p class="submit-feedback" id="submitFeedback"></p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>Интерактивная практическая работа по биологии · 7 класс</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
