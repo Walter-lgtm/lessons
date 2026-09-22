@@ -1,9 +1,7 @@
 // ==========================================
 // 1. БАЗА ДАННЫХ ХИМИЧЕСКИХ ИОНОВ И ПРАВИЛ
 // ==========================================
-
 const IONS_POOL = {
-    // Катионы (+)
     "H+":   { type: "cation", charge: 1,  html: "H<sup>+</sup>",   img: "" },
     "Na+":  { type: "cation", charge: 1,  html: "Na<sup>+</sup>",  img: "" },
     "K+":   { type: "cation", charge: 1,  html: "K<sup>+</sup>",   img: "" },
@@ -13,8 +11,6 @@ const IONS_POOL = {
     "Cu2+": { type: "cation", charge: 2,  html: "Cu<sup>2+</sup>", img: "" },
     "Ag+":  { type: "cation", charge: 1,  html: "Ag<sup>+</sup>",  img: "" },
     "Al3+": { type: "cation", charge: 3,  html: "Al<sup>3+</sup>", img: "" },
-
-    // Анионы (-)
     "OH-":   { type: "anion", charge: -1, html: "OH<sup>-</sup>",  img: "" },
     "Cl-":   { type: "anion", charge: -1, html: "Cl<sup>-</sup>",  img: "" },
     "S2-":   { type: "anion", charge: -2, html: "S<sup>2-</sup>",   img: "" },
@@ -24,33 +20,26 @@ const IONS_POOL = {
     "SiO32-":{ type: "anion", charge: -2, html: "SiO<sub>3</sub><sup>2-</sup>", img: "" }
 };
 
-// ==========================================
-// ПРАВИЛА РАСТВОРИМОСТИ
-// ==========================================
-
 function checkSubstanceProperty(cations, anions) {
     const catName = Object.keys(cations)[0];
     const anName = Object.keys(anions)[0];
     
-    // 1. ГАЗЫ
-    if (catName === "H+" && anName === "CO32-") return { status: "GAS", label: "CO2 ↑ + H2O", color: "#e2e8f0" };
-    if (catName === "H+" && anName === "S2-") return { status: "GAS", label: "H2S ↑", color: "#cbd5e1" };
+    if (catName === "H+" && anName === "CO32-") return { status: "GAS", label: "CO2 &#8593; + H2O", color: "#e2e8f0" };
+    if (catName === "H+" && anName === "S2-") return { status: "GAS", label: "H2S &#8593;", color: "#cbd5e1" };
     
-    // 2. ОСАДКИ
-    if (catName === "Ba2+" && anName === "SO42-") return { status: "PRECIPITATE", label: "BaSO4 ↓", color: "#ffffff" };
-    if (catName === "Ag+" && anName === "Cl-") return { status: "PRECIPITATE", label: "AgCl ↓", color: "#f8fafc" };
-    if (catName === "Cu2+" && anName === "OH-") return { status: "PRECIPITATE", label: "Cu(OH)2 ↓", color: "#38bdf8" };
+    if (catName === "Ba2+" && anName === "SO42-") return { status: "PRECIPITATE", label: "BaSO4 &#8595;", color: "#ffffff" };
+    if (catName === "Ag+" && anName === "Cl-") return { status: "PRECIPITATE", label: "AgCl &#8595;", color: "#f8fafc" };
+    if (catName === "Cu2+" && anName === "OH-") return { status: "PRECIPITATE", label: "Cu(OH)2 &#8595;", color: "#38bdf8" };
     
     const isActiveBase = ["Na+", "K+", "NH4+"].includes(catName);
     if (!isActiveBase && ["CO32-", "PO43-", "SiO32-"].includes(anName)) {
-        return { status: "PRECIPITATE", label: "ОСАДОК ↓", color: "#e2e8f0" };
+        return { status: "PRECIPITATE", label: "&#8595;", color: "#e2e8f0" };
     }
     if (!isActiveBase && anName === "OH-" && catName !== "Ca2+" && catName !== "H+") {
-        return { status: "PRECIPITATE", label: "ОСАДОК ↓", color: "#f1f5f9" };
+        return { status: "PRECIPITATE", label: "&#8595;", color: "#f1f5f9" };
     }
 
-    // 3. РАСТВОРИМО
-    return { status: "DISSOLVE", label: "РАСТВОР", color: "#4ade80" };
+    return { status: "DISSOLVE", label: "Растворимо", color: "#4ade80" };
 }
 
 // ==========================================
@@ -69,7 +58,6 @@ let isPaused = false;
 let gameTimerId = null;
 let fallSpeed = 1000;
 
-// DOM
 const glass = document.getElementById("chemistry-glass");
 const formulaBoard = document.getElementById("formula-board");
 const levelVal = document.getElementById("level-val");
@@ -78,10 +66,18 @@ const nextPreview = document.getElementById("next-ion-preview");
 const startScreen = document.getElementById("start-screen");
 const gameoverScreen = document.getElementById("gameover-screen");
 const finalScore = document.getElementById("final-score");
+const rulesScreen = document.getElementById("rules-screen");
+const bgMusic = document.getElementById("bg-music");
+const audioToggleBtn = document.getElementById("btn-audio");
+let isMusicPlaying = false;
 
-// Кнопки
+// Инициализация кнопок
 document.getElementById("start-btn").addEventListener("click", startGame);
 document.getElementById("restart-btn").addEventListener("click", startGame);
+document.getElementById("rules-btn").addEventListener("click", showRules);
+document.getElementById("rules-close-btn").addEventListener("click", closeRules);
+document.getElementById("btn-pause").addEventListener("click", togglePause);
+audioToggleBtn.addEventListener("click", toggleMusic);
 
 setupMobileControls();
 
@@ -91,7 +87,6 @@ function setupMobileControls() {
         if (!btn) return;
         btn.addEventListener("touchstart", (e) => { e.preventDefault(); action(); }, { passive: false });
         btn.addEventListener("mousedown", () => { action(); });
-        btn.addEventListener("click", () => { action(); });
     };
     bindBtn("btn-left", () => movePiece(-1, 0));
     bindBtn("btn-right", () => movePiece(1, 0));
@@ -111,14 +106,21 @@ function startGame() {
     fallSpeed = 1000;
     gameActive = true;
     isPaused = false;
-    document.getElementById("btn-pause").textContent = "\u23F8\uFE0F";
+    
+    // Сброс иконки паузы
+    document.getElementById("btn-pause").textContent = "\u23F8";
+    formulaBoard.textContent = "—";
     
     updateCounters();
     renderGridStructure();
     
     nextPieceId = getRandomIonId();
     spawnPiece();
+    
     resetTimer();
+    
+    // Запуск музыки
+    startMusic();
 }
 
 function resetTimer() {
@@ -133,8 +135,15 @@ function resetTimer() {
 function togglePause() {
     if (!gameActive) return;
     isPaused = !isPaused;
-    document.getElementById("btn-pause").textContent = isPaused ? "\u25B6\uFE0F" : "\u23F8\uFE0F";
-    formulaBoard.textContent = isPaused ? "\u041F\u0410\u0423\u0417\u0410" : "\u2014";
+    document.getElementById("btn-pause").textContent = isPaused ? "\u25B6" : "\u23F8";
+    formulaBoard.textContent = isPaused ? "ПАУЗА" : "—";
+    
+    // Пауза/возобновление музыки
+    if (isPaused) {
+        bgMusic.pause();
+    } else if (isMusicPlaying) {
+        bgMusic.play().catch(() => {});
+    }
 }
 
 function getRandomIonId() {
@@ -154,6 +163,7 @@ function spawnPiece() {
         data: IONS_POOL[id]
     };
 
+    // Если место появления занято — стакан переполнен
     if (grid[currentPiece.y][currentPiece.x] !== null) {
         gameOver();
     } else {
@@ -203,6 +213,16 @@ function lockPiece() {
         id: currentPiece.id,
         data: currentPiece.data
     };
+    
+    // ПРОВЕРКА: если плашка зафиксировалась на самом верхнем ряду (ряд 0),
+    // значит стакан заполнен до верху — Game Over
+    if (currentPiece.y === 0) {
+        currentPiece = null;
+        renderGrid();
+        gameOver();
+        return;
+    }
+    
     currentPiece = null;
     checkChemicalReactions();
 }
@@ -210,38 +230,6 @@ function lockPiece() {
 // ==========================================
 // 5. УМНАЯ ХИМИЧЕСКАЯ ЛОГИКА (КЛАСТЕРЫ)
 // ==========================================
-
-// === НОВАЯ ФУНКЦИЯ: проверка локального баланса каждого иона ===
-// Для каждого иона в кластере считает сумму зарядов ПРОТИВОПОЛОЖНЫХ
-// прямых соседей (4 направления). Если хотя бы у одного иона
-// сумма < модуля его заряда — кластер не сбалансирован.
-function isClusterBalanced(cluster) {
-    const directions = [[0, 1], [0, -1], [1, 0], [-1, 0]];
-
-    for (let cell of cluster) {
-        const block = grid[cell.r][cell.c];
-        const myCharge = Math.abs(block.data.charge);
-        let oppositeSum = 0;
-
-        for (let [dr, dc] of directions) {
-            const nr = cell.r + dr;
-            const nc = cell.c + dc;
-            if (nr >= 0 && nr < ROWS && nc >= 0 && nc < COLS) {
-                const neighbor = grid[nr][nc];
-                if (neighbor !== null && neighbor.data.type !== block.data.type) {
-                    oppositeSum += Math.abs(neighbor.data.charge);
-                }
-            }
-        }
-
-        // Если у иона не хватает противоположных соседей для нейтрализации
-        if (oppositeSum < myCharge) {
-            return false;
-        }
-    }
-    return true;
-}
-
 function checkChemicalReactions() {
     let visited = Array(ROWS).fill(null).map(() => Array(COLS).fill(false));
     let reactionOccurred = false;
@@ -263,10 +251,6 @@ function checkChemicalReactions() {
                     if (block.data.type === "anion") anions[block.id] = (anions[block.id] || 0) + 1;
                 });
 
-                // УСЛОВИЕ РЕАКЦИИ:
-                // 1. Суммарный заряд = 0 (общий баланс)
-                // 2. Есть и катионы, и анионы
-                // 3. Каждый ион "нейтрализован" соседями (локальный баланс)
                 if (totalCharge === 0 
                     && Object.keys(cations).length > 0 
                     && Object.keys(anions).length > 0
@@ -289,6 +273,35 @@ function checkChemicalReactions() {
     }
 }
 
+// Проверка локального баланса: каждый ион должен иметь достаточно соседей противоположного заряда
+function isClusterBalanced(cluster) {
+    const clusterSet = new Set(cluster.map(c => `${c.r},${c.c}`));
+    
+    for (let cell of cluster) {
+        const block = grid[cell.r][cell.c];
+        const myCharge = Math.abs(block.data.charge);
+        let oppositeSum = 0;
+        
+        const directions = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+        for (let [dr, dc] of directions) {
+            let nr = cell.r + dr;
+            let nc = cell.c + dc;
+            let key = `${nr},${nc}`;
+            
+            if (clusterSet.has(key)) {
+                let neighborBlock = grid[nr][nc];
+                if (neighborBlock.data.type !== block.data.type) {
+                    oppositeSum += Math.abs(neighborBlock.data.charge);
+                }
+            }
+        }
+        
+        if (oppositeSum < myCharge) return false;
+    }
+    
+    return true;
+}
+
 function findCluster(startR, startC, visited, cluster) {
     let queue = [{ r: startR, c: startC }];
     visited[startR][startC] = true;
@@ -301,6 +314,7 @@ function findCluster(startR, startC, visited, cluster) {
         for (let [dr, dc] of directions) {
             let nr = curr.r + dr;
             let nc = curr.c + dc;
+
             if (nr >= 0 && nr < ROWS && nc >= 0 && nc < COLS) {
                 if (grid[nr][nc] !== null && !visited[nr][nc]) {
                     visited[nr][nc] = true;
@@ -408,7 +422,7 @@ function createBlockDOM(x, y, id, data) {
         img.src = data.img;
         block.appendChild(img);
     } else {
-        block.innerHTML = data.html; 
+        block.innerHTML = data.html;
     }
 
     glass.appendChild(block);
@@ -424,4 +438,53 @@ function gameOver() {
     clearInterval(gameTimerId);
     finalScore.textContent = score;
     gameoverScreen.style.display = "flex";
+    stopMusic();
+}
+
+// ==========================================
+// 7. ПРАВИЛА ИГРЫ
+// ==========================================
+function showRules() {
+    rulesScreen.style.display = "flex";
+}
+
+function closeRules() {
+    rulesScreen.style.display = "none";
+}
+
+// ==========================================
+// 8. УПРАВЛЕНИЕ МУЗЫКОЙ
+// ==========================================
+function startMusic() {
+    if (!bgMusic) return;
+    bgMusic.volume = 0.3;
+    bgMusic.play().then(() => {
+        isMusicPlaying = true;
+        audioToggleBtn.textContent = "\uD83D\uDD0A";
+    }).catch(() => {
+        // Браузер заблокировал автовоспроизведение — игрок включит сам
+        isMusicPlaying = false;
+        audioToggleBtn.textContent = "\uD83D\uDD07";
+    });
+}
+
+function stopMusic() {
+    if (!bgMusic) return;
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
+    isMusicPlaying = false;
+    audioToggleBtn.textContent = "\uD83D\uDD07";
+}
+
+function toggleMusic() {
+    if (!bgMusic) return;
+    if (isMusicPlaying) {
+        bgMusic.pause();
+        isMusicPlaying = false;
+        audioToggleBtn.textContent = "\uD83D\uDD07";
+    } else {
+        bgMusic.play().catch(() => {});
+        isMusicPlaying = true;
+        audioToggleBtn.textContent = "\uD83D\uDD0A";
+    }
 }
