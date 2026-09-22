@@ -469,17 +469,17 @@ function checkAll() {
 //    https://docs.google.com/forms/d/e/XXXXX/formResponse
 
 const GOOGLE_FORM_CONFIG = {
-    formActionUrl: "https://docs.google.com/forms/d/e/1FAIpQLSc-ЗДЕСЬ-ВАШ-ID/formResponse",
+    formActionUrl: "https://docs.google.com/forms/d/e/1FAIpQLSe8Xa78odsCnFOyYalmIYi4bnbqD_AfWIeCFE8jQXJW9BLNMg/formResponse",
     fields: {
-        name:    "entry.1234567890",   // ← замените на реальные ID
-        class:   "entry.0987654321",
-        task1:   "entry.1111111111",
-        task2:   "entry.2222222222",
-        task3:   "entry.3333333333",
-        task4:   "entry.4444444444",
-        total:   "entry.5555555555",
-        grade:   "entry.6666666666",
-        percent: "entry.7777777777",
+        name:    "entry.309062002",   // ← замените на реальные ID
+        class:   "entry.237189406",
+        task1:   "entry.1810626333",
+        task2:   "entry.1881275398",
+        task3:   "entry.1778708186",
+        task4:   "entry.1281354805",
+        total:   "entry.1709965527",
+        grade:   "entry.1189436329",
+        percent: "entry.1244618852",
     },
 };
 
