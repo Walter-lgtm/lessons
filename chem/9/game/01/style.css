@@ -10,43 +10,37 @@
 
 body, html {
     width: 100%;
-    height: 100dvh; /* ИСПРАВЛЕНО: 100% → 100dvh — учитывает адресную строку */
+    height: 100dvh;
     overflow: hidden;
     font-family: 'Courier New', Courier, monospace;
     background-color: #121214;
     color: #333;
 }
 
-/* Главный контейнер (Альбомный режим) */
 #game-container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100dvh; /* ИСПРАВЛЕНО: 100% → 100dvh */
+    height: 100dvh;
     background: #f8f9fa;
     padding: 10px;
-    /* ИСПРАВЛЕНО: безопасные отступы для вырезов и браузерных панелей */
-    padding-top: max(10px, env(safe-area-inset-top));
-    padding-bottom: max(10px, env(safe-area-inset-bottom));
-    padding-left: max(10px, env(safe-area-inset-left));
-    padding-right: max(10px, env(safe-area-inset-right));
+    position: relative;
 }
 
-/* Верхняя панель: Формула и Статистика */
+/* Верхняя панель */
 .top-panel {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     margin-bottom: 5px;
-    flex-shrink: 0; /* ИСПРАВЛЕНО: не сжимать панель */
 }
 
 .formula-display-container {
     border: 2px solid #333;
     background: #fff;
     width: 250px;
-    min-height: 50px; /* ИСПРАВЛЕНО: height → min-height */
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,10 +51,8 @@ body, html {
     font-size: 1.8rem;
     font-weight: bold;
     letter-spacing: 1px;
-    text-align: center;
 }
 
-/* Индексы в формуле (нижние) */
 #formula-board sub {
     font-size: 1rem;
     bottom: -0.2em;
@@ -76,14 +68,13 @@ body, html {
     font-weight: bold;
 }
 
-/* Основная игровая зона (Сплит на 3 части) */
+/* Основная игровая зона */
 .main-game-area {
     display: flex;
     flex: 1;
     width: 100%;
-    /* ИСПРАВЛЕНО: убрали жёсткий calc(100% - 90px) — flex: 1 сам растянет */
-    min-height: 0; /* критично для flex-потомков */
-    overflow: hidden;
+    height: calc(100% - 90px);
+    min-height: 0;
 }
 
 /* Боковые панели */
@@ -92,8 +83,7 @@ body, html {
     flex-direction: column;
     justify-content: flex-end;
     padding: 10px;
-    /* ИСПРАВЛЕНО: 100px → 70px + flex-shrink: 0 */
-    min-width: 70px;
+    min-width: 100px;
     flex-shrink: 0;
 }
 
@@ -106,7 +96,6 @@ body, html {
     align-items: flex-end;
 }
 
-/* Блок "Next" */
 .next-box-container {
     display: flex;
     flex-direction: column;
@@ -142,7 +131,7 @@ body, html {
     flex-direction: row;
 }
 
-/* Мобильные кнопки управления */
+/* Кнопки управления */
 .control-btn {
     width: 60px;
     height: 60px;
@@ -156,7 +145,7 @@ body, html {
     justify-content: center;
     box-shadow: 3px 3px 0px #000;
     transition: transform 0.05s, box-shadow 0.05s;
-    flex-shrink: 0; /* ИСПРАВЛЕНО: не сжимать кнопки */
+    flex-shrink: 0;
 }
 
 .control-btn:active {
@@ -164,15 +153,26 @@ body, html {
     box-shadow: 1px 1px 0px #000;
 }
 
-/* Центральный игровой стакан */
+/* Кнопка звука */
+.audio-toggle {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    z-index: 50;
+    opacity: 0.7;
+}
+
+/* Игровой стакан */
 .glass-container {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-    min-width: 0; /* ИСПРАВЛЕНО: критично для flex-потомков */
-    overflow: hidden;
+    min-width: 0;
 }
 
 #chemistry-glass {
@@ -184,20 +184,16 @@ body, html {
     border: 2px solid #333;
     box-shadow: 4px 4px 0px #000;
     overflow: hidden;
-    
     display: grid;
     grid-template-columns: repeat(14, 1fr);
     grid-template-rows: repeat(8, 1fr);
-    /* ИСПРАВЛЕНО: сохраняем пропорции */
     aspect-ratio: 14 / 8;
 }
 
-/* Ячейки сетки для структуры */
 .grid-cell {
     border: 1px dashed #e2e8f0;
 }
 
-/* Игровые плашки ионов */
 .ion-block {
     position: absolute;
     width: calc(100% / 14);
@@ -221,7 +217,7 @@ body, html {
     object-fit: cover;
 }
 
-/* Эффекты химических реакций */
+/* Эффекты реакций */
 .effect-precipitate {
     animation: precipitateFall 0.5s forwards;
 }
@@ -236,22 +232,21 @@ body, html {
     100% { transform: scale(0); opacity: 0; }
 }
 
-/* ИСПРАВЛЕНО: убрали filter: min-width(50%) — это синтаксическая ошибка */
 @keyframes gasFading {
     0% { opacity: 1; filter: contrast(200%) grayscale(100%); transform: translate(1px, 1px); }
     50% { opacity: 0.5; filter: blur(1px); transform: translate(-1px, -1px); }
     100% { opacity: 0; transform: translateY(-20px); }
 }
 
-/* Экраны блокировок и стартов */
+/* Экраны-оверлеи */
 .overlay-screen {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: rgba(255, 255, 255, 0.95);
-    z-index: 10;
+    z-index: 100;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -261,7 +256,7 @@ body, html {
 }
 
 .overlay-screen h2 { font-size: 2rem; margin-bottom: 10px; }
-.overlay-screen p { margin-bottom: 20px; max-width: 400px; color: #555; }
+.overlay-screen p { margin-bottom: 10px; max-width: 400px; color: #555; }
 .overlay-screen button {
     padding: 10px 25px;
     font-size: 1.1rem;
@@ -270,10 +265,52 @@ body, html {
     border: 2px solid #333;
     box-shadow: 3px 3px 0px #000;
     cursor: pointer;
+    margin-top: 10px;
+    font-family: 'Courier New', Courier, monospace;
 }
 .overlay-screen button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #000; }
 
-/* Предупреждение о перевороте экрана */
+/* Кнопка правил */
+#rules-btn {
+    background: #f1f5f9;
+    font-size: 1rem;
+}
+
+/* Экран правил */
+.rules-content {
+    max-width: 500px;
+    text-align: left;
+    margin: 15px 0;
+}
+
+.rules-content p {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+/* Game Over */
+.game-over-title {
+    font-size: 3rem;
+    color: #dc2626;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 3px 3px 0px #000;
+    animation: gameOverPulse 1.5s ease-in-out infinite;
+}
+
+.game-over-subtitle {
+    color: #dc2626;
+    font-weight: bold;
+    margin-bottom: 15px !important;
+}
+
+@keyframes gameOverPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Предупреждение о повороте */
 .screen-warning {
     display: none;
     position: fixed;
@@ -289,123 +326,17 @@ body, html {
     #game-container { display: none; }
 }
 
-/* ============================================== */
-/* ИСПРАВЛЕНИЯ ДЛЯ МОБИЛЬНЫХ (альбомный режим)    */
-/* ============================================== */
-@media (max-width: 900px) and (orientation: landscape) {
-    #game-container {
-        padding: 4px;
-        padding-top: max(4px, env(safe-area-inset-top));
-        padding-bottom: max(4px, env(safe-area-inset-bottom));
-        padding-left: max(4px, env(safe-area-inset-left));
-        padding-right: max(4px, env(safe-area-inset-right));
-    }
-
-    .top-panel {
-        margin-bottom: 2px;
-    }
-
-    .formula-display-container {
-        width: 180px;
-        min-height: 36px;
-    }
-
-    #formula-board {
-        font-size: 1.2rem;
-    }
-
-    .stats-row {
-        font-size: 0.75rem;
-        margin-top: 2px;
-    }
-
-    .side-panel {
-        padding: 4px;
-        min-width: 52px;
-    }
-
-    .ion-preview-slot {
-        width: 48px;
-        height: 48px;
-        font-size: 0.8rem;
-    }
-
-    .side-label {
-        font-size: 0.7rem;
-    }
-
-    .left-controls, .right-controls {
-        gap: 6px;
-    }
-
-    .control-btn {
-        width: 44px;
-        height: 44px;
-        font-size: 1.1rem;
-        border-radius: 6px;
-        box-shadow: 2px 2px 0px #000;
-    }
-
-    #chemistry-glass {
-        max-width: 100%;
-    }
-
-    .ion-block {
-        font-size: 0.6rem;
-    }
-
-    .overlay-screen h2 { font-size: 1.4rem; }
-    .overlay-screen p { font-size: 0.85rem; }
-    .overlay-screen button {
-        padding: 8px 18px;
-        font-size: 0.9rem;
-    }
+/* Адаптив для узких экранов */
+@media (max-width: 900px) {
+    .side-panel { min-width: 70px; padding: 6px; }
+    .control-btn { width: 48px; height: 48px; font-size: 1.3rem; }
+    .ion-preview-slot { width: 56px; height: 56px; }
 }
 
-/* Очень узкие экраны (маленькие телефоны в альбомном) */
-@media (max-width: 600px) and (orientation: landscape) {
-    .side-panel {
-        min-width: 42px;
-        padding: 2px;
-    }
-
-    .ion-preview-slot {
-        width: 38px;
-        height: 38px;
-        font-size: 0.65rem;
-    }
-
-    .side-label {
-        font-size: 0.6rem;
-        margin-bottom: 2px;
-    }
-
-    .control-btn {
-        width: 38px;
-        height: 38px;
-        font-size: 0.95rem;
-        border-radius: 5px;
-        box-shadow: 1px 1px 0px #000;
-    }
-
-    .left-controls, .right-controls {
-        gap: 4px;
-    }
-
-    .formula-display-container {
-        width: 130px;
-        min-height: 28px;
-    }
-
-    #formula-board {
-        font-size: 0.9rem;
-    }
-
-    .stats-row {
-        font-size: 0.65rem;
-    }
-
-    .ion-block {
-        font-size: 0.5rem;
-    }
+@media (max-width: 600px) {
+    .side-panel { min-width: 50px; padding: 4px; }
+    .control-btn { width: 40px; height: 40px; font-size: 1.1rem; }
+    .ion-preview-slot { width: 44px; height: 44px; }
+    .formula-display-container { width: 200px; height: 50px; }
+    #formula-board { font-size: 1.4rem; }
 }
