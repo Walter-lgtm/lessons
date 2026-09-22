@@ -2,82 +2,97 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- ИСПРАВЛЕНО: добавлен viewport-fit=cover для safe-area-inset -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Химический Тетрис: Ионный Баланс</title>
     <link rel="stylesheet" href="style.css">
+    <title>Химический Тетрис</title>
 </head>
 <body>
-    <!-- Заглушка для портретного режима -->
-    <div id="landscape-warning" class="screen-warning">
-        <div class="warning-content">
-            <div class="phone-icon">🔄</div>
-            <p>Переверните устройство в альбомный режим для химического эксперимента 🧪</p>
-        </div>
+
+    <!-- Предупреждение о повороте экрана -->
+    <div class="screen-warning">
+        <div class="phone-icon">📱</div>
+        <p>Поверните телефон горизонтально</p>
     </div>
 
-    <!-- Главный экран игры -->
+    <!-- Главный контейнер -->
     <div id="game-container">
-        
-        <!-- Верхняя информационная панель -->
-        <header class="top-panel">
+        <!-- Верхняя панель -->
+        <div class="top-panel">
             <div class="formula-display-container">
-                <!-- Главное табло для получившейся формулы -->
                 <div id="formula-board">—</div>
             </div>
             <div class="stats-row">
-                <div class="stat-item">Level: <span id="level-val">01</span></div>
-                <div class="stat-item">Score: <span id="score-val">00000</span></div>
+                <span>Уровень: <strong id="level-val">01</strong></span>
+                <span>Очки: <strong id="score-val">00000</strong></span>
             </div>
-        </header>
+        </div>
 
         <!-- Основная игровая зона -->
         <div class="main-game-area">
-            
-            <!-- Левая панель: Пауза, Следующий ион и Стрелка влево -->
-            <aside class="side-panel left-side">
+            <!-- Левая панель -->
+            <div class="side-panel left-side">
                 <div class="next-box-container">
                     <span class="side-label">Next</span>
-                    <div id="next-ion-preview" class="ion-preview-slot"></div>
+                    <div class="ion-preview-slot" id="next-ion-preview"></div>
                 </div>
                 <div class="left-controls">
-                    <button id="btn-pause" class="control-btn icon-btn">⏸️</button>
-                    <button id="btn-left" class="control-btn arrow-btn">◀️</button>
+                    <button class="control-btn" id="btn-left">◀</button>
                 </div>
-            </aside>
+            </div>
 
-            <!-- Центральный игровой стакан Тетриса -->
-            <main class="glass-container">
-                <div id="chemistry-glass">
-                    <!-- Сюда JS будет рендерить сетку и падающие плашки -->
-                    
-                    <!-- Стартовый экран поверх стакана -->
-                    <div id="start-screen" class="overlay-screen">
-                        <h2>Химический Тетрис</h2>
-                        <p>Соединяй катионы (+) и анионы (-), нейтрализуй заряды и получай вещества!</p>
-                        <button id="start-btn">Запустить реакцию</button>
-                    </div>
+            <!-- Игровой стакан -->
+            <div class="glass-container">
+                <div id="chemistry-glass"></div>
+            </div>
 
-                    <!-- Экран Game Over -->
-                    <div id="gameover-screen" class="overlay-screen" style="display: none;">
-                        <h2>Стакан переполнен!</h2>
-                        <p>Реакция остановилась. Ваш счет: <span id="final-score">0</span></p>
-                        <button id="restart-btn">Повторить опыт</button>
-                    </div>
-                </div>
-            </main>
-
-            <!-- Правая панель: Стрелки вниз и вправо -->
-            <aside class="side-panel right-side">
+            <!-- Правая панель -->
+            <div class="side-panel right-side">
                 <div class="right-controls">
-                    <button id="btn-down" class="control-btn arrow-btn">🔽</button>
-                    <button id="btn-right" class="control-btn arrow-btn">▶️</button>
+                    <button class="control-btn" id="btn-down">▼</button>
+                    <button class="control-btn" id="btn-right">▶</button>
                 </div>
-            </aside>
-
+                <button class="control-btn" id="btn-pause">⏸</button>
+            </div>
         </div>
+
+        <!-- Кнопка звука (внизу справа) -->
+        <button class="control-btn audio-toggle" id="btn-audio" title="Включить/выключить звук">🔊</button>
     </div>
+
+    <!-- Стартовый экран -->
+    <div class="overlay-screen" id="start-screen">
+        <h2>Химический Тетрис</h2>
+        <p>Соединяй ионы противоположных зарядов, чтобы получить вещества!</p>
+        <button id="start-btn">Запустить реакцию</button>
+        <button id="rules-btn">Правила игры</button>
+    </div>
+
+    <!-- Экран правил -->
+    <div class="overlay-screen" id="rules-screen" style="display: none;">
+        <h2>Правила игры</h2>
+        <div class="rules-content">
+            <p><strong>1.</strong> Плашки с ионами падают в стакан (терминал).</p>
+            <p><strong>2.</strong> Управление: ◀ ▶ — движение в стороны, ▼ — быстрое падение, ⏸ — пауза.</p>
+            <p><strong>3.</strong> Катионы (красные, +) и анионы (синие, −) соединяются, если их заряды уравновешены.</p>
+            <p><strong>4.</strong> Если рядом с ионом достаточно ионов противоположного заряда — образуется вещество. Плашки исчезают, вы получаете очки.</p>
+            <p><strong>5.</strong> Осадок (↓) — 50 бонусных очков. Газ (↑) — 70 бонусных очков.</p>
+            <p><strong>6.</strong> Если стакан заполнится до верха — Game Over!</p>
+        </div>
+        <button id="rules-close-btn">Понятно, играть!</button>
+    </div>
+
+    <!-- Экран Game Over -->
+    <div class="overlay-screen" id="gameover-screen" style="display: none;">
+        <h2 class="game-over-title">Game Over</h2>
+        <p>Ваш результат: <strong id="final-score">0</strong> очков</p>
+        <p class="game-over-subtitle">Стакан переполнен!</p>
+        <button id="restart-btn">Повторить опыт</button>
+    </div>
+
+    <!-- Аудиоплеер (файл music.mp3 должен лежать рядом с index.html) -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
 
     <script src="script.js"></script>
 </body>
