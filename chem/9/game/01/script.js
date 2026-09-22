@@ -492,7 +492,7 @@ function startGame() {
     clearInterval(gameInterval);
     gameInterval = setInterval(dropPiece, dropSpeed);
 
-    startMusic();
+    stopMusic(); // ← было startMusic()
 }
 
 function togglePause() {
@@ -500,12 +500,7 @@ function togglePause() {
     isPaused = !isPaused;
     pauseBtn.textContent = isPaused ? '▶️' : '⏸️';
     showFormula(isPaused ? 'ПАУЗА' : '—');
-
-    if (isPaused) {
-        pauseMusic();
-    } else {
-        resumeMusic();
-    }
+    // Убрали pauseMusic() и resumeMusic()
 }
 
 function updateNextPreview() {
@@ -517,7 +512,7 @@ function updateNextPreview() {
 function gameOver() {
     isGameRunning = false;
     clearInterval(gameInterval);
-    stopMusic();
+    // Убрали stopMusic()
 
     document.getElementById('game-container').classList.add('hidden');
     document.getElementById('gameover-screen').classList.remove('hidden');
@@ -528,12 +523,13 @@ function backToMenu() {
     isGameRunning = false;
     isPaused = false;
     clearInterval(gameInterval);
-    stopMusic();
 
     document.getElementById('game-container').classList.add('hidden');
     document.getElementById('rules-screen').classList.add('hidden');
     document.getElementById('gameover-screen').classList.add('hidden');
     document.getElementById('start-screen').classList.remove('hidden');
+
+    startMusic(); // ← было stopMusic() — снова играем в меню
 }
 
 function showRules() {
@@ -609,3 +605,5 @@ restartFromMenuBtn.addEventListener('click', backToMenu);
 toggleSoundBtn.addEventListener('click', toggleSound);
 
 setupMobileControls();
+// Музыка на стартовом экране
+startMusic();
