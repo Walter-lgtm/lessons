@@ -1,342 +1,164 @@
-/* Базовый сброс и защита от багов мобильного тапа */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-}
+/* Базовые настройки */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Courier New', Courier, monospace; }
 
-body, html {
-    width: 100%;
-    height: 100dvh;
+body {
+    background-color: #121212;
+    color: #ffb000;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
     overflow: hidden;
-    font-family: 'Courier New', Courier, monospace;
-    background-color: #121214;
-    color: #333;
 }
 
-#game-container {
+/* Слои экранов */
+.screen-layer {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100dvh;
-    background: #f8f9fa;
-    padding: 10px;
-    position: relative;
-}
-
-/* Верхняя панель */
-.top-panel {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 5px;
-}
-
-.formula-display-container {
-    border: 2px solid #333;
-    background: #fff;
-    width: 250px;
-    height: 60px;
-    display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 2px 2px 0px #000;
+    z-index: 10;
 }
+.hidden { display: none !important; }
 
-#formula-board {
-    font-size: 1.8rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
+h1 { font-size: 2.5rem; margin-bottom: 1rem; text-shadow: 2px 2px #000; }
+h2 { font-size: 1.8rem; margin-bottom: 1rem; }
+p { margin-bottom: 1.5rem; max-width: 600px; text-align: center; }
+ol { text-align: left; max-width: 600px; margin-bottom: 1.5rem; }
 
-#formula-board sub {
-    font-size: 1rem;
-    bottom: -0.2em;
-}
-
-.stats-row {
-    display: flex;
-    justify-content: space-between;
-    width: 60%;
-    max-width: 600px;
-    margin-top: 5px;
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-/* Основная игровая зона */
-.main-game-area {
-    display: flex;
-    flex: 1;
-    width: 100%;
-    height: calc(100% - 90px);
-    min-height: 0;
-}
-
-/* Боковые панели */
-.side-panel {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 10px;
-    min-width: 100px;
-    flex-shrink: 0;
-}
-
-.left-side {
-    align-items: flex-start;
-    justify-content: space-between;
-}
-
-.right-side {
-    align-items: flex-end;
-}
-
-.next-box-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.side-label {
-    font-size: 0.9rem;
-    font-weight: bold;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-}
-
-.ion-preview-slot {
-    width: 70px;
-    height: 70px;
-    border: 2px solid #333;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 2px 2px 0px #000;
-}
-
-/* Контейнеры кнопок */
-.left-controls, .right-controls {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.right-controls {
-    flex-direction: row;
-}
-
-/* Кнопки управления */
-.control-btn {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
-    background: #fff;
-    border: 2px solid #333;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.main-btn {
+    width: 260px; height: 56px;
+    font-size: 1.2rem; font-weight: bold;
+    background: #fff; border: 2px solid #333;
+    border-radius: 8px; cursor: pointer;
     box-shadow: 3px 3px 0px #000;
     transition: transform 0.05s, box-shadow 0.05s;
-    flex-shrink: 0;
 }
-
-.control-btn:active {
-    transform: translate(2px, 2px);
-    box-shadow: 1px 1px 0px #000;
+.main-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #000; }
+.secondary-btn {
+    width: 260px; height: 48px;
+    font-size: 1rem;
+    background: transparent; border: 2px solid #ffb000; color: #ffb000;
+    border-radius: 8px; cursor: pointer;
+    box-shadow: 3px 3px 0px #000;
+    margin-top: 10px;
 }
+.secondary-btn:active { transform: translate(2px, 2px); }
 
-/* Кнопка звука */
-.audio-toggle {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    width: 44px;
-    height: 44px;
-    font-size: 1.2rem;
-    z-index: 50;
-    opacity: 0.7;
-}
-
-/* Игровой стакан */
-.glass-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    min-width: 0;
-}
-
-#chemistry-glass {
+/* Игровой макет */
+.game-layout {
     position: relative;
     width: 100%;
     height: 100%;
-    max-width: 560px;
-    background: #fff;
-    border: 2px solid #333;
-    box-shadow: 4px 4px 0px #000;
-    overflow: hidden;
-    display: grid;
-    grid-template-columns: repeat(14, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    aspect-ratio: 14 / 8;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    padding-bottom: 8px;
 }
 
-.grid-cell {
-    border: 1px dashed #e2e8f0;
-}
-
-.ion-block {
-    position: absolute;
-    width: calc(100% / 14);
-    height: calc(100% / 8);
+.top-panel {
+    width: 100%;
+    min-height: 70px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 0.9rem;
-    background: #fff;
-    border: 2px solid #333;
-    box-shadow: inset -2px -2px 0px rgba(0,0,0,0.1);
-    box-sizing: border-box;
-    transition: all 0.1s ease;
-    z-index: 2;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0 10px 10px;
+}
+.stat-box {
+    display: flex; flex-direction: column; align-items: center;
+}
+.stat-label { font-size: 0.8rem; color: #aaa; text-transform: uppercase; }
+.stat-value { font-size: 1.4rem; font-weight: bold; color: #ffb000; }
+
+.ion-preview-slot {
+    width: 70px; height: 70px;
+    border: 2px solid #333; background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 2px 2px 0px #000;
+    color: black;
 }
 
-.ion-block img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.left-controls, .right-controls {
+    display: flex; flex-direction: column; gap: 15px; min-width: 72px;
+}
+.right-controls { flex-direction: row; }
+
+.control-btn {
+    width: 60px; height: 60px; font-size: 1.5rem;
+    background: #fff; border: 2px solid #333; border-radius: 8px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    box-shadow: 3px 3px 0px #000;
+    transition: transform 0.05s, box-shadow 0.05s;
+}
+.control-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #000; }
+
+.glass-container {
+    flex: 1; display: flex; justify-content: center; align-items: flex-start;
+    position: relative; min-width: 0;
+}
+#chemistry-glass {
+    aspect-ratio: 14 / 8;
+    max-width: 96vw;
+    max-height: calc(100dvh - 180px);
+    background: #000; border: 4px solid #333;
+    position: relative; overflow: hidden;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+}
+.grid-cell {
+    position: absolute;
+}
+.ion-block {
+    position: absolute; width: calc(100% / 14); height: calc(100% / 8);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    pointer-events: none;
+    user-select: none;
 }
 
-/* Эффекты реакций */
-.effect-precipitate {
-    animation: precipitateFall 0.5s forwards;
+/* Анимация реакции — «подпрыгивание» */
+.reaction-bounce {
+    animation: bounce 0.3s forwards;
 }
-
-.effect-gas {
-    animation: gasFading 0.4s linear infinite;
-}
-
-@keyframes precipitateFall {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); filter: brightness(1.2); }
+@keyframes bounce {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(0.85); opacity: 0.7; }
     100% { transform: scale(0); opacity: 0; }
 }
 
-@keyframes gasFading {
-    0% { opacity: 1; filter: contrast(200%) grayscale(100%); transform: translate(1px, 1px); }
-    50% { opacity: 0.5; filter: blur(1px); transform: translate(-1px, -1px); }
-    100% { opacity: 0; transform: translateY(-20px); }
+.formula-board {
+    position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+    font-size: 1.1rem; font-weight: bold; text-align: center;
+    text-shadow: 2px 2px #000; z-index: 20;
 }
 
-/* Экраны-оверлеи */
-.overlay-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    text-align: center;
+.mobile-controls-wrapper {
+    position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 12px; padding: 6px 4px;
+    background: rgba(248, 249, 250, 0.95); border-top: 1px solid #ccc;
+    z-index: 50;
 }
 
-.overlay-screen h2 { font-size: 2rem; margin-bottom: 10px; }
-.overlay-screen p { margin-bottom: 10px; max-width: 400px; color: #555; }
-.overlay-screen button {
-    padding: 10px 25px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    background: #fff;
-    border: 2px solid #333;
-    box-shadow: 3px 3px 0px #000;
-    cursor: pointer;
-    margin-top: 10px;
-    font-family: 'Courier New', Courier, monospace;
-}
-.overlay-screen button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #000; }
-
-/* Кнопка правил */
-#rules-btn {
-    background: #f1f5f9;
-    font-size: 1rem;
+.sound-toggle-btn {
+    width: 44px; height: 44px; font-size: 1.2rem;
+    background: #fff; border: 2px solid #333; border-radius: 8px;
+    cursor: pointer; box-shadow: 3px 3px 0px #000;
 }
 
-/* Экран правил */
-.rules-content {
-    max-width: 500px;
-    text-align: left;
-    margin: 15px 0;
-}
+/* Game Over стили */
+.gameover-title { color: #ef4444; text-shadow: 2px 2px #000; animation: shake 0.5s infinite alternate; }
+.gameover-subtitle { color: #fca5a5; margin-bottom: 1rem; }
+.score-display { margin: 1rem 0; text-align: center; font-size: 1.2rem; }
+@keyframes shake { from { transform: translateX(-4px); } to { transform: translateX(4px); } }
 
-.rules-content p {
-    margin-bottom: 8px;
-    font-size: 1rem;
-    line-height: 1.4;
-}
-
-/* Game Over */
-.game-over-title {
-    font-size: 3rem;
-    color: #dc2626;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    text-shadow: 3px 3px 0px #000;
-    animation: gameOverPulse 1.5s ease-in-out infinite;
-}
-
-.game-over-subtitle {
-    color: #dc2626;
-    font-weight: bold;
-    margin-bottom: 15px !important;
-}
-
-@keyframes gameOverPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-/* Предупреждение о повороте */
-.screen-warning {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: #121214; color: #fff;
-    z-index: 9999; justify-content: center; align-items: center; text-align: center;
-}
-.phone-icon { font-size: 3rem; animation: rotatePhone 2s infinite ease-in-out; margin-bottom: 15px; }
-@keyframes rotatePhone { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(90deg); } }
-
-@media (orientation: portrait) {
-    .screen-warning { display: flex; }
-    #game-container { display: none; }
-}
-
-/* Адаптив для узких экранов */
-@media (max-width: 900px) {
-    .side-panel { min-width: 70px; padding: 6px; }
-    .control-btn { width: 48px; height: 48px; font-size: 1.3rem; }
-    .ion-preview-slot { width: 56px; height: 56px; }
-}
-
-@media (max-width: 600px) {
-    .side-panel { min-width: 50px; padding: 4px; }
-    .control-btn { width: 40px; height: 40px; font-size: 1.1rem; }
-    .ion-preview-slot { width: 44px; height: 44px; }
-    .formula-display-container { width: 200px; height: 50px; }
-    #formula-board { font-size: 1.4rem; }
+/* Адаптив для мобильных */
+@media (max-width: 768px) {
+    .game-layout { flex-direction: column; }
+    .top-panel { flex-direction: column; align-items: stretch; }
+    .side-panel { display: none; }
+    .mobile-controls-wrapper { display: flex; }
+    #chemistry-glass { max-height: calc(100dvh - 220px); }
 }
