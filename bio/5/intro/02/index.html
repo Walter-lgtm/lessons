@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>§2. Биология — система наук о живой природе</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Экран ввода данных ученика -->
+    <div id="auth-screen" class="bio-card">
+        <div class="card-header">
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z"></path>
+                <path d="M12 14a2 2 0 100 4 2 2 0 000-4z"></path>
+            </svg>
+            <h2>Регистрация участника</h2>
+        </div>
+        <p class="card-subtitle">Заполните данные, чтобы приступить к заданиям.</p>
+        <div class="input-group">
+            <label for="student-name">Фамилия и имя:</label>
+            <input type="text" id="student-name" placeholder="Иванов Иван" autocomplete="off">
+        </div>
+        <div class="input-group">
+            <label for="student-class">Класс:</label>
+            <input type="text" id="student-class" placeholder="5А" autocomplete="off">
+        </div>
+        <button id="start-btn" class="btn-primary">Начать работу</button>
+    </div>
+
+    <!-- Основной контейнер с заданиями -->
+    <div id="quiz-container" class="hidden">
+        <header class="page-header">
+            <div class="header-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2C8 6 6 10 6 14a6 6 0 0012 0c0-4-2-8-6-12z"></path>
+                    <path d="M12 14a2 2 0 100 4 2 2 0 000-4z"></path>
+                </svg>
+                <span>Биология</span>
+            </div>
+            <h1>Биологический модуль</h1>
+            <p>Тема: Биология — система наук о живой природе</p>
+        </header>
+
+        <!-- ЗАДАНИЕ 1 -->
+        <section class="task-card">
+            <h3>Задание 1. Соотнеси науки с объектами изучения</h3>
+            <p class="question-text">Соедини науку и то, что она изучает.</p>
+            <div class="match-container">
+                <div class="match-col" id="left-col">
+                    <div class="match-item" data-id="botany">Ботаника</div>
+                    <div class="match-item" data-id="genetics">Генетика</div>
+                    <div class="match-item" data-id="zoology">Зоология</div>
+                    <div class="match-item" data-id="mycology">Микология</div>
+                    <div class="match-item" data-id="cytology">Цитология</div>
+                </div>
+                <div class="match-col" id="right-col">
+                    <div class="match-target" data-id="cytology">Клетка</div>
+                    <div class="match-target" data-id="zoology">Животные</div>
+                    <div class="match-target" data-id="genetics">Наследственность и изменчивость</div>
+                    <div class="match-target" data-id="botany">Растения</div>
+                    <div class="match-target" data-id="mycology">Грибы</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 2 -->
+        <section class="task-card">
+            <h3>Задание 2. Выбери верный ответ</h3>
+            <div class="select-gaps">
+                <p>
+                    <select class="form-select" id="t2-select1">
+                        <option value="" disabled selected>...</option>
+                        <option value="Экология">Экология</option>
+                        <option value="Биология">Биология</option>
+                        <option value="Анатомия">Анатомия</option>
+                    </select>
+                    изучает строение и жизнедеятельность организмов, их многообразие, сообщества, связи с окружающей средой.
+                </p>
+                <p>
+                    Людей, профессионально занимающихся научной деятельностью, называют научными работниками или 
+                    <select class="form-select" id="t2-select2">
+                        <option value="" disabled selected>...</option>
+                        <option value="учёными">учёными</option>
+                        <option value="учителями">учителями</option>
+                        <option value="лаборантами">лаборантами</option>
+                    </select>.
+                </p>
+                <p>
+                    Способом изучения и познания окружающего мира человеком является 
+                    <select class="form-select" id="t2-select3">
+                        <option value="" disabled selected>...</option>
+                        <option value="опыт">опыт</option>
+                        <option value="наука">наука</option>
+                        <option value="фантазия">фантазия</option>
+                    </select>.
+                </p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 3 -->
+        <section class="task-card">
+            <h3>Задание 3. Выбери верный ответ</h3>
+            <p class="question-text">Какая наука изучает индивидуальное развитие организмов?</p>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="q3" value="Физиология"><span></span> Физиология</label>
+                <label class="radio-label"><input type="radio" name="q3" value="Вирусология"><span></span> Вирусология</label>
+                <label class="radio-label"><input type="radio" name="q3" value="Генетика"><span></span> Генетика</label>
+                <label class="radio-label"><input type="radio" name="q3" value="Эмбриология"><span></span> Эмбриология</label>
+                <label class="radio-label"><input type="radio" name="q3" value="Биохимия"><span></span> Биохимия</label>
+                <label class="radio-label"><input type="radio" name="q3" value="Ботаника"><span></span> Ботаника</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 4 -->
+        <section class="task-card">
+            <h3>Задание 4. Вставь названия профессий</h3>
+            <p class="question-text">Перенеси на место пропусков верные названия профессий.</p>
+            <div class="drag-words-container" id="words-t4">
+                <span class="drag-word" draggable="true" data-word="Инженер-эколог">Инженер-эколог</span>
+                <span class="drag-word" draggable="true" data-word="Ветеринар">Ветеринар</span>
+                <span class="drag-word" draggable="true" data-word="Агроном">Агроном</span>
+                <span class="drag-word" draggable="true" data-word="Зоотехник">Зоотехник</span>
+                <span class="drag-word" draggable="true" data-word="Селекционер">Селекционер</span>
+            </div>
+            <div class="text-gaps">
+                <p><span class="drop-gap" data-answer="Ветеринар"></span> — специалист, который занимается разведением и содержанием сельскохозяйственных животных, профилактикой и лечением их заболеваний.</p>
+                <p><span class="drop-gap" data-answer="Агроном"></span> — специалист в области земледелия.</p>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 5 -->
+        <section class="task-card">
+            <h3>Задание 5. Выбери верный ответ</h3>
+            <p class="question-text">Из перечисленных наук выбери науку, наиболее связанную с биологией:</p>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="q5" value="Химия"><span></span> Химия</label>
+                <label class="radio-label"><input type="radio" name="q5" value="История"><span></span> История</label>
+                <label class="radio-label"><input type="radio" name="q5" value="Обществознание"><span></span> Обществознание</label>
+                <label class="radio-label"><input type="radio" name="q5" value="Математика"><span></span> Математика</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 6 -->
+        <section class="task-card">
+            <h3>Задание 6. Выбери верные ответы</h3>
+            <div class="image-wrapper" style="text-align: center; margin-bottom: 20px;">
+                <!-- Замените lab_1.jpg на имя вашего файла изображения -->
+                <img src="lab_1.jpg" alt="Лабораторная посуда" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); background: #fff; padding: 4px;">
+            </div>
+            <p class="question-text">Какую лабораторную посуду, изображённую на рисунке, можно использовать для измерения объёма?</p>
+            <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" name="q6" value="Воронку"><span></span> Воронку</label>
+                <label class="checkbox-label"><input type="checkbox" name="q6" value="Колбу плоскодонную"><span></span> Колбу плоскодонную</label>
+                <label class="checkbox-label"><input type="checkbox" name="q6" value="Пипетку"><span></span> Пипетку</label>
+                <label class="checkbox-label"><input type="checkbox" name="q6" value="Мерный цилиндр"><span></span> Мерный цилиндр</label>
+                <label class="checkbox-label"><input type="checkbox" name="q6" value="Чашки Петри"><span></span> Чашки Петри</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 7 -->
+        <section class="task-card">
+            <h3>Задание 7. Выбери верные утверждения</h3>
+            <p class="question-text">Выбери правильные правила поведения в лаборатории.</p>
+            <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" name="q7" value="1"><span></span> В лаборатории можно принимать пищу.</label>
+                <label class="checkbox-label"><input type="checkbox" name="q7" value="2"><span></span> В лаборатории нельзя нюхать незнакомые вещества.</label>
+                <label class="checkbox-label"><input type="checkbox" name="q7" value="3"><span></span> По окончании работы все приборы должны быть возвращены на своё место.</label>
+                <label class="checkbox-label"><input type="checkbox" name="q7" value="4"><span></span> Для питья можно использовать лабораторную посуду.</label>
+                <label class="checkbox-label"><input type="checkbox" name="q7" value="5"><span></span> При проведении практической работы нужно точно следовать всем указаниям учителя.</label>
+                <label class="checkbox-label"><input type="checkbox" name="q7" value="6"><span></span> Приборы и вещества в лаборатории можно трогать без разрешения учителя.</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 8 -->
+        <section class="task-card">
+            <h3>Задание 8. Выбери верные утверждения</h3>
+            <p class="question-text">Выбери верные факты о лабораторной посуде и оборудовании.</p>
+            <div class="checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" name="q8" value="1"><span></span> Лабораторное оборудование изготавливают только из металла.</label>
+                <label class="checkbox-label"><input type="checkbox" name="q8" value="2"><span></span> Для переливания жидкостей применяют воронки.</label>
+                <label class="checkbox-label"><input type="checkbox" name="q8" value="3"><span></span> Для изготовления лабораторной посуды применяют только обычное стекло.</label>
+                <label class="checkbox-label"><input type="checkbox" name="q8" value="4"><span></span> Для отбора определённого количества жидкости используют пипетки.</label>
+                <label class="checkbox-label"><input type="checkbox" name="q8" value="5"><span></span> Для перенесения твёрдых веществ берут шпатели.</label>
+                <label class="checkbox-label"><input type="checkbox" name="q8" value="6"><span></span> Чашка Петри имеет форму высокого цилиндра.</label>
+            </div>
+        </section>
+
+        <!-- ЗАДАНИЕ 9 -->
+        <section class="task-card">
+            <h3>Задание 9. Заполни пропуски</h3>
+            <div class="text-inputs-block">
+                <p>Биология — наука, которая изучает ж<input type="text" class="inline-input" id="t9-i1" placeholder="..." autocomplete="off"> во всех её проявлениях.</p>
+                <br>
+                <p>Живые организмы на нашей планете обитают на с<input type="text" class="inline-input" id="t9-i2" placeholder="..." autocomplete="off"> , в в<input type="text" class="inline-input" id="t9-i3" placeholder="..." autocomplete="off"> , в п<input type="text" class="inline-input" id="t9-i4" placeholder="..." autocomplete="off"> , область распространения жизни в этих средах составляет оболочку Земли — б<input type="text" class="inline-input" id="t9-i5" placeholder="..." autocomplete="off"> .</p>
+            </div>
+        </section>
+
+        <!-- Кнопка отправки -->
+        <div class="submit-wrapper">
+            <button id="submit-quiz-btn" class="btn-primary large">Отправить результаты</button>
+        </div>
+    </div>
+
+    <!-- Финальный экран результатов -->
+    <div id="result-screen" class="bio-card hidden">
+        <div class="card-header">
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <h2>Работа завершена</h2>
+        </div>
+        <p class="card-subtitle">Результаты успешно сохранены.</p>
+        <div class="score-board">
+            <p>Ученик: <span id="res-name"></span></p>
+            <p>Класс: <span id="res-class"></span></p>
+            <p class="total-score">Итоговый балл: <span id="res-score">0</span> / 9</p>
+            <p class="total-score" style="margin-top: 10px; color: #2e7d32;">Оценка: <span id="res-grade" style="font-size: 1.5rem; text-decoration: underline;">-</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
