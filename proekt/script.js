@@ -774,7 +774,7 @@ function resetSurvey() {
 // 5. Замените значения ниже
 
 const GOOGLE_FORM_CONFIG = {
-    formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSe-44WRxhZXVTSv1vZ4gi3j_t6YTU0mYhEIHmrn0a4mNGYKxA/viewform?usp=preview',
+    formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSe-44WRxhZXVTSv1vZ4gi3j_t6YTU0mYhEIHmrn0a4mNGYKxA/formResponse',
     fields: {
         studentName: 'entry.2125414691',
         direction: 'entry.2064919858'
