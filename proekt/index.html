@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Проектная деятельность — ХимБио 10</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+<!-- ЭКРАН: ГЛАВНОЕ МЕНЮ -->
+<section id="screen-main" class="screen active">
+  <div class="header">
+    <h1>Проектная деятельность</h1>
+    <p class="subtitle">Химико-биологический класс · 10 класс · 30 учеников</p>
+  </div>
+  <div class="menu-grid">
+    <button class="menu-btn" onclick="showScreen('screen-survey')">
+      <span class="btn-icon">&#128221;</span>
+      <span class="btn-title">Пройти анкетирование</span>
+      <span class="btn-desc">«Какой проект мне выбрать?»</span>
+    </button>
+    <button class="menu-btn" onclick="showScreen('screen-topics')">
+      <span class="btn-icon">&#128218;</span>
+      <span class="btn-title">Темы индивидуальных проектов</span>
+      <span class="btn-desc">40 тем с планами работы</span>
+    </button>
+    <button class="menu-btn" onclick="showScreen('screen-bv')">
+      <span class="btn-icon">&#127942;</span>
+      <span class="btn-title">Большие вызовы</span>
+      <span class="btn-desc">Конкурс научно-технологических проектов</span>
+    </button>
+    <button class="menu-btn" onclick="showScreen('screen-sirius')">
+      <span class="btn-icon">&#128640;</span>
+      <span class="btn-title">Сириус.Лето</span>
+      <span class="btn-desc">Технические задания от партнёров</span>
+    </button>
+    <button class="menu-btn" onclick="showScreen('screen-calendar')">
+      <span class="btn-icon">&#128197;</span>
+      <span class="btn-title">Календарь проектной деятельности</span>
+      <span class="btn-desc">График работы: сентябрь — апрель</span>
+    </button>
+    <button class="menu-btn" onclick="showScreen('screen-report')">
+      <span class="btn-icon">&#128196;</span>
+      <span class="btn-title">Структура отчёта</span>
+      <span class="btn-desc">Требования к защите</span>
+    </button>
+    <button class="menu-btn" onclick="showScreen('screen-resources')">
+      <span class="btn-icon">&#128279;</span>
+      <span class="btn-title">Полезные ресурсы</span>
+      <span class="btn-desc">Базы данных, курсы, ГОСТы</span>
+    </button>
+    <button class="menu-btn" onclick="showScreen('screen-checklist')">
+      <span class="btn-icon">&#9989;</span>
+      <span class="btn-title">Чек-лист готовности к защите</span>
+      <span class="btn-desc">Финальная проверка перед апрелем</span>
+    </button>
+  </div>
+</section>
+
+<!-- ЭКРАН: АНКЕТИРОВАНИЕ -->
+<section id="screen-survey" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-main')">&#8592; Назад</button>
+  <h2>Анкетирование «Какой проект мне выбрать?»</h2>
+  <div id="survey-container"></div>
+</section>
+
+<!-- ЭКРАН: ТЕМЫ ПРОЕКТОВ -->
+<section id="screen-topics" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-main')">&#8592; Назад</button>
+  <h2>Темы индивидуальных проектов</h2>
+  <div class="filter-bar" id="topic-filters"></div>
+  <div id="topics-list"></div>
+</section>
+
+<!-- ЭКРАН: БОЛЬШИЕ ВЫЗОВЫ -->
+<section id="screen-bv" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-main')">&#8592; Назад</button>
+  <h2>Конкурс «Большие вызовы»</h2>
+  <div id="bv-container"></div>
+</section>
+
+<!-- ЭКРАН: СИРИУС.ЛЕТО -->
+<section id="screen-sirius" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-main')">&#8592; Назад</button>
+  <h2>Технические задания от партнёров Сириус.Лето</h2>
+  <div id="sirius-container"></div>
+</section>
+
+<!-- ЭКРАН: КАЛЕНДАРЬ -->
+<section id="screen-calendar" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-main')">&#8592; Назад</button>
+  <h2>Календарь проектной деятельности</h2>
+  <div id="calendar-container"></div>
+</section>
+
+<!-- ЭКРАН: ОТЧЁТ -->
+<section id="screen-report" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-main')">&#8592; Назад</button>
+  <h2>Структура отчёта и требования к защите</h2>
+  <div id="report-container"></div>
+</section>
+
+<!-- ЭКРАН: РЕСУРСЫ -->
+<section id="screen-resources" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-main')">&#8592; Назад</button>
+  <h2>Полезные ресурсы</h2>
+  <div id="resources-container"></div>
+</section>
+
+<!-- ЭКРАН: ЧЕК-ЛИСТ -->
+<section id="screen-checklist" class="screen">
+  <button class="back-btn" onclick="showScreen('screen-main')">&#8592; Назад</button>
+  <h2>Чек-лист готовности к защите</h2>
+  <div id="checklist-container"></div>
+</section>
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>
