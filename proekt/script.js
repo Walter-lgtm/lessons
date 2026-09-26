@@ -5,9 +5,9 @@
 
 // --- КОНФИГУРАЦИЯ GOOGLE ФОРМЫ ---
 const GOOGLE_FORM_CONFIG = {
-  formUrl: 'https://docs.google.com/forms/d/REPLACE_FORM_ID/formResponse',
-  fieldName: 'entry.REPLACE_NAME_FIELD_ID',
-  fieldDirection: 'entry.REPLACE_DIRECTION_FIELD_ID'
+  formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSe-44WRxhZXVTSv1vZ4gi3j_t6YTU0mYhEIHmrn0a4mNGYKxA/formResponse',
+  fieldName: 'entry.2125414691',
+  fieldDirection: 'entry.2064919858'
 };
 
 // --- ДАННЫЕ: 40 ТЕМ ПРОЕКТОВ ---
