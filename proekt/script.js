@@ -774,10 +774,10 @@ function resetSurvey() {
 // 5. Замените значения ниже
 
 const GOOGLE_FORM_CONFIG = {
-    formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSc_REPLACE_WITH_YOUR_FORM_ID/formResponse',
+    formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSe-44WRxhZXVTSv1vZ4gi3j_t6YTU0mYhEIHmrn0a4mNGYKxA/viewform?usp=preview',
     fields: {
-        studentName: 'entry.REPLACE_NAME_FIELD_ID',
-        direction: 'entry.REPLACE_DIRECTION_FIELD_ID'
+        studentName: 'entry.2125414691',
+        direction: 'entry.2064919858'
     }
 };
 
