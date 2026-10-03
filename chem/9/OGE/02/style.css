@@ -1,0 +1,320 @@
+/* ==========================================================================
+   1. ПЕРЕМЕННЫЕ И БАЗОВЫЕ НАСТРОЙКИ
+   ========================================================================== */
+:root {
+    --primary-color: #4a6fa5;
+    --primary-hover: #3b5984;
+    --success-color: #2ec4b6;
+    --error-color: #e63946;
+    --background-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    --card-bg: #ffffff;
+    --text-main: #2b2d42;
+    --text-muted: #8d99ae;
+    --border-radius: 16px;
+    --transition-speed: 0.3s;
+    --shadow-subtle: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent; /* Убирает синее выделение при клике на смартфонах */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--background-gradient);
+    min-height: 100vh;
+    color: var(--text-main);
+    line-height: 1.5;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 16px;
+}
+
+/* ==========================================================================
+   2. КОНТЕЙНЕРЫ И КАРТОЧКИИНТЕРФЕЙСА
+   ========================================================================== */
+.app-container {
+    width: 100%;
+    max-width: 500px; /* Идеальная ширина для мобильных и планшетов */
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px 0;
+}
+
+header h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #1d3557;
+    margin-bottom: 4px;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    box-shadow: var(--shadow-subtle);
+    margin-bottom: 16px;
+    transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+   3. КНОПКИ И ПОЛЯ ВВОДА (UI ELEMENTS)
+   ========================================================================== */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1.1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    background-color: #f8fafc;
+    color: var(--text-main);
+    outline: none;
+    transition: border-color var(--transition-speed);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: var(--primary-color);
+    background-color: #fff;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(74, 111, 165, 0.2);
+    transition: background-color var(--transition-speed), transform 0.1s;
+    text-align: center;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn.secondary {
+    background-color: #edf2f7;
+    color: #4a5568;
+    box-shadow: none;
+    margin-top: 20px;
+}
+/* ==========================================================================
+   4. ИНТЕРФЕЙС ТЕСТА И ХИМИЧЕСКИЕ ТАБЛИЦЫ
+   ========================================================================== */
+.quiz-header {
+    margin-bottom: 20px;
+}
+
+#progress-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 6px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#progress-fill {
+    height: 100%;
+    width: 0%;
+    background-color: var(--success-color);
+    transition: width 0.3s ease;
+}
+
+.task-description {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    line-height: 1.4;
+}
+
+/* Стилизация таблицы ОГЭ (Формула - Степень окисления) */
+.chemistry-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.chemistry-table th, 
+.chemistry-table td {
+    border: 1px solid #cbd5e1;
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.chemistry-table th {
+    background-color: #f1f5f9;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.chemistry-table td sub {
+    font-size: 0.7rem;
+    bottom: -0.2em;
+}
+
+/* ==========================================================================
+   5. ПОЛЕ ВВОДА ОТВЕТА (МОБИЛЬНАЯ ОПТИМИЗАЦИЯ)
+   ========================================================================== */
+.answer-section {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #e2e8f0;
+}
+
+.answer-section label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+/* Огромное и удобное поле для ввода ответа на телефоне */
+#user-answer {
+    text-align: center;
+    font-size: 1.8rem;
+    letter-spacing: 8px;
+    font-weight: 700;
+    padding: 10px;
+    max-width: 180px;
+    display: block;
+    margin: 0 auto 8px auto;
+}
+
+.mobile-keyboard-hint {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   6. ЭКРАН РЕЗУЛЬТАТОВ И РАЗБОР ОШИБОК
+   ========================================================================== */
+.score-board {
+    display: flex;
+    justify-content: space-around;
+    background: #f1f5f9;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.score-item {
+    text-align: center;
+}
+
+.score-label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.score-val {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1d3557;
+}
+
+.status-msg {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.review-header h3 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 6px;
+}
+
+/* Карточки разбора каждого вопроса */
+.review-item {
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 12px;
+    border-left: 5px solid #cbd5e1;
+    background-color: #f8fafc;
+}
+
+.review-item.correct {
+    border-left-color: var(--success-color);
+    background-color: #f0fdf4;
+}
+
+.review-item.wrong {
+    border-left-color: var(--error-color);
+    background-color: #fef2f2;
+}
+
+.review-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+}
+
+.review-answers {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.review-explanation {
+    font-size: 0.85rem;
+    color: #475569;
+    line-height: 1.4;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px dashed #cbd5e1;
+}
