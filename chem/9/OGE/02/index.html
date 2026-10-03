@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Тренажер ОГЭ по химии: Степень окисления</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <header>
+            <h1>Подготовка к ОГЭ: Химия</h1>
+            <p class="subtitle">Задание на определение степеней окисления</p>
+        </header>
+
+        <!-- Шаг 1: Авторизация -->
+        <section id="auth-screen" class="card active">
+            <h2>Регистрация участника</h2>
+            <div class="form-group">
+                <label for="student-name">Фамилия и Имя:</label>
+                <input type="text" id="student-name" placeholder="Иванов Иван" required autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="student-class">Класс:</label>
+                <input type="text" id="student-class" placeholder="9А" required autocomplete="off">
+            </div>
+            <button id="start-btn" class="btn">Начать тест</button>
+        </section>
+
+        <!-- Шаг 2: Тестирование -->
+        <section id="quiz-screen" class="card hidden">
+            <div class="quiz-header">
+                <span id="progress-text">Вопрос 1 из 10</span>
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+            </div>
+
+            <div id="question-container">
+                <!-- Сюда JS будет подставлять текст задания, таблицы и варианты -->
+            </div>
+
+            <div class="answer-section">
+                <label for="user-answer">Ваш ответ (3 цифры без пробелов):</label>
+                <input type="number" id="user-answer" pattern="[1-4]{3}" inputmode="numeric" placeholder="Пример: 214" maxlength="3">
+                <div class="mobile-keyboard-hint">Введите три цифры, соответствующие буквам А, Б, В</div>
+            </div>
+
+            <button id="next-btn" class="btn">Ответить</button>
+        </section>
+
+        <!-- Шаг 3: Результаты -->
+        <section id="result-screen" class="card hidden">
+            <h2>Результаты тестирования</h2>
+            <div class="score-board">
+                <div class="score-item">
+                    <span class="score-label">Баллы:</span>
+                    <span id="final-points" class="score-val">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">Оценка:</span>
+                    <span id="final-grade" class="score-val">-</span>
+                </div>
+            </div>
+
+            <div id="sending-status" class="status-msg">Сохранение результатов...</div>
+
+            <div class="review-header">
+                <h3>Разбор ваших ответов:</h3>
+            </div>
+            <div id="review-container">
+                <!-- Сюда JS выведет отчет об ошибках с пояснениями -->
+            </div>
+
+            <button id="restart-btn" class="btn secondary">Пройти заново</button>
+        </section>
+    </div>
+
+    <!-- Скрытая форма для отправки данных в Google Таблицу -->
+    <!-- Замените URL в action на вашу ссылку /formResponse -->
+    <form id="google-form" action="https://google.com" method="POST" target="hidden-iframe" class="hidden">
+        <!-- Замените name="entry.XXXXX" на ваши реальные ID полей -->
+        <input type="text" id="entry-name" name="entry.111111111">
+        <input type="text" id="entry-class" name="entry.222222222">
+        <input type="text" id="entry-points" name="entry.333333333">
+        <input type="text" id="entry-grade" name="entry.444444444">
+    </form>
+
+    <!-- Фрейм, чтобы страница не перезагружалась при отправке формы -->
+    <iframe name="hidden-iframe" class="hidden"></iframe>
+
+    <script src="script.js"></script>
+</body>
+</html>
